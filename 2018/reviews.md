@@ -104,6 +104,8 @@ This dude is seriously overrated.
 **As kingfishers catch fire**
 *by Gerard Manley Hopkins*
 
+God God God God God God God. Also Jesus.
+
 **Tales From Earthsea**
 *by Ursula K. Le Guin*
 
@@ -143,14 +145,20 @@ This dude is seriously overrated.
 **Why We Never Talk About Sugar**
 *by Aubrey Hirsch*
 
+Honestly it wasn't very good, but at least it was short.
+
 **Not Just Lucky**
 *by Jamila Rizvi*
+
+It's a shallow ego boost, but sometimes you just need that.
 
 **Soon I Will Be Invincible**
 *by Austin Grossman*
 
 **Strengths Based Leadership**
 *by Tom Rath*
+
+LERDERSHERP
 
 **My Lesbian Experience with Loneliness**
 *by Nagata Kabi*
