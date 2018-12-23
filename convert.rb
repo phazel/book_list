@@ -2,6 +2,8 @@
 
 require 'json'
 
+YEAR = '2018'
+
 def format(book)
   <<~SUMMARY
   **#{book['name']}**
@@ -10,9 +12,7 @@ def format(book)
   SUMMARY
 end
 
-hash = JSON.load File.read("./exported.json")
-
-YEAR = '2018'
+hash = JSON.load File.read("#{YEAR}/exported.json")
 
 not_finished_label = hash['labels'].find{|label| label['name'] == 'Not Gonna Finish'}
 
@@ -36,4 +36,4 @@ output << not_finished_books.map do |book|
   format book
 end
 
-File.write "books_read_#{YEAR}.md", output.join
+File.write "#{YEAR}/books_read_#{YEAR}.md", output.join
