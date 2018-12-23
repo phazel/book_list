@@ -2,6 +2,14 @@
 
 require 'json'
 
+def format(book)
+  <<~SUMMARY
+  **#{book['name']}**
+  *by #{book['desc']}*
+
+  SUMMARY
+end
+
 YEAR = '2018'
 
 hash = JSON.load File.read("#{YEAR}/exported.json")
@@ -21,12 +29,6 @@ end
 output << "BOOKS I DIDN'T FINISH:\n\n"
 output << not_finished_books.map{ |book| format(book) }
 
+output << "Total books: #{read_books.size}\n"
+
 File.write "#{YEAR}/books_read_#{YEAR}.md", output.join
-
-def format(book)
-  <<~SUMMARY
-  **#{book['name']}**
-  *by #{book['desc']}*
-
-  SUMMARY
-end

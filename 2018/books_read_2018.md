@@ -153,3 +153,4 @@ BOOKS I DIDN'T FINISH:
 **The Subtle Art of Not Giving a Fuck**
 *by Mark Manson*
 
+Total books: 50
