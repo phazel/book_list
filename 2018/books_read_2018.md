@@ -1,3 +1,6 @@
+# Books Read in 2018
+Total books: 50
+
 **Guide to Living Through the Impending Apocalypse**
 *by First Dog on the Moon*
 
@@ -136,7 +139,7 @@ Martin Luther King, Jr.*
 **Perdido Street Station**
 *by China Mieville*
 
-BOOKS I DIDN'T FINISH:
+## Books I Didn't Finish:
 
 **Television Was a Baby Crawling Toward That Deathchamber**
 *by Allen Ginsberg*
@@ -153,4 +156,3 @@ BOOKS I DIDN'T FINISH:
 **The Subtle Art of Not Giving a Fuck**
 *by Mark Manson*
 
-Total books: 50

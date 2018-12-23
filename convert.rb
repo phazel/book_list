@@ -20,15 +20,15 @@ read_books = hash['cards'].select{|card| card['idList'] == read_list['id'] }
 not_finished_label = hash['labels'].find{|label| label['name'] == 'Not Gonna Finish'}
 not_finished_books = []
 
-output = read_books.map do |book|
+output = ["# Books Read in #{YEAR}\n"]
+output << "Total books: #{read_books.size}\n\n"
+output << read_books.map do |book|
   not_finished = book['idLabels'].include? not_finished_label['id']
   not_finished_books << book if not_finished
   not_finished ? "" : format(book)
 end
 
-output << "BOOKS I DIDN'T FINISH:\n\n"
+output << "## Books I Didn't Finish:\n\n"
 output << not_finished_books.map{ |book| format(book) }
-
-output << "Total books: #{read_books.size}\n"
 
 File.write "#{YEAR}/books_read_#{YEAR}.md", output.join
