@@ -1,5 +1,6 @@
 # Books Read in 2018
-Total books: 50
+`Total books: 50`
+
 
 **Guide to Living Through the Impending Apocalypse**
 *by First Dog on the Moon*

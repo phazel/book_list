@@ -21,7 +21,7 @@ not_finished_label = hash['labels'].find{|label| label['name'] == 'Not Gonna Fin
 not_finished_books = []
 
 output = ["# Books Read in #{YEAR}\n"]
-output << "Total books: #{read_books.size}\n\n"
+output << "`Total books: #{read_books.size}`\n\n\n"
 output << read_books.map do |book|
   not_finished = book['idLabels'].include? not_finished_label['id']
   not_finished_books << book if not_finished
