@@ -5,26 +5,42 @@
 **Guide to Living Through the Impending Apocalypse**
 *by First Dog on the Moon*
 
+I started getting a bit worried about that whole Global Environmental Collapse thing that's definitely happening right now, so a friend of mine recommended I read this book. It was a bit of a giggle sometimes, but you know. I'm still worried.
+
 **The Quiet Earth**
 *by Craig Harrison*
+
+This one had a great premise and executed on the atmosphere amazingly well. Having an unreliable narrator was good fun, though could have done with a bit less of the casual racism. I can only assume the author doesn't share the protagonist's views. Unfortunately the ending was a little disappointing.
 
 **The Found and the Lost**
 *by Ursula K. Le Guin*
 
+A collection of short stories from one of the greats. Many of them were within her Hainish universe, however the one that stuck with me the most was actually set in our own world. "Hernes" was about a family of four generations of women, each from their own perspectives, and it was beautiful.
+
 **Harry Potter and the Goblet Of Fire**
 *by J. K. Rowling*
+
+I've been listening to the HP audiobooks to help me fall asleep. They're so familiar that I don't mind if I miss anything.
 
 **Wailing Ghosts**
 *by Pu Songling*
 
+A collection of scary Chinese folk talks. I suspect much has been lost in translation, though the straightforward tone used to describe what should be terrifying stories provides its own entertainment.
+
 **The Breakthrough**
 *by Daphne Du Maurier*
+
+A short story I thoroughly enjoyed, especially her characterisation work at the beginning. I want to read more from Du Maurier.
 
 **Fingersmith**
 *by Sarah Waters*
 
+This was one of my favourite books this year. Her use of character and plot was spectacular. The atmosphere of the old house, the questions left hanging perfectly. The suspense. The heartbreak. Oh god. Read this book, seriously. I don't even just love it because it has girls kissing in it, but it has that too!
+
 **Traffic**
 *by John Ruskin*
+
+A racist rant by an old racist guy. Nothing much else to say about it.
 
 **The Awakening**
 *by Kate Chopin*
@@ -32,11 +48,19 @@
 **Feminism is for Everybody**
 *by bell hooks*
 
+It covers the basics, and does so very well. It also provides some context for previous decades of the movement, and what some of the conflicts within the movement look like. Which is very useful for someone unfamiliar with how those conversations have unfolded over the years who wants to catch up.
+
 **Lud-in-the-Mist**
 *by Hope Mirrlees*
 
+This book was a huge surprise. I picked it up on a whim while browsing my local bookstore, and I'm so glad I did! It feels like contemporary fantasy, not something that was written in the 1920s! This girl was ahead of her time. And she was a girl, she wrote this book when she was so young! It's a tragedy that this book has been forgotten, it should be a well-known classic.
+There are a few slight annoyances with grammar and particularly spelling (I suspect these are mostly due to errors with automated transcription), but the story is worth it.
+The beautiful world she's created, and the sinister magical tone is gorgeous.
+
 **Aphorisms on Love and Hate**
 *by Friedrich Nietzsche*
+
+This dude is seriously overrated.
 
 **Stories of Your Life and Others**
 *by Ted Chiang*
@@ -167,4 +191,3 @@
 
 **The Fifth Season**
 *by N. K. Jemisin*
-
