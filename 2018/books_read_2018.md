@@ -1,4 +1,4 @@
-# Books Read in 2018
+# Books Read In 2018
 `Total books: 50`
 
 
@@ -137,7 +137,7 @@
 **Perdido Street Station**
 *by China Mieville*
 
-## Books I Didn't Finish:
+## Books I Decided Not To Finish:
 
 **Television Was a Baby Crawling Toward That Deathchamber**
 *by Allen Ginsberg*
@@ -153,4 +153,18 @@
 
 **The Subtle Art of Not Giving a Fuck**
 *by Mark Manson*
+
+## Books I'm Currently Reading:
+
+**Caliban and the Witch**
+*by Silvia Federici*
+
+**Harry Potter and the Order of the Phoenix**
+*by J. K. Rowling*
+
+**A Modest Proposal**
+*by Jonathan Swift*
+
+**The Fifth Season**
+*by N. K. Jemisin*
 
