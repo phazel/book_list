@@ -32,7 +32,7 @@ A collection of scary Chinese folk talks. I suspect much has been lost in transl
 
 A short story I thoroughly enjoyed, especially her characterisation work at the beginning. I want to read more from Du Maurier.
 
-**Fingersmith**
+⭐️ **Fingersmith**
 *by Sarah Waters*
 
 This was one of my favourite books this year. Her use of character and plot was spectacular. The atmosphere of the old house, the questions left hanging perfectly. The suspense. The heartbreak. Oh god. Read this book, seriously. I don't even just love it because it has girls kissing in it, but it has that too!
@@ -50,7 +50,7 @@ A racist rant by an old racist guy. Nothing much else to say about it.
 
 It covers the basics, and does so very well. It also provides some context for previous decades of the movement, and what some of the conflicts within the movement look like. Which is very useful for someone unfamiliar with how those conversations have unfolded over the years who wants to catch up.
 
-**Lud-in-the-Mist**
+⭐️ **Lud-in-the-Mist**
 *by Hope Mirrlees*
 
 This book was a huge surprise. I picked it up on a whim while browsing my local bookstore, and I'm so glad I did! It feels like contemporary fantasy, not something that was written in the 1920s! This girl was ahead of her time. And she was a girl, she wrote this book when she was so young! It's a tragedy that this book has been forgotten, it should be a well-known classic.
@@ -62,7 +62,7 @@ The beautiful world she's created, and the sinister magical tone is gorgeous.
 
 This dude is seriously overrated.
 
-**Stories of Your Life and Others**
+⭐️ **Stories of Your Life and Others**
 *by Ted Chiang*
 
 **Harry Potter and the Prisoner of Azkaban**
@@ -74,7 +74,7 @@ This dude is seriously overrated.
 **The Starry Rift**
 *by James Tiptree, Jr.*
 
-**Her Body And Other Parties**
+⭐️ **Her Body And Other Parties**
 *by Carmen Maria Machado*
 
 **One: valuing the single life**
@@ -118,7 +118,7 @@ God God God God God God God. Also Jesus.
 **Assassin’s Apprentice**
 *by Robin Hobb*
 
-**We Who Are About To...**
+⭐️ **We Who Are About To...**
 *by Joanna Russ*
 
 **The Farthest Shore**
@@ -188,7 +188,7 @@ LERDERSHERP
 
 ## Books I'm Currently Reading:
 
-**Caliban and the Witch**
+⭐️ **Caliban and the Witch**
 *by Silvia Federici*
 
 **Harry Potter and the Order of the Phoenix**
