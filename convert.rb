@@ -2,13 +2,16 @@
 require 'json'
 
 YEAR = '2018'
+READ_LIST = "Read #{YEAR}"
+CURRENTLY_READING_LIST = "*** Reading ***"
+NOT_FINISHING_LABEL = 'Not Gonna Finish'
 
 def not_finishing(hash)
-  hash['labels'].find{|label| label['name'] == 'Not Gonna Finish'}['id']
+  hash['labels'].find{|label| label['name'] == NOT_FINISHING_LABEL}['id']
 end
 
 def read_books(hash)
-  read_list = hash['lists'].find{|list| list['name'] == "Read #{YEAR}" }
+  read_list = hash['lists'].find{|list| list['name'] == READ_LIST }
   hash['cards'].select do|card|
     card['idList'] == read_list['id'] &&
     !card['idLabels'].include?(not_finishing(hash))
@@ -20,7 +23,7 @@ def not_finishing_books(hash)
 end
 
 def currently_reading_books(hash)
-  currently_reading_list = hash['lists'].find{|list| list['name'] == "*** Reading ***" }
+  currently_reading_list = hash['lists'].find{|list| list['name'] == CURRENTLY_READING_LIST }
   hash['cards'].select do |card|
     card['idList'] == currently_reading_list['id'] && !card['closed']
   end
@@ -39,8 +42,9 @@ end
 hash = JSON.load File.read("#{YEAR}/exported.json")
 
 output = ["# Books Read In #{YEAR}\n"]
-output << "`Total books read: #{read_books(hash).size}`\n\n\n"
-output << format(read_books(hash))
+read_books = read_books(hash)
+output << "`Total books read: #{read_books.size}`\n\n\n"
+output << format(read_books)
 
 output << "## Books I Decided Not To Finish:\n\n"
 output << format(not_finishing_books(hash))
