@@ -99,10 +99,7 @@
 *by Ursula K. Le Guin*
 
 **Letter From Birmingham Jail**
-*by - The Three Dimensions of a Complete Life
-
-
-Martin Luther King, Jr.*
+*by Martin Luther King, Jr.*
 
 **Pride and Prejudice**
 *by Jane Austen*
