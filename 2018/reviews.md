@@ -35,7 +35,7 @@ A short story I thoroughly enjoyed, especially her characterisation work at the 
 ⭐️ **Fingersmith**
 *by Sarah Waters*
 
-This was one of my favourite books this year. Her use of character and plot was spectacular. The atmosphere of the old house, the questions left hanging perfectly. The suspense. The heartbreak. Oh god. Read this book, seriously. I don't even just love it because it has girls kissing in it, but it has that too!
+This was one of my favourite books this year. Her use of character and plot was spectacular. The atmosphere of the old house, the questions left hanging perfectly. The suspense. The heartbreak. Oh god. Read this book, seriously. I don't even just love it because it has girls kissing in it, but it has that too! It did drag a little in the second half, but only in comparison to the spectacularly edge-of-your-seat first half.
 
 **Traffic**
 *by John Ruskin*
