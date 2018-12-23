@@ -1,5 +1,5 @@
 # Books Read In 2018
-`Total books: 50`
+`Total books read: 45`
 
 
 **Guide to Living Through the Impending Apocalypse**
