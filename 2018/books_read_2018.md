@@ -1,6 +1,12 @@
 # Books Read In 2018
-`Total books read: 45`
+`Total books read: 47`
 
+
+**The Fifth Season**
+*by N. K. Jemisin*
+
+**Caliban and the Witch**
+*by Silvia Federici*
 
 **Guide to Living Through the Impending Apocalypse**
 *by First Dog on the Moon*
@@ -156,15 +162,12 @@
 
 ## Books I'm Currently Reading:
 
-**Caliban and the Witch**
-*by Silvia Federici*
-
 **Harry Potter and the Order of the Phoenix**
 *by J. K. Rowling*
 
 **A Modest Proposal**
 *by Jonathan Swift*
 
-**The Fifth Season**
-*by N. K. Jemisin*
+**Emma**
+*by Jane Austen*
 
