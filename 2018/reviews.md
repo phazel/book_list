@@ -5,8 +5,13 @@
 ⭐️ **The Fifth Season**
 *by N. K. Jemisin*
 
+This is the kind of fantasy I wish I'd had growing up. I never really got into the typical fantasy genre, mostly it was just memorising names and places, and it felt on some level like it was catering to someone _else's_ fantasy. It just wasn't for me. So I stuck to sci-fi, and decided I just didn't like fantasy so much.
+The last year or two I've been delving into fantasy written by women (as well as sci-fi), and it's been like night and day. This book is essentially the epitome of that difference. I adore this book, and I'm so excited to read the rest of the trilogy, which are already making their way to me on a shipping container as we spealk.
+
 ⭐️ **Caliban and the Witch**
 *by Silvia Federici*
+
+Have you ever wondered why everything is so shit for women? This book explains why everything is so shit for women, rather than just describing it. How we actually got here. How the stories we tell about gender came to be, and why, and who they were there to benefit. I have become an immense fan of Federici, and I look forward to reading [her new book](https://www.amazon.com/Re-enchanting-World-Feminism-Politics-Commons/dp/1629635693).
 
 **Guide to Living Through the Impending Apocalypse**
 *by First Dog on the Moon*
@@ -71,6 +76,8 @@ This dude is seriously overrated.
 ⭐️ **Stories of Your Life and Others**
 *by Ted Chiang*
 
+Just extremely well-crafted stories.
+
 **Harry Potter and the Prisoner of Azkaban**
 *by J. K. Rowling*
 
@@ -82,6 +89,8 @@ This dude is seriously overrated.
 
 ⭐️ **Her Body And Other Parties**
 *by Carmen Maria Machado*
+
+Short stories that capture the body horror and underlying psychological terror inherent to the experience of being a woman in this world. I cannot recommend it highly enough.
 
 **One: valuing the single life**
 *by Clare Payne*
@@ -126,6 +135,8 @@ God God God God God God God. Also Jesus.
 
 ⭐️ **We Who Are About To...**
 *by Joanna Russ*
+
+This one really got me. It got _to_ me, it got _inside_ me. It knows what I long for and can never have: just a little bit of peace and quiet, please.
 
 **The Farthest Shore**
 *by Ursula K. Le Guin*
