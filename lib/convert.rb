@@ -58,6 +58,7 @@ end
 hash = JSON.load File.read("#{YEAR}/exported.json")
 
 favourite = favourite_label(hash)
+pp hash['labels'][0]
 not_finishing = not_finishing_label(hash)
 read_books = read_books(hash)
 
