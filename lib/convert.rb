@@ -37,10 +37,6 @@ def with_label(books, label)
   books.select { |book| has_label(book, label) }
 end
 
-def without_label(books, label)
-  books.reject { |book| has_label(book, label) }
-end
-
 def without_labels(books, labels)
   books.reject { |book| labels.any? { |label| has_label(book, label) } }
 end
@@ -58,7 +54,6 @@ end
 hash = JSON.load File.read("#{YEAR}/exported.json")
 
 favourite = favourite_label(hash)
-pp hash['labels'][0]
 not_finishing = not_finishing_label(hash)
 read_books = read_books(hash)
 
