@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'json'
-require_relative './books'
-require_relative './labels'
+require_relative './lib/books'
+require_relative './lib/labels'
 
 YEAR = '2019'
 READ_LIST = "Read #{YEAR}"
