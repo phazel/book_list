@@ -1,5 +1,4 @@
 class Books
-
   def self.find(hash, list_name)
     list = find_list(hash, list_name)
     hash['cards'].select do |card|
