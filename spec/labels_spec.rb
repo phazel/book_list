@@ -53,7 +53,7 @@ describe '.find' do
   hash = {
     "labels" => [label, another_label]
   }
-  it { expect(Labels.find(hash, 'some_label')).to eq label }
-  it { expect(Labels.find(hash, 'some_other_label')).to eq another_label }
+  it { expect(Labels.find(hash, label['name'])).to eq label }
+  it { expect(Labels.find(hash, another_label['name'])).to eq another_label }
   it { expect(Labels.find(hash, 'does_not_exist')).to eq nil }
 end
