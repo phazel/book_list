@@ -12,10 +12,10 @@ FAVOURITE_LABEL = 'fav'
 
 hash = JSON.load File.read("#{YEAR}/exported.json")
 
-favourite_label = Find.label(hash, FAVOURITE_LABEL)
-not_finishing_label = Find.label(hash, NOT_FINISHING_LABEL)
 read_list = Find.list(hash, READ_LIST)
 currently_reading_list = Find.list(hash, CURRENTLY_READING_LIST)
+favourite_label = Find.label(hash, FAVOURITE_LABEL)
+not_finishing_label = Find.label(hash, NOT_FINISHING_LABEL)
 books = hash['cards']
 
 read = Filter.in_list(books, read_list)
