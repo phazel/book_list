@@ -12,19 +12,21 @@ FAVOURITE_LABEL = 'fav'
 
 hash = JSON.load File.read("#{YEAR}/exported.json")
 
-favourite = Find.label(hash, FAVOURITE_LABEL)
-not_finishing = Find.label(hash, NOT_FINISHING_LABEL)
+favourite_label = Find.label(hash, FAVOURITE_LABEL)
+not_finishing_label = Find.label(hash, NOT_FINISHING_LABEL)
+read_list = Find.list(hash, READ_LIST)
+currently_reading_list = Find.list(hash, CURRENTLY_READING_LIST)
 
-read_books = Find.books_in_list(hash, READ_LIST)
-currently_reading = Find.books_in_list(hash, CURRENTLY_READING_LIST)
+books = hash['cards']
+read = Filter.in_list(books, read_list)
+currently_reading = Filter.in_list(books, currently_reading_list)
+favourites = Filter.with_label(read, favourite_label)
+regular_read = Filter.without_labels(read, [favourite_label, not_finishing_label])
+not_finishing = Filter.with_label(read, not_finishing_label)
 
-favourites = Filter.with_label(read_books, favourite)
-regular = Filter.without_labels(read_books, [favourite, not_finishing])
-not_finishing = Filter.with_label(read_books, not_finishing)
-
-output = Format.header(YEAR, read_books.size)
+output = Format.header(YEAR, read.size)
 output += Format.favourites(favourites)
-output += Format.regular_read(regular)
+output += Format.regular_read(regular_read)
 output += Format.not_finishing(not_finishing) if not_finishing.any?
 output += Format.currently_reading(currently_reading)
 
