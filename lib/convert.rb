@@ -13,7 +13,7 @@ hash = JSON.load File.read("#{YEAR}/exported.json")
 
 favourite = Labels.find(hash, FAVOURITE_LABEL)
 not_finishing = Labels.find(hash, NOT_FINISHING_LABEL)
-read_books = Books.read_books(hash)
+read_books = Books.find(hash, READ_LIST)
 
 output = ["# Books Read In #{YEAR}\n"]
 output << "`Total books read: #{read_books.size}`\n\n\n"
@@ -35,6 +35,6 @@ if not_finishing_books.any?
 end
 
 output << "## Books I'm Currently Reading:\n\n"
-output << Books.present(Books.currently_reading_books(hash))
+output << Books.present(Books.find(hash, CURRENTLY_READING_LIST))
 
 File.write "#{YEAR}/books_read_#{YEAR}.md", output.join
