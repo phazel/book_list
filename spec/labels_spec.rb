@@ -1,64 +1,25 @@
 require 'labels'
 
-label = {
-  "id"=>"label_id",
-  "idBoard"=>"board_id",
-  "name"=>"some_label",
-  "color"=>"some_colour"
-}
+label = { "id"=>"l_id", "name"=>"some_label" }
+another_label = { "id"=>"al_id", "name"=>"some_other_label" }
 
-another_label = {
-  "id"=>"another_label_id",
-  "idBoard"=>"board_id",
-  "name"=>"some_other_label",
-  "color"=>"another_colour"
-}
-
-book_with_label = {
-  "id"=>"book_id",
-  "closed"=>false,
-  "desc"=>"Author Name",
-  "idBoard"=>"board_id",
-  "idLabels"=>[label["id"]],
-  "idList"=>"list_id",
-  "name"=>"Title Of This Book",
-  "labels"=> [ label ]
-}
-
+book_with_no_labels = { "idLabels"=>[], "labels"=> [] }
+book_with_label = { "idLabels"=>[ label["id"] ], "labels"=> [ label ] }
 book_with_another_label = {
-  "id"=>"another_book_id",
-  "closed"=>false,
-  "desc"=>"Author Name",
-  "idBoard"=>"board_id",
-  "idLabels"=>[another_label["id"]],
-  "idList"=>"list_id",
-  "name"=>"Title Of This Book",
+  "idLabels"=>[ another_label["id"] ],
   "labels"=> [ another_label ]
 }
-
 book_with_both_labels = {
-  "id"=>"book_with_both_labels_id",
-  "closed"=>false,
-  "desc"=>"Author Name",
-  "idBoard"=>"board_id",
-  "idLabels"=>[label["id"], another_label["id"]],
-  "idList"=>"list_id",
-  "name"=>"Title Of This Book",
+  "idLabels"=>[ label["id"], another_label["id"] ],
   "labels"=> [ label, another_label ]
 }
 
-book_with_no_labels = {
-  "id"=>"book_with_no_labels_id",
-  "closed"=>false,
-  "desc"=>"Author Name",
-  "idBoard"=>"board_id",
-  "idLabels"=>[],
-  "idList"=>"list_id",
-  "name"=>"Title Of This Book",
-  "labels"=> []
-}
-
-books = [ book_with_label, book_with_another_label, book_with_both_labels, book_with_no_labels ]
+books = [
+  book_with_label,
+  book_with_another_label,
+  book_with_both_labels,
+  book_with_no_labels
+]
 
 describe '.has_label' do
   it { expect(Labels.has_label(book_with_label, label)).to be true }

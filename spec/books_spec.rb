@@ -1,43 +1,11 @@
 require 'books'
 
-list = {
-  "id"=>"list_id",
-  "name"=>"some_list",
-  "idBoard"=>"board_id"
-}
+list = { "id"=>"l_id", "name"=>"some_list" }
+another_list = { "id"=>"al_id", "name"=>"some_other_list" }
 
-another_list = {
-  "id"=>"another_list_id",
-  "name"=>"some_other_list",
-  "idBoard"=>"board_id"
-}
-
-book_in_list = {
-  "id"=>"book_in_list_id",
-  "closed"=>false,
-  "desc"=>"Author Name",
-  "idBoard"=>"board_id",
-  "idList"=>"list_id",
-  "name"=>"Title Of This Book"
-}
-
-book_in_another_list = {
-  "id"=>"book_in_list_id",
-  "closed"=>false,
-  "desc"=>"Author Name",
-  "idBoard"=>"board_id",
-  "idList"=>"another_list_id",
-  "name"=>"Title Of This Book"
-}
-
-closed_book_in_list = {
-  "id"=>"closed_book_id",
-  "closed"=>true,
-  "desc"=>"Author Name",
-  "idBoard"=>"board_id",
-  "idList"=>"list_id",
-  "name"=>"Title Of This Book"
-}
+book_in_list = { "idList"=>list["id"], "closed"=>false }
+book_in_another_list = { "idList"=>another_list["id"], "closed"=>false }
+closed_book_in_list = { "idList"=>list["id"], "closed"=>true }
 
 hash = {
   "lists" => [ list, another_list ],
@@ -47,7 +15,7 @@ hash = {
 describe '.find' do
   it { expect(Books.find(hash, 'some_list')).to eq [ book_in_list ] }
   it { expect(Books.find(hash, 'some_other_list')).to eq [ book_in_another_list ] }
-  
+
   context 'when the card is archived' do
     it { expect(Books.find(hash, 'some_list')).not_to include closed_book_in_list }
   end
