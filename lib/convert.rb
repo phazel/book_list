@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'json'
+require_relative './labels'
 
 YEAR = '2019'
 READ_LIST = "Read #{YEAR}"
@@ -19,26 +20,6 @@ def currently_reading_books(hash)
   hash['cards'].select do |card|
     card['idList'] == currently_reading_list['id'] && !card['closed']
   end
-end
-
-def not_finishing_label(hash)
-  hash['labels'].find{|label| label['name'] == NOT_FINISHING_LABEL}['id']
-end
-
-def favourite_label(hash)
-  hash['labels'].find{|label| label['name'] == FAVOURITE_LABEL}['id']
-end
-
-def has_label(book, label)
-  book['idLabels'].include? label
-end
-
-def with_label(books, label)
-  books.select { |book| has_label(book, label) }
-end
-
-def without_labels(books, labels)
-  books.reject { |book| labels.any? { |label| has_label(book, label) } }
 end
 
 def present(books)
