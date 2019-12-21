@@ -1,5 +1,4 @@
 require 'labels'
-require 'pry-byebug'
 
 label = {
   "id"=>"label_id",
@@ -9,10 +8,10 @@ label = {
 }
 
 another_label = {
-  "id"=>"another_label",
+  "id"=>"another_label_id",
   "idBoard"=>"board_id",
-  "name"=>"some_label",
-  "color"=>"purple"
+  "name"=>"some_other_label",
+  "color"=>"another_colour"
 }
 
 book_with_label = {
@@ -87,4 +86,13 @@ describe '.without_labels' do
   context 'books without no labels' do
     it { expect(Labels.without_labels(books, [])).to eq books }
   end
+end
+
+describe '.find' do
+  hash = {
+    "labels" => [label, another_label]
+  }
+  it { expect(Labels.find(hash, 'some_label')).to eq label }
+  it { expect(Labels.find(hash, 'some_other_label')).to eq another_label }
+  it { expect(Labels.find(hash, 'does_not_exist')).to eq nil }
 end

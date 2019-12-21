@@ -11,11 +11,7 @@ class Labels
     book['idLabels'].include? label["id"]
   end
 
-  def self.not_finishing_label(hash)
-    hash['labels'].find{|label| label['name'] == NOT_FINISHING_LABEL}['id']
-  end
-
-  def self.favourite_label(hash)
-    hash['labels'].find{|label| label['name'] == FAVOURITE_LABEL}['id']
+  def self.find(hash, label_name)
+    hash['labels'].find{|label| label['name'] == label_name}
   end
 end
