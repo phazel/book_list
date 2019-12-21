@@ -15,7 +15,7 @@ another_label = {
 }
 
 book_with_label = {
-  "id"=>"book_id_1",
+  "id"=>"book_id",
   "closed"=>false,
   "desc"=>"Author Name",
   "idBoard"=>"board_id",
@@ -26,7 +26,7 @@ book_with_label = {
 }
 
 book_with_another_label = {
-  "id"=>"book_id_2",
+  "id"=>"another_book_id",
   "closed"=>false,
   "desc"=>"Author Name",
   "idBoard"=>"board_id",
@@ -37,7 +37,7 @@ book_with_another_label = {
 }
 
 book_with_both_labels = {
-  "id"=>"book_id_2",
+  "id"=>"book_with_both_labels_id",
   "closed"=>false,
   "desc"=>"Author Name",
   "idBoard"=>"board_id",
@@ -48,7 +48,7 @@ book_with_both_labels = {
 }
 
 book_with_no_labels = {
-  "id"=>"book_id_2",
+  "id"=>"book_with_no_labels_id",
   "closed"=>false,
   "desc"=>"Author Name",
   "idBoard"=>"board_id",
