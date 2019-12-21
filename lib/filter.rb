@@ -1,10 +1,10 @@
-class Labels
+class Filter
   def self.with_label(books, label)
-    books.select { |book| Labels.has_label(book, label) }
+    books.select { |book| has_label(book, label) }
   end
 
   def self.without_labels(books, labels)
-    books.reject { |book| labels.any? { |label| Labels.has_label(book, label) } }
+    books.reject { |book| labels.any? { |label| has_label(book, label) } }
   end
 
   def self.has_label(book, label)
