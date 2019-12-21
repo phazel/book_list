@@ -1,9 +1,7 @@
 class Find
   def self.books_in_list(hash, list_name)
     list = list(hash, list_name)
-    hash['cards'].select do |card|
-      card['idList'] == list['id'] && !card['closed']
-    end
+    Filter.in_list(hash['cards'], list)
   end
 
   def self.list(hash, list_name)
