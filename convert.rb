@@ -2,6 +2,7 @@
 require 'json'
 require_relative './lib/books'
 require_relative './lib/labels'
+require_relative './lib/find'
 
 YEAR = '2019'
 READ_LIST = "Read #{YEAR}"
@@ -11,9 +12,9 @@ FAVOURITE_LABEL = 'fav'
 
 hash = JSON.load File.read("#{YEAR}/exported.json")
 
-favourite = Labels.find(hash, FAVOURITE_LABEL)
-not_finishing = Labels.find(hash, NOT_FINISHING_LABEL)
-read_books = Books.find(hash, READ_LIST)
+favourite = Find.label(hash, FAVOURITE_LABEL)
+not_finishing = Find.label(hash, NOT_FINISHING_LABEL)
+read_books = Find.books_in_list(hash, READ_LIST)
 
 output = ["# Books Read In #{YEAR}\n"]
 output << "`Total books read: #{read_books.size}`\n\n\n"
@@ -35,6 +36,6 @@ if not_finishing_books.any?
 end
 
 output << "## Books I'm Currently Reading:\n\n"
-output << Books.present(Books.find(hash, CURRENTLY_READING_LIST))
+output << Books.present(Find.books_in_list(hash, CURRENTLY_READING_LIST))
 
 File.write "#{YEAR}/books_read_#{YEAR}.md", output.join

@@ -48,12 +48,3 @@ describe '.without_labels' do
     it { expect(Labels.without_labels(books, [])).to eq books }
   end
 end
-
-describe '.find' do
-  hash = {
-    "labels" => [label, another_label]
-  }
-  it { expect(Labels.find(hash, label['name'])).to eq label }
-  it { expect(Labels.find(hash, another_label['name'])).to eq another_label }
-  it { expect(Labels.find(hash, 'does_not_exist')).to eq nil }
-end

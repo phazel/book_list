@@ -10,8 +10,4 @@ class Labels
   def self.has_label(book, label)
     book['idLabels'].include? label["id"]
   end
-
-  def self.find(hash, label_name)
-    hash['labels'].find{|label| label['name'] == label_name}
-  end
 end
