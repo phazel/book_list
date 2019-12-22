@@ -8,7 +8,7 @@ another_label = { "id"=>"al_id", "name"=>"some_other_label" }
 
 hash = {
   "lists" => [ list, another_list ],
-  "labels" => [label, another_label]
+  "labels" => [ label, another_label ]
 }
 
 describe Find do

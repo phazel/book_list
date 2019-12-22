@@ -9,11 +9,7 @@ describe Filter do
     book_in_another_list = { "idList"=>another_list["id"], "closed"=>false }
     closed_book_in_list = { "idList"=>list["id"], "closed"=>true }
 
-    books = [
-      book_in_list,
-      book_in_another_list,
-      closed_book_in_list
-    ]
+    books = [ book_in_list, book_in_another_list, closed_book_in_list ]
 
     it { expect(described_class.in_list(books, list)).to eq [book_in_list] }
     it { expect(described_class.in_list(books, another_list)).to eq [ book_in_another_list ] }
