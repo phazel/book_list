@@ -1,4 +1,5 @@
-require 'pry'
+require_relative 'find'
+require_relative 'filter'
 
 class Format
   SECTION_HEADERS = {
@@ -21,10 +22,17 @@ class Format
   def self.pretty(books)
     books.map do |book|
       <<~SUMMARY
-      **#{book['name']}**
+      **#{book['name']}**#{' (Audiobook)' if book['audiobook']}
       *by #{book['desc']}*
 
       SUMMARY
+    end
+  end
+
+  def self.add_audiobook(hash, audiobook_label)
+    hash['cards'].map do |book|
+      audiobook = { 'audiobook'=> Filter.has_label(book, audiobook_label) }
+      book.merge(audiobook)
     end
   end
 

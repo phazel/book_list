@@ -9,6 +9,7 @@ READ_LIST = "Read #{YEAR}"
 CURRENTLY_READING_LIST = "*** Reading ***"
 NOT_FINISHING_LABEL = 'Not Gonna Finish'
 FAVOURITE_LABEL = 'fav'
+AUDIOBOOK_LABEL = 'audiobook'
 
 hash = JSON.load File.read("#{YEAR}/exported.json")
 
@@ -16,7 +17,8 @@ read_list = Find.list(hash, READ_LIST)
 currently_reading_list = Find.list(hash, CURRENTLY_READING_LIST)
 favourite_label = Find.label(hash, FAVOURITE_LABEL)
 not_finishing_label = Find.label(hash, NOT_FINISHING_LABEL)
-books = hash['cards']
+audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
+books = Format.add_audiobook(hash, audiobook_label)
 
 read = Filter.in_list(books, read_list)
 currently_reading = Filter.in_list(books, currently_reading_list)
