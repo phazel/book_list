@@ -23,7 +23,7 @@ describe Book do
     "idList"=> list["id"],
     "closed"=> is_archived
   }}
-  let(:hash) {{ "cards" => [ json_book ] }}
+  let(:hash) {{ "cards" => [ json_book ], "labels" => [ audio_label ] }}
 
   describe '#initialize' do
     it { expect(book).to be_a Book }
@@ -36,9 +36,9 @@ describe Book do
   end
 
   describe '.create_all' do
-    it { expect(Book.create_all(hash, audio_label)).to all be_a Book }
-    it 'matches book title and author' do
-      expect(Book.create_all(hash, audio_label).first).to have_attributes(
+    it { expect(Book.create_all(hash)).to all be_a Book }
+    it 'matches book attributes' do
+      expect(Book.create_all(hash).first).to have_attributes(
         :title => book.title,
         :author => book.author,
         :is_audiobook => book.is_audiobook,

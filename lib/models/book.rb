@@ -1,7 +1,9 @@
 require_relative '../filter'
+require_relative '../find'
 
 class Book
   attr_reader :title, :author, :is_audiobook, :label_ids, :list_id, :is_archived
+  AUDIOBOOK_LABEL = 'audiobook'
 
   def initialize(title, author, is_audiobook, label_ids, list_id, is_archived)
     @title = title
@@ -12,7 +14,8 @@ class Book
     @is_archived = is_archived
   end
 
-  def self.create_all(hash, audiobook_label)
+  def self.create_all(hash)
+    audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     hash['cards'].map do |json_book|
       is_audiobook = Filter.has_label(json_book, audiobook_label)
       Book.new(
