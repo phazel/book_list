@@ -6,9 +6,9 @@ describe Filter do
     list = { "id"=>"list_id", "name"=>"some_list" }
     another_list = { "id"=>"another_list_id", "name"=>"some_other_list" }
 
-    book_in_list = { "idList"=>list["id"], "closed"=>false }
-    book_in_another_list = { "idList"=>another_list["id"], "closed"=>false }
-    closed_book_in_list = { "idList"=>list["id"], "closed"=>true }
+    book_in_list = Book.new('', '', false, [], list["id"], false)
+    book_in_another_list = Book.new('', '', false, [], another_list["id"], false)
+    closed_book_in_list = Book.new('', '', false, [], list["id"], true)
 
     books = [ book_in_list, book_in_another_list, closed_book_in_list ]
 
@@ -23,10 +23,10 @@ describe Filter do
     label = { "id"=>"label_id", "name"=>"some_label" }
     another_label = { "id"=>"another_label_id", "name"=>"some_other_label" }
 
-    book_with_no_labels = Book.new('', '', false, [], '')
-    book_with_label = Book.new('', '', false, [ label["id"] ], '')
-    book_with_another_label = Book.new('', '', false, [ another_label["id"] ], '')
-    book_with_both_labels = Book.new('', '', false, [ label["id"], another_label["id"] ], '')
+    book_with_no_labels = Book.new('', '', false, [], '', false)
+    book_with_label = Book.new('', '', false, [ label["id"] ], '', false)
+    book_with_another_label = Book.new('', '', false, [ another_label["id"] ], '', false)
+    book_with_both_labels = Book.new('', '', false, [ label["id"], another_label["id"] ], '', false)
 
     books = [
       book_with_label,

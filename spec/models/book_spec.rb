@@ -6,12 +6,22 @@ describe Book do
   let(:is_audiobook) { true }
   let(:audio_label) {{ "id"=>"a_id", "name"=>"audiobook" }}
   let(:list) {{ "id"=>"list_id", "name"=>"some_list" }}
-  let(:book) { Book.new(title, author, is_audiobook, [ audio_label["id"] ], list["id"]) }
+  let(:is_archived) { false }
+  let(:book) {
+    Book.new(
+      title,
+      author,
+      is_audiobook,
+      [ audio_label["id"] ],
+      list["id"],
+      is_archived
+    )}
   let(:json_book) {{
     "name"=> title,
     "desc"=> author,
     "idLabels"=>[ audio_label["id"] ],
-    "idList"=> list["id"]
+    "idList"=> list["id"],
+    "closed"=> is_archived
   }}
   let(:hash) {{ "cards" => [ json_book ] }}
 
@@ -20,6 +30,9 @@ describe Book do
     it { expect(book.title).to eq title }
     it { expect(book.author).to eq author }
     it { expect(book.is_audiobook).to eq is_audiobook }
+    it { expect(book.label_ids).to eq [ audio_label["id"] ] }
+    it { expect(book.list_id).to eq list["id"] }
+    it { expect(book.is_archived).to eq is_archived }
   end
 
   describe '.create_list' do
@@ -30,7 +43,8 @@ describe Book do
         :author => book.author,
         :is_audiobook => book.is_audiobook,
         :label_ids => book.label_ids,
-        :list_id => book.list_id
+        :list_id => book.list_id,
+        :is_archived => book.is_archived
       )
     end
   end

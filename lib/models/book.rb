@@ -1,14 +1,15 @@
 require_relative '../filter'
 
 class Book
-  attr_reader :title, :author, :is_audiobook, :label_ids, :list_id
+  attr_reader :title, :author, :is_audiobook, :label_ids, :list_id, :is_archived
 
-  def initialize(title, author, is_audiobook, label_ids, list_id)
+  def initialize(title, author, is_audiobook, label_ids, list_id, is_archived)
     @title = title
     @author = author
     @is_audiobook = is_audiobook
     @label_ids = label_ids
     @list_id = list_id
+    @is_archived = is_archived
   end
 
   def self.create_list(json_books, audiobook_label)
@@ -19,7 +20,8 @@ class Book
         json_book['desc'],
         is_audiobook,
         json_book['idLabels'],
-        json_book['idList']
+        json_book['idList'],
+        json_book['closed']
       )
     end
   end
