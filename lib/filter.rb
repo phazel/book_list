@@ -15,6 +15,6 @@ class Filter
 
   def self.has_label(book, label)
     labels = book.is_a?(Hash) ? book['idLabels'] : book.label_ids # TEMP
-    book.label_ids.include? label["id"]
+    labels.include? label["id"]
   end
 end

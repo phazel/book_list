@@ -1,8 +1,8 @@
 require 'format'
 
 books = [
-  Book.new('book_1', 'Author 1', false, []),
-  Book.new('book_2', 'Author 2', true, [])
+  Book.new('book_1', 'Author 1', false, [], ''),
+  Book.new('book_2', 'Author 2', true, [], '')
 ]
 
 pretty_books = [

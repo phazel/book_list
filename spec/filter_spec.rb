@@ -23,10 +23,10 @@ describe Filter do
     label = { "id"=>"label_id", "name"=>"some_label" }
     another_label = { "id"=>"another_label_id", "name"=>"some_other_label" }
 
-    book_with_no_labels = Book.new('', '', false, [])
-    book_with_label = Book.new('', '', false, [ label["id"] ])
-    book_with_another_label = Book.new('', '', false, [ another_label["id"] ])
-    book_with_both_labels = Book.new('', '', false, [ label["id"], another_label["id"] ])
+    book_with_no_labels = Book.new('', '', false, [], '')
+    book_with_label = Book.new('', '', false, [ label["id"] ], '')
+    book_with_another_label = Book.new('', '', false, [ another_label["id"] ], '')
+    book_with_both_labels = Book.new('', '', false, [ label["id"], another_label["id"] ], '')
 
     books = [
       book_with_label,

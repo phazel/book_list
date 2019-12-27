@@ -5,11 +5,13 @@ describe Book do
   let(:author) { 'Someone Quite Prestigious' }
   let(:is_audiobook) { true }
   let(:audio_label) {{ "id"=>"a_id", "name"=>"audiobook" }}
-  let(:book) { Book.new(title, author, is_audiobook, [ audio_label["id"] ]) }
+  let(:list) {{ "id"=>"list_id", "name"=>"some_list" }}
+  let(:book) { Book.new(title, author, is_audiobook, [ audio_label["id"] ], list["id"]) }
   let(:json_book) {{
     "name"=> title,
     "desc"=> author,
     "idLabels"=>[ audio_label["id"] ],
+    "idList"=> list["id"]
   }}
   let(:hash) {{ "cards" => [ json_book ] }}
 
@@ -21,13 +23,14 @@ describe Book do
   end
 
   describe '.create_list' do
-    it { expect(Book.create_list(hash, audio_label)).to all be_a Book }
+    it { expect(Book.create_list(hash['cards'], audio_label)).to all be_a Book }
     it 'matches book title and author' do
-      expect(Book.create_list(hash, audio_label).first).to have_attributes(
+      expect(Book.create_list(hash['cards'], audio_label).first).to have_attributes(
         :title => book.title,
         :author => book.author,
         :is_audiobook => book.is_audiobook,
-        :label_ids => book.label_ids
+        :label_ids => book.label_ids,
+        :list_id => book.list_id
       )
     end
   end
