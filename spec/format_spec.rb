@@ -53,15 +53,11 @@ describe Format do
     let(:expected_section) {
       [ "---\n\n", "## Favourites:\n\n", pretty_books ]
     }
-    it { expect(described_class.section(books_with_audiobook_flag, :favourites)) }
+    it { expect(described_class.section(books_with_audiobook_flag, audiobook_label, :favourites)) }
   end
 
   describe '.pretty' do
-    it { expect(described_class.pretty(books_with_audiobook_flag)).to eq pretty_books }
-  end
-
-  describe '.add_audiobook' do
-    it { expect(described_class.add_audiobook(hash, audiobook_label)).to eq books_with_audiobook_flag }
+    it { expect(described_class.pretty(books_with_audiobook_flag, audiobook_label)).to eq pretty_books }
   end
 
   describe '.line' do

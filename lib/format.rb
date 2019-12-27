@@ -1,5 +1,6 @@
 require_relative 'find'
 require_relative 'filter'
+require_relative 'models/book'
 
 class Format
   SECTION_HEADERS = {
@@ -15,24 +16,17 @@ class Format
     ]
   end
 
-  def self.section(books, header = nil)
-    [ line, SECTION_HEADERS[header], pretty(books) ]
+  def self.section(books, audiobook_label, header = nil)
+    [ line, SECTION_HEADERS[header], pretty(books, audiobook_label) ]
   end
 
-  def self.pretty(books)
-    books.map do |book|
+  def self.pretty(books, audiobook_label)
+    Book.create_list(books, audiobook_label).map do |book|
       <<~SUMMARY
-      **#{book['name']}**#{' (Audiobook)' if book['audiobook']}
-      *by #{book['desc']}*
+      **#{book.title}**#{' (Audiobook)' if book.is_audiobook}
+      *by #{book.author}*
 
       SUMMARY
-    end
-  end
-
-  def self.add_audiobook(hash, audiobook_label)
-    hash['cards'].map do |book|
-      audiobook = { 'audiobook'=> Filter.has_label(book, audiobook_label) }
-      book.merge(audiobook)
     end
   end
 
