@@ -18,7 +18,7 @@ currently_reading_list = Find.list(hash, CURRENTLY_READING_LIST)
 favourite_label = Find.label(hash, FAVOURITE_LABEL)
 not_finishing_label = Find.label(hash, NOT_FINISHING_LABEL)
 audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
-books = Book.create_all(hash['cards'], audiobook_label)
+books = Book.create_all(hash, audiobook_label)
 
 read = Filter.in_list(books, read_list)
 currently_reading = Filter.in_list(books, currently_reading_list)

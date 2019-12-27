@@ -36,9 +36,9 @@ describe Book do
   end
 
   describe '.create_all' do
-    it { expect(Book.create_all(hash['cards'], audio_label)).to all be_a Book }
+    it { expect(Book.create_all(hash, audio_label)).to all be_a Book }
     it 'matches book title and author' do
-      expect(Book.create_all(hash['cards'], audio_label).first).to have_attributes(
+      expect(Book.create_all(hash, audio_label).first).to have_attributes(
         :title => book.title,
         :author => book.author,
         :is_audiobook => book.is_audiobook,

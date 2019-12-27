@@ -12,8 +12,8 @@ class Book
     @is_archived = is_archived
   end
 
-  def self.create_all(json_books, audiobook_label)
-    json_books.map do |json_book|
+  def self.create_all(hash, audiobook_label)
+    hash['cards'].map do |json_book|
       is_audiobook = Filter.has_label(json_book, audiobook_label)
       Book.new(
         json_book['name'],
