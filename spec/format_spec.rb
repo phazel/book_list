@@ -35,6 +35,11 @@ book_is_audiobook = {
 
 books_with_audiobook_flag = [ book_not_audiobook, book_is_audiobook ]
 
+books = [
+  Book.new(book_not_audiobook['name'], book_not_audiobook['desc'], book_not_audiobook['audiobook']),
+  Book.new(book_is_audiobook['name'], book_is_audiobook['desc'], book_is_audiobook['audiobook'])
+]
+
 pretty_books = [
   "**book_1**\n*by Author 1*\n\n",
   "**book_2** (Audiobook)\n*by Author 2*\n\n"
@@ -57,7 +62,7 @@ describe Format do
   end
 
   describe '.pretty' do
-    it { expect(described_class.pretty(books_with_audiobook_flag, audiobook_label)).to eq pretty_books }
+    it { expect(described_class.pretty(books)).to eq pretty_books }
   end
 
   describe '.line' do

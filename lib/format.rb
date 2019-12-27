@@ -16,12 +16,13 @@ class Format
     ]
   end
 
-  def self.section(books, audiobook_label, header = nil)
-    [ line, SECTION_HEADERS[header], pretty(books, audiobook_label) ]
+  def self.section(json_books, audiobook_label, header = nil)
+    books = Book.create_list(json_books, audiobook_label)
+    [ line, SECTION_HEADERS[header], pretty(books) ]
   end
 
-  def self.pretty(books, audiobook_label)
-    Book.create_list(books, audiobook_label).map do |book|
+  def self.pretty(books)
+    books.map do |book|
       <<~SUMMARY
       **#{book.title}**#{' (Audiobook)' if book.is_audiobook}
       *by #{book.author}*
