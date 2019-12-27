@@ -16,8 +16,7 @@ class Format
     ]
   end
 
-  def self.section(json_books, audiobook_label, header = nil)
-    books = Book.create_list(json_books, audiobook_label)
+  def self.section(books, header = nil)
     [ line, SECTION_HEADERS[header], pretty(books) ]
   end
 
