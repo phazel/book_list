@@ -5,9 +5,13 @@ describe Book do
   let(:author) { 'Someone Quite Prestigious' }
   let(:is_audiobook) { true }
   let(:audio_label) {{ "id"=>"a_id", "name"=>"audiobook" }}
-  let(:json_book) {{ "name"=> title, "desc"=> author, "idLabels"=>[audio_label["id"]] }}
+  let(:book) { Book.new(title, author, is_audiobook, [ audio_label["id"] ]) }
+  let(:json_book) {{
+    "name"=> title,
+    "desc"=> author,
+    "idLabels"=>[ audio_label["id"] ],
+  }}
   let(:hash) {{ "cards" => [ json_book ] }}
-  let(:book) { Book.new(title, author, is_audiobook) }
 
   describe '#initialize' do
     it { expect(book).to be_a Book }
@@ -22,7 +26,8 @@ describe Book do
       expect(Book.create_list(hash, audio_label).first).to have_attributes(
         :title => book.title,
         :author => book.author,
-        :is_audiobook => book.is_audiobook
+        :is_audiobook => book.is_audiobook,
+        :label_ids => book.label_ids
       )
     end
   end

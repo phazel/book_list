@@ -21,14 +21,12 @@ audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
 books = hash['cards']
 
 json_read = Filter.in_list(books, read_list)
+read = Book.create_list(json_read, audiobook_label)
 json_currently_reading = Filter.in_list(books, currently_reading_list)
 currently_reading = Book.create_list(json_currently_reading, audiobook_label)
-json_favourites = Filter.with_label(json_read, favourite_label)
-favourites = Book.create_list(json_favourites, audiobook_label)
-json_regular_read = Filter.without_labels(json_read, [favourite_label, not_finishing_label])
-regular_read = Book.create_list(json_regular_read, audiobook_label)
-json_not_finishing = Filter.with_label(json_read, not_finishing_label)
-not_finishing = Book.create_list(json_not_finishing, audiobook_label)
+favourites = Filter.with_label(read, favourite_label)
+regular_read = Filter.without_labels(read, [favourite_label, not_finishing_label])
+not_finishing = Filter.with_label(read, not_finishing_label)
 
 output = Format.header(YEAR, json_read.size)
 output += Format.section(favourites, :favourites)
