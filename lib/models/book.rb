@@ -14,6 +14,14 @@ class Book
     @is_archived = is_archived
   end
 
+  def to_s
+    <<~BOOK
+    **#{@title}**#{' (Audiobook)' if @is_audiobook}
+    *by #{@author}*
+
+    BOOK
+  end
+
   def self.create_all(hash)
     audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     hash['cards'].map do |json_book|

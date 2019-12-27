@@ -35,6 +35,11 @@ describe Book do
     it { expect(book.is_archived).to eq is_archived }
   end
 
+  describe '#to_s' do
+    let(:pretty_book) { "**A Very Good Book** (Audiobook)\n*by Someone Quite Prestigious*\n\n" }
+    it { expect(book.to_s).to eq pretty_book }
+  end
+
   describe '.create_all' do
     it { expect(Book.create_all(hash)).to all be_a Book }
     it 'matches book attributes' do

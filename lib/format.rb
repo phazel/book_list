@@ -10,27 +10,14 @@ class Format
   }
 
   def self.header(year, number)
-    [
-      "# Books Read In #{year}\n",
-      "`Total books read: #{number}`\n\n"
-    ]
+    [ "# Books Read In #{year}\n", "`Total books read: #{number}`\n\n" ]
   end
 
   def self.section(books, header = nil)
-    [ line, SECTION_HEADERS[header], pretty(books) ]
-  end
-
-  def self.pretty(books)
-    books.map do |book|
-      <<~SUMMARY
-      **#{book.title}**#{' (Audiobook)' if book.is_audiobook}
-      *by #{book.author}*
-
-      SUMMARY
-    end
+    [ line, SECTION_HEADERS[header], books ]
   end
 
   def self.line
-    [ "---\n\n" ]
+    "---\n\n"
   end
 end
