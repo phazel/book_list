@@ -25,7 +25,7 @@ favourites = Filter.with_label(read, favourite_label)
 regular_read = Filter.without_labels(read, [favourite_label, dnf_label])
 dnf = Filter.with_label(read, dnf_label)
 
-output = Format.header(YEAR, read.size)
+output = Format.header(YEAR, regular_read.size)
 output += Format.section(favourites, :favourites)
 output += Format.section(regular_read)
 output += Format.section(dnf, :dnf) if dnf.any?
