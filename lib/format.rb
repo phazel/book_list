@@ -5,7 +5,7 @@ require_relative 'models/book'
 class Format
   SECTION_HEADERS = {
     favourites: "## Favourites:\n\n",
-    not_finishing: "## Books I Decided Not To Finish:\n\n",
+    dnf: "## Books I Decided Not To Finish:\n\n",
     currently_reading: "## Books I'm Currently Reading:\n\n"
   }
 
