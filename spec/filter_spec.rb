@@ -59,12 +59,15 @@ describe Filter do
     end
 
     describe '.has_label' do
-      let(:json_book_with_label) {{ "idLabels"=>[ label["id"] ], "labels"=> [ label ] }}
-
       it { expect(described_class.has_label(book_with_label, label)).to be true }
       it { expect(described_class.has_label(book_with_label, another_label)).to be false }
-      it { expect(described_class.has_label(json_book_with_label, label)).to be true }
-      it { expect(described_class.has_label(json_book_with_label, another_label)).to be false }
+    end
+
+    describe '.has_json_label' do
+      let(:json_book_with_label) {{ "idLabels"=>[ label["id"] ], "labels"=> [ label ] }}
+
+      it { expect(described_class.has_json_label(json_book_with_label, label)).to be true }
+      it { expect(described_class.has_json_label(json_book_with_label, another_label)).to be false }
     end
   end
 end

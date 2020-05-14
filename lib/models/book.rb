@@ -36,8 +36,8 @@ class Book
     ebook_label = Find.label(hash, EBOOK_LABEL)
 
     hash['cards'].map do |json_book|
-      is_audiobook = Filter.has_label(json_book, audiobook_label)
-      is_ebook = Filter.has_label(json_book, ebook_label)
+      is_audiobook = Filter.has_json_label(json_book, audiobook_label)
+      is_ebook = Filter.has_json_label(json_book, ebook_label)
 
       Book.new(
         json_book['name'],

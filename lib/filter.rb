@@ -14,7 +14,10 @@ class Filter
   end
 
   def self.has_label(book, label)
-    labels = book.is_a?(Hash) ? book['idLabels'] : book.label_ids # TEMP
-    labels.include? label["id"]
+    book.label_ids.include? label["id"]
+  end
+
+  def self.has_json_label(book, label)
+    book['idLabels'].include? label["id"]
   end
 end
