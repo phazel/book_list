@@ -8,34 +8,16 @@ describe Book do
   let(:audio_label) {{ "id"=>"a_id", "name"=>"audiobook" }}
   let(:ebook_label) {{ "id"=>"e_id", "name"=>"ebook" }}
   let(:label_ids) do
-    labels = []
-    labels << audio_label["id"] if is_audiobook
-    labels << ebook_label["id"] if is_ebook
-    labels
+    [
+      is_audiobook ? audio_label["id"] : [],
+      is_ebook ? ebook_label["id"] : []
+    ].flatten
   end
   let(:list) {{ "id"=>"list_id", "name"=>"some_list" }}
   let(:is_archived) { false }
-  let(:book) {
-    Book.new(
-      title,
-      author,
-      is_audiobook,
-      is_ebook,
-      label_ids,
-      list["id"],
-      is_archived
-    )}
-  let(:json_book) {{
-    "name"=> title,
-    "desc"=> author,
-    "idLabels"=> label_ids,
-    "idList"=> list["id"],
-    "closed"=> is_archived
-  }}
-  let(:hash) {{
-    "cards" => [ json_book ],
-    "labels" => [ audio_label, ebook_label ]
-  }}
+  let(:book) do
+    Book.new(title, author, is_audiobook, is_ebook, label_ids, list["id"], is_archived)
+  end
 
   describe '#initialize' do
     it { expect(book).to be_a Book }
@@ -77,6 +59,18 @@ describe Book do
   end
 
   describe '.create_all' do
+    let(:json_book) {{
+      "name"=> title,
+      "desc"=> author,
+      "idLabels"=> label_ids,
+      "idList"=> list["id"],
+      "closed"=> is_archived
+    }}
+    let(:hash) {{
+      "cards" => [ json_book ],
+      "labels" => [ audio_label, ebook_label ]
+    }}
+
     it { expect(Book.create_all(hash)).to all be_a Book }
 
     it 'matches book attributes' do
