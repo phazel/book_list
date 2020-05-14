@@ -4,7 +4,14 @@ describe Format do
   describe '.header' do
     let(:year) { 3904 }
     let(:number) { 45 }
-    let(:expected_header) {[ "# Books Read In 3904\n", "`Total books read: 45`\n\n" ]}
+    let(:expected_header) {
+      [
+        "# Books Read In #{year}\n",
+        "`Total books read: #{number}`\n\n",
+        "📖 - physical or ebook\n",
+        "🎧 - audiobook\n\n"
+      ]
+    }
 
     it { expect(described_class.header(year, number)).to eq expected_header }
   end

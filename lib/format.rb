@@ -10,7 +10,12 @@ class Format
   }
 
   def self.header(year, number)
-    [ "# Books Read In #{year}\n", "`Total books read: #{number}`\n\n" ]
+    [
+      "# Books Read In #{year}\n",
+      "`Total books read: #{number}`\n\n",
+      "📖 - physical or ebook\n",
+      "🎧 - audiobook\n\n"
+    ]
   end
 
   def self.section(books, header = nil)

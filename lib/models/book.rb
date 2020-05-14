@@ -14,9 +14,13 @@ class Book
     @is_archived = is_archived
   end
 
+  def form_emoji
+    @is_audiobook ? '🎧' : '📖'
+  end
+
   def to_s
     <<~BOOK
-    **#{@title}**#{' (Audiobook)' if @is_audiobook}
+    **#{@title}** #{form_emoji}
     *by #{@author}*
 
     BOOK
