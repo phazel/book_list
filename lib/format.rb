@@ -13,7 +13,8 @@ class Format
     [
       "# Books Read In #{year}\n",
       "`Total books read: #{number}`\n\n",
-      "📖 - physical or ebook\n",
+      "📖 - physical book\n",
+      "📱 - ebook\n",
       "🎧 - audiobook\n\n"
     ]
   end

@@ -8,7 +8,8 @@ describe Format do
       [
         "# Books Read In #{year}\n",
         "`Total books read: #{number}`\n\n",
-        "📖 - physical or ebook\n",
+        "📖 - physical book\n",
+        "📱 - ebook\n",
         "🎧 - audiobook\n\n"
       ]
     }
@@ -18,8 +19,8 @@ describe Format do
 
   describe '.section' do
     let(:books) {[
-      Book.new('book_1', 'Author 1', false, [], '', false),
-      Book.new('book_2', 'Author 2', true, [], '', false)
+      Book.new('book_1', 'Author 1', false, false, [], '', false),
+      Book.new('book_2', 'Author 2', true, false, [], '', false)
     ]}
     let(:expected_section) {[ "---\n\n", "## Favourites:\n\n", books ]}
 
