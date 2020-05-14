@@ -6,7 +6,7 @@ require_relative './lib/format'
 
 YEAR = '2019'
 READ_LIST = "Read #{YEAR}"
-CURRENTLY_READING_LIST = "*** Reading ***"
+CURRENTLY_READING_LIST = "📖 Reading 📖"
 DNF_LABEL = 'dnf'
 FAVOURITE_LABEL = 'fav'
 
