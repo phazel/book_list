@@ -6,4 +6,8 @@ class Find
   def self.label(hash, label_name)
     hash['labels'].find{ |label| label['name'] == label_name }
   end
+
+  def self.custom_field(hash, field_name)
+    hash['customFields'].find{ |field| field['name'] == field_name }
+  end
 end

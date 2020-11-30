@@ -2,7 +2,7 @@ require 'models/book'
 
 describe Book do
   let(:title) { 'A Very Good Book' }
-  let(:author) { 'Someone Quite Prestigious' }
+  let(:author) { 'Pretty Good Writer' }
   let(:is_audiobook) { false }
   let(:is_ebook) { false }
   let(:audio_label) {{ "id"=>"a_id", "name"=>"audiobook" }}
@@ -32,56 +32,91 @@ describe Book do
 
   describe '#to_s' do
     context 'when a physical book' do
-      let(:pretty_book) { "**A Very Good Book** 📖\n*by Someone Quite Prestigious*\n\n" }
+      let(:pretty_book) { "**A Very Good Book** 📖\n*by Pretty Good Writer*\n\n" }
       it { expect(book.to_s).to eq pretty_book }
     end
 
     context 'when an audiobook' do
       let(:is_audiobook) { true }
       let(:is_ebook) { false }
-      let(:pretty_book) { "**A Very Good Book** 🎧\n*by Someone Quite Prestigious*\n\n" }
+      let(:pretty_book) { "**A Very Good Book** 🎧\n*by Pretty Good Writer*\n\n" }
       it { expect(book.to_s).to eq pretty_book }
     end
 
     context 'when an ebook' do
       let(:is_audiobook) { false }
       let(:is_ebook) { true }
-      let(:pretty_book) { "**A Very Good Book** 📱\n*by Someone Quite Prestigious*\n\n" }
+      let(:pretty_book) { "**A Very Good Book** 📱\n*by Pretty Good Writer*\n\n" }
       it { expect(book.to_s).to eq pretty_book }
     end
 
     context 'when both audiobook and ebook' do
       let(:is_audiobook) { true }
       let(:is_ebook) { true }
-      let(:pretty_book) { "**A Very Good Book** 📱🎧\n*by Someone Quite Prestigious*\n\n" }
+      let(:pretty_book) { "**A Very Good Book** 📱🎧\n*by Pretty Good Writer*\n\n" }
       it { expect(book.to_s).to eq pretty_book }
     end
   end
 
   describe '.create_all' do
+    let(:field) {{ "id"=>"f_id", "name"=>"some_field" }}
+    let(:another_field) {{ "id"=>"af_id", "name"=>"Author" }}
     let(:json_book) {{
       "name"=> title,
-      "desc"=> author,
+      "desc"=> "Blah blah blah",
       "idLabels"=> label_ids,
       "idList"=> list["id"],
-      "closed"=> is_archived
+      "closed"=> is_archived,
+      "customFieldItems"=> [{
+        "value"=> { "text"=> 'Pretty Good Writer' },
+        "idCustomField"=> "af_id",
+        }]
+    }}
+    let(:json_book_desc_author) {{
+      "name"=> "A Cynical Cash Grab",
+      "desc"=> "Ghost Writer",
+      "idLabels"=> label_ids,
+      "idList"=> list["id"],
+      "closed"=> is_archived,
+      "customFieldItems"=> []
+    }}
+    let(:json_book_desc_author) {{
+      "name"=> "A Cynical Cash Grab",
+      "desc"=> "Ghost Writer",
+      "idLabels"=> label_ids,
+      "idList"=> list["id"],
+      "closed"=> is_archived,
+      "customFieldItems"=> []
     }}
     let(:archived_json_book) {{ "closed"=> "true" }}
     let(:hash) {{
-      "cards" => [ json_book, archived_json_book ],
-      "labels" => [ audio_label, ebook_label ]
+      "cards" => [ json_book, json_book_desc_author, archived_json_book ],
+      "labels" => [ audio_label, ebook_label ],
+      "customFields" => [ field, another_field ]
     }}
 
     it { expect(Book.create_all(hash)).to all be_a Book }
 
     it 'ignores archived books' do
-      expect(Book.create_all(hash).size).to eq 1
+      expect(Book.create_all(hash).size).to eq 2
     end
 
     it 'matches book attributes' do
       expect(Book.create_all(hash).first).to have_attributes(
         :title => book.title,
         :author => book.author,
+        :is_audiobook => book.is_audiobook,
+        :is_ebook => book.is_ebook,
+        :label_ids => book.label_ids,
+        :list_id => book.list_id,
+        :is_archived => book.is_archived
+      )
+    end
+
+    it 'takes author from description if not in custom field' do
+      expect(Book.create_all(hash).last).to have_attributes(
+        :title => "A Cynical Cash Grab",
+        :author => "Ghost Writer",
         :is_audiobook => book.is_audiobook,
         :is_ebook => book.is_ebook,
         :label_ids => book.label_ids,
