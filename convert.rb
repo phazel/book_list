@@ -12,6 +12,8 @@ FAVOURITE_LABEL = 'fav'
 
 hash = JSON.load File.read("#{YEAR}/exported.json")
 
+File.open("#{YEAR}/exported_pretty.json", "w") { |f| f.write JSON.pretty_generate hash }
+
 read_list = Find.list(hash, READ_LIST)
 currently_reading_list = Find.list(hash, CURRENTLY_READING_LIST)
 favourite_label = Find.label(hash, FAVOURITE_LABEL)
