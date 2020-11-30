@@ -1,7 +1,7 @@
 class Filter
   def self.in_list(books, list)
     books.select do |book|
-      book.list_id == list['id'] && !book.is_archived
+      book.list_id == list['id']
     end
   end
 

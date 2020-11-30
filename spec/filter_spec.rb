@@ -8,15 +8,11 @@ describe Filter do
 
     book_in_list = Book.new('', '', false, false, [], list["id"], false)
     book_in_another_list = Book.new('', '', false, false, [], another_list["id"], false)
-    closed_book_in_list = Book.new('', '', false, false, [], list["id"], true)
 
-    books = [ book_in_list, book_in_another_list, closed_book_in_list ]
+    books = [ book_in_list, book_in_another_list ]
 
     it { expect(described_class.in_list(books, list)).to eq [book_in_list] }
     it { expect(described_class.in_list(books, another_list)).to eq [ book_in_another_list ] }
-    context 'when the card is archived' do
-      it { expect(described_class.in_list(books, list)).not_to include closed_book_in_list }
-    end
   end
 
   describe 'label filters' do

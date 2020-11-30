@@ -20,21 +20,19 @@ favourite_label = Find.label(hash, FAVOURITE_LABEL)
 dnf_label = Find.label(hash, DNF_LABEL)
 
 books = Book.create_all(hash)
-read = Filter.in_list(books, read_list)
-data = {
-  read: {
-    favourites: Filter.with_label(read, favourite_label),
-    regular: Filter.without_labels(read, [favourite_label, dnf_label]),
-    total_finished: Filter.without_labels(read, [dnf_label]).size
-  },
-  dnf: Filter.with_label(read, dnf_label),
-  currently_reading: Filter.in_list(books, currently_reading_list)
+all_read = Filter.in_list(books, read_list)
+read = {
+  favourites: Filter.with_label(all_read, favourite_label),
+  regular: Filter.without_labels(all_read, [favourite_label, dnf_label]),
+  total_finished: Filter.without_labels(all_read, [dnf_label]).size
 }
+dnf = Filter.with_label(all_read, dnf_label)
+currently_reading = Filter.in_list(books, currently_reading_list)
 
-output = Format.header(YEAR, data[:read][:total_finished])
-output += Format.section(data[:read][:favourites], :favourites)
-output += Format.section(data[:read][:regular])
-output += Format.section(data[:dnf], :dnf) if data[:dnf].any?
-output += Format.section(data[:currently_reading], :currently_reading)
+output = Format.header(YEAR, read[:total_finished])
+output += Format.section(read[:favourites], :favourites)
+output += Format.section(read[:regular])
+output += Format.section(dnf, :dnf) if dnf.any?
+output += Format.section(currently_reading, :currently_reading)
 
 File.write "#{YEAR}/books_read_#{YEAR}.md", output.join

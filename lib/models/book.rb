@@ -35,19 +35,21 @@ class Book
     audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     ebook_label = Find.label(hash, EBOOK_LABEL)
 
-    hash['cards'].map do |json_book|
-      is_audiobook = Filter.has_json_label(json_book, audiobook_label)
-      is_ebook = Filter.has_json_label(json_book, ebook_label)
+    hash['cards']
+      .select{ |json_book| !json_book['closed'] }
+      .map do |json_book|
+        is_audiobook = Filter.has_json_label(json_book, audiobook_label)
+        is_ebook = Filter.has_json_label(json_book, ebook_label)
 
-      Book.new(
-        json_book['name'],
-        json_book['desc'],
-        is_audiobook,
-        is_ebook,
-        json_book['idLabels'],
-        json_book['idList'],
-        json_book['closed']
-      )
+        Book.new(
+          json_book['name'],
+          json_book['desc'],
+          is_audiobook,
+          is_ebook,
+          json_book['idLabels'],
+          json_book['idList'],
+          json_book['closed']
+        )
     end
   end
 end

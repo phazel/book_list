@@ -66,12 +66,17 @@ describe Book do
       "idList"=> list["id"],
       "closed"=> is_archived
     }}
+    let(:archived_json_book) {{ "closed"=> "true" }}
     let(:hash) {{
-      "cards" => [ json_book ],
+      "cards" => [ json_book, archived_json_book ],
       "labels" => [ audio_label, ebook_label ]
     }}
 
     it { expect(Book.create_all(hash)).to all be_a Book }
+
+    it 'ignores archived books' do
+      expect(Book.create_all(hash).size).to eq 1
+    end
 
     it 'matches book attributes' do
       expect(Book.create_all(hash).first).to have_attributes(
