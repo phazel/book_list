@@ -26,4 +26,12 @@ class Format
   def self.line
     "---\n\n"
   end
+
+  def self.result(year, total, fav, reg, dnf, current)
+    output = Format.header(YEAR, total)
+    output += Format.section(fav, :favourites)
+    output += Format.section(reg)
+    output += Format.section(dnf, :dnf) if dnf.any?
+    output += Format.section(current, :currently_reading)
+  end
 end

@@ -24,10 +24,6 @@ read = {
 dnf = Filter.with_label(all_read, labels['dnf'])
 currently_reading = Filter.in_list(books, lists['current'])
 
-output = Format.header(YEAR, read[:total_finished])
-output += Format.section(read[:favourites], :favourites)
-output += Format.section(read[:regular])
-output += Format.section(dnf, :dnf) if dnf.any?
-output += Format.section(currently_reading, :currently_reading)
+output = Format.result(YEAR, read[:total_finished], read[:favourites], read[:regular], dnf, currently_reading)
 
 File.write "#{YEAR}/books_read_#{YEAR}.md", output.join
