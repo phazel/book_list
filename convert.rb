@@ -7,8 +7,9 @@ require_relative './lib/format'
 YEAR = '2020'
 
 hash = JSON.load File.read("#{YEAR}/exported.json")
-
-File.open("#{YEAR}/exported_pretty.json", "w") { |f| f.write JSON.pretty_generate hash }
+File.open("#{YEAR}/exported_pretty.json", "w") do |file|
+  file.write JSON.pretty_generate hash
+end
 
 lists = Find.lists(hash, YEAR)
 labels = Find.labels(hash)
