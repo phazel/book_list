@@ -13,9 +13,9 @@ end
 
 lists = Find.lists(hash, YEAR)
 labels = Find.labels(hash)
-
 books = Book.create_all(hash)
 all_read = Filter.in_list(books, lists['read'])
+
 read = {
   favourites: Filter.with_label(all_read, labels['fav']),
   regular: Filter.without_labels(all_read, [labels['fav'], labels['dnf']]),
