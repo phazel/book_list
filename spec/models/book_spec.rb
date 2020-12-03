@@ -130,4 +130,20 @@ describe Book do
       )
     end
   end
+
+  describe '#matches' do
+    let(:dup_book) do
+      Book.new(title, author, !is_audiobook, !is_ebook, [], '', !is_archived)
+    end
+    let(:different_book) do
+      Book.new("Another", author, is_audiobook, is_ebook, label_ids, list[:id], is_archived)
+    end
+    let(:different_author) do
+      Book.new(title, "Someone Else", is_audiobook, is_ebook, label_ids, list[:id], is_archived)
+    end
+
+    it { expect(book.matches(dup_book)).to be true }
+    it { expect(book.matches(different_book)).to be false }
+    it { expect(book.matches(different_author)).to be false }
+  end
 end

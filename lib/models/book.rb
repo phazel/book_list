@@ -32,6 +32,10 @@ class Book
     BOOK
   end
 
+  def matches(book)
+    book.title == title && book.author == author
+  end
+
   def self.debug(json_book)
     {
       name: json_book[:name],
