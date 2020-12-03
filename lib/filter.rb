@@ -1,7 +1,7 @@
 class Filter
   def self.in_list(books, list)
     books.select do |book|
-      book.list_id == list['id']
+      book.list_id == list[:id]
     end
   end
 
@@ -14,10 +14,10 @@ class Filter
   end
 
   def self.has_label(book, label)
-    book.label_ids.include? label["id"]
+    book.label_ids.include? label[:id]
   end
 
   def self.has_json_label(book, label)
-    book['idLabels'].include? label["id"]
+    book[:idLabels].include? label[:id]
   end
 end

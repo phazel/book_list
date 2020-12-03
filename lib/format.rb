@@ -34,4 +34,15 @@ class Format
     output += Format.section(dnf, :dnf) if dnf.any?
     output += Format.section(current, :currently_reading)
   end
+
+  def self.symbify(item)
+    if item.is_a? Hash
+      item.map { |k, v| [k, symbify(v)] }.to_h
+      item.transform_keys! &:to_sym
+    elsif item.respond_to? :map
+      item.map { |i| symbify(i) }
+    else
+      item
+    end
+  end
 end

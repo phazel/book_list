@@ -30,4 +30,10 @@ describe Format do
   describe '.line' do
     it { expect(described_class.line).to eq "---\n\n" }
   end
+
+  describe '.symbify' do
+    json = { "a"=>1, "b"=>{ "c"=>"d", "e"=>[{ "f"=> "g" }] } }
+    hash = { a: 1, b: { c: "d", e: [{ f: "g" }] } }
+    it { expect(described_class.symbify json).to eq hash }
+  end
 end

@@ -3,11 +3,11 @@ require 'models/book'
 
 describe Filter do
   describe '.in_list' do
-    list = { "id"=>"list_id", "name"=>"some_list" }
-    another_list = { "id"=>"another_list_id", "name"=>"some_other_list" }
+    list = { id:"list_id", name:"some_list" }
+    another_list = { id:"another_list_id", name:"some_other_list" }
 
-    book_in_list = Book.new('', '', false, false, [], list["id"], false)
-    book_in_another_list = Book.new('', '', false, false, [], another_list["id"], false)
+    book_in_list = Book.new('', '', false, false, [], list[:id], false)
+    book_in_another_list = Book.new('', '', false, false, [], another_list[:id], false)
 
     books = [ book_in_list, book_in_another_list ]
 
@@ -16,13 +16,13 @@ describe Filter do
   end
 
   describe 'label filters' do
-    label = { "id"=>"label_id", "name"=>"some_label" }
-    another_label = { "id"=>"another_label_id", "name"=>"some_other_label" }
+    label = { id:"label_id", name:"some_label" }
+    another_label = { id:"another_label_id", name:"some_other_label" }
 
     book_with_no_labels = Book.new('', '', false, false, [], '', false)
-    book_with_label = Book.new('', '', false, false, [ label["id"] ], '', false)
-    book_with_another_label = Book.new('', '', false, false, [ another_label["id"] ], '', false)
-    book_with_both_labels = Book.new('', '', false, false, [ label["id"], another_label["id"] ], '', false)
+    book_with_label = Book.new('', '', false, false, [ label[:id] ], '', false)
+    book_with_another_label = Book.new('', '', false, false, [ another_label[:id] ], '', false)
+    book_with_both_labels = Book.new('', '', false, false, [ label[:id], another_label[:id] ], '', false)
 
     books = [
       book_with_label,
@@ -60,7 +60,7 @@ describe Filter do
     end
 
     describe '.has_json_label' do
-      let(:json_book_with_label) {{ "idLabels"=>[ label["id"] ], "labels"=> [ label ] }}
+      let(:json_book_with_label) {{ idLabels:[ label[:id] ], labels: [ label ] }}
 
       it { expect(described_class.has_json_label(json_book_with_label, label)).to be true }
       it { expect(described_class.has_json_label(json_book_with_label, another_label)).to be false }

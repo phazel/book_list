@@ -6,23 +6,24 @@ require_relative './lib/format'
 
 YEAR = '2020'
 
-hash = JSON.load File.read("#{YEAR}/exported.json")
+raw_hash = JSON.parse(File.read("#{YEAR}/exported.json"))
+hash = Format.symbify raw_hash
 File.open("#{YEAR}/exported_pretty.json", "w") do |file|
-  file.write JSON.pretty_generate hash
+  file.write JSON.pretty_generate raw_hash
 end
 
 lists = Find.lists(hash, YEAR)
 labels = Find.labels(hash)
 books = Book.create_all(hash)
-all_read = Filter.in_list(books, lists['read'])
+all_read = Filter.in_list(books, lists[:read])
 
 read = {
-  favourites: Filter.with_label(all_read, labels['fav']),
-  regular: Filter.without_labels(all_read, [labels['fav'], labels['dnf']]),
-  total_finished: Filter.without_labels(all_read, [labels['dnf']]).size
+  favourites: Filter.with_label(all_read, labels[:fav]),
+  regular: Filter.without_labels(all_read, [labels[:fav], labels[:dnf]]),
+  total_finished: Filter.without_labels(all_read, [labels[:dnf]]).size
 }
-dnf = Filter.with_label(all_read, labels['dnf'])
-currently_reading = Filter.in_list(books, lists['current'])
+dnf = Filter.with_label(all_read, labels[:dnf])
+currently_reading = Filter.in_list(books, lists[:current])
 
 output = Format.result(YEAR, read[:total_finished], read[:favourites], read[:regular], dnf, currently_reading)
 

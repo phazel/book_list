@@ -34,10 +34,10 @@ class Book
 
   def self.debug(json_book)
     {
-      "name"=> json_book['name'],
-      "desc"=> json_book['desc'],
-      "customFieldItems"=> json_book['customFieldItems'],
-      "closed"=> json_book["closed"]
+      name: json_book[:name],
+      desc: json_book[:desc],
+      customFieldItems: json_book[:customFieldItems],
+      closed: json_book[:closed]
     }
   end
 
@@ -46,24 +46,26 @@ class Book
     audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     ebook_label = Find.label(hash, EBOOK_LABEL)
 
-    hash['cards']
-      .select{ |json_book| !json_book['closed'] }
+    hash[:cards]
+      .select{ |json_book| !json_book[:closed] }
       .map do |json_book|
-        found_author = json_book['customFieldItems']
-          .find{ |field| field['idCustomField'] == author_field['id'] }
-        author = found_author ? found_author['value']['text'] : json_book['desc']
+        if json_book[:customFieldItems]
+          found_author = json_book[:customFieldItems]
+            .find{ |field| field[:idCustomField] == author_field[:id] }
+        end
+        author = found_author ? found_author[:value][:text] : json_book[:desc]
 
         is_audiobook = Filter.has_json_label(json_book, audiobook_label)
         is_ebook = Filter.has_json_label(json_book, ebook_label)
 
         Book.new(
-          json_book['name'],
+          json_book[:name],
           author,
           is_audiobook,
           is_ebook,
-          json_book['idLabels'],
-          json_book['idList'],
-          json_book['closed']
+          json_book[:idLabels],
+          json_book[:idList],
+          json_book[:closed]
         )
       end
   end
