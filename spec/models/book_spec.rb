@@ -14,10 +14,9 @@ describe Book do
     ].flatten
   end
   let(:list) {{ id: "list_id", name:"some_list" }}
-  let(:is_archived) { false }
 
   let(:book) do
-    Book.new(title, author, is_audiobook, is_ebook, label_ids, list[:id], is_archived)
+    Book.new(title, author, is_audiobook, is_ebook, label_ids, list[:id])
   end
 
   describe '#initialize' do
@@ -28,7 +27,6 @@ describe Book do
     it { expect(book.is_ebook).to eq is_ebook }
     it { expect(book.label_ids).to eq label_ids }
     it { expect(book.list_id).to eq list[:id] }
-    it { expect(book.is_archived).to eq is_archived }
   end
 
   describe '#to_s' do
@@ -67,7 +65,6 @@ describe Book do
       desc: "Blah blah blah",
       idLabels: label_ids,
       idList: list[:id],
-      closed: is_archived,
       customFieldItems: [{
         value: { text: 'Pretty Good Writer' },
         idCustomField: "af_id",
@@ -78,7 +75,6 @@ describe Book do
       desc: "Ghost Writer",
       idLabels: label_ids,
       idList: list[:id],
-      closed: is_archived,
       customFieldItems: []
     }}
     let(:json_book_no_custom_fields) {{
@@ -86,7 +82,6 @@ describe Book do
       desc: "Ghost Writer",
       idLabels: label_ids,
       idList: list[:id],
-      closed: is_archived,
     }}
     let(:archived_json_book) {{ closed: "true" }}
     let(:hash) {{
@@ -113,8 +108,7 @@ describe Book do
         is_audiobook: book.is_audiobook,
         is_ebook: book.is_ebook,
         label_ids: book.label_ids,
-        list_id: book.list_id,
-        is_archived: book.is_archived
+        list_id: book.list_id
       )
     end
 
@@ -125,21 +119,20 @@ describe Book do
         is_audiobook: book.is_audiobook,
         is_ebook: book.is_ebook,
         label_ids: book.label_ids,
-        list_id: book.list_id,
-        is_archived: book.is_archived
+        list_id: book.list_id
       )
     end
   end
 
   describe '#matches' do
     let(:dup_book) do
-      Book.new(title, author, !is_audiobook, !is_ebook, [], '', !is_archived)
+      Book.new(title, author, !is_audiobook, !is_ebook, [], '')
     end
     let(:different_book) do
-      Book.new("Another", author, is_audiobook, is_ebook, label_ids, list[:id], is_archived)
+      Book.new("Another", author, is_audiobook, is_ebook, label_ids, list[:id])
     end
     let(:different_author) do
-      Book.new(title, "Someone Else", is_audiobook, is_ebook, label_ids, list[:id], is_archived)
+      Book.new(title, "Someone Else", is_audiobook, is_ebook, label_ids, list[:id])
     end
 
     it { expect(book.matches(dup_book)).to be true }

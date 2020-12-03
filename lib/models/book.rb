@@ -2,19 +2,18 @@ require_relative '../filter'
 require_relative '../find'
 
 class Book
-  attr_reader :title, :author, :is_audiobook, :is_ebook, :label_ids, :list_id, :is_archived
+  attr_reader :title, :author, :is_audiobook, :is_ebook, :label_ids, :list_id
   AUTHOR_FIELD = 'Author'
   AUDIOBOOK_LABEL = 'audiobook'
   EBOOK_LABEL = 'ebook'
 
-  def initialize(title, author, is_audiobook, is_ebook, label_ids, list_id, is_archived)
+  def initialize(title, author, is_audiobook, is_ebook, label_ids, list_id)
     @title = title
     @author = author
     @is_audiobook = is_audiobook
     @is_ebook = is_ebook
     @label_ids = label_ids
     @list_id = list_id
-    @is_archived = is_archived
   end
 
   def emojis
@@ -40,8 +39,7 @@ class Book
     {
       name: json_book[:name],
       desc: json_book[:desc],
-      customFieldItems: json_book[:customFieldItems],
-      closed: json_book[:closed]
+      customFieldItems: json_book[:customFieldItems]
     }
   end
 
@@ -68,8 +66,7 @@ class Book
           is_audiobook,
           is_ebook,
           json_book[:idLabels],
-          json_book[:idList],
-          json_book[:closed]
+          json_book[:idList]
         )
       end
   end
