@@ -20,4 +20,13 @@ class Filter
   def self.has_json_label(book, label)
     book[:idLabels].include? label[:id]
   end
+
+  def self.duplicates(books)
+    books.reduce([]) do |dups, book|
+      unique = dups.none? { |dup| dup.matches(book) }
+      matches = books.select { |book_b| book_b.matches(book) }.size > 1
+
+      unique && matches ? dups.push(book) : dups
+    end
+  end
 end

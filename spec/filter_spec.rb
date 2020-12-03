@@ -2,6 +2,8 @@ require 'filter'
 require 'models/book'
 
 describe Filter do
+  label = { id:"label_id", name:"some_label" }
+
   describe '.in_list' do
     list = { id:"list_id", name:"some_list" }
     another_list = { id:"another_list_id", name:"some_other_list" }
@@ -16,7 +18,6 @@ describe Filter do
   end
 
   describe 'label filters' do
-    label = { id:"label_id", name:"some_label" }
     another_label = { id:"another_label_id", name:"some_other_label" }
 
     book_with_no_labels = Book.new('', '', false, false, [], '', false)
@@ -65,5 +66,18 @@ describe Filter do
       it { expect(described_class.has_json_label(json_book_with_label, label)).to be true }
       it { expect(described_class.has_json_label(json_book_with_label, another_label)).to be false }
     end
+  end
+
+  describe '.duplicates' do
+    book1 = Book.new('Title 1', 'Author 1', true, false, [label[:id]], '', false)
+    book2u = Book.new('Title 2', 'Author 2', false, false, [label[:id]], '', false)
+    book1a = Book.new('Title 1', 'Author 1', false, true, [], '', false)
+    book3 = Book.new('Title 3', 'Author 3', false, true, [], '', false)
+    book1b = Book.new('Title 1', 'Author 1', false, true, [], '', false)
+    book3a = Book.new('Title 3', 'Author 3', false, true, [], '', false)
+
+    books = [ book1, book2u, book1a, book3, book1b, book3a ]
+
+    it { expect(described_class.duplicates(books)).to eq [ book1, book3 ] }
   end
 end
