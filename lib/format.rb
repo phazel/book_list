@@ -4,9 +4,9 @@ require_relative 'models/book'
 
 class Format
   SECTION_HEADERS = {
-    favourites: "## Favourites:\n\n",
+    fav: "## Favourites:\n\n",
     dnf: "## Books I Decided Not To Finish:\n\n",
-    currently_reading: "## Books I'm Currently Reading:\n\n"
+    current: "## Books I'm Currently Reading:\n\n"
   }
 
   def self.header(year, number)
@@ -27,12 +27,12 @@ class Format
     "---\n\n"
   end
 
-  def self.result(year, total, fav, reg, dnf, current)
-    output = Format.header(YEAR, total)
-    output += Format.section(fav, :favourites)
-    output += Format.section(reg)
-    output += Format.section(dnf, :dnf) if dnf.any?
-    output += Format.section(current, :currently_reading)
+  def self.result(year, read, current)
+    output = Format.header(YEAR, read[:count])
+    output += Format.section(read[:fav], :fav)
+    output += Format.section(read[:regular])
+    output += Format.section(read[:dnf], :dnf) if read[:dnf].any?
+    output += Format.section(current, :current)
   end
 
   def self.symbify(item)

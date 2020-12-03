@@ -24,7 +24,7 @@ describe Format do
     ]}
     let(:expected_section) {[ "---\n\n", "## Favourites:\n\n", books ]}
 
-    it { expect(described_class.section(books, :favourites)).to eq expected_section }
+    it { expect(described_class.section(books, :fav)).to eq expected_section }
   end
 
   describe '.line' do
