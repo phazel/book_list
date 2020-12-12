@@ -18,6 +18,7 @@ all_read = Filter.in_list(books, lists[:read])
 
 read = {
   count: Filter.without_labels(all_read, [labels[:dnf]]).size,
+  dups: Filter.duplicates(all_read),
   fav: Filter.with_label(all_read, labels[:fav]),
   regular: Filter.without_labels(all_read, [labels[:fav], labels[:dnf]]),
   dnf: Filter.with_label(all_read, labels[:dnf]),

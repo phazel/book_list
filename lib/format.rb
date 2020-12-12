@@ -4,6 +4,7 @@ require_relative 'models/book'
 
 class Format
   SECTION_HEADERS = {
+    dups: "## Books I Read More Than Once!\n\n",
     fav: "## Favourites:\n\n",
     dnf: "## Books I Decided Not To Finish:\n\n",
     current: "## Books I'm Currently Reading:\n\n"
@@ -29,6 +30,7 @@ class Format
 
   def self.result(year, read, current)
     output = Format.header(YEAR, read[:count])
+    output += Format.section(read[:dups], :dups)
     output += Format.section(read[:fav], :fav)
     output += Format.section(read[:regular])
     output += Format.section(read[:dnf], :dnf) if read[:dnf].any?
