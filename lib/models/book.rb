@@ -8,14 +8,14 @@ class Book
   EBOOK_LABEL = 'ebook'
   NATALIE_LABEL = 'nat'
 
-  def initialize(title, author, is_audiobook, is_ebook, label_ids, list_id, with_nat)
+  def initialize(title, author, is_audiobook, is_ebook, with_nat, label_ids, list_id)
     @title = title
     @author = author
     @is_audiobook = is_audiobook
     @is_ebook = is_ebook
+    @with_nat = with_nat
     @label_ids = label_ids
     @list_id = list_id
-    @with_nat = with_nat
   end
 
   def emojis
@@ -48,34 +48,32 @@ class Book
     }
   end
 
-  def self.create_all(hash)
+  def self.author(hash, json_book)
     author_field = Find.custom_field(hash, AUTHOR_FIELD)
+    if json_book[:customFieldItems]
+      found_author = json_book[:customFieldItems]
+        .find{ |field| field[:idCustomField] == author_field[:id] }
+    end
+
+    found_author ? found_author[:value][:text] : json_book[:desc]
+  end
+
+  def self.create_all(hash)
     audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     ebook_label = Find.label(hash, EBOOK_LABEL)
     nat_label = Find.label(hash, NATALIE_LABEL)
 
-
     hash[:cards]
       .select{ |json_book| !json_book[:closed] }
       .map do |json_book|
-        if json_book[:customFieldItems]
-          found_author = json_book[:customFieldItems]
-            .find{ |field| field[:idCustomField] == author_field[:id] }
-        end
-        author = found_author ? found_author[:value][:text] : json_book[:desc]
-
-        is_audiobook = Filter.has_json_label(json_book, audiobook_label)
-        is_ebook = Filter.has_json_label(json_book, ebook_label)
-        with_nat = Filter.has_json_label(json_book, nat_label)
-
         Book.new(
           json_book[:name],
-          author,
-          is_audiobook,
-          is_ebook,
+          Book.author(hash, json_book),
+          Filter.has_json_label(json_book, audiobook_label),
+          Filter.has_json_label(json_book, ebook_label),
+          Filter.has_json_label(json_book, nat_label),
           json_book[:idLabels],
           json_book[:idList],
-          with_nat,
         )
       end
   end

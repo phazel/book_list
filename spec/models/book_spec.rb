@@ -17,7 +17,7 @@ describe Book do
   let(:with_nat) { false }
 
   let(:book) do
-    Book.new(title, author, is_audiobook, is_ebook, label_ids, list[:id], with_nat)
+    Book.new(title, author, is_audiobook, is_ebook, with_nat, label_ids, list[:id] )
   end
 
   describe '#initialize' do
@@ -26,9 +26,9 @@ describe Book do
     it { expect(book.author).to eq author }
     it { expect(book.is_audiobook).to eq is_audiobook }
     it { expect(book.is_ebook).to eq is_ebook }
+    it { expect(book.with_nat).to eq with_nat }
     it { expect(book.label_ids).to eq label_ids }
     it { expect(book.list_id).to eq list[:id] }
-    it { expect(book.with_nat).to eq with_nat }
   end
 
   describe '#to_s' do
@@ -155,13 +155,13 @@ describe Book do
 
   describe '#matches' do
     let(:dup_book) do
-      Book.new(title, author, !is_audiobook, !is_ebook, [], '', false)
+      Book.new(title, author, !is_audiobook, !is_ebook, with_nat, [], '')
     end
     let(:different_book) do
-      Book.new("Another", author, is_audiobook, is_ebook, label_ids, list[:id], false)
+      Book.new("Another", author, is_audiobook, is_ebook, with_nat, label_ids, list[:id])
     end
     let(:different_author) do
-      Book.new(title, "Someone Else", is_audiobook, is_ebook, label_ids, list[:id], false)
+      Book.new(title, "Someone Else", is_audiobook, is_ebook, with_nat, label_ids, list[:id])
     end
 
     it { expect(book.matches(dup_book)).to be true }

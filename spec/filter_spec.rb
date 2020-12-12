@@ -8,8 +8,8 @@ describe Filter do
     list = { id:"list_id", name:"some_list" }
     another_list = { id:"another_list_id", name:"some_other_list" }
 
-    book_in_list = Book.new('', '', false, false, [], list[:id], false)
-    book_in_another_list = Book.new('', '', false, false, [], another_list[:id], false)
+    book_in_list = Book.new('', '', false, false, false, [], list[:id])
+    book_in_another_list = Book.new('', '', false, false, false, [], another_list[:id])
 
     books = [ book_in_list, book_in_another_list ]
 
@@ -20,10 +20,10 @@ describe Filter do
   describe 'label filters' do
     another_label = { id:"another_label_id", name:"some_other_label" }
 
-    book_with_no_labels = Book.new('', '', false, false, [], '', false)
-    book_with_label = Book.new('', '', false, false, [ label[:id] ], '', false)
-    book_with_another_label = Book.new('', '', false, false, [ another_label[:id] ], '', false)
-    book_with_both_labels = Book.new('', '', false, false, [ label[:id], another_label[:id] ], '', false)
+    book_with_no_labels = Book.new('', '', false, false, false, [], '')
+    book_with_label = Book.new('', '', false, false, false, [ label[:id] ], '')
+    book_with_another_label = Book.new('', '', false, false, false, [ another_label[:id] ], '')
+    book_with_both_labels = Book.new('', '', false, false, false, [ label[:id], another_label[:id] ], '')
 
     books = [
       book_with_label,
@@ -69,12 +69,12 @@ describe Filter do
   end
 
   describe '.duplicates' do
-    book1 = Book.new('Title 1', 'Author 1', true, false, [label[:id]], '', false)
-    book2u = Book.new('Title 2', 'Author 2', false, false, [label[:id]], '', false)
-    book1a = Book.new('Title 1', 'Author 1', false, true, [], '', false)
-    book3 = Book.new('Title 3', 'Author 3', false, true, [], '', false)
-    book1b = Book.new('Title 1', 'Author 1', false, true, [], '', false)
-    book3a = Book.new('Title 3', 'Author 3', false, true, [], '', false)
+    book1 = Book.new('Title 1', 'Author 1', true, false, false, [label[:id]], '')
+    book2u = Book.new('Title 2', 'Author 2', false, false, false, [label[:id]], '')
+    book1a = Book.new('Title 1', 'Author 1', false, true, false, [], '')
+    book3 = Book.new('Title 3', 'Author 3', false, true, false, [], '')
+    book1b = Book.new('Title 1', 'Author 1', false, true, false, [], '')
+    book3a = Book.new('Title 3', 'Author 3', false, true, false, [], '')
 
     books = [ book1, book2u, book1a, book3, book1b, book3a ]
 
