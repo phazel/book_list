@@ -2,25 +2,30 @@ require_relative '../filter'
 require_relative '../find'
 
 class Book
-  attr_reader :title, :author, :is_audiobook, :is_ebook, :label_ids, :list_id
+  attr_reader :title, :author, :is_audiobook, :is_ebook, :label_ids, :list_id, :with_nat
   AUTHOR_FIELD = 'Author'
   AUDIOBOOK_LABEL = 'audiobook'
   EBOOK_LABEL = 'ebook'
+  NATALIE_LABEL = 'nat'
 
-  def initialize(title, author, is_audiobook, is_ebook, label_ids, list_id)
+  def initialize(title, author, is_audiobook, is_ebook, label_ids, list_id, with_nat)
     @title = title
     @author = author
     @is_audiobook = is_audiobook
     @is_ebook = is_ebook
     @label_ids = label_ids
     @list_id = list_id
+    @with_nat = with_nat
   end
 
   def emojis
     device = @is_audiobook || @is_ebook
     device_emojis = "#{'📱' if @is_ebook}#{'🎧' if @is_audiobook}"
 
-    device ? device_emojis : '📖'
+    type = device ? device_emojis : '📖'
+    nat = with_nat ? '👩🏻‍🤝‍👩🏽' : ''
+
+    "#{type}#{nat}"
   end
 
   def to_s
@@ -47,6 +52,8 @@ class Book
     author_field = Find.custom_field(hash, AUTHOR_FIELD)
     audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     ebook_label = Find.label(hash, EBOOK_LABEL)
+    nat_label = Find.label(hash, NATALIE_LABEL)
+
 
     hash[:cards]
       .select{ |json_book| !json_book[:closed] }
@@ -59,6 +66,7 @@ class Book
 
         is_audiobook = Filter.has_json_label(json_book, audiobook_label)
         is_ebook = Filter.has_json_label(json_book, ebook_label)
+        with_nat = Filter.has_json_label(json_book, nat_label)
 
         Book.new(
           json_book[:name],
@@ -66,7 +74,8 @@ class Book
           is_audiobook,
           is_ebook,
           json_book[:idLabels],
-          json_book[:idList]
+          json_book[:idList],
+          with_nat,
         )
       end
   end
