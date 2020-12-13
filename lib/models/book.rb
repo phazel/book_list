@@ -58,23 +58,26 @@ class Book
     found_author ? found_author[:value][:text] : json_book[:desc]
   end
 
-  def self.create_all(hash)
+  def self.create(hash, json_book)
     audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     ebook_label = Find.label(hash, EBOOK_LABEL)
     nat_label = Find.label(hash, NATALIE_LABEL)
+    Book.new(
+      title: json_book[:name],
+      author: Book.author(hash, json_book),
+      is_audiobook: Filter.has_json_label(json_book, audiobook_label),
+      is_ebook: Filter.has_json_label(json_book, ebook_label),
+      with_nat: Filter.has_json_label(json_book, nat_label),
+      label_ids: json_book[:idLabels],
+      list_id: json_book[:idList],
+    )
+  end
 
+  def self.create_all(hash)
     hash[:cards]
       .select{ |json_book| !json_book[:closed] }
       .map do |json_book|
-        Book.new(
-          title: json_book[:name],
-          author: Book.author(hash, json_book),
-          is_audiobook: Filter.has_json_label(json_book, audiobook_label),
-          is_ebook: Filter.has_json_label(json_book, ebook_label),
-          with_nat: Filter.has_json_label(json_book, nat_label),
-          label_ids: json_book[:idLabels],
-          list_id: json_book[:idList],
-        )
+        create(hash, json_book)
       end
   end
 end

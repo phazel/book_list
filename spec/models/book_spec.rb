@@ -2,6 +2,26 @@ require 'models/book'
 
 describe Book do
   let(:list) {{ id: "list_id", name:"some_list" }}
+  let(:audio_label) {{ id: "a_id", name: "audiobook" }}
+  let(:ebook_label) {{ id: "e_id", name: "ebook" }}
+  let(:nat_label) {{ id: "n_id", name: "nat" }}
+  let(:author_field) {{ id: "af_id", name: "Author" }}
+  let(:json_book) {{
+    name: 'A Very Good Book',
+    desc: "Ghost Writer",
+    idLabels: [],
+    idList: list[:id],
+    customFieldItems: [{
+      idCustomField: "af_id",
+      value: { text: 'Pretty Good Writer' },
+    }]
+  }}
+  let(:hash) {{
+    cards: [ json_book ],
+    lists: [ list ],
+    labels: [ audio_label, ebook_label, nat_label ],
+    customFields: [ author_field ]
+  }}
 
   let(:book) do
     Book.new(
@@ -82,74 +102,35 @@ describe Book do
     end
   end
 
-  describe '.create_all' do
-    let(:field) {{ id: "f_id", name: "some_field" }}
-    let(:another_field) {{ id: "af_id", name: "Author" }}
-    let(:audio_label) {{ id: "a_id", name: "audiobook" }}
-    let(:ebook_label) {{ id: "e_id", name: "ebook" }}
-    let(:nat_label) {{ id: "n_id", name: "nat" }}
-    let(:json_book) {{
-      name: 'A Very Good Book',
-      desc: "Blah blah blah",
-      idLabels: [],
-      idList: list[:id],
-      customFieldItems: [{
-        value: { text: 'Pretty Good Writer' },
-        idCustomField: "af_id",
-        }]
-    }}
-    let(:json_book_with_nat) { json_book.merge({
-      name: "Good To Listen Together",
-      idLabels: [nat_label[:id]],
-      })}
-    let(:json_book_no_custom_fields) { json_book.merge({
-      name: "A Cynical Cash Grab 2",
-      desc: "Ghost Writer",
-      customFieldItems: [],
-    })}
-    let(:archived_json_book) {{ closed: "true" }}
-    let(:hash) {{
-      cards: [
-        json_book,
-        json_book_with_nat,
-        archived_json_book,
-        json_book_no_custom_fields,
-      ],
-      labels: [ audio_label, ebook_label, nat_label ],
-      customFields: [ field, another_field ]
-    }}
+  describe '.create' do
+    it { expect(Book.create(hash, json_book)).to be_a Book }
 
-    it { expect(Book.create_all(hash)).to all be_a Book }
-
-    it 'ignores archived books' do
-      expect(Book.create_all(hash).size).to eq 3
-    end
-
-    it 'matches book attributes' do
-      expect(Book.create_all(hash).first).to have_same_attributes_as(book)
+    it 'matches json attributes' do
+      expect(Book.create(hash, json_book)).to have_same_attributes_as(book)
     end
 
     it 'takes author from description if not in custom field' do
-      expect(Book.create_all(hash).last).to have_attributes(
-        title: "A Cynical Cash Grab 2",
-        author: "Ghost Writer",
-        is_audiobook: book.is_audiobook,
-        is_ebook: book.is_ebook,
-        label_ids: book.label_ids,
-        list_id: book.list_id
-      )
+      json_book_no_custom_fields = json_book.merge({ customFieldItems: [] })
+      expect(Book.create(hash, json_book_no_custom_fields))
+        .to have_attributes( author: "Ghost Writer" )
     end
 
     it 'includes if I read the book with Nat' do
-      expect(Book.create_all(hash)[1]).to have_attributes(
-        title: "Good To Listen Together",
-        author: "Pretty Good Writer",
-        is_audiobook: book.is_audiobook,
-        is_ebook: book.is_ebook,
-        label_ids: [nat_label[:id]],
-        list_id: book.list_id,
-        with_nat: true,
-      )
+      json_book_with_nat = json_book.merge({ idLabels: [nat_label[:id]] })
+      expect(Book.create(hash, json_book_with_nat))
+        .to have_attributes( with_nat: true )
+    end
+  end
+
+  describe '.create_all' do
+    let(:hash_with_archived) { hash.merge({
+      cards: [ json_book, { closed: "true" } ]
+    })}
+
+    it { expect(Book.create_all(hash_with_archived)).to all be_a Book }
+
+    it 'ignores archived books' do
+      expect(Book.create_all(hash_with_archived).size).to eq 1
     end
   end
 
