@@ -70,7 +70,7 @@ class Book
     found_series ? found_series[:value][:text] : nil
   end
 
-  def self.from_json(hash, json_book)
+  def self.from_hash(hash, json_book)
     audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     ebook_label = Find.label(hash, EBOOK_LABEL)
     nat_label = Find.label(hash, NATALIE_LABEL)
@@ -86,11 +86,11 @@ class Book
     )
   end
 
-  def self.create_all(hash)
+  def self.all_from_hash(hash)
     hash[:cards]
       .select{ |json_book| !json_book[:closed] }
       .map do |json_book|
-        from_json(hash, json_book)
+        from_hash(hash, json_book)
       end
   end
 end

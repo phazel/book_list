@@ -13,7 +13,7 @@ end
 
 lists = Find.lists(hash, YEAR)
 labels = Find.labels(hash)
-books = Book.create_all(hash)
+books = Book.all_from_hash(hash)
 all_read = Filter.in_list(books, lists[:read])
 
 read = {

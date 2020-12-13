@@ -99,21 +99,21 @@ describe Book do
     end
   end
 
-  describe '.from_json' do
-    it { expect(Book.from_json(hash, json_book)).to be_a Book }
+  describe '.from_hash' do
+    it { expect(Book.from_hash(hash, json_book)).to be_a Book }
 
     it 'matches json attributes' do
-      expect(Book.from_json(hash, json_book)).to convert_to(book)
+      expect(Book.from_hash(hash, json_book)).to convert_to(book)
     end
 
     it 'takes author from description if not in custom field' do
       json_book_no_custom_fields = json_book.merge({ customFieldItems: [] })
-      expect(Book.from_json(hash, json_book_no_custom_fields))
+      expect(Book.from_hash(hash, json_book_no_custom_fields))
         .to have_attributes( author: "Ghost Writer" )
     end
 
     it 'sets series to nil' do
-      expect(Book.from_json(hash, json_book)).to have_attributes( series: nil )
+      expect(Book.from_hash(hash, json_book)).to have_attributes( series: nil )
     end
 
     it 'takes series from custom field' do
@@ -121,26 +121,26 @@ describe Book do
         idCustomField: "sf_id",
         value: { text: 'The Adventures' },
       }]})
-      expect(Book.from_json(hash, json_book_in_series))
+      expect(Book.from_hash(hash, json_book_in_series))
         .to have_attributes( series: "The Adventures" )
     end
 
     it 'includes if I read the book with Nat' do
       json_book_with_nat = json_book.merge({ idLabels: [nat_label[:id]] })
-      expect(Book.from_json(hash, json_book_with_nat))
+      expect(Book.from_hash(hash, json_book_with_nat))
         .to have_attributes( with_nat: true )
     end
   end
 
-  describe '.create_all' do
+  describe '.all_from_hash' do
     let(:hash_with_archived) { hash.merge({
       cards: [ json_book, { closed: "true" } ]
     })}
 
-    it { expect(Book.create_all(hash_with_archived)).to all be_a Book }
+    it { expect(Book.all_from_hash(hash_with_archived)).to all be_a Book }
 
     it 'ignores archived books' do
-      expect(Book.create_all(hash_with_archived).size).to eq 1
+      expect(Book.all_from_hash(hash_with_archived).size).to eq 1
     end
   end
 end
