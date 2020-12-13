@@ -63,10 +63,7 @@ describe Book do
   end
 
   describe '#to_s' do
-    context 'when a physical book' do
-      let(:pretty_book) { "**A Very Good Book** 📖\n*by Pretty Good Writer*\n\n" }
-      it { expect(book.to_s).to eq pretty_book }
-    end
+    it { expect(book.to_s).to eq "**A Very Good Book** 📖\n*by Pretty Good Writer*\n\n" }
 
     context 'when in a series' do
       let(:book_in_series) { make_book(series: 'Saga of Time') }
@@ -76,41 +73,31 @@ describe Book do
       it { expect(book_in_series.to_s).to eq pretty_book }
 
       context 'with a series number' do
-        let(:book_in_series_2) { make_book({
-          series: 'Saga of Time',
-          series_number: 2,
-        })}
+        let(:book_in_series_2) { make_book({ series: 'Saga of Time', series_number: 2 })}
         let(:pretty_book) {
           "**A Very Good Book** 📖\nSeries: Saga of Time, #2\n*by Pretty Good Writer*\n\n"
         }
         it { expect(book_in_series_2.to_s).to eq pretty_book }
       end
     end
-
-    context 'when an audiobook' do
-      let(:audiobook) { make_book(is_audiobook: true) }
-      let(:pretty_book) { "**A Very Good Book** 🎧\n*by Pretty Good Writer*\n\n" }
-      it { expect(audiobook.to_s).to eq pretty_book }
-    end
-
-    context 'when an ebook' do
-      let(:ebook) { make_book(is_ebook: true) }
-      let(:pretty_book) { "**A Very Good Book** 📱\n*by Pretty Good Writer*\n\n" }
-      it { expect(ebook.to_s).to eq pretty_book }
-    end
-
-    context 'when both audiobook and ebook' do
-      let(:multi_book) { make_book(is_audiobook: true, is_ebook: true) }
-      let(:pretty_book) { "**A Very Good Book** 📱🎧\n*by Pretty Good Writer*\n\n" }
-      it { expect(multi_book.to_s).to eq pretty_book }
-    end
-
-    context 'when I read it with Natalie' do
-      let(:nat_book) { make_book(with_nat: true) }
-      let(:pretty_book) { "**A Very Good Book** 📖👩🏻‍🤝‍👩🏽\n*by Pretty Good Writer*\n\n" }
-      it { expect(nat_book.to_s).to eq pretty_book }
-    end
   end
+
+  describe '#emojis' do
+    it{ expect(book.emojis)
+      .to eq '📖' }
+    it{ expect(make_book(is_audiobook: true).emojis)
+      .to eq '🎧' }
+    it{ expect(make_book(is_ebook: true).emojis)
+      .to eq '📱' }
+    it{ expect(make_book(is_audiobook: true, is_ebook: true).emojis)
+      .to eq '📱🎧' }
+    it{ expect(make_book(with_nat: true).emojis)
+      .to eq '📖💞' }
+    it{ expect(make_book(is_audiobook: true, is_ebook: true, with_nat: true).emojis)
+      .to eq '📱🎧💞' }
+  end
+
+  describe '.custom_field'
 
   describe '.from_hash' do
     it { expect(Book.from_hash(hash, json_book)).to be_a Book }

@@ -42,7 +42,7 @@ class Book
     device_emojis = "#{'📱' if @is_ebook}#{'🎧' if @is_audiobook}"
 
     type = device ? device_emojis : '📖'
-    nat = with_nat ? '👩🏻‍🤝‍👩🏽' : ''
+    nat = with_nat ? '💞' : ''
 
     "#{type}#{nat}"
   end
