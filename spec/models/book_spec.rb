@@ -5,6 +5,7 @@ describe Book do
   let(:audio_label) {{ id: "a_id", name: "audiobook" }}
   let(:ebook_label) {{ id: "e_id", name: "ebook" }}
   let(:nat_label) {{ id: "n_id", name: "nat" }}
+  let(:sleep_label) {{ id: "s_id", name: "sleep" }}
   let(:author_field) {{ id: "af_id", name: "Author" }}
   let(:series_field) {{ id: "sf_id", name: "Series" }}
   let(:series_number_field) {{ id: "snf_id", name: "Series Number" }}
@@ -21,7 +22,7 @@ describe Book do
   let(:hash) {{
     cards: [ json_book ],
     lists: [ list ],
-    labels: [ audio_label, ebook_label, nat_label ],
+    labels: [ audio_label, ebook_label, nat_label, sleep_label ],
     customFields: [ author_field, series_field, series_number_field ]
   }}
 
@@ -34,6 +35,7 @@ describe Book do
       is_audiobook: options[:is_audiobook] ||= false,
       is_ebook: options[:is_ebook] ||= false,
       with_nat: options[:with_nat] ||= false,
+      for_sleep: options[:for_sleep] ||= false,
       label_ids: options[:label_ids] ||= [],
       list_id: options[:list_id] ||= list[:id],
     )
@@ -48,6 +50,7 @@ describe Book do
     it { expect(book.is_audiobook).to eq false }
     it { expect(book.is_ebook).to eq false }
     it { expect(book.with_nat).to eq false }
+    it { expect(book.for_sleep).to eq false }
     it { expect(book.label_ids).to eq []   }
     it { expect(book.list_id).to eq list[:id] }
   end
@@ -61,6 +64,25 @@ describe Book do
     it { expect(book.matches(different_title)).to be false }
     it { expect(book.matches(different_author)).to be false }
   end
+
+  describe '#emojis' do
+    it{ expect(book.emojis)
+      .to eq '📖' }
+    it{ expect(make_book(is_audiobook: true).emojis)
+      .to eq '🎧' }
+    it{ expect(make_book(is_ebook: true).emojis)
+      .to eq '📱' }
+    it{ expect(make_book(is_audiobook: true, is_ebook: true).emojis)
+      .to eq '📱🎧' }
+    it{ expect(make_book(with_nat: true).emojis)
+      .to eq '📖💞' }
+    it{ expect(make_book(is_audiobook: true, is_ebook: true, with_nat: true).emojis)
+      .to eq '📱🎧💞' }
+    it{ expect(make_book(for_sleep: true).emojis)
+      .to eq '📖🌒' }
+    it{ expect(make_book(is_audiobook: true, with_nat: true, for_sleep: true).emojis)
+      .to eq '🎧💞🌒' }
+    end
 
   describe '#to_s' do
     it { expect(book.to_s).to eq "**A Very Good Book** 📖\n*by Pretty Good Writer*\n\n" }
@@ -80,21 +102,6 @@ describe Book do
         it { expect(book_in_series_2.to_s).to eq pretty_book }
       end
     end
-  end
-
-  describe '#emojis' do
-    it{ expect(book.emojis)
-      .to eq '📖' }
-    it{ expect(make_book(is_audiobook: true).emojis)
-      .to eq '🎧' }
-    it{ expect(make_book(is_ebook: true).emojis)
-      .to eq '📱' }
-    it{ expect(make_book(is_audiobook: true, is_ebook: true).emojis)
-      .to eq '📱🎧' }
-    it{ expect(make_book(with_nat: true).emojis)
-      .to eq '📖💞' }
-    it{ expect(make_book(is_audiobook: true, is_ebook: true, with_nat: true).emojis)
-      .to eq '📱🎧💞' }
   end
 
   describe '.custom_field' do
@@ -165,6 +172,12 @@ describe Book do
       json_book_with_nat = json_book.merge({ idLabels: [nat_label[:id]] })
       expect(Book.from_hash(hash, json_book_with_nat))
         .to have_attributes( with_nat: true )
+    end
+
+    it 'includes if I read the book to sleep' do
+      json_book_sleep = json_book.merge({ idLabels: [sleep_label[:id]] })
+      expect(Book.from_hash(hash, json_book_sleep))
+        .to have_attributes( for_sleep: true )
     end
   end
 

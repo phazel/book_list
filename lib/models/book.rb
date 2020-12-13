@@ -2,15 +2,16 @@ require_relative '../filter'
 require_relative '../find'
 
 class Book
-  attr_reader :title, :author, :series, :series_number, :is_audiobook, :is_ebook, :label_ids, :list_id, :with_nat
+  attr_reader :title, :author, :series, :series_number, :is_audiobook, :is_ebook, :with_nat, :for_sleep, :label_ids, :list_id
   AUTHOR_FIELD = 'Author'
   SERIES_FIELD = 'Series'
   SERIES_NUMBER_FIELD = 'Series Number'
   AUDIOBOOK_LABEL = 'audiobook'
   EBOOK_LABEL = 'ebook'
   NATALIE_LABEL = 'nat'
+  SLEEP_LABEL = 'sleep'
 
-  def initialize(title:, author:, series: nil, series_number: nil, is_audiobook: false, is_ebook: false, with_nat: false, label_ids: [], list_id: '')
+  def initialize(title:, author:, series: nil, series_number: nil, is_audiobook: false, is_ebook: false, with_nat: false, for_sleep: false, label_ids: [], list_id: '')
     @title = title
     @author = author
     @series = series
@@ -18,19 +19,9 @@ class Book
     @is_audiobook = is_audiobook
     @is_ebook = is_ebook
     @with_nat = with_nat
+    @for_sleep = for_sleep
     @label_ids = label_ids
     @list_id = list_id
-  end
-
-  def to_s
-    number_section = "#{", ##{@series_number}" if @series_number}"
-    series_section = "#{"\nSeries: #{@series}#{number_section}" if @series}"
-
-    <<~BOOK
-    **#{@title}** #{emojis}#{series_section}
-    *by #{@author}*
-
-    BOOK
   end
 
   def matches(book)
@@ -43,8 +34,20 @@ class Book
 
     type = device ? device_emojis : '📖'
     nat = with_nat ? '💞' : ''
+    sleep = for_sleep ? '🌒' : ''
 
-    "#{type}#{nat}"
+    "#{type}#{nat}#{sleep}"
+  end
+
+  def to_s
+    number_section = "#{", ##{@series_number}" if @series_number}"
+    series_section = "#{"\nSeries: #{@series}#{number_section}" if @series}"
+
+    <<~BOOK
+    **#{@title}** #{emojis}#{series_section}
+    *by #{@author}*
+
+    BOOK
   end
 
   def self.debug(json_book)
@@ -71,6 +74,7 @@ class Book
     audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     ebook_label = Find.label(hash, EBOOK_LABEL)
     nat_label = Find.label(hash, NATALIE_LABEL)
+    sleep_label = Find.label(hash, SLEEP_LABEL)
     Book.new(
       title: json_book[:name],
       author: Book.custom_field(json_book, author_field, :text, default: json_book[:desc]),
@@ -79,6 +83,7 @@ class Book
       is_audiobook: Filter.has_json_label(json_book, audiobook_label),
       is_ebook: Filter.has_json_label(json_book, ebook_label),
       with_nat: Filter.has_json_label(json_book, nat_label),
+      for_sleep: Filter.has_json_label(json_book, sleep_label),
       label_ids: json_book[:idLabels],
       list_id: json_book[:idList],
     )
