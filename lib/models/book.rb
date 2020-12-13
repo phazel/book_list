@@ -55,45 +55,27 @@ class Book
     }
   end
 
-  def self.author(hash, json_book)
-    author_field = Find.custom_field(hash, AUTHOR_FIELD)
+  def self.custom_field(json_book, field, key, if_not_found: nil)
     if json_book[:customFieldItems]
-      found_author = json_book[:customFieldItems]
-        .find{ |field| field[:idCustomField] == author_field[:id] }
+      found_field = json_book[:customFieldItems]
+        .find{ |book_field| book_field[:idCustomField] == field[:id] }
     end
 
-    found_author ? found_author[:value][:text] : json_book[:desc]
-  end
-
-  def self.series(hash, json_book)
-    series_field = Find.custom_field(hash, SERIES_FIELD)
-    if json_book[:customFieldItems]
-      found_series = json_book[:customFieldItems]
-        .find{ |field| field[:idCustomField] == series_field[:id] }
-    end
-
-    found_series ? found_series[:value][:text] : nil
-  end
-
-  def self.series_number(hash, json_book)
-    series_number_field = Find.custom_field(hash, SERIES_NUMBER_FIELD)
-    if json_book[:customFieldItems]
-      found_series_number = json_book[:customFieldItems]
-        .find{ |field| field[:idCustomField] == series_number_field[:id] }
-    end
-
-    found_series_number ? found_series_number[:value][:number] : nil
+    found_field ? found_field[:value][key] : if_not_found
   end
 
   def self.from_hash(hash, json_book)
+    author_field = Find.custom_field(hash, AUTHOR_FIELD)
+    series_field = Find.custom_field(hash, SERIES_FIELD)
+    series_number_field = Find.custom_field(hash, SERIES_NUMBER_FIELD)
     audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     ebook_label = Find.label(hash, EBOOK_LABEL)
     nat_label = Find.label(hash, NATALIE_LABEL)
     Book.new(
       title: json_book[:name],
-      author: Book.author(hash, json_book),
-      series: Book.series(hash, json_book),
-      series_number: Book.series_number(hash, json_book),
+      author: Book.custom_field(json_book, author_field, :text, if_not_found: json_book[:desc]),
+      series: Book.custom_field(json_book, series_field, :text),
+      series_number: Book.custom_field(json_book, series_number_field, :number),
       is_audiobook: Filter.has_json_label(json_book, audiobook_label),
       is_ebook: Filter.has_json_label(json_book, ebook_label),
       with_nat: Filter.has_json_label(json_book, nat_label),
