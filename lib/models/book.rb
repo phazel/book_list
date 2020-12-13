@@ -2,15 +2,17 @@ require_relative '../filter'
 require_relative '../find'
 
 class Book
-  attr_reader :title, :author, :is_audiobook, :is_ebook, :label_ids, :list_id, :with_nat
+  attr_reader :title, :author, :series, :is_audiobook, :is_ebook, :label_ids, :list_id, :with_nat
   AUTHOR_FIELD = 'Author'
+  SERIES_FIELD = 'Series'
   AUDIOBOOK_LABEL = 'audiobook'
   EBOOK_LABEL = 'ebook'
   NATALIE_LABEL = 'nat'
 
-  def initialize(title:, author:, is_audiobook: false, is_ebook: false, with_nat: false, label_ids: [], list_id: '')
+  def initialize(title:, author:, series: nil, is_audiobook: false, is_ebook: false, with_nat: false, label_ids: [], list_id: '')
     @title = title
     @author = author
+    @series = series
     @is_audiobook = is_audiobook
     @is_ebook = is_ebook
     @with_nat = with_nat
@@ -30,7 +32,7 @@ class Book
 
   def to_s
     <<~BOOK
-    **#{@title}** #{emojis}
+    **#{@title}** #{emojis}#{"\nSeries: #{series}" if @series}
     *by #{@author}*
 
     BOOK
@@ -58,6 +60,16 @@ class Book
     found_author ? found_author[:value][:text] : json_book[:desc]
   end
 
+  def self.series(hash, json_book)
+    series_field = Find.custom_field(hash, SERIES_FIELD)
+    if json_book[:customFieldItems]
+      found_series = json_book[:customFieldItems]
+        .find{ |field| field[:idCustomField] == series_field[:id] }
+    end
+
+    found_series ? found_series[:value][:text] : nil
+  end
+
   def self.create(hash, json_book)
     audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     ebook_label = Find.label(hash, EBOOK_LABEL)
@@ -65,6 +77,7 @@ class Book
     Book.new(
       title: json_book[:name],
       author: Book.author(hash, json_book),
+      series: Book.series(hash, json_book),
       is_audiobook: Filter.has_json_label(json_book, audiobook_label),
       is_ebook: Filter.has_json_label(json_book, ebook_label),
       with_nat: Filter.has_json_label(json_book, nat_label),
