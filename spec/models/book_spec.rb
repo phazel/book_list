@@ -50,51 +50,6 @@ describe Book do
     it { expect(book.list_id).to eq list[:id] }
   end
 
-  describe '.create' do
-    it { expect(Book.create(hash, json_book)).to be_a Book }
-
-    it 'matches json attributes' do
-      expect(Book.create(hash, json_book)).to convert_to(book)
-    end
-
-    it 'takes author from description if not in custom field' do
-      json_book_no_custom_fields = json_book.merge({ customFieldItems: [] })
-      expect(Book.create(hash, json_book_no_custom_fields))
-        .to have_attributes( author: "Ghost Writer" )
-    end
-
-    it 'sets series to nil' do
-      expect(Book.create(hash, json_book)).to have_attributes( series: nil )
-    end
-
-    it 'takes series from custom field' do
-      json_book_in_series = json_book.merge({ customFieldItems: [{
-        idCustomField: "sf_id",
-        value: { text: 'The Adventures' },
-      }]})
-      expect(Book.create(hash, json_book_in_series))
-        .to have_attributes( series: "The Adventures" )
-    end
-
-    it 'includes if I read the book with Nat' do
-      json_book_with_nat = json_book.merge({ idLabels: [nat_label[:id]] })
-      expect(Book.create(hash, json_book_with_nat))
-        .to have_attributes( with_nat: true )
-    end
-  end
-
-  describe '.create_all' do
-    let(:hash_with_archived) { hash.merge({
-      cards: [ json_book, { closed: "true" } ]
-    })}
-
-    it { expect(Book.create_all(hash_with_archived)).to all be_a Book }
-
-    it 'ignores archived books' do
-      expect(Book.create_all(hash_with_archived).size).to eq 1
-    end
-  end
-
   describe '#matches' do
     let(:dup_book)         { make_book() }
     let(:different_title)  { make_book(title: "Another") }
@@ -141,6 +96,51 @@ describe Book do
       let(:nat_book) { make_book(with_nat: true) }
       let(:pretty_book) { "**A Very Good Book** 📖👩🏻‍🤝‍👩🏽\n*by Pretty Good Writer*\n\n" }
       it { expect(nat_book.to_s).to eq pretty_book }
+    end
+  end
+
+  describe '.from_json' do
+    it { expect(Book.from_json(hash, json_book)).to be_a Book }
+
+    it 'matches json attributes' do
+      expect(Book.from_json(hash, json_book)).to convert_to(book)
+    end
+
+    it 'takes author from description if not in custom field' do
+      json_book_no_custom_fields = json_book.merge({ customFieldItems: [] })
+      expect(Book.from_json(hash, json_book_no_custom_fields))
+        .to have_attributes( author: "Ghost Writer" )
+    end
+
+    it 'sets series to nil' do
+      expect(Book.from_json(hash, json_book)).to have_attributes( series: nil )
+    end
+
+    it 'takes series from custom field' do
+      json_book_in_series = json_book.merge({ customFieldItems: [{
+        idCustomField: "sf_id",
+        value: { text: 'The Adventures' },
+      }]})
+      expect(Book.from_json(hash, json_book_in_series))
+        .to have_attributes( series: "The Adventures" )
+    end
+
+    it 'includes if I read the book with Nat' do
+      json_book_with_nat = json_book.merge({ idLabels: [nat_label[:id]] })
+      expect(Book.from_json(hash, json_book_with_nat))
+        .to have_attributes( with_nat: true )
+    end
+  end
+
+  describe '.create_all' do
+    let(:hash_with_archived) { hash.merge({
+      cards: [ json_book, { closed: "true" } ]
+    })}
+
+    it { expect(Book.create_all(hash_with_archived)).to all be_a Book }
+
+    it 'ignores archived books' do
+      expect(Book.create_all(hash_with_archived).size).to eq 1
     end
   end
 end

@@ -20,16 +20,6 @@ class Book
     @list_id = list_id
   end
 
-  def emojis
-    device = @is_audiobook || @is_ebook
-    device_emojis = "#{'📱' if @is_ebook}#{'🎧' if @is_audiobook}"
-
-    type = device ? device_emojis : '📖'
-    nat = with_nat ? '👩🏻‍🤝‍👩🏽' : ''
-
-    "#{type}#{nat}"
-  end
-
   def to_s
     <<~BOOK
     **#{@title}** #{emojis}#{"\nSeries: #{series}" if @series}
@@ -40,6 +30,16 @@ class Book
 
   def matches(book)
     book.title == title && book.author == author
+  end
+
+  def emojis
+    device = @is_audiobook || @is_ebook
+    device_emojis = "#{'📱' if @is_ebook}#{'🎧' if @is_audiobook}"
+
+    type = device ? device_emojis : '📖'
+    nat = with_nat ? '👩🏻‍🤝‍👩🏽' : ''
+
+    "#{type}#{nat}"
   end
 
   def self.debug(json_book)
@@ -70,7 +70,7 @@ class Book
     found_series ? found_series[:value][:text] : nil
   end
 
-  def self.create(hash, json_book)
+  def self.from_json(hash, json_book)
     audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
     ebook_label = Find.label(hash, EBOOK_LABEL)
     nat_label = Find.label(hash, NATALIE_LABEL)
@@ -90,7 +90,7 @@ class Book
     hash[:cards]
       .select{ |json_book| !json_book[:closed] }
       .map do |json_book|
-        create(hash, json_book)
+        from_json(hash, json_book)
       end
   end
 end
