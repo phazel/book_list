@@ -7,6 +7,7 @@ describe Book do
   let(:nat_label) {{ id: "n_id", name: "nat" }}
   let(:author_field) {{ id: "af_id", name: "Author" }}
   let(:series_field) {{ id: "sf_id", name: "Series" }}
+  let(:series_number_field) {{ id: "snf_id", name: "Series Number" }}
   let(:json_book) {{
     name: 'A Very Good Book',
     desc: "Ghost Writer",
@@ -21,7 +22,7 @@ describe Book do
     cards: [ json_book ],
     lists: [ list ],
     labels: [ audio_label, ebook_label, nat_label ],
-    customFields: [ author_field, series_field ]
+    customFields: [ author_field, series_field, series_number_field ]
   }}
 
   def make_book(options = {})
@@ -29,6 +30,7 @@ describe Book do
       title: options[:title] ||= 'A Very Good Book',
       author: options[:author] ||= 'Pretty Good Writer',
       series: options[:series] ||= nil,
+      series_number: options[:series_number] ||= nil,
       is_audiobook: options[:is_audiobook] ||= false,
       is_ebook: options[:is_ebook] ||= false,
       with_nat: options[:with_nat] ||= false,
@@ -72,6 +74,17 @@ describe Book do
         "**A Very Good Book** 📖\nSeries: Saga of Time\n*by Pretty Good Writer*\n\n"
       }
       it { expect(book_in_series.to_s).to eq pretty_book }
+
+      context 'with a series number' do
+        let(:book_in_series_2) { make_book({
+          series: 'Saga of Time',
+          series_number: 2,
+        })}
+        let(:pretty_book) {
+          "**A Very Good Book** 📖\nSeries: Saga of Time, #2\n*by Pretty Good Writer*\n\n"
+        }
+        it { expect(book_in_series_2.to_s).to eq pretty_book }
+      end
     end
 
     context 'when an audiobook' do
@@ -116,13 +129,27 @@ describe Book do
       expect(Book.from_hash(hash, json_book)).to have_attributes( series: nil )
     end
 
-    it 'takes series from custom field' do
-      json_book_in_series = json_book.merge({ customFieldItems: [{
+    context 'when the book is in a series' do
+      let(:json_book_in_series) { json_book.merge({ customFieldItems: [{
         idCustomField: "sf_id",
         value: { text: 'The Adventures' },
-      }]})
-      expect(Book.from_hash(hash, json_book_in_series))
-        .to have_attributes( series: "The Adventures" )
+      }]})}
+      it 'sets the series' do
+        expect(Book.from_hash(hash, json_book_in_series))
+          .to have_attributes( series: "The Adventures" )
+      end
+      it { expect(Book.from_hash(hash, json_book_in_series))
+          .to have_attributes( series_number: nil ) }
+
+      it 'sets the series number if present' do
+        json_book_in_series_w_num = json_book.merge({ customFieldItems:
+          json_book_in_series[:customFieldItems] + [{
+            idCustomField: "snf_id",
+            value: { number: 2 },
+        }]})
+        expect(Book.from_hash(hash, json_book_in_series_w_num))
+          .to have_attributes( series: "The Adventures", series_number: 2 )
+      end
     end
 
     it 'includes if I read the book with Nat' do
