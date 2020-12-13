@@ -24,13 +24,19 @@ describe Book do
     customFields: [ author_field, series_field ]
   }}
 
-  let(:book) do
-    Book.new(
-      title: 'A Very Good Book',
-      author: 'Pretty Good Writer',
-      list_id: list[:id],
+  def make_book(options = {})
+    return Book.new(
+      title: options[:title] ||= 'A Very Good Book',
+      author: options[:author] ||= 'Pretty Good Writer',
+      series: options[:series] ||= nil,
+      is_audiobook: options[:is_audiobook] ||= false,
+      is_ebook: options[:is_ebook] ||= false,
+      with_nat: options[:with_nat] ||= false,
+      label_ids: options[:label_ids] ||= [],
+      list_id: options[:list_id] ||= list[:id],
     )
   end
+  let(:book) { make_book() }
 
   describe '#initialize' do
     it { expect(book).to be_a Book }
@@ -90,9 +96,9 @@ describe Book do
   end
 
   describe '#matches' do
-    let(:dup_book)         { Book.new(title: book.title, author: book.author) }
-    let(:different_title)  { Book.new(title: "Another", author: book.author) }
-    let(:different_author) { Book.new(title: book.title, author: "Someone Else") }
+    let(:dup_book)         { make_book() }
+    let(:different_title)  { make_book(title: "Another") }
+    let(:different_author) { make_book(author: "Someone Else") }
 
     it { expect(book.matches(dup_book)).to be true }
     it { expect(book.matches(different_title)).to be false }
@@ -106,77 +112,35 @@ describe Book do
     end
 
     context 'when in a series' do
-      let(:book) {
-        Book.new(
-          title: 'A Very Good Book',
-          author: 'Pretty Good Writer',
-          series: 'Saga of Time',
-          is_audiobook: true,
-          list_id: list[:id],
-        )
-      }
+      let(:book_in_series) { make_book(series: 'Saga of Time') }
       let(:pretty_book) {
-        <<~BOOK
-        **A Very Good Book** 🎧
-        Series: Saga of Time
-        *by Pretty Good Writer*
-
-        BOOK
+        "**A Very Good Book** 📖\nSeries: Saga of Time\n*by Pretty Good Writer*\n\n"
       }
-      it { expect(book.to_s).to eq pretty_book }
+      it { expect(book_in_series.to_s).to eq pretty_book }
     end
 
     context 'when an audiobook' do
-      let(:book) {
-        Book.new(
-          title: 'A Very Good Book',
-          author: 'Pretty Good Writer',
-          is_audiobook: true,
-          list_id: list[:id],
-        )
-      }
+      let(:audiobook) { make_book(is_audiobook: true) }
       let(:pretty_book) { "**A Very Good Book** 🎧\n*by Pretty Good Writer*\n\n" }
-      it { expect(book.to_s).to eq pretty_book }
+      it { expect(audiobook.to_s).to eq pretty_book }
     end
 
     context 'when an ebook' do
-      let(:book) {
-        Book.new(
-          title: 'A Very Good Book',
-          author: 'Pretty Good Writer',
-          is_ebook: true,
-          list_id: list[:id],
-        )
-      }
+      let(:ebook) { make_book(is_ebook: true) }
       let(:pretty_book) { "**A Very Good Book** 📱\n*by Pretty Good Writer*\n\n" }
-      it { expect(book.to_s).to eq pretty_book }
+      it { expect(ebook.to_s).to eq pretty_book }
     end
 
     context 'when both audiobook and ebook' do
-      let(:book) {
-        Book.new(
-          title: 'A Very Good Book',
-          author: 'Pretty Good Writer',
-          is_audiobook: true,
-          is_ebook: true,
-          list_id: list[:id],
-        )
-      }
+      let(:multi_book) { make_book(is_audiobook: true, is_ebook: true) }
       let(:pretty_book) { "**A Very Good Book** 📱🎧\n*by Pretty Good Writer*\n\n" }
-      it { expect(book.to_s).to eq pretty_book }
+      it { expect(multi_book.to_s).to eq pretty_book }
     end
 
     context 'when I read it with Natalie' do
-      let(:book) {
-        Book.new(
-          title: 'A Very Good Book',
-          author: 'Pretty Good Writer',
-          with_nat: true,
-          list_id: list[:id],
-        )
-      }
+      let(:nat_book) { make_book(with_nat: true) }
       let(:pretty_book) { "**A Very Good Book** 📖👩🏻‍🤝‍👩🏽\n*by Pretty Good Writer*\n\n" }
-      it { expect(book.to_s).to eq pretty_book }
+      it { expect(nat_book.to_s).to eq pretty_book }
     end
   end
 end
