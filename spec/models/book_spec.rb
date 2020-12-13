@@ -173,7 +173,7 @@ describe Book do
         list_id: ''
       )
     end
-    let(:different_book) do
+    let(:different_title) do
       Book.new(
         title: "Another",
         author: author,
@@ -197,7 +197,7 @@ describe Book do
     end
 
     it { expect(book.matches(dup_book)).to be true }
-    it { expect(book.matches(different_book)).to be false }
+    it { expect(book.matches(different_title)).to be false }
     it { expect(book.matches(different_author)).to be false }
   end
 end
