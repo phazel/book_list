@@ -19,8 +19,24 @@ describe Format do
 
   describe '.section' do
     let(:books) {[
-      Book.new('book_1', 'Author 1', false, false, false, [], ''),
-      Book.new('book_2', 'Author 2', true, false, false, [], ''),
+      Book.new(
+        title: 'book_1',
+        author: 'Author 1',
+        is_audiobook: false,
+        is_ebook: false,
+        with_nat: false,
+        label_ids: [],
+        list_id: ''
+      ),
+      Book.new(
+        title: 'book_2',
+        author: 'Author 2',
+        is_audiobook: true,
+        is_ebook: false,
+        with_nat: false,
+        label_ids: [],
+        list_id: ''
+      ),
     ]}
     let(:expected_section) {[ "---\n\n", "## Favourites:\n\n", books ]}
 

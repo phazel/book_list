@@ -8,7 +8,7 @@ class Book
   EBOOK_LABEL = 'ebook'
   NATALIE_LABEL = 'nat'
 
-  def initialize(title, author, is_audiobook, is_ebook, with_nat, label_ids, list_id)
+  def initialize(title:, author:, is_audiobook:, is_ebook:, with_nat:, label_ids:, list_id:)
     @title = title
     @author = author
     @is_audiobook = is_audiobook
@@ -67,13 +67,13 @@ class Book
       .select{ |json_book| !json_book[:closed] }
       .map do |json_book|
         Book.new(
-          json_book[:name],
-          Book.author(hash, json_book),
-          Filter.has_json_label(json_book, audiobook_label),
-          Filter.has_json_label(json_book, ebook_label),
-          Filter.has_json_label(json_book, nat_label),
-          json_book[:idLabels],
-          json_book[:idList],
+          title: json_book[:name],
+          author: Book.author(hash, json_book),
+          is_audiobook: Filter.has_json_label(json_book, audiobook_label),
+          is_ebook: Filter.has_json_label(json_book, ebook_label),
+          with_nat: Filter.has_json_label(json_book, nat_label),
+          label_ids: json_book[:idLabels],
+          list_id: json_book[:idList],
         )
       end
   end
