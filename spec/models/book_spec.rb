@@ -98,30 +98,19 @@ describe Book do
         idCustomField: "af_id",
         }]
     }}
-    let(:json_book_desc_author) {{
-      name: "A Cynical Cash Grab",
-      desc: "Ghost Writer",
-      idLabels: [],
-      idList: list[:id],
-      customFieldItems: []
-    }}
-    let(:json_book_with_nat) {{
+    let(:json_book_with_nat) { json_book.merge({
       name: "Good To Listen Together",
-      desc: "Someone Cool",
       idLabels: [nat_label[:id]],
-      idList: list[:id],
-      }}
-    let(:json_book_no_custom_fields) {{
+      })}
+    let(:json_book_no_custom_fields) { json_book.merge({
       name: "A Cynical Cash Grab 2",
       desc: "Ghost Writer",
-      idLabels: [],
-      idList: list[:id],
-    }}
+      customFieldItems: [],
+    })}
     let(:archived_json_book) {{ closed: "true" }}
     let(:hash) {{
       cards: [
         json_book,
-        json_book_desc_author,
         json_book_with_nat,
         archived_json_book,
         json_book_no_custom_fields,
@@ -133,19 +122,11 @@ describe Book do
     it { expect(Book.create_all(hash)).to all be_a Book }
 
     it 'ignores archived books' do
-      expect(Book.create_all(hash).size).to eq 4
+      expect(Book.create_all(hash).size).to eq 3
     end
 
     it 'matches book attributes' do
-      expect(Book.create_all(hash).first).to have_attributes(
-        title: book.title,
-        author: book.author,
-        is_audiobook: book.is_audiobook,
-        is_ebook: book.is_ebook,
-        label_ids: book.label_ids,
-        list_id: book.list_id,
-        with_nat: book.with_nat
-      )
+      expect(Book.create_all(hash).first).to have_same_attributes_as(book)
     end
 
     it 'takes author from description if not in custom field' do
@@ -160,9 +141,9 @@ describe Book do
     end
 
     it 'includes if I read the book with Nat' do
-      expect(Book.create_all(hash)[2]).to have_attributes(
+      expect(Book.create_all(hash)[1]).to have_attributes(
         title: "Good To Listen Together",
-        author: "Someone Cool",
+        author: "Pretty Good Writer",
         is_audiobook: book.is_audiobook,
         is_ebook: book.is_ebook,
         label_ids: [nat_label[:id]],
@@ -180,5 +161,17 @@ describe Book do
     it { expect(book.matches(dup_book)).to be true }
     it { expect(book.matches(different_title)).to be false }
     it { expect(book.matches(different_author)).to be false }
+  end
+end
+
+RSpec::Matchers.define :have_same_attributes_as do |expected|
+  match do |actual|
+    actual.title == expected.title &&
+    actual.author == expected.author &&
+    actual.is_audiobook == expected.is_audiobook &&
+    actual.is_ebook == expected.is_ebook &&
+    actual.with_nat == expected.with_nat &&
+    actual.label_ids == expected.label_ids &&
+    actual.list_id == expected.list_id
   end
 end
