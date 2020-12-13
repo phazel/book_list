@@ -10,7 +10,7 @@ describe Book do
   let(:series_number_field) {{ id: "snf_id", name: "Series Number" }}
   let(:json_book) {{
     name: 'A Very Good Book',
-    desc: "Ghost Writer",
+    desc: 'Ghost Writer',
     idLabels: [],
     idList: list[:id],
     customFieldItems: [{
@@ -97,7 +97,29 @@ describe Book do
       .to eq '📱🎧💞' }
   end
 
-  describe '.custom_field'
+  describe '.custom_field' do
+    it { expect(Book.custom_field(json_book, author_field, :text)).to eq 'Pretty Good Writer' }
+    it { expect(Book.custom_field(json_book, series_field, :number)).to eq nil }
+    it { expect(Book.custom_field(json_book, series_number_field, :number)).to eq nil }
+
+    it 'finds the custom field' do
+      json_sequel = json_book.merge({ customFieldItems: [{
+        idCustomField: "snf_id",
+        value: { number: 2 },
+      }]})
+      expect(Book.custom_field(json_sequel, series_number_field, :number)).to eq 2
+    end
+
+    context 'the book has no author field' do
+      let(:json_book_old) { json_book.merge({ customFieldItems: [] }) }
+
+      it { expect(Book.custom_field(json_book_old, author_field, :text)).to eq nil }
+      it 'uses a default value' do
+        expect(Book.custom_field(json_book_old, author_field, :text, default: 'description text'))
+          .to eq 'description text'
+      end
+    end
+  end
 
   describe '.from_hash' do
     it { expect(Book.from_hash(hash, json_book)).to be_a Book }
@@ -109,7 +131,7 @@ describe Book do
     it 'takes author from description if not in custom field' do
       json_book_no_custom_fields = json_book.merge({ customFieldItems: [] })
       expect(Book.from_hash(hash, json_book_no_custom_fields))
-        .to have_attributes( author: "Ghost Writer" )
+        .to have_attributes( author: 'Ghost Writer' )
     end
 
     it 'sets series to nil' do

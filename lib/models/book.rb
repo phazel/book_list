@@ -55,13 +55,13 @@ class Book
     }
   end
 
-  def self.custom_field(json_book, field, key, if_not_found: nil)
+  def self.custom_field(json_book, field, key, default: nil)
     if json_book[:customFieldItems]
       found_field = json_book[:customFieldItems]
         .find{ |book_field| book_field[:idCustomField] == field[:id] }
     end
 
-    found_field ? found_field[:value][key] : if_not_found
+    found_field ? found_field[:value][key] : default
   end
 
   def self.from_hash(hash, json_book)
@@ -73,7 +73,7 @@ class Book
     nat_label = Find.label(hash, NATALIE_LABEL)
     Book.new(
       title: json_book[:name],
-      author: Book.custom_field(json_book, author_field, :text, if_not_found: json_book[:desc]),
+      author: Book.custom_field(json_book, author_field, :text, default: json_book[:desc]),
       series: Book.custom_field(json_book, series_field, :text),
       series_number: Book.custom_field(json_book, series_number_field, :number),
       is_audiobook: Filter.has_json_label(json_book, audiobook_label),
