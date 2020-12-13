@@ -8,7 +8,7 @@ class Book
   EBOOK_LABEL = 'ebook'
   NATALIE_LABEL = 'nat'
 
-  def initialize(title:, author:, is_audiobook:, is_ebook:, with_nat:, label_ids:, list_id:)
+  def initialize(title:, author:, is_audiobook: false, is_ebook: false, with_nat: false, label_ids: [], list_id: '')
     @title = title
     @author = author
     @is_audiobook = is_audiobook
