@@ -15,17 +15,18 @@ end
 lists = Find.lists(hash, YEAR)
 labels = Find.labels(hash)
 books = Convert.all_books(hash)
-all_read = Filter.in_list(books, lists[:read])
 
-read = {
-  count: Filter.without_labels(all_read, [labels[:dnf]]).size,
-  dups: Filter.duplicates(all_read),
-  fav: Filter.with_label(all_read, labels[:fav]),
-  regular: Filter.without_labels(all_read, [labels[:fav], labels[:dnf]]),
-  dnf: Filter.with_label(all_read, labels[:dnf]),
-}
+read = Filter.in_list(books, lists[:read])
 current = Filter.in_list(books, lists[:current])
 
-output = Format.result YEAR, read, current
+sections = {
+  count: Filter.without_labels(read, [labels[:dnf]]).size,
+  dups: Filter.duplicates(read),
+  fav: Filter.with_label(read, labels[:fav]),
+  regular: Filter.without_labels(read, [labels[:fav], labels[:dnf]]),
+  dnf: Filter.with_label(read, labels[:dnf]),
+}
+
+output = Format.result YEAR, sections, current
 
 File.write "#{YEAR}/books_read_#{YEAR}.md", output.join
