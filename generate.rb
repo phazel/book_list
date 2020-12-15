@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'json'
-require_relative './lib/convert'
+require_relative './lib/extract'
 require_relative './lib/find'
 require_relative './lib/filter'
 require_relative './lib/format'
@@ -14,7 +14,7 @@ end
 
 lists = Find.lists(hash, YEAR)
 labels = Find.labels(hash)
-books = Convert.all_books(hash)
+books = Extract.all_books(hash)
 
 read = Filter.in_list(books, lists[:read])
 current = Filter.in_list(books, lists[:current])

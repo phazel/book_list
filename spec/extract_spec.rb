@@ -1,6 +1,6 @@
 require 'convert'
 
-describe Convert do
+describe Extract do
   let(:list) {{ id: "list_id", name:"some_list" }}
   let(:audio_label) {{ id: "a_id", name: "audiobook" }}
   let(:ebook_label) {{ id: "e_id", name: "ebook" }}
@@ -43,44 +43,44 @@ describe Convert do
   let(:book) { make_book() }
 
   describe '.custom_field' do
-    it { expect(Convert.custom_field(json_book, author_field, :text)).to eq 'Pretty Good Writer' }
-    it { expect(Convert.custom_field(json_book, series_field, :number)).to eq nil }
-    it { expect(Convert.custom_field(json_book, series_number_field, :number)).to eq nil }
+    it { expect(Extract.custom_field(json_book, author_field, :text)).to eq 'Pretty Good Writer' }
+    it { expect(Extract.custom_field(json_book, series_field, :number)).to eq nil }
+    it { expect(Extract.custom_field(json_book, series_number_field, :number)).to eq nil }
 
     it 'finds the custom field' do
       json_sequel = json_book.merge({ customFieldItems: [{
         idCustomField: "snf_id",
         value: { number: 2 },
       }]})
-      expect(Convert.custom_field(json_sequel, series_number_field, :number)).to eq 2
+      expect(Extract.custom_field(json_sequel, series_number_field, :number)).to eq 2
     end
 
     context 'the book has no author field' do
       let(:json_book_old) { json_book.merge({ customFieldItems: [] }) }
 
-      it { expect(Convert.custom_field(json_book_old, author_field, :text)).to eq nil }
+      it { expect(Extract.custom_field(json_book_old, author_field, :text)).to eq nil }
       it 'uses a default value' do
-        expect(Convert.custom_field(json_book_old, author_field, :text, default: 'description text'))
+        expect(Extract.custom_field(json_book_old, author_field, :text, default: 'description text'))
           .to eq 'description text'
       end
     end
   end
 
   describe '.book' do
-    it { expect(Convert.book(hash, json_book)).to be_a Book }
+    it { expect(Extract.book(hash, json_book)).to be_a Book }
 
     it 'matches json attributes' do
-      expect(Convert.book(hash, json_book)).to convert_to(book)
+      expect(Extract.book(hash, json_book)).to convert_to(book)
     end
 
     it 'takes author from description if not in custom field' do
       json_book_no_custom_fields = json_book.merge({ customFieldItems: [] })
-      expect(Convert.book(hash, json_book_no_custom_fields))
+      expect(Extract.book(hash, json_book_no_custom_fields))
         .to have_attributes( author: 'Ghost Writer' )
     end
 
     it 'sets series to nil' do
-      expect(Convert.book(hash, json_book)).to have_attributes( series: nil )
+      expect(Extract.book(hash, json_book)).to have_attributes( series: nil )
     end
 
     context 'when the book is in a series' do
@@ -89,10 +89,10 @@ describe Convert do
         value: { text: 'The Adventures' },
       }]})}
       it 'sets the series' do
-        expect(Convert.book(hash, json_book_in_series))
+        expect(Extract.book(hash, json_book_in_series))
           .to have_attributes( series: "The Adventures" )
       end
-      it { expect(Convert.book(hash, json_book_in_series))
+      it { expect(Extract.book(hash, json_book_in_series))
           .to have_attributes( series_number: nil ) }
 
       it 'sets the series number if present' do
@@ -101,20 +101,20 @@ describe Convert do
             idCustomField: "snf_id",
             value: { number: 2 },
         }]})
-        expect(Convert.book(hash, json_book_in_series_w_num))
+        expect(Extract.book(hash, json_book_in_series_w_num))
           .to have_attributes( series: "The Adventures", series_number: 2 )
       end
     end
 
     it 'includes if I read the book with Nat' do
       json_book_with_nat = json_book.merge({ idLabels: [nat_label[:id]] })
-      expect(Convert.book(hash, json_book_with_nat))
+      expect(Extract.book(hash, json_book_with_nat))
         .to have_attributes( with_nat: true )
     end
 
     it 'includes if I read the book to sleep' do
       json_book_sleep = json_book.merge({ idLabels: [sleep_label[:id]] })
-      expect(Convert.book(hash, json_book_sleep))
+      expect(Extract.book(hash, json_book_sleep))
         .to have_attributes( for_sleep: true )
     end
   end
@@ -124,10 +124,10 @@ describe Convert do
       cards: [ json_book, { closed: "true" } ]
     })}
 
-    it { expect(Convert.all_books(hash_with_archived)).to all be_a Book }
+    it { expect(Extract.all_books(hash_with_archived)).to all be_a Book }
 
     it 'ignores archived books' do
-      expect(Convert.all_books(hash_with_archived).size).to eq 1
+      expect(Extract.all_books(hash_with_archived).size).to eq 1
     end
   end
 end

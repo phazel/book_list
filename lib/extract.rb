@@ -2,7 +2,7 @@ require_relative './filter'
 require_relative './find'
 require_relative './models/book'
 
-class Convert
+class Extract
   AUTHOR_FIELD = 'Author'
   SERIES_FIELD = 'Series'
   SERIES_NUMBER_FIELD = 'Series Number'
