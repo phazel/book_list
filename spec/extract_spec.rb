@@ -30,58 +30,41 @@ describe Extract do
     labels: [ audio_label, ebook_label, nat_label, sleep_label ],
     customFields: [ author_field, series_field, series_number_field ]
   }}
-
-  def make_book(options = {})
-    return Book.new(
-      title: options[:title] ||= 'A Very Good Book',
-      author: options[:author] ||= 'Pretty Good Writer',
-      series: options[:series] ||= nil,
-      series_number: options[:series_number] ||= nil,
-      is_audiobook: options[:is_audiobook] ||= false,
-      is_ebook: options[:is_ebook] ||= false,
-      with_nat: options[:with_nat] ||= false,
-      for_sleep: options[:for_sleep] ||= false,
-      label_ids: options[:label_ids] ||= [],
-      list_id: options[:list_id] ||= list[:id],
-    )
-  end
   let(:book) { make_book() }
 
   describe '.list' do
-    it { expect(described_class.list(hash, list[:name])).to eq list }
-    it { expect(described_class.list(hash, 'does_not_exist')).to eq nil }
+    it { expect(Extract.list(hash, list[:name])).to eq list }
+    it { expect(Extract.list(hash, 'does_not_exist')).to eq nil }
   end
 
   describe '.lists' do
-    lists = ['some_list', 'another_list']
-    expected = {
-      some_list: { id: "list_id", name: "some_list" },
-      another_list: { id: "al_id", name: "another_list" }
-    }
-    it { expect(described_class.lists(hash, 3040, lists)).to eq expected }
-    it { expect(described_class.lists(hash, 250, [])).to be_empty }
+    it { expect(Extract.lists(hash, 250, [])).to be_empty }
+
+    it 'finds the lists' do
+      expect(Extract.lists(hash, 3040, ['some_list', 'another_list']))
+        .to eq ({ some_list: list, another_list: another_list })
+    end
   end
 
   describe '.label' do
-    it { expect(described_class.label(hash, ebook_label[:name])).to eq ebook_label }
-    it { expect(described_class.label(hash, sleep_label[:name])).to eq sleep_label }
-    it { expect(described_class.label(hash, 'does_not_exist')).to eq nil }
+    it { expect(Extract.label(hash, ebook_label[:name])).to eq ebook_label }
+    it { expect(Extract.label(hash, sleep_label[:name])).to eq sleep_label }
+    it { expect(Extract.label(hash, 'does_not_exist')).to eq nil }
   end
 
   describe '.labels' do
-    labels = ['nat', 'audiobook']
-    expected = {
-      nat: { id: "n_id", name: "nat" },
-      audiobook: { id: "a_id", name: "audiobook" }
-    }
-    it { expect(described_class.labels(hash, labels)).to eq expected }
-    it { expect(described_class.labels(hash, [])).to be_empty }
+    it { expect(Extract.labels(hash, [])).to be_empty }
+
+    it 'finds the labels' do
+      expect(Extract.labels(hash, ['nat', 'audiobook']))
+        .to eq ({ nat: nat_label, audiobook: audio_label })
+    end
   end
 
   describe '.custom_field' do
-    it { expect(described_class.custom_field(hash, author_field[:name])).to eq author_field }
-    it { expect(described_class.custom_field(hash, series_field[:name])).to eq series_field }
-    it { expect(described_class.custom_field(hash, 'does_not_exist')).to eq nil }
+    it { expect(Extract.custom_field(hash, author_field[:name])).to eq author_field }
+    it { expect(Extract.custom_field(hash, series_field[:name])).to eq series_field }
+    it { expect(Extract.custom_field(hash, 'does_not_exist')).to eq nil }
   end
 
   describe '.book_custom_field' do
@@ -163,7 +146,7 @@ describe Extract do
 
   describe '.all_books' do
     let(:hash_with_archived) { hash.merge({
-      cards: [ json_book, { closed: "true" } ]
+      cards: hash[:cards] + [{ closed: "true" }]
     })}
 
     it { expect(Extract.all_books(hash_with_archived)).to all be_a Book }
@@ -172,6 +155,21 @@ describe Extract do
       expect(Extract.all_books(hash_with_archived).size).to eq 1
     end
   end
+end
+
+def make_book(options = {})
+  return Book.new(
+    title: options[:title] ||= json_book[:name],
+    author: options[:author] ||= json_book[:customFieldItems].first[:value][:text],
+    series: options[:series] ||= nil,
+    series_number: options[:series_number] ||= nil,
+    is_audiobook: options[:is_audiobook] ||= false,
+    is_ebook: options[:is_ebook] ||= false,
+    with_nat: options[:with_nat] ||= false,
+    for_sleep: options[:for_sleep] ||= false,
+    label_ids: options[:label_ids] ||= [],
+    list_id: options[:list_id] ||= list[:id],
+  )
 end
 
 RSpec::Matchers.define :convert_to do |expected|
