@@ -1,4 +1,3 @@
-require_relative 'find'
 require_relative 'filter'
 require_relative 'models/book'
 
@@ -29,12 +28,12 @@ class Format
   end
 
   def self.result(year, read, current)
-    output = Format.header(YEAR, read[:count])
-    output += Format.section(read[:dups], :dups)
-    output += Format.section(read[:fav], :fav)
-    output += Format.section(read[:regular])
-    output += Format.section(read[:dnf], :dnf) if read[:dnf].any?
-    output += Format.section(current, :current)
+    output = header(YEAR, read[:count])
+    output += section(read[:dups], :dups)
+    output += section(read[:fav], :fav)
+    output += section(read[:regular])
+    output += section(read[:dnf], :dnf) if read[:dnf].any?
+    output += section(current, :current)
   end
 
   def self.symbify(item)

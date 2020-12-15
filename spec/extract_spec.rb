@@ -1,14 +1,19 @@
-require 'convert'
+require 'extract'
 
 describe Extract do
   let(:list) {{ id: "list_id", name:"some_list" }}
+  let(:some_other_list) {{ id: "al_id", name: "some_other_list" }}
+  let(:another_list) {{ id: "al_id", name: "another_list" }}
+
   let(:audio_label) {{ id: "a_id", name: "audiobook" }}
   let(:ebook_label) {{ id: "e_id", name: "ebook" }}
   let(:nat_label) {{ id: "n_id", name: "nat" }}
   let(:sleep_label) {{ id: "s_id", name: "sleep" }}
+
   let(:author_field) {{ id: "af_id", name: "Author" }}
   let(:series_field) {{ id: "sf_id", name: "Series" }}
   let(:series_number_field) {{ id: "snf_id", name: "Series Number" }}
+
   let(:json_book) {{
     name: 'A Very Good Book',
     desc: 'Ghost Writer',
@@ -21,7 +26,7 @@ describe Extract do
   }}
   let(:hash) {{
     cards: [ json_book ],
-    lists: [ list ],
+    lists: [ list, some_other_list, another_list ],
     labels: [ audio_label, ebook_label, nat_label, sleep_label ],
     customFields: [ author_field, series_field, series_number_field ]
   }}
@@ -42,25 +47,62 @@ describe Extract do
   end
   let(:book) { make_book() }
 
+  describe '.list' do
+    it { expect(described_class.list(hash, list[:name])).to eq list }
+    it { expect(described_class.list(hash, 'does_not_exist')).to eq nil }
+  end
+
+  describe '.lists' do
+    lists = ['some_list', 'another_list']
+    expected = {
+      some_list: { id: "list_id", name: "some_list" },
+      another_list: { id: "al_id", name: "another_list" }
+    }
+    it { expect(described_class.lists(hash, 3040, lists)).to eq expected }
+    it { expect(described_class.lists(hash, 250, [])).to be_empty }
+  end
+
+  describe '.label' do
+    it { expect(described_class.label(hash, ebook_label[:name])).to eq ebook_label }
+    it { expect(described_class.label(hash, sleep_label[:name])).to eq sleep_label }
+    it { expect(described_class.label(hash, 'does_not_exist')).to eq nil }
+  end
+
+  describe '.labels' do
+    labels = ['nat', 'audiobook']
+    expected = {
+      nat: { id: "n_id", name: "nat" },
+      audiobook: { id: "a_id", name: "audiobook" }
+    }
+    it { expect(described_class.labels(hash, labels)).to eq expected }
+    it { expect(described_class.labels(hash, [])).to be_empty }
+  end
+
   describe '.custom_field' do
-    it { expect(Extract.custom_field(json_book, author_field, :text)).to eq 'Pretty Good Writer' }
-    it { expect(Extract.custom_field(json_book, series_field, :number)).to eq nil }
-    it { expect(Extract.custom_field(json_book, series_number_field, :number)).to eq nil }
+    it { expect(described_class.custom_field(hash, author_field[:name])).to eq author_field }
+    it { expect(described_class.custom_field(hash, series_field[:name])).to eq series_field }
+    it { expect(described_class.custom_field(hash, 'does_not_exist')).to eq nil }
+  end
+
+  describe '.book_custom_field' do
+    it { expect(Extract.book_custom_field(json_book, author_field, :text)).to eq 'Pretty Good Writer' }
+    it { expect(Extract.book_custom_field(json_book, series_field, :number)).to eq nil }
+    it { expect(Extract.book_custom_field(json_book, series_number_field, :number)).to eq nil }
 
     it 'finds the custom field' do
       json_sequel = json_book.merge({ customFieldItems: [{
         idCustomField: "snf_id",
         value: { number: 2 },
       }]})
-      expect(Extract.custom_field(json_sequel, series_number_field, :number)).to eq 2
+      expect(Extract.book_custom_field(json_sequel, series_number_field, :number)).to eq 2
     end
 
     context 'the book has no author field' do
       let(:json_book_old) { json_book.merge({ customFieldItems: [] }) }
 
-      it { expect(Extract.custom_field(json_book_old, author_field, :text)).to eq nil }
+      it { expect(Extract.book_custom_field(json_book_old, author_field, :text)).to eq nil }
       it 'uses a default value' do
-        expect(Extract.custom_field(json_book_old, author_field, :text, default: 'description text'))
+        expect(Extract.book_custom_field(json_book_old, author_field, :text, default: 'description text'))
           .to eq 'description text'
       end
     end

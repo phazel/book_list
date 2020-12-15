@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 require 'json'
 require_relative './lib/extract'
-require_relative './lib/find'
 require_relative './lib/filter'
 require_relative './lib/format'
 
@@ -12,8 +11,8 @@ File.open("#{YEAR}/exported_pretty.json", "w") do |file|
   file.write JSON.pretty_generate hash
 end
 
-lists = Find.lists(hash, YEAR)
-labels = Find.labels(hash)
+lists = Extract.lists(hash, YEAR)
+labels = Extract.labels(hash)
 books = Extract.all_books(hash)
 
 read = Filter.in_list(books, lists[:read])

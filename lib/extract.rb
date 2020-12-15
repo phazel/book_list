@@ -1,5 +1,4 @@
 require_relative './filter'
-require_relative './find'
 require_relative './models/book'
 
 class Extract
@@ -11,7 +10,39 @@ class Extract
   NATALIE_LABEL = 'nat'
   SLEEP_LABEL = 'sleep'
 
-  def self.custom_field(json_book, field, key, default: nil)
+  FAVOURITE_LABEL = 'fav'
+  DNF_LABEL = 'dnf'
+  CURRENTLY_READING_LIST = "📖 Reading 📖"
+  def self.READ(year) "Read #{year}" end
+
+  def self.list(hash, list_name)
+    hash[:lists].find{ |list| list[:name] == list_name }
+  end
+
+  def self.lists(hash, year, list_names=nil)
+    if list_names.nil?
+      {
+        read: list(hash, READ(year)),
+        current: list(hash, CURRENTLY_READING_LIST)
+      }
+    else
+      list_names.map{ |name| [ name.to_sym, list(hash, name) ] }.to_h
+    end
+  end
+
+  def self.label(hash, label_name)
+    hash[:labels].find{ |label| label[:name] == label_name }
+  end
+
+  def self.labels(hash, label_names=[FAVOURITE_LABEL, DNF_LABEL])
+    label_names.map{ |name| [ name.to_sym, label(hash, name) ] }.to_h
+  end
+
+  def self.custom_field(hash, field_name)
+    hash[:customFields].find{ |field| field[:name] == field_name }
+  end
+
+  def self.book_custom_field(json_book, field, key, default: nil)
     if json_book[:customFieldItems]
       found_field = json_book[:customFieldItems]
         .find{ |book_field| book_field[:idCustomField] == field[:id] }
@@ -21,18 +52,18 @@ class Extract
   end
 
   def self.book(hash, json_book)
-    author_field = Find.custom_field(hash, AUTHOR_FIELD)
-    series_field = Find.custom_field(hash, SERIES_FIELD)
-    series_number_field = Find.custom_field(hash, SERIES_NUMBER_FIELD)
-    audiobook_label = Find.label(hash, AUDIOBOOK_LABEL)
-    ebook_label = Find.label(hash, EBOOK_LABEL)
-    nat_label = Find.label(hash, NATALIE_LABEL)
-    sleep_label = Find.label(hash, SLEEP_LABEL)
+    author_field = custom_field(hash, AUTHOR_FIELD)
+    series_field = custom_field(hash, SERIES_FIELD)
+    series_number_field = custom_field(hash, SERIES_NUMBER_FIELD)
+    audiobook_label = label(hash, AUDIOBOOK_LABEL)
+    ebook_label = label(hash, EBOOK_LABEL)
+    nat_label = label(hash, NATALIE_LABEL)
+    sleep_label = label(hash, SLEEP_LABEL)
     Book.new(
       title: json_book[:name],
-      author: custom_field(json_book, author_field, :text, default: json_book[:desc]),
-      series: custom_field(json_book, series_field, :text),
-      series_number: custom_field(json_book, series_number_field, :number),
+      author: book_custom_field(json_book, author_field, :text, default: json_book[:desc]),
+      series: book_custom_field(json_book, series_field, :text),
+      series_number: book_custom_field(json_book, series_number_field, :number),
       is_audiobook: Filter.has_json_label(json_book, audiobook_label),
       is_ebook: Filter.has_json_label(json_book, ebook_label),
       with_nat: Filter.has_json_label(json_book, nat_label),

@@ -1,6 +1,3 @@
-require_relative '../filter'
-require_relative '../find'
-
 class Book
   attr_reader :title, :author, :series, :series_number, :is_audiobook, :is_ebook, :with_nat, :for_sleep, :label_ids, :list_id
   AUTHOR_FIELD = 'Author'
