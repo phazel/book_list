@@ -14,14 +14,15 @@ describe Extract do
   let(:series_field) {{ id: "sf_id", name: "Series" }}
   let(:series_number_field) {{ id: "snf_id", name: "Series Number" }}
 
+  let(:book) { make_book() }
   let(:json_book) {{
-    name: 'A Very Good Book',
+    name: book.title,
     desc: 'Ghost Writer',
     idLabels: [],
     idList: list[:id],
     customFieldItems: [{
-      idCustomField: "af_id",
-      value: { text: 'Pretty Good Writer' },
+      idCustomField: author_field[:id],
+      value: { text: book.author },
     }]
   }}
   let(:hash) {{
@@ -30,7 +31,6 @@ describe Extract do
     labels: [ audio_label, ebook_label, nat_label, sleep_label ],
     customFields: [ author_field, series_field, series_number_field ]
   }}
-  let(:book) { make_book() }
 
   describe '.list' do
     it { expect(Extract.list(hash, list[:name])).to eq list }
@@ -38,12 +38,11 @@ describe Extract do
   end
 
   describe '.lists' do
-    it { expect(Extract.lists(hash, 250, [])).to be_empty }
+    let(:lists) {[list[:name], another_list[:name]]}
+    let(:expected) {{ some_list: list, another_list: another_list }}
 
-    it 'finds the lists' do
-      expect(Extract.lists(hash, 3040, ['some_list', 'another_list']))
-        .to eq ({ some_list: list, another_list: another_list })
-    end
+    it { expect(Extract.lists(hash, 3040, lists)).to eq expected }
+    it { expect(Extract.lists(hash, 250, [])).to be_empty }
   end
 
   describe '.label' do
@@ -53,12 +52,11 @@ describe Extract do
   end
 
   describe '.labels' do
-    it { expect(Extract.labels(hash, [])).to be_empty }
+    let(:labels) {[nat_label[:name], audio_label[:name]]}
+    let(:expected) {{ nat: nat_label, audiobook: audio_label }}
 
-    it 'finds the labels' do
-      expect(Extract.labels(hash, ['nat', 'audiobook']))
-        .to eq ({ nat: nat_label, audiobook: audio_label })
-    end
+    it { expect(Extract.labels(hash, labels)).to eq expected }
+    it { expect(Extract.labels(hash, [])).to be_empty }
   end
 
   describe '.custom_field' do
@@ -159,8 +157,8 @@ end
 
 def make_book(options = {})
   return Book.new(
-    title: options[:title] ||= json_book[:name],
-    author: options[:author] ||= json_book[:customFieldItems].first[:value][:text],
+    title: options[:title] ||= 'A Very Good Book',
+    author: options[:author] ||= 'Pretty Good Writer',
     series: options[:series] ||= nil,
     series_number: options[:series_number] ||= nil,
     is_audiobook: options[:is_audiobook] ||= false,
