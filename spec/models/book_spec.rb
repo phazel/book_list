@@ -53,6 +53,7 @@ describe Book do
     it { expect(book.for_sleep).to eq false }
     it { expect(book.label_ids).to eq []   }
     it { expect(book.list_id).to eq list[:id] }
+    it { expect{ Book.new }.to raise_error(ArgumentError, "missing keywords: title, author") }
   end
 
   describe '#matches' do
