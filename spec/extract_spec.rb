@@ -166,8 +166,7 @@ def make_book(options = {})
     with_nat: options[:with_nat] ||= false,
     for_sleep: options[:for_sleep] ||= false,
     label_ids: options[:label_ids] ||= [],
-    list_id: options[:list_id] ||= list[:id],
-  )
+    ).with_list_id(options[:list_id] ||= list[:id])
 end
 
 RSpec::Matchers.define :convert_to do |expected|

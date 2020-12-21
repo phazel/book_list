@@ -15,8 +15,7 @@ describe Filter do
       is_ebook: false,
       with_nat: false,
       label_ids: [],
-      list_id: list[:id],
-    )
+    ).with_list_id(list[:id])
     book_in_another_list = Book.new(
       title: '',
       author: '',
@@ -24,8 +23,7 @@ describe Filter do
       is_ebook: false,
       with_nat: false,
       label_ids: [],
-      list_id: another_list[:id],
-    )
+    ).with_list_id(another_list[:id])
 
     books = [ book_in_list, book_in_another_list ]
 
@@ -43,7 +41,6 @@ describe Filter do
       is_ebook: false,
       with_nat: false,
       label_ids: [],
-      list_id: '',
     )
     book_with_label = Book.new(
       title: '',
@@ -52,7 +49,6 @@ describe Filter do
       is_ebook: false,
       with_nat: false,
       label_ids: [ label[:id] ],
-      list_id: '',
     )
     book_with_another_label = Book.new(
       title: '',
@@ -61,7 +57,6 @@ describe Filter do
       is_ebook: false,
       with_nat: false,
       label_ids: [ another_label[:id] ],
-      list_id: '',
     )
     book_with_both_labels = Book.new(
       title: '',
@@ -70,7 +65,6 @@ describe Filter do
       is_ebook: false,
       with_nat: false,
       label_ids: [ label[:id], another_label[:id] ],
-      list_id: '',
     )
 
     books = [
@@ -124,7 +118,6 @@ describe Filter do
       is_ebook: false,
       with_nat: false,
       label_ids: [label[:id]],
-      list_id: '',
     )
     book2u = Book.new(
       title: 'Title 2',
@@ -133,7 +126,6 @@ describe Filter do
       is_ebook: false,
       with_nat: false,
       label_ids: [label[:id]],
-      list_id: '',
     )
     book1a = Book.new(
       title: 'Title 1',
@@ -142,7 +134,6 @@ describe Filter do
       is_ebook: true,
       with_nat: false,
       label_ids: [],
-      list_id: '',
     )
     book3 = Book.new(
       title: 'Title 3',
@@ -151,7 +142,6 @@ describe Filter do
       is_ebook: true,
       with_nat: false,
       label_ids: [],
-      list_id: '',
     )
     book1b = Book.new(
       title: 'Title 1',
@@ -160,7 +150,6 @@ describe Filter do
       is_ebook: true,
       with_nat: false,
       label_ids: [],
-      list_id: '',
     )
     book3a = Book.new(
       title: 'Title 3',
@@ -169,7 +158,6 @@ describe Filter do
       is_ebook: true,
       with_nat: false,
       label_ids: [],
-      list_id: '',
     )
 
     books = [ book1, book2u, book1a, book3, book1b, book3a ]

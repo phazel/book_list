@@ -1,5 +1,6 @@
 class Book
-  attr_reader :title, :author, :series, :series_number, :is_audiobook, :is_ebook, :with_nat, :for_sleep, :label_ids, :list_id
+  attr_reader :title, :author
+  attr_accessor :series, :series_number, :is_audiobook, :is_ebook, :with_nat, :for_sleep, :label_ids, :list_id
   AUTHOR_FIELD = 'Author'
   SERIES_FIELD = 'Series'
   SERIES_NUMBER_FIELD = 'Series Number'
@@ -8,7 +9,7 @@ class Book
   NATALIE_LABEL = 'nat'
   SLEEP_LABEL = 'sleep'
 
-  def initialize(title:, author:, series: nil, series_number: nil, is_audiobook: false, is_ebook: false, with_nat: false, for_sleep: false, label_ids: [], list_id: '')
+  def initialize(title:, author:, series: nil, series_number: nil, is_audiobook: false, is_ebook: false, with_nat: false, for_sleep: false, label_ids: [])
     @title = title
     @author = author
     @series = series
@@ -18,11 +19,16 @@ class Book
     @with_nat = with_nat
     @for_sleep = for_sleep
     @label_ids = label_ids
-    @list_id = list_id
   end
 
   def matches(book)
     book.title == title && book.author == author
+  end
+
+  def with_list_id(list_id)
+    book = self.dup
+    book.list_id = list_id
+    return book
   end
 
   def emojis

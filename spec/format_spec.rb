@@ -26,7 +26,6 @@ describe Format do
         is_ebook: false,
         with_nat: false,
         label_ids: [],
-        list_id: ''
       ),
       Book.new(
         title: 'book_2',
@@ -35,7 +34,6 @@ describe Format do
         is_ebook: false,
         with_nat: false,
         label_ids: [],
-        list_id: ''
       ),
     ]}
     let(:expected_section) {[ "---\n\n", "## Favourites:\n\n", books ]}

@@ -68,9 +68,8 @@ class Extract
       is_ebook: Filter.has_json_label(json_book, ebook_label),
       with_nat: Filter.has_json_label(json_book, nat_label),
       for_sleep: Filter.has_json_label(json_book, sleep_label),
-      label_ids: json_book[:idLabels],
-      list_id: json_book[:idList],
-    )
+      label_ids: json_book[:idLabels])
+      .with_list_id(json_book[:idList])
   end
 
   def self.all_books(hash)
