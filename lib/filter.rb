@@ -22,16 +22,16 @@ class Filter
   end
 
   def self.duplicates(books)
-    books.reduce([]) do |dups, book|
-      dup_match = dups.find { |dup| dup.matches(book) }
-      all_matches = books.select { |book_b| book_b.matches(book) }.size > 1
+    books.reduce({ dups: [], non_dups: [] }) do |result, book|
+      dup_match = result[:dups].find { |dup| dup.matches(book) }
+      any_matches = books.select { |book_b| book_b.matches(book) }.size > 1
 
       if dup_match
         dup_match.add_dup book
-        dups
       else
-        all_matches ? dups.push(book) : dups
+        any_matches ? result[:dups].push(book) : result[:non_dups].push(book)
       end
+      result
     end
   end
 end

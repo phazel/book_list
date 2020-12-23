@@ -18,11 +18,13 @@ books = Extract.all_books(hash)
 read = Filter.in_list(books, lists[:read])
 current = Filter.in_list(books, lists[:current])
 
+dups, non_dups = Filter.duplicates(read).values_at(:dups, :non_dups)
+
 sections = {
   count: Filter.without_labels(read, [labels[:dnf]]).size,
-  dups: Filter.duplicates(read),
-  fav: Filter.with_label(read, labels[:fav]),
-  regular: Filter.without_labels(read, [labels[:fav], labels[:dnf]]),
+  dups: dups,
+  fav: Filter.with_label(non_dups, labels[:fav]),
+  regular: Filter.without_labels(non_dups, [labels[:fav], labels[:dnf]]),
   dnf: Filter.with_label(read, labels[:dnf]),
 }
 
