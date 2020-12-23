@@ -30,14 +30,14 @@ describe Book do
     Book.new(
       title: options[:title] ||= 'A Very Good Book',
       author: options[:author] ||= 'Pretty Good Writer')
-        .with_series(options[:series] ||= nil)
-        .with_series_number(options[:series_number] ||= nil)
-        .with_label_ids(options[:label_ids] ||= [])
-        .with_list_id(options[:list_id] ||= list[:id])
-        .with_audiobook(options[:audiobook])
-        .with_ebook(options[:ebook])
-        .with_nat(options[:nat])
-        .with_sleep(options[:sleep])
+      .with_series(options[:series] ||= nil)
+      .with_series_number(options[:series_number] ||= nil)
+      .with_label_ids(options[:label_ids] ||= [])
+      .with_list_id(options[:list_id] ||= list[:id])
+      .with_audiobook(options[:audiobook])
+      .with_ebook(options[:ebook])
+      .with_nat(options[:nat])
+      .with_sleep(options[:sleep])
   end
   let(:book) { make_book() }
 
