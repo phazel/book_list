@@ -81,5 +81,8 @@ describe Filter do
     books = [ book1A, book1A_dup, book1B, book1A_dup_dup, book2B, book2B_dup ]
 
     it { expect(described_class.duplicates(books)).to eq [ book1A, book2B ] }
+    it { expect(book1A.duplicates).to eq [ book1A_dup, book1A_dup_dup ] }
+    it { expect(book1B.duplicates).to eq [] }
+    it { expect(book2B.duplicates).to eq [ book2B_dup ] }
   end
 end

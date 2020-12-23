@@ -103,4 +103,10 @@ describe Book do
       end
     end
   end
+
+  describe '.add_duplicate' do
+    let(:book_with_dup) { make_book().add_dup(book) }
+    it { expect(book.duplicates).to eq [] }
+    it { expect(book_with_dup.duplicates).to eq [ book ] }
+  end
 end

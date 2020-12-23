@@ -23,10 +23,15 @@ class Filter
 
   def self.duplicates(books)
     books.reduce([]) do |dups, book|
-      unique = dups.none? { |dup| dup.matches(book) }
-      matches = books.select { |book_b| book_b.matches(book) }.size > 1
+      dup_match = dups.find { |dup| dup.matches(book) }
+      all_matches = books.select { |book_b| book_b.matches(book) }.size > 1
 
-      unique && matches ? dups.push(book) : dups
+      if dup_match
+        dup_match.add_dup book
+        dups
+      else
+        all_matches ? dups.push(book) : dups
+      end
     end
   end
 end

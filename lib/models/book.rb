@@ -1,5 +1,5 @@
 class Book
-  attr_reader :title, :author
+  attr_reader :title, :author, :duplicates
   attr_accessor :series, :series_number, :audiobook, :ebook, :nat, :sleep, :label_ids, :list_id
   AUTHOR_FIELD = 'Author'
   SERIES_FIELD = 'Series'
@@ -14,7 +14,7 @@ class Book
     @author = author
     @series = series
     @series_number = series_number
-    @label_ids = []
+    @label_ids = @duplicates = []
     @audiobook = @ebook = @nat = @sleep = false
   end
 
@@ -25,49 +25,54 @@ class Book
   def with_series(series)
     book = self.dup
     book.series = series
-    return book
+    book
   end
 
   def with_series_number(series_number)
     book = self.dup
     book.series_number = series_number
-    return book
+    book
   end
 
   def with_label_ids(label_ids)
     book = self.dup
     book.label_ids = label_ids
-    return book
+    book
   end
 
   def with_list_id(list_id)
     book = self.dup
     book.list_id = list_id
-    return book
+    book
   end
 
   def with_audiobook(cond = true)
     book = self.dup
     book.audiobook = true if cond
-    return book
+    book
   end
 
   def with_ebook(cond = true)
     book = self.dup
     book.ebook = true if cond
-    return book
+    book
   end
 
   def with_nat(cond = true)
     book = self.dup
     book.nat = true if cond
-    return book
+    book
   end
 
   def with_sleep(cond = true)
     book = self.dup
     book.sleep = true if cond
-    return book
+    book
+  end
+
+  def add_dup(dup_book)
+    @duplicates.push dup_book
+    self
   end
 
   def emojis
