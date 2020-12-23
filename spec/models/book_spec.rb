@@ -27,17 +27,17 @@ describe Book do
   }}
 
   def make_book(options = {})
-    return Book.new(
+    Book.new(
       title: options[:title] ||= 'A Very Good Book',
-      author: options[:author] ||= 'Pretty Good Writer',
-      series: options[:series] ||= nil,
-      series_number: options[:series_number] ||= nil,
-      is_audiobook: options[:is_audiobook] ||= false,
-      is_ebook: options[:is_ebook] ||= false,
-      with_nat: options[:with_nat] ||= false,
-      for_sleep: options[:for_sleep] ||= false,
-      label_ids: options[:label_ids] ||= [],
-    ).with_list_id(options[:list_id] ||= list[:id])
+      author: options[:author] ||= 'Pretty Good Writer')
+        .with_series(options[:series] ||= nil)
+        .with_series_number(options[:series_number] ||= nil)
+        .with_label_ids(options[:label_ids] ||= [])
+        .with_list_id(options[:list_id] ||= list[:id])
+        .with_audiobook(options[:audiobook])
+        .with_ebook(options[:ebook])
+        .with_nat(options[:nat])
+        .with_sleep(options[:sleep])
   end
   let(:book) { make_book() }
 
@@ -46,10 +46,10 @@ describe Book do
     it { expect(book.title).to eq 'A Very Good Book' }
     it { expect(book.author).to eq 'Pretty Good Writer' }
     it { expect(book.series).to eq nil }
-    it { expect(book.is_audiobook).to eq false }
-    it { expect(book.is_ebook).to eq false }
-    it { expect(book.with_nat).to eq false }
-    it { expect(book.for_sleep).to eq false }
+    it { expect(book.audiobook).to eq false }
+    it { expect(book.ebook).to eq false }
+    it { expect(book.nat).to eq false }
+    it { expect(book.sleep).to eq false }
     it { expect(book.label_ids).to eq []   }
     it { expect(book.list_id).to eq list[:id] }
     it { expect{ Book.new }.to raise_error(ArgumentError, "missing keywords: title, author") }
@@ -68,19 +68,19 @@ describe Book do
   describe '#emojis' do
     it{ expect(book.emojis)
       .to eq '📖' }
-    it{ expect(make_book(is_audiobook: true).emojis)
+    it{ expect(make_book(audiobook: true).emojis)
       .to eq '🎧' }
-    it{ expect(make_book(is_ebook: true).emojis)
+    it{ expect(make_book(ebook: true).emojis)
       .to eq '📱' }
-    it{ expect(make_book(is_audiobook: true, is_ebook: true).emojis)
+    it{ expect(make_book(audiobook: true, ebook: true).emojis)
       .to eq '📱🎧' }
-    it{ expect(make_book(with_nat: true).emojis)
+    it{ expect(make_book(nat: true).emojis)
       .to eq '📖💞' }
-    it{ expect(make_book(is_audiobook: true, is_ebook: true, with_nat: true).emojis)
+    it{ expect(make_book(audiobook: true, ebook: true, nat: true).emojis)
       .to eq '📱🎧💞' }
-    it{ expect(make_book(for_sleep: true).emojis)
+    it{ expect(make_book(sleep: true).emojis)
       .to eq '📖🌒' }
-    it{ expect(make_book(is_audiobook: true, with_nat: true, for_sleep: true).emojis)
+    it{ expect(make_book(audiobook: true, nat: true, sleep: true).emojis)
       .to eq '🎧💞🌒' }
     end
 

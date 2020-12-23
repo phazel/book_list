@@ -11,18 +11,10 @@ describe Filter do
     book_in_list = Book.new(
       title: '',
       author: '',
-      is_audiobook: false,
-      is_ebook: false,
-      with_nat: false,
-      label_ids: [],
     ).with_list_id(list[:id])
     book_in_another_list = Book.new(
       title: '',
       author: '',
-      is_audiobook: false,
-      is_ebook: false,
-      with_nat: false,
-      label_ids: [],
     ).with_list_id(another_list[:id])
 
     books = [ book_in_list, book_in_another_list ]
@@ -37,35 +29,19 @@ describe Filter do
     book_with_no_labels = Book.new(
       title: '',
       author: '',
-      is_audiobook: false,
-      is_ebook: false,
-      with_nat: false,
-      label_ids: [],
     )
     book_with_label = Book.new(
       title: '',
       author: '',
-      is_audiobook: false,
-      is_ebook: false,
-      with_nat: false,
-      label_ids: [ label[:id] ],
-    )
+    ).with_label_ids([ label[:id] ])
     book_with_another_label = Book.new(
       title: '',
       author: '',
-      is_audiobook: false,
-      is_ebook: false,
-      with_nat: false,
-      label_ids: [ another_label[:id] ],
-    )
+    ).with_label_ids([ another_label[:id] ])
     book_with_both_labels = Book.new(
       title: '',
       author: '',
-      is_audiobook: false,
-      is_ebook: false,
-      with_nat: false,
-      label_ids: [ label[:id], another_label[:id] ],
-    )
+    ).with_label_ids([ label[:id], another_label[:id] ])
 
     books = [
       book_with_label,
@@ -114,51 +90,28 @@ describe Filter do
     book1 = Book.new(
       title: 'Title 1',
       author: 'Author 1',
-      is_audiobook: true,
-      is_ebook: false,
-      with_nat: false,
-      label_ids: [label[:id]],
-    )
+    ).with_audiobook
+    .with_label_ids([ label[:id] ])
     book2u = Book.new(
       title: 'Title 2',
       author: 'Author 2',
-      is_audiobook: false,
-      is_ebook: false,
-      with_nat: false,
-      label_ids: [label[:id]],
-    )
+    ).with_label_ids([ label[:id] ])
     book1a = Book.new(
       title: 'Title 1',
       author: 'Author 1',
-      is_audiobook: false,
-      is_ebook: true,
-      with_nat: false,
-      label_ids: [],
-    )
+    ).with_ebook
     book3 = Book.new(
       title: 'Title 3',
       author: 'Author 3',
-      is_audiobook: false,
-      is_ebook: true,
-      with_nat: false,
-      label_ids: [],
-    )
+    ).with_ebook
     book1b = Book.new(
       title: 'Title 1',
       author: 'Author 1',
-      is_audiobook: false,
-      is_ebook: true,
-      with_nat: false,
-      label_ids: [],
-    )
+    ).with_ebook
     book3a = Book.new(
       title: 'Title 3',
       author: 'Author 3',
-      is_audiobook: false,
-      is_ebook: true,
-      with_nat: false,
-      label_ids: [],
-    )
+    ).with_ebook
 
     books = [ book1, book2u, book1a, book3, book1b, book3a ]
 

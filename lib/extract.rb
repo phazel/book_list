@@ -61,15 +61,15 @@ class Extract
     sleep_label = label(hash, SLEEP_LABEL)
     Book.new(
       title: json_book[:name],
-      author: book_custom_field(json_book, author_field, :text, default: json_book[:desc]),
-      series: book_custom_field(json_book, series_field, :text),
-      series_number: book_custom_field(json_book, series_number_field, :number),
-      is_audiobook: Filter.has_json_label(json_book, audiobook_label),
-      is_ebook: Filter.has_json_label(json_book, ebook_label),
-      with_nat: Filter.has_json_label(json_book, nat_label),
-      for_sleep: Filter.has_json_label(json_book, sleep_label),
-      label_ids: json_book[:idLabels])
+      author: book_custom_field(json_book, author_field, :text, default: json_book[:desc]))
+      .with_series(book_custom_field(json_book, series_field, :text))
+      .with_series_number(book_custom_field(json_book, series_number_field, :number))
+      .with_label_ids(json_book[:idLabels])
       .with_list_id(json_book[:idList])
+      .with_audiobook(Filter.has_json_label(json_book, audiobook_label))
+      .with_ebook(Filter.has_json_label(json_book, ebook_label))
+      .with_nat(Filter.has_json_label(json_book, nat_label))
+      .with_sleep(Filter.has_json_label(json_book, sleep_label))
   end
 
   def self.all_books(hash)

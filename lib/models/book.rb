@@ -1,6 +1,6 @@
 class Book
   attr_reader :title, :author
-  attr_accessor :series, :series_number, :is_audiobook, :is_ebook, :with_nat, :for_sleep, :label_ids, :list_id
+  attr_accessor :series, :series_number, :audiobook, :ebook, :nat, :sleep, :label_ids, :list_id
   AUTHOR_FIELD = 'Author'
   SERIES_FIELD = 'Series'
   SERIES_NUMBER_FIELD = 'Series Number'
@@ -9,20 +9,59 @@ class Book
   NATALIE_LABEL = 'nat'
   SLEEP_LABEL = 'sleep'
 
-  def initialize(title:, author:, series: nil, series_number: nil, is_audiobook: false, is_ebook: false, with_nat: false, for_sleep: false, label_ids: [])
+  def initialize(title:, author:, series: nil, series_number: nil)
     @title = title
     @author = author
     @series = series
     @series_number = series_number
-    @is_audiobook = is_audiobook
-    @is_ebook = is_ebook
-    @with_nat = with_nat
-    @for_sleep = for_sleep
-    @label_ids = label_ids
+    @label_ids = []
+    @audiobook = @ebook = @nat = @sleep = false
   end
 
   def matches(book)
     book.title == title && book.author == author
+  end
+
+  def with_series(series)
+    book = self.dup
+    book.series = series
+    return book
+  end
+
+  def with_series_number(series_number)
+    book = self.dup
+    book.series_number = series_number
+    return book
+  end
+
+  def with_audiobook(cond = true)
+    book = self.dup
+    book.audiobook = true if cond
+    return book
+  end
+
+  def with_ebook(cond = true)
+    book = self.dup
+    book.ebook = true if cond
+    return book
+  end
+
+  def with_nat(cond = true)
+    book = self.dup
+    book.nat = true if cond
+    return book
+  end
+
+  def with_sleep(cond = true)
+    book = self.dup
+    book.sleep = true if cond
+    return book
+  end
+
+  def with_label_ids(label_ids)
+    book = self.dup
+    book.label_ids = label_ids
+    return book
   end
 
   def with_list_id(list_id)
@@ -32,14 +71,14 @@ class Book
   end
 
   def emojis
-    device = @is_audiobook || @is_ebook
-    device_emojis = "#{'📱' if @is_ebook}#{'🎧' if @is_audiobook}"
+    device = @audiobook || @ebook
+    device_emojis = "#{'📱' if @ebook}#{'🎧' if @audiobook}"
 
-    type = device ? device_emojis : '📖'
-    nat = with_nat ? '💞' : ''
-    sleep = for_sleep ? '🌒' : ''
+    type_emojis = device ? device_emojis : '📖'
+    nat_emojis = @nat ? '💞' : ''
+    sleep_emojis = @sleep ? '🌒' : ''
 
-    "#{type}#{nat}#{sleep}"
+    "#{type_emojis}#{nat_emojis}#{sleep_emojis}"
   end
 
   def to_s

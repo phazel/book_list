@@ -132,13 +132,13 @@ describe Extract do
     it 'includes if I read the book with Nat' do
       json_book_with_nat = json_book.merge({ idLabels: [nat_label[:id]] })
       expect(Extract.book(hash, json_book_with_nat))
-        .to have_attributes( with_nat: true )
+        .to have_attributes( nat: true )
     end
 
     it 'includes if I read the book to sleep' do
       json_book_sleep = json_book.merge({ idLabels: [sleep_label[:id]] })
       expect(Extract.book(hash, json_book_sleep))
-        .to have_attributes( for_sleep: true )
+        .to have_attributes( sleep: true )
     end
   end
 
@@ -158,15 +158,15 @@ end
 def make_book(options = {})
   return Book.new(
     title: options[:title] ||= 'A Very Good Book',
-    author: options[:author] ||= 'Pretty Good Writer',
-    series: options[:series] ||= nil,
-    series_number: options[:series_number] ||= nil,
-    is_audiobook: options[:is_audiobook] ||= false,
-    is_ebook: options[:is_ebook] ||= false,
-    with_nat: options[:with_nat] ||= false,
-    for_sleep: options[:for_sleep] ||= false,
-    label_ids: options[:label_ids] ||= [],
-    ).with_list_id(options[:list_id] ||= list[:id])
+    author: options[:author] ||= 'Pretty Good Writer')
+    .with_series(options[:series] ||= nil)
+    .with_series_number(options[:series_number] ||= nil)
+    .with_label_ids(options[:label_ids] ||= [])
+    .with_list_id(options[:list_id] ||= list[:id])
+    .with_audiobook(options[:audiobook])
+    .with_ebook(options[:ebook])
+    .with_nat(options[:nat])
+    .with_sleep(options[:sleep])
 end
 
 RSpec::Matchers.define :convert_to do |expected|
@@ -174,10 +174,12 @@ RSpec::Matchers.define :convert_to do |expected|
     actual.title == expected.title &&
     actual.author == expected.author &&
     actual.series == expected.series &&
-    actual.is_audiobook == expected.is_audiobook &&
-    actual.is_ebook == expected.is_ebook &&
-    actual.with_nat == expected.with_nat &&
+    actual.series_number == expected.series_number &&
     actual.label_ids == expected.label_ids &&
-    actual.list_id == expected.list_id
+    actual.list_id == expected.list_id &&
+    actual.audiobook == expected.audiobook &&
+    actual.ebook == expected.ebook &&
+    actual.nat == expected.nat &&
+    actual.sleep == expected.sleep
   end
 end
