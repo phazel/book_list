@@ -38,25 +38,27 @@ describe Book do
       .with_ebook(options[:ebook])
       .with_nat(options[:nat])
       .with_sleep(options[:sleep])
+      .with_dnf(options[:dnf])
   end
-  let(:book) { make_book() }
+  let(:book) { make_book }
 
   describe '#initialize' do
     it { expect(book).to be_a Book }
     it { expect(book.title).to eq 'A Very Good Book' }
     it { expect(book.author).to eq 'Pretty Good Writer' }
     it { expect(book.series).to eq nil }
+    it { expect(book.label_ids).to eq []   }
+    it { expect(book.list_id).to eq list[:id] }
     it { expect(book.audiobook).to eq false }
     it { expect(book.ebook).to eq false }
     it { expect(book.nat).to eq false }
     it { expect(book.sleep).to eq false }
-    it { expect(book.label_ids).to eq []   }
-    it { expect(book.list_id).to eq list[:id] }
+    it { expect(book.dnf).to eq false }
     it { expect{ Book.new }.to raise_error(ArgumentError, "missing keywords: title, author") }
   end
 
   describe '#matches' do
-    let(:dup_book)         { make_book() }
+    let(:dup_book)         { make_book }
     let(:different_title)  { make_book(title: "Another") }
     let(:different_author) { make_book(author: "Someone Else") }
 
@@ -66,22 +68,14 @@ describe Book do
   end
 
   describe '#emojis' do
-    it{ expect(book.emojis)
-      .to eq '📖' }
-    it{ expect(make_book(audiobook: true).emojis)
-      .to eq '🎧' }
-    it{ expect(make_book(ebook: true).emojis)
-      .to eq '📱' }
-    it{ expect(make_book(audiobook: true, ebook: true).emojis)
-      .to eq '📱🎧' }
-    it{ expect(make_book(nat: true).emojis)
-      .to eq '📖💞' }
-    it{ expect(make_book(audiobook: true, ebook: true, nat: true).emojis)
-      .to eq '📱🎧💞' }
-    it{ expect(make_book(sleep: true).emojis)
-      .to eq '📖🌒' }
-    it{ expect(make_book(audiobook: true, nat: true, sleep: true).emojis)
-      .to eq '🎧💞🌒' }
+    it{ expect(book.emojis).to eq '📖' }
+    it{ expect(make_book(audiobook: true).emojis).to eq '🎧' }
+    it{ expect(make_book(ebook: true).emojis).to eq '📱' }
+    it{ expect(make_book(audiobook: true, ebook: true).emojis).to eq '📱🎧' }
+    it{ expect(make_book(nat: true).emojis).to eq '📖💞' }
+    it{ expect(make_book(audiobook: true, ebook: true, nat: true).emojis).to eq '📱🎧💞' }
+    it{ expect(make_book(sleep: true).emojis).to eq '📖🌒' }
+    it{ expect(make_book(audiobook: true, nat: true, sleep: true).emojis).to eq '🎧💞🌒' }
     end
 
   describe '#to_s' do
@@ -89,23 +83,23 @@ describe Book do
 
     context 'when in a series' do
       let(:book_in_series) { make_book(series: 'Saga of Time') }
-      let(:pretty_book) {
+      let(:pretty_book) do
         "**A Very Good Book** 📖\nSeries: Saga of Time\n*by Pretty Good Writer*\n\n"
-      }
+      end
       it { expect(book_in_series.to_s).to eq pretty_book }
 
       context 'with a series number' do
-        let(:book_in_series_2) { make_book({ series: 'Saga of Time', series_number: 2 })}
-        let(:pretty_book) {
+        let(:book_in_series_2) { make_book({ series: 'Saga of Time', series_number: 2 }) }
+        let(:pretty_book) do
           "**A Very Good Book** 📖\nSeries: Saga of Time, #2\n*by Pretty Good Writer*\n\n"
-        }
+        end
         it { expect(book_in_series_2.to_s).to eq pretty_book }
       end
     end
   end
 
   describe '.add_duplicate' do
-    let(:book_with_dup) { make_book().add_dup(book) }
+    let(:book_with_dup) { make_book.add_dup(book) }
     it { expect(book.duplicates).to eq [] }
     it { expect(book_with_dup.duplicates).to eq [ book ] }
   end

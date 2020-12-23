@@ -9,6 +9,7 @@ describe Extract do
   let(:ebook_label) {{ id: "e_id", name: "ebook" }}
   let(:nat_label) {{ id: "n_id", name: "nat" }}
   let(:sleep_label) {{ id: "s_id", name: "sleep" }}
+  let(:dnf_label) {{ id: "d_id", name: "dnf" }}
 
   let(:author_field) {{ id: "af_id", name: "Author" }}
   let(:series_field) {{ id: "sf_id", name: "Series" }}
@@ -28,7 +29,7 @@ describe Extract do
   let(:hash) {{
     cards: [ json_book ],
     lists: [ list, some_other_list, another_list ],
-    labels: [ audio_label, ebook_label, nat_label, sleep_label ],
+    labels: [ audio_label, ebook_label, nat_label, sleep_label, dnf_label ],
     customFields: [ author_field, series_field, series_number_field ]
   }}
 
@@ -140,6 +141,12 @@ describe Extract do
       expect(Extract.book(hash, json_book_sleep))
         .to have_attributes( sleep: true )
     end
+
+    it 'includes if I did not finish the book' do
+      json_book_dnf = json_book.merge({ idLabels: [dnf_label[:id]] })
+      expect(Extract.book(hash, json_book_dnf))
+        .to have_attributes( dnf: true )
+    end
   end
 
   describe '.all_books' do
@@ -167,6 +174,7 @@ def make_book(options = {})
     .with_ebook(options[:ebook])
     .with_nat(options[:nat])
     .with_sleep(options[:sleep])
+    .with_dnf(options[:dnf])
 end
 
 RSpec::Matchers.define :convert_to do |expected|
@@ -180,6 +188,7 @@ RSpec::Matchers.define :convert_to do |expected|
     actual.audiobook == expected.audiobook &&
     actual.ebook == expected.ebook &&
     actual.nat == expected.nat &&
-    actual.sleep == expected.sleep
+    actual.sleep == expected.sleep &&
+    actual.dnf == expected.dnf
   end
 end

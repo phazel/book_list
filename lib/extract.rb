@@ -59,6 +59,8 @@ class Extract
     ebook_label = label(hash, EBOOK_LABEL)
     nat_label = label(hash, NATALIE_LABEL)
     sleep_label = label(hash, SLEEP_LABEL)
+    dnf_label = label(hash, DNF_LABEL)
+
     Book.new(
       title: json_book[:name],
       author: book_custom_field(json_book, author_field, :text, default: json_book[:desc]))
@@ -70,6 +72,7 @@ class Extract
       .with_ebook(Filter.has_json_label(json_book, ebook_label))
       .with_nat(Filter.has_json_label(json_book, nat_label))
       .with_sleep(Filter.has_json_label(json_book, sleep_label))
+      .with_dnf(Filter.has_json_label(json_book, dnf_label))
   end
 
   def self.all_books(hash)

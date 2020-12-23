@@ -86,4 +86,10 @@ describe Filter do
     it { expect(book1B.duplicates).to eq [] }
     it { expect(book2B.duplicates).to eq [ book2B_dup ] }
   end
+
+  describe '.dnf' do
+    dnf_book = book.with_dnf
+    books = [ book, dnf_book ]
+    it { expect(described_class.dnf(books)).to eq [ dnf_book ] }
+  end
 end

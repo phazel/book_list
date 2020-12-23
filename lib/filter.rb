@@ -21,6 +21,10 @@ class Filter
     book[:idLabels].include? label[:id]
   end
 
+  def self.dnf(books)
+    books.select { |book| book.dnf }
+  end
+
   def self.duplicates(books)
     books.reduce({ dups: [], non_dups: [] }) do |result, book|
       dup_match = result[:dups].find { |dup| dup.matches(book) }

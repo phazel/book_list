@@ -25,7 +25,7 @@ sections = {
   dups: dups,
   fav: Filter.with_label(non_dups, labels[:fav]),
   regular: Filter.without_labels(non_dups, [labels[:fav], labels[:dnf]]),
-  dnf: Filter.with_label(read, labels[:dnf]),
+  dnf: Filter.dnf(read),
 }
 
 output = Format.result YEAR, sections, current

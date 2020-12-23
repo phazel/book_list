@@ -1,6 +1,6 @@
 class Book
   attr_reader :title, :author, :duplicates
-  attr_accessor :series, :series_number, :audiobook, :ebook, :nat, :sleep, :label_ids, :list_id
+  attr_accessor :series, :series_number, :audiobook, :ebook, :nat, :sleep, :label_ids, :list_id, :dnf
   AUTHOR_FIELD = 'Author'
   SERIES_FIELD = 'Series'
   SERIES_NUMBER_FIELD = 'Series Number'
@@ -8,6 +8,7 @@ class Book
   EBOOK_LABEL = 'ebook'
   NATALIE_LABEL = 'nat'
   SLEEP_LABEL = 'sleep'
+  DNF_LABEL = 'dnf'
 
   def initialize(title:, author:, series: nil, series_number: nil)
     @title = title
@@ -15,7 +16,7 @@ class Book
     @series = series
     @series_number = series_number
     @label_ids = @duplicates = []
-    @audiobook = @ebook = @nat = @sleep = false
+    @audiobook = @ebook = @nat = @sleep = @dnf = false
   end
 
   def matches(book)
@@ -67,6 +68,12 @@ class Book
   def with_sleep(cond = true)
     book = self.dup
     book.sleep = true if cond
+    book
+  end
+
+  def with_dnf(cond = true)
+    book = self.dup
+    book.dnf = true if cond
     book
   end
 
