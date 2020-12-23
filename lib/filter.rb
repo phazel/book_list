@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Filter
   def self.in_list(books, list)
     books.select do |book|
@@ -6,27 +8,27 @@ class Filter
   end
 
   def self.with_label(books, label)
-    books.select { |book| has_label(book, label) }
+    books.select { |book| label?(book, label) }
   end
 
   def self.without_labels(books, labels)
-    books.reject { |book| labels.any? { |label| has_label(book, label) } }
+    books.reject { |book| labels.any? { |label| label?(book, label) } }
   end
 
-  def self.has_label(book, label)
+  def self.label?(book, label)
     book.label_ids.include? label[:id]
   end
 
-  def self.has_json_label(book, label)
+  def self.json_label?(book, label)
     book[:idLabels].include? label[:id]
   end
 
   def self.dnf(books)
-    books.select { |book| book.dnf }
+    books.select(&:dnf)
   end
 
   def self.duplicates(books)
-    books.reduce({ dups: [], non_dups: [] }) do |result, book|
+    books.each_with_object({ dups: [], non_dups: [] }) do |book, result|
       dup_match = result[:dups].find { |dup| dup.matches(book) }
       any_matches = books.select { |book_b| book_b.matches(book) }.size > 1
 
@@ -35,7 +37,6 @@ class Filter
       else
         any_matches ? result[:dups].push(book) : result[:non_dups].push(book)
       end
-      result
     end
   end
 end

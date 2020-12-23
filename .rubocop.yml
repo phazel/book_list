@@ -1,5 +1,10 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+
 Layout/SpaceInsideArrayLiteralBrackets:
   Enabled: false
 
-Layout/LineLength:
-  Max: 99
+Style/Documentation:
+  Enabled: false

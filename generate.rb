@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'json'
 require_relative './lib/extract'
 require_relative './lib/filter'
@@ -7,7 +9,7 @@ require_relative './lib/format'
 YEAR = '2020'
 
 hash = Format.symbify JSON.parse File.read "#{YEAR}/exported.json"
-File.open("#{YEAR}/exported_pretty.json", "w") do |file|
+File.open("#{YEAR}/exported_pretty.json", 'w') do |file|
   file.write JSON.pretty_generate hash
 end
 
@@ -25,7 +27,7 @@ sections = {
   dups: dups,
   fav: Filter.with_label(non_dups, labels[:fav]),
   regular: Filter.without_labels(non_dups, [labels[:fav], labels[:dnf]]),
-  dnf: Filter.dnf(read),
+  dnf: Filter.dnf(read)
 }
 
 output = Format.result YEAR, sections, current

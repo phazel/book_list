@@ -1,14 +1,9 @@
+# frozen_string_literal: true
+
 class Book
   attr_reader :title, :author, :duplicates
-  attr_accessor :series, :series_number, :audiobook, :ebook, :nat, :sleep, :label_ids, :list_id, :dnf
-  AUTHOR_FIELD = 'Author'
-  SERIES_FIELD = 'Series'
-  SERIES_NUMBER_FIELD = 'Series Number'
-  AUDIOBOOK_LABEL = 'audiobook'
-  EBOOK_LABEL = 'ebook'
-  NATALIE_LABEL = 'nat'
-  SLEEP_LABEL = 'sleep'
-  DNF_LABEL = 'dnf'
+  attr_accessor :series, :series_number, :audiobook, :ebook, :nat, :sleep, :label_ids, :list_id,
+                :dnf
 
   def initialize(title:, author:, series: nil, series_number: nil)
     @title = title
@@ -24,55 +19,55 @@ class Book
   end
 
   def with_series(series)
-    book = self.dup
+    book = dup
     book.series = series
     book
   end
 
   def with_series_number(series_number)
-    book = self.dup
+    book = dup
     book.series_number = series_number
     book
   end
 
   def with_label_ids(label_ids)
-    book = self.dup
+    book = dup
     book.label_ids = label_ids
     book
   end
 
   def with_list_id(list_id)
-    book = self.dup
+    book = dup
     book.list_id = list_id
     book
   end
 
-  def with_audiobook(cond = true)
-    book = self.dup
+  def with_audiobook(cond: true)
+    book = dup
     book.audiobook = true if cond
     book
   end
 
-  def with_ebook(cond = true)
-    book = self.dup
+  def with_ebook(cond: true)
+    book = dup
     book.ebook = true if cond
     book
   end
 
-  def with_nat(cond = true)
-    book = self.dup
+  def with_nat(cond: true)
+    book = dup
     book.nat = true if cond
     book
   end
 
-  def with_sleep(cond = true)
-    book = self.dup
+  def with_sleep(cond: true)
+    book = dup
     book.sleep = true if cond
     book
   end
 
-  def with_dnf(cond = true)
-    book = self.dup
+  def with_dnf(cond: true)
+    book = dup
     book.dnf = true if cond
     book
   end
@@ -94,12 +89,12 @@ class Book
   end
 
   def to_s
-    number_section = "#{", ##{@series_number}" if @series_number}"
-    series_section = "#{"\nSeries: #{@series}#{number_section}" if @series}"
+    number_section = (", ##{@series_number}" if @series_number).to_s
+    series_section = ("\nSeries: #{@series}#{number_section}" if @series).to_s
 
     <<~BOOK
-    **#{@title}** #{emojis}#{series_section}
-    *by #{@author}*
+      **#{@title}** #{emojis}#{series_section}
+      *by #{@author}*
 
     BOOK
   end
