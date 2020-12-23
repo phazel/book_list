@@ -1,6 +1,3 @@
-require_relative 'filter'
-require_relative 'models/book'
-
 class Format
   SECTION_HEADERS = {
     dups: "## Books I Read More Than Once!\n\n",

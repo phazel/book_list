@@ -34,6 +34,18 @@ class Book
     return book
   end
 
+  def with_label_ids(label_ids)
+    book = self.dup
+    book.label_ids = label_ids
+    return book
+  end
+
+  def with_list_id(list_id)
+    book = self.dup
+    book.list_id = list_id
+    return book
+  end
+
   def with_audiobook(cond = true)
     book = self.dup
     book.audiobook = true if cond
@@ -55,18 +67,6 @@ class Book
   def with_sleep(cond = true)
     book = self.dup
     book.sleep = true if cond
-    return book
-  end
-
-  def with_label_ids(label_ids)
-    book = self.dup
-    book.label_ids = label_ids
-    return book
-  end
-
-  def with_list_id(list_id)
-    book = self.dup
-    book.list_id = list_id
     return book
   end
 

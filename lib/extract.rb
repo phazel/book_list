@@ -1,4 +1,3 @@
-require_relative './filter'
 require_relative './models/book'
 
 class Extract
