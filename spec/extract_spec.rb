@@ -18,13 +18,16 @@ describe Extract do
   let(:series_field) { { id: 'sf_id', name: 'Series' } }
   let(:series_number_field) { { id: 'snf_id', name: 'Series Number' } }
 
-  let(:book) { make_book }
+  let(:book) do
+    Book.new(title: 'A Very Good Book', author: 'Pretty Good Writer')
+      .with(list_id: list[:id])
+  end
   let(:json_book) do
     {
       name: book.title,
       desc: 'Ghost Writer',
       idLabels: [],
-      idList: list[:id],
+      idList: book.list_id,
       customFieldItems: [{
         idCustomField: author_field[:id],
         value: { text: book.author }
@@ -97,11 +100,19 @@ describe Extract do
   end
 
   describe '.book' do
-    it { expect(Extract.book(hash, json_book)).to be_a Book }
-
-    it 'matches json attributes' do
-      expect(Extract.book(hash, json_book)).to convert_to(book)
-    end
+    let(:extracted_book) { Extract.book(hash, json_book) }
+    it { expect(extracted_book).to be_a Book }
+    it { expect(extracted_book.title).to eq book.title }
+    it { expect(extracted_book.author).to eq book.author }
+    it { expect(extracted_book.series).to eq book.series }
+    it { expect(extracted_book.series_number).to eq book.series_number }
+    it { expect(extracted_book.list_id).to eq book.list_id }
+    it { expect(extracted_book.audiobook).to eq book.audiobook }
+    it { expect(extracted_book.ebook).to eq book.ebook }
+    it { expect(extracted_book.nat).to eq book.nat }
+    it { expect(extracted_book.sleep).to eq book.sleep }
+    it { expect(extracted_book.dnf).to eq book.dnf }
+    it { expect(extracted_book.fav).to eq book.fav }
 
     it 'takes author from description if not in custom field' do
       json_book_no_custom_fields = json_book.merge({ customFieldItems: [] })
@@ -171,37 +182,5 @@ describe Extract do
     it 'ignores archived books' do
       expect(Extract.all_books(hash_with_archived).size).to eq 1
     end
-  end
-end
-
-def make_book(options = {})
-  Book.new(
-    title: options[:title] ||= 'A Very Good Book',
-    author: options[:author] ||= 'Pretty Good Writer'
-  )
-      .with(:series, options[:series] ||= nil)
-      .with(:series_number, options[:series_number] ||= nil)
-      .with(:list_id, options[:list_id] ||= list[:id])
-      .is(:audiobook, cond: options[:audiobook])
-      .is(:ebook, cond: options[:ebook])
-      .is(:nat, cond: options[:nat])
-      .is(:sleep, cond: options[:sleep])
-      .is(:dnf, cond: options[:dnf])
-      .is(:fav, cond: options[:fav])
-end
-
-RSpec::Matchers.define :convert_to do |expected|
-  match do |actual|
-    actual.title == expected.title &&
-      actual.author == expected.author &&
-      actual.series == expected.series &&
-      actual.series_number == expected.series_number &&
-      actual.list_id == expected.list_id &&
-      actual.audiobook == expected.audiobook &&
-      actual.ebook == expected.ebook &&
-      actual.nat == expected.nat &&
-      actual.sleep == expected.sleep &&
-      actual.dnf == expected.dnf &&
-      actual.fav == expected.fav
   end
 end

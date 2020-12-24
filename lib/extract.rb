@@ -68,9 +68,9 @@ class Extract
       title: json_book[:name],
       author: book_custom_field(json_book, author_field, :text, default: json_book[:desc])
     )
-        .with(:series, book_custom_field(json_book, series_field, :text))
-        .with(:series_number, book_custom_field(json_book, series_number_field, :number))
-        .with(:list_id, json_book[:idList])
+        .with(series: book_custom_field(json_book, series_field, :text))
+        .with(series_number: book_custom_field(json_book, series_number_field, :number))
+        .with(list_id: json_book[:idList])
         .is(:audiobook, cond: json_label?(json_book, audiobook_label))
         .is(:ebook, cond: json_label?(json_book, ebook_label))
         .is(:nat, cond: json_label?(json_book, nat_label))

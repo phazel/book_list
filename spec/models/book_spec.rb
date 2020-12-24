@@ -31,30 +31,14 @@ describe Book do
       customFields: [ author_field, series_field, series_number_field ]
     }
   end
-
-  def make_book(options = {})
-    Book.new(
-      title: options[:title] ||= 'A Very Good Book',
-      author: options[:author] ||= 'Pretty Good Writer'
-    )
-        .with(:series, options[:series] ||= nil)
-        .with(:series_number, options[:series_number] ||= nil)
-        .with(:list_id, options[:list_id] ||= list[:id])
-        .is(:audiobook, cond: options[:audiobook])
-        .is(:ebook, cond: options[:ebook])
-        .is(:nat, cond: options[:nat])
-        .is(:sleep, cond: options[:sleep])
-        .is(:dnf, cond: options[:dnf])
-        .is(:fav, cond: options[:fav])
-  end
-  let(:book) { make_book }
+  let(:book) { Book.new(title: 'A Very Good Book', author: 'Pretty Good Writer') }
 
   describe '#initialize' do
     it { expect(book).to be_a Book }
     it { expect(book.title).to eq 'A Very Good Book' }
     it { expect(book.author).to eq 'Pretty Good Writer' }
     it { expect(book.series).to eq nil }
-    it { expect(book.list_id).to eq list[:id] }
+    it { expect(book.list_id).to eq nil }
     it { expect(book.audiobook).to eq false }
     it { expect(book.ebook).to eq false }
     it { expect(book.nat).to eq false }
@@ -65,9 +49,9 @@ describe Book do
   end
 
   describe '#matches' do
-    let(:dup_book)         { make_book }
-    let(:different_title)  { make_book(title: 'Another') }
-    let(:different_author) { make_book(author: 'Someone Else') }
+    let(:dup_book)         { book.dup }
+    let(:different_title)  { book.with(title: 'Another') }
+    let(:different_author) { book.with(author: 'Someone Else') }
 
     it { expect(book.matches(dup_book)).to be true }
     it { expect(book.matches(different_title)).to be false }
@@ -75,8 +59,8 @@ describe Book do
   end
 
   describe '#with' do
-    it { expect(book.with(:series, 'Some Series').series).to eq 'Some Series' }
-    it { expect { book.with(:nope, 'Nup') }.to raise_error(ArgumentError, 'invalid attribute') }
+    it { expect(book.with(series: 'Some Series').series).to eq 'Some Series' }
+    it { expect { book.with(nope: 'Nup') }.to raise_error(ArgumentError, 'invalid attribute') }
   end
 
   describe '#is' do
@@ -86,27 +70,27 @@ describe Book do
 
   describe '#emojis' do
     it { expect(book.emojis).to eq '📖' }
-    it { expect(make_book(audiobook: true).emojis).to eq '🎧' }
-    it { expect(make_book(ebook: true).emojis).to eq '📱' }
-    it { expect(make_book(audiobook: true, ebook: true).emojis).to eq '📱🎧' }
-    it { expect(make_book(nat: true).emojis).to eq '📖💞' }
-    it { expect(make_book(audiobook: true, ebook: true, nat: true).emojis).to eq '📱🎧💞' }
-    it { expect(make_book(sleep: true).emojis).to eq '📖🌒' }
-    it { expect(make_book(audiobook: true, nat: true, sleep: true).emojis).to eq '🎧💞🌒' }
+    it { expect(book.is(:audiobook).emojis).to eq '🎧' }
+    it { expect(book.is(:ebook).emojis).to eq '📱' }
+    it { expect(book.is(:audiobook).is(:ebook).emojis).to eq '📱🎧' }
+    it { expect(book.is(:nat).emojis).to eq '📖💞' }
+    it { expect(book.is(:audiobook).is(:ebook).is(:nat).emojis).to eq '📱🎧💞' }
+    it { expect(book.is(:sleep).emojis).to eq '📖🌒' }
+    it { expect(book.is(:audiobook).is(:nat).is(:sleep).emojis).to eq '🎧💞🌒' }
   end
 
   describe '#to_s' do
     it { expect(book.to_s).to eq "**A Very Good Book** 📖\n*by Pretty Good Writer*\n\n" }
 
     context 'when in a series' do
-      let(:book_in_series) { make_book(series: 'Saga of Time') }
+      let(:book_in_series) { book.with(series: 'Saga of Time') }
       let(:pretty_book) do
         "**A Very Good Book** 📖\nSeries: Saga of Time\n*by Pretty Good Writer*\n\n"
       end
       it { expect(book_in_series.to_s).to eq pretty_book }
 
       context 'with a series number' do
-        let(:book_in_series2) { make_book({ series: 'Saga of Time', series_number: 2 }) }
+        let(:book_in_series2) { book.with(series: 'Saga of Time', series_number: 2) }
         let(:pretty_book) do
           "**A Very Good Book** 📖\nSeries: Saga of Time, #2\n*by Pretty Good Writer*\n\n"
         end
@@ -116,7 +100,7 @@ describe Book do
   end
 
   describe '.add_duplicate' do
-    let(:book_with_dup) { make_book.add_dup(book) }
+    let(:book_with_dup) { book.dup.add_dup(book) }
     it { expect(book.duplicates).to eq [] }
     it { expect(book_with_dup.duplicates).to eq [ book ] }
   end

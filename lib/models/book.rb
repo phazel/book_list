@@ -17,12 +17,12 @@ class Book
     book.title == title && book.author == author
   end
 
-  def with(attr, value)
-    valid = %i[series series_number list_id].freeze
-    raise ArgumentError, 'invalid attribute' unless valid.include? attr
+  def with(**attrs)
+    valid = %i[title author series series_number list_id].freeze
+    raise ArgumentError, 'invalid attribute' unless attrs.keys.all? {|key| valid.include? key }
 
     book = dup
-    book.instance_variable_set("@#{attr}", value)
+    attrs.each { |key, value| book.instance_variable_set("@#{key}", value) }
     book
   end
 

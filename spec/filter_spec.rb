@@ -15,8 +15,8 @@ describe Filter do
     let(:list) { { id: 'list_id', name: 'some_list' } }
     let(:another_list) { { id: 'another_list_id', name: 'some_other_list' } }
 
-    let(:book_in_list) { book.with(:list_id, list[:id]) }
-    let(:book_in_another_list) { book.with(:list_id, another_list[:id]) }
+    let(:book_in_list) { book.with(list_id: list[:id]) }
+    let(:book_in_another_list) { book.with(list_id: another_list[:id]) }
 
     let(:books) { [ book_in_list, book_in_another_list ] }
 
