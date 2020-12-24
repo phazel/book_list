@@ -37,15 +37,15 @@ describe Book do
       title: options[:title] ||= 'A Very Good Book',
       author: options[:author] ||= 'Pretty Good Writer'
     )
-        .with_series(options[:series] ||= nil)
-        .with_series_number(options[:series_number] ||= nil)
-        .with_list_id(options[:list_id] ||= list[:id])
-        .with_audiobook(cond: options[:audiobook])
-        .with_ebook(cond: options[:ebook])
-        .with_nat(cond: options[:nat])
-        .with_sleep(cond: options[:sleep])
-        .with_dnf(cond: options[:dnf])
-        .with_fav(cond: options[:fav])
+        .with(:series, options[:series] ||= nil)
+        .with(:series_number, options[:series_number] ||= nil)
+        .with(:list_id, options[:list_id] ||= list[:id])
+        .is(:audiobook, cond: options[:audiobook])
+        .is(:ebook, cond: options[:ebook])
+        .is(:nat, cond: options[:nat])
+        .is(:sleep, cond: options[:sleep])
+        .is(:dnf, cond: options[:dnf])
+        .is(:fav, cond: options[:fav])
   end
   let(:book) { make_book }
 

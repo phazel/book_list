@@ -17,57 +17,15 @@ class Book
     book.title == title && book.author == author
   end
 
-  def with_series(series)
+  def with(attr, value)
     book = dup
-    book.series = series
+    book.instance_variable_set("@#{attr}", value)
     book
   end
 
-  def with_series_number(series_number)
+  def is(attr, cond: true)
     book = dup
-    book.series_number = series_number
-    book
-  end
-
-  def with_list_id(list_id)
-    book = dup
-    book.list_id = list_id
-    book
-  end
-
-  def with_audiobook(cond: true)
-    book = dup
-    book.audiobook = true if cond
-    book
-  end
-
-  def with_ebook(cond: true)
-    book = dup
-    book.ebook = true if cond
-    book
-  end
-
-  def with_nat(cond: true)
-    book = dup
-    book.nat = true if cond
-    book
-  end
-
-  def with_sleep(cond: true)
-    book = dup
-    book.sleep = true if cond
-    book
-  end
-
-  def with_dnf(cond: true)
-    book = dup
-    book.dnf = true if cond
-    book
-  end
-
-  def with_fav(cond: true)
-    book = dup
-    book.fav = true if cond
+    book.instance_variable_set("@#{attr}", true) if cond
     book
   end
 
