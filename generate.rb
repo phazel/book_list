@@ -24,7 +24,7 @@ sections = {
   count: Filter.books_without(read, [:dnf]).size,
   dups: dups,
   fav: Filter.books_with(non_dups, :fav),
-  regular: Filter.books_without(non_dups, [:fav, :dnf]),
+  regular: Filter.books_without(non_dups, %i[fav dnf]),
   dnf: Filter.books_with(read, :dnf)
 }
 

@@ -27,11 +27,11 @@ describe Filter do
   describe '.books_with' do
     it {
       expect(described_class.books_with(books, :fav))
-      .to eq [book_fav, book_fav_dnf]
+        .to eq [book_fav, book_fav_dnf]
     }
     it {
       expect(described_class.books_with(books, :dnf))
-      .to eq [book_dnf, book_fav_dnf]
+        .to eq [book_dnf, book_fav_dnf]
     }
   end
 
@@ -49,7 +49,7 @@ describe Filter do
     end
     context 'books without either attribute' do
       let(:expected) { [ book ] }
-      it { expect(described_class.books_without(books, [:fav, :dnf])).to eq expected }
+      it { expect(described_class.books_without(books, %i[fav dnf])).to eq expected }
     end
   end
 
