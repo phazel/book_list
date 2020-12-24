@@ -74,6 +74,16 @@ describe Book do
     it { expect(book.matches(different_author)).to be false }
   end
 
+  describe '#with' do
+    it { expect(book.with(:series, 'Some Series').series).to eq 'Some Series' }
+    it { expect { book.with(:nope, 'Nup') }.to raise_error(ArgumentError, 'invalid attribute') }
+  end
+
+  describe '#is' do
+    it { expect(book.is(:ebook).ebook).to eq true }
+    it { expect { book.is(:nope) }.to raise_error(ArgumentError, 'invalid attribute') }
+  end
+
   describe '#emojis' do
     it { expect(book.emojis).to eq '📖' }
     it { expect(make_book(audiobook: true).emojis).to eq '🎧' }

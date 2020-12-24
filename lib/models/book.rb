@@ -18,12 +18,18 @@ class Book
   end
 
   def with(attr, value)
+    valid = %i[series series_number list_id].freeze
+    raise ArgumentError, 'invalid attribute' unless valid.include? attr
+
     book = dup
     book.instance_variable_set("@#{attr}", value)
     book
   end
 
   def is(attr, cond: true)
+    valid = [:audiobook, :ebook, :nat, :sleep, :list_id, :dnf, :fav].freeze
+    raise ArgumentError, 'invalid attribute' unless valid.include? attr
+
     book = dup
     book.instance_variable_set("@#{attr}", true) if cond
     book
