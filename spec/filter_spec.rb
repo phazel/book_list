@@ -98,4 +98,10 @@ describe Filter do
     books = [ book, dnf_book ]
     it { expect(described_class.dnf(books)).to eq [ dnf_book ] }
   end
+
+  describe '.fav' do
+    fav_book = book.with_fav
+    books = [ book, fav_book ]
+    it { expect(described_class.fav(books)).to eq [ fav_book ] }
+  end
 end

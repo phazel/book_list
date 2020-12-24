@@ -27,6 +27,10 @@ class Filter
     books.select(&:dnf)
   end
 
+  def self.fav(books)
+    books.select(&:fav)
+  end
+
   def self.duplicates(books)
     books.each_with_object({ dups: [], non_dups: [] }) do |book, result|
       dup_match = result[:dups].find { |dup| dup.matches(book) }

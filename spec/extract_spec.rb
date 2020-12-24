@@ -12,6 +12,7 @@ describe Extract do
   let(:nat_label) { { id: 'n_id', name: 'nat' } }
   let(:sleep_label) { { id: 's_id', name: 'sleep' } }
   let(:dnf_label) { { id: 'd_id', name: 'dnf' } }
+  let(:fav_label) { { id: 'f_id', name: 'fav' } }
 
   let(:author_field) { { id: 'af_id', name: 'Author' } }
   let(:series_field) { { id: 'sf_id', name: 'Series' } }
@@ -34,7 +35,7 @@ describe Extract do
     {
       cards: [ json_book ],
       lists: [ list, some_other_list, another_list ],
-      labels: [ audio_label, ebook_label, nat_label, sleep_label, dnf_label ],
+      labels: [ audio_label, ebook_label, nat_label, sleep_label, dnf_label, fav_label ],
       customFields: [ author_field, series_field, series_number_field ]
     }
   end
@@ -151,6 +152,12 @@ describe Extract do
       expect(Extract.book(hash, json_book_dnf))
         .to have_attributes(dnf: true)
     end
+
+    it 'includes if the book is a favourite' do
+      json_book_fav = json_book.merge({ idLabels: [fav_label[:id]] })
+      expect(Extract.book(hash, json_book_fav))
+        .to have_attributes(fav: true)
+    end
   end
 
   describe '.all_books' do
@@ -179,6 +186,7 @@ def make_book(options = {})
       .with_nat(cond: options[:nat])
       .with_sleep(cond: options[:sleep])
       .with_dnf(cond: options[:dnf])
+      .with_fav(cond: options[:fav])
 end
 
 RSpec::Matchers.define :convert_to do |expected|
@@ -193,6 +201,7 @@ RSpec::Matchers.define :convert_to do |expected|
       actual.ebook == expected.ebook &&
       actual.nat == expected.nat &&
       actual.sleep == expected.sleep &&
-      actual.dnf == expected.dnf
+      actual.dnf == expected.dnf &&
+      actual.fav == expected.fav
   end
 end

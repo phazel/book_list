@@ -3,7 +3,7 @@
 class Book
   attr_reader :title, :author, :duplicates
   attr_accessor :series, :series_number, :audiobook, :ebook, :nat, :sleep, :label_ids, :list_id,
-                :dnf
+                :dnf, :fav
 
   def initialize(title:, author:, series: nil, series_number: nil)
     @title = title
@@ -11,7 +11,7 @@ class Book
     @series = series
     @series_number = series_number
     @label_ids = @duplicates = []
-    @audiobook = @ebook = @nat = @sleep = @dnf = false
+    @audiobook = @ebook = @nat = @sleep = @dnf = @fav = false
   end
 
   def matches(book)
@@ -69,6 +69,12 @@ class Book
   def with_dnf(cond: true)
     book = dup
     book.dnf = true if cond
+    book
+  end
+
+  def with_fav(cond: true)
+    book = dup
+    book.fav = true if cond
     book
   end
 

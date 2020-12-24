@@ -65,6 +65,7 @@ class Extract
     nat_label = label(hash, NATALIE_LABEL)
     sleep_label = label(hash, SLEEP_LABEL)
     dnf_label = label(hash, DNF_LABEL)
+    fav_label = label(hash, FAVOURITE_LABEL)
 
     Book.new(
       title: json_book[:name],
@@ -79,6 +80,7 @@ class Extract
         .with_nat(cond: Filter.json_label?(json_book, nat_label))
         .with_sleep(cond: Filter.json_label?(json_book, sleep_label))
         .with_dnf(cond: Filter.json_label?(json_book, dnf_label))
+        .with_fav(cond: Filter.json_label?(json_book, fav_label))
   end
 
   def self.all_books(hash)

@@ -46,6 +46,7 @@ describe Book do
         .with_nat(cond: options[:nat])
         .with_sleep(cond: options[:sleep])
         .with_dnf(cond: options[:dnf])
+        .with_fav(cond: options[:fav])
   end
   let(:book) { make_book }
 
@@ -61,6 +62,7 @@ describe Book do
     it { expect(book.nat).to eq false }
     it { expect(book.sleep).to eq false }
     it { expect(book.dnf).to eq false }
+    it { expect(book.fav).to eq false }
     it { expect { Book.new }.to raise_error(ArgumentError, 'missing keywords: title, author') }
   end
 
