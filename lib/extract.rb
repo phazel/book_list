@@ -14,9 +14,7 @@ class Extract
   FAVOURITE_LABEL = 'fav'
   DNF_LABEL = 'dnf'
   CURRENTLY_READING_LIST = '📖 Reading 📖'
-  def self.read_list(year)
-    "Read #{year}"
-  end
+  def self.READ_LIST(year) "Read #{year}" end
 
   def self.list(hash, list_name)
     hash[:lists].find { |list| list[:name] == list_name }
@@ -25,7 +23,7 @@ class Extract
   def self.lists(hash, year, list_names = nil)
     if list_names.nil?
       {
-        read: list(hash, read_list(year)),
+        read: list(hash, READ_LIST(year)),
         current: list(hash, CURRENTLY_READING_LIST)
       }
     else
