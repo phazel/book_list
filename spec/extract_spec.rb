@@ -59,14 +59,6 @@ describe Extract do
     it { expect(Extract.label(hash, 'does_not_exist')).to eq nil }
   end
 
-  describe '.labels' do
-    let(:labels) { [nat_label[:name], audio_label[:name]] }
-    let(:expected) { { nat: nat_label, audiobook: audio_label } }
-
-    it { expect(Extract.labels(hash, labels)).to eq expected }
-    it { expect(Extract.labels(hash, [])).to be_empty }
-  end
-
   describe '.custom_field' do
     it { expect(Extract.custom_field(hash, author_field[:name])).to eq author_field }
     it { expect(Extract.custom_field(hash, series_field[:name])).to eq series_field }

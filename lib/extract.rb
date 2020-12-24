@@ -37,10 +37,6 @@ class Extract
     hash[:labels].find { |label| label[:name] == label_name }
   end
 
-  def self.labels(hash, label_names = [FAVOURITE_LABEL, DNF_LABEL])
-    label_names.map { |name| [ name.to_sym, label(hash, name) ] }.to_h
-  end
-
   def self.custom_field(hash, field_name)
     hash[:customFields].find { |field| field[:name] == field_name }
   end
