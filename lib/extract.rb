@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative './filter'
 require_relative './models/book'
 
 class Extract
@@ -56,6 +55,10 @@ class Extract
     found_field ? found_field[:value][key] : default
   end
 
+  def self.json_label?(json_book, label)
+    json_book[:idLabels].include? label[:id]
+  end
+
   def self.book(hash, json_book)
     author_field = custom_field(hash, AUTHOR_FIELD)
     series_field = custom_field(hash, SERIES_FIELD)
@@ -75,12 +78,12 @@ class Extract
         .with_series_number(book_custom_field(json_book, series_number_field, :number))
         .with_label_ids(json_book[:idLabels])
         .with_list_id(json_book[:idList])
-        .with_audiobook(cond: Filter.json_label?(json_book, audiobook_label))
-        .with_ebook(cond: Filter.json_label?(json_book, ebook_label))
-        .with_nat(cond: Filter.json_label?(json_book, nat_label))
-        .with_sleep(cond: Filter.json_label?(json_book, sleep_label))
-        .with_dnf(cond: Filter.json_label?(json_book, dnf_label))
-        .with_fav(cond: Filter.json_label?(json_book, fav_label))
+        .with_audiobook(cond: json_label?(json_book, audiobook_label))
+        .with_ebook(cond: json_label?(json_book, ebook_label))
+        .with_nat(cond: json_label?(json_book, nat_label))
+        .with_sleep(cond: json_label?(json_book, sleep_label))
+        .with_dnf(cond: json_label?(json_book, dnf_label))
+        .with_fav(cond: json_label?(json_book, fav_label))
   end
 
   def self.all_books(hash)

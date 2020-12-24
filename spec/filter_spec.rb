@@ -4,75 +4,52 @@ require 'filter'
 require 'models/book'
 
 describe Filter do
-  label = { id: 'label_id', name: 'some_label' }
-  book = Book.new(title: '', author: '')
+  let(:book) { Book.new(title: '', author: '') }
+  let(:book_fav) { book.with_fav }
+  let(:book_dnf) { book.with_dnf }
+  let(:book_fav_dnf) { book.with_fav.with_dnf }
+
+  let(:books) { [ book, book_fav, book_dnf, book_fav_dnf ] }
 
   describe '.in_list' do
-    list = { id: 'list_id', name: 'some_list' }
-    another_list = { id: 'another_list_id', name: 'some_other_list' }
+    let(:list) { { id: 'list_id', name: 'some_list' } }
+    let(:another_list) { { id: 'another_list_id', name: 'some_other_list' } }
 
-    book_in_list = book.with_list_id(list[:id])
-    book_in_another_list = book.with_list_id(another_list[:id])
+    let(:book_in_list) { book.with_list_id(list[:id]) }
+    let(:book_in_another_list) { book.with_list_id(another_list[:id]) }
 
-    books = [ book_in_list, book_in_another_list ]
+    let(:books) { [ book_in_list, book_in_another_list ] }
 
     it { expect(described_class.in_list(books, list)).to eq [book_in_list] }
     it { expect(described_class.in_list(books, another_list)).to eq [ book_in_another_list ] }
   end
 
-  describe 'label filters' do
-    another_label = { id: 'another_label_id', name: 'some_other_label' }
+  describe '.books_with' do
+    it {
+      expect(described_class.books_with(books, :fav))
+      .to eq [book_fav, book_fav_dnf]
+    }
+    it {
+      expect(described_class.books_with(books, :dnf))
+      .to eq [book_dnf, book_fav_dnf]
+    }
+  end
 
-    book_with_label = book.with_label_ids([ label[:id] ])
-    book_with_another_label = book.with_label_ids([ another_label[:id] ])
-    book_with_both_labels = book.with_label_ids([ label[:id], another_label[:id] ])
-
-    books = [
-      book_with_label,
-      book_with_another_label,
-      book_with_both_labels,
-      book
-    ]
-
-    describe '.with_label' do
-      it {
-        expect(described_class.with_label(books, label))
-          .to eq [book_with_label, book_with_both_labels]
-      }
-      it {
-        expect(described_class.with_label(books, another_label))
-          .to eq [book_with_another_label, book_with_both_labels]
-      }
+  describe '.books_without' do
+    context 'books with all labels' do
+      it { expect(described_class.books_without(books, [])).to eq books }
     end
-
-    describe '.without_labels' do
-      context 'books without either label' do
-        expected = [ book ]
-        it { expect(described_class.without_labels(books, [label, another_label])).to eq expected }
-      end
-      context 'books without label' do
-        expected = [ book_with_another_label, book ]
-        it { expect(described_class.without_labels(books, [label])).to eq expected }
-      end
-      context 'books without another_label' do
-        expected = [ book_with_label, book ]
-        it { expect(described_class.without_labels(books, [another_label])).to eq expected }
-      end
-      context 'books with all labels' do
-        it { expect(described_class.without_labels(books, [])).to eq books }
-      end
+    context 'books without fav' do
+      let(:expected) { [ book, book_dnf ] }
+      it { expect(described_class.books_without(books, [:fav])).to eq expected }
     end
-
-    describe '.label?' do
-      it { expect(described_class.label?(book_with_label, label)).to be true }
-      it { expect(described_class.label?(book_with_label, another_label)).to be false }
+    context 'books without dnf' do
+      let(:expected) { [ book, book_fav ] }
+      it { expect(described_class.books_without(books, [:dnf])).to eq expected }
     end
-
-    describe '.json_label?' do
-      let(:json_book_with_label) { { idLabels: [ label[:id] ], labels: [ label ] } }
-
-      it { expect(described_class.json_label?(json_book_with_label, label)).to be true }
-      it { expect(described_class.json_label?(json_book_with_label, another_label)).to be false }
+    context 'books without either attribute' do
+      let(:expected) { [ book ] }
+      it { expect(described_class.books_without(books, [:fav, :dnf])).to eq expected }
     end
   end
 
@@ -91,17 +68,5 @@ describe Filter do
     it { expect(book1a.duplicates).to eq [ book1a_dup, book1a_dup_dup ] }
     it { expect(book1b.duplicates).to eq [] }
     it { expect(book2b.duplicates).to eq [ book2b_dup ] }
-  end
-
-  describe '.dnf' do
-    dnf_book = book.with_dnf
-    books = [ book, dnf_book ]
-    it { expect(described_class.dnf(books)).to eq [ dnf_book ] }
-  end
-
-  describe '.fav' do
-    fav_book = book.with_fav
-    books = [ book, fav_book ]
-    it { expect(described_class.fav(books)).to eq [ fav_book ] }
   end
 end

@@ -95,6 +95,15 @@ describe Extract do
     end
   end
 
+  describe '.json_label?' do
+    label = { id: 'label_id', name: 'some_label' }
+    another_label = { id: 'another_label_id', name: 'some_other_label' }
+    json_book_with_label = { idLabels: [ label[:id] ], labels: [ label ] }
+
+    it { expect(described_class.json_label?(json_book_with_label, label)).to be true }
+    it { expect(described_class.json_label?(json_book_with_label, another_label)).to be false }
+  end
+
   describe '.book' do
     it { expect(Extract.book(hash, json_book)).to be_a Book }
 

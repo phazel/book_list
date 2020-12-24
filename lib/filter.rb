@@ -7,28 +7,16 @@ class Filter
     end
   end
 
-  def self.with_label(books, label)
-    books.select { |book| label?(book, label) }
+  def self.books_with(books, attribute)
+    books.select(& attribute)
   end
 
-  def self.without_labels(books, labels)
-    books.reject { |book| labels.any? { |label| label?(book, label) } }
-  end
-
-  def self.label?(book, label)
-    book.label_ids.include? label[:id]
+  def self.books_without(books, attributes)
+    books.reject { |book| attributes.any? { |attr| book.public_send(attr) } }
   end
 
   def self.json_label?(book, label)
     book[:idLabels].include? label[:id]
-  end
-
-  def self.dnf(books)
-    books.select(&:dnf)
-  end
-
-  def self.fav(books)
-    books.select(&:fav)
   end
 
   def self.duplicates(books)

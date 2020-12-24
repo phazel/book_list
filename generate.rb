@@ -14,20 +14,18 @@ File.open("#{YEAR}/exported_pretty.json", 'w') do |file|
 end
 
 lists = Extract.lists(hash, YEAR)
-labels = Extract.labels(hash)
 books = Extract.all_books(hash)
 
 read = Filter.in_list(books, lists[:read])
 current = Filter.in_list(books, lists[:current])
-
 dups, non_dups = Filter.duplicates(read).values_at(:dups, :non_dups)
 
 sections = {
-  count: Filter.without_labels(read, [labels[:dnf]]).size,
+  count: Filter.books_without(read, [:dnf]).size,
   dups: dups,
-  fav: Filter.with_label(non_dups, labels[:fav]),
-  regular: Filter.without_labels(non_dups, [labels[:fav], labels[:dnf]]),
-  dnf: Filter.dnf(read)
+  fav: Filter.books_with(non_dups, :fav),
+  regular: Filter.books_without(non_dups, [:fav, :dnf]),
+  dnf: Filter.books_with(read, :dnf)
 }
 
 output = Format.result YEAR, sections, current
