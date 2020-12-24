@@ -15,10 +15,6 @@ class Filter
     books.reject { |book| attributes.any? { |attr| book.public_send(attr) } }
   end
 
-  def self.json_label?(book, label)
-    book[:idLabels].include? label[:id]
-  end
-
   def self.duplicates(books)
     books.each_with_object({ dups: [], non_dups: [] }) do |book, result|
       dup_match = result[:dups].find { |dup| dup.matches(book) }
