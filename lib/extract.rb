@@ -76,7 +76,6 @@ class Extract
     )
         .with_series(book_custom_field(json_book, series_field, :text))
         .with_series_number(book_custom_field(json_book, series_number_field, :number))
-        .with_label_ids(json_book[:idLabels])
         .with_list_id(json_book[:idList])
         .with_audiobook(cond: json_label?(json_book, audiobook_label))
         .with_ebook(cond: json_label?(json_book, ebook_label))

@@ -39,7 +39,6 @@ describe Book do
     )
         .with_series(options[:series] ||= nil)
         .with_series_number(options[:series_number] ||= nil)
-        .with_label_ids(options[:label_ids] ||= [])
         .with_list_id(options[:list_id] ||= list[:id])
         .with_audiobook(cond: options[:audiobook])
         .with_ebook(cond: options[:ebook])
@@ -55,7 +54,6 @@ describe Book do
     it { expect(book.title).to eq 'A Very Good Book' }
     it { expect(book.author).to eq 'Pretty Good Writer' }
     it { expect(book.series).to eq nil }
-    it { expect(book.label_ids).to eq [] }
     it { expect(book.list_id).to eq list[:id] }
     it { expect(book.audiobook).to eq false }
     it { expect(book.ebook).to eq false }

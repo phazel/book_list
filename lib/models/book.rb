@@ -2,7 +2,7 @@
 
 class Book
   attr_reader :title, :author, :duplicates
-  attr_accessor :series, :series_number, :audiobook, :ebook, :nat, :sleep, :label_ids, :list_id,
+  attr_accessor :series, :series_number, :audiobook, :ebook, :nat, :sleep, :list_id,
                 :dnf, :fav
 
   def initialize(title:, author:, series: nil, series_number: nil)
@@ -10,7 +10,7 @@ class Book
     @author = author
     @series = series
     @series_number = series_number
-    @label_ids = @duplicates = []
+    @duplicates = []
     @audiobook = @ebook = @nat = @sleep = @dnf = @fav = false
   end
 
@@ -27,12 +27,6 @@ class Book
   def with_series_number(series_number)
     book = dup
     book.series_number = series_number
-    book
-  end
-
-  def with_label_ids(label_ids)
-    book = dup
-    book.label_ids = label_ids
     book
   end
 
