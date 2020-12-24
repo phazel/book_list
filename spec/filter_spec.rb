@@ -24,32 +24,32 @@ describe Filter do
     it { expect(described_class.in_list(books, another_list)).to eq [ book_in_another_list ] }
   end
 
-  describe '.books_with' do
+  describe '.with' do
     it {
-      expect(described_class.books_with(books, :fav))
+      expect(described_class.with(books, :fav))
         .to eq [book_fav, book_fav_dnf]
     }
     it {
-      expect(described_class.books_with(books, :dnf))
+      expect(described_class.with(books, :dnf))
         .to eq [book_dnf, book_fav_dnf]
     }
   end
 
-  describe '.books_without' do
+  describe '.without' do
     context 'books with all labels' do
-      it { expect(described_class.books_without(books, [])).to eq books }
+      it { expect(described_class.without(books, [])).to eq books }
     end
     context 'books without fav' do
       let(:expected) { [ book, book_dnf ] }
-      it { expect(described_class.books_without(books, [:fav])).to eq expected }
+      it { expect(described_class.without(books, [:fav])).to eq expected }
     end
     context 'books without dnf' do
       let(:expected) { [ book, book_fav ] }
-      it { expect(described_class.books_without(books, [:dnf])).to eq expected }
+      it { expect(described_class.without(books, [:dnf])).to eq expected }
     end
     context 'books without either attribute' do
       let(:expected) { [ book ] }
-      it { expect(described_class.books_without(books, %i[fav dnf])).to eq expected }
+      it { expect(described_class.without(books, %i[fav dnf])).to eq expected }
     end
   end
 

@@ -7,11 +7,11 @@ class Filter
     end
   end
 
-  def self.books_with(books, attribute)
+  def self.with(books, attribute)
     books.select(& attribute)
   end
 
-  def self.books_without(books, attributes)
+  def self.without(books, attributes)
     books.reject { |book| attributes.any? { |attr| book.public_send(attr) } }
   end
 

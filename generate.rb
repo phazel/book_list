@@ -21,11 +21,11 @@ current = Filter.in_list(books, lists[:current])
 dups, non_dups = Filter.duplicates(read).values_at(:dups, :non_dups)
 
 sections = {
-  count: Filter.books_without(read, [:dnf]).size,
+  count: Filter.without(read, [:dnf]).size,
   dups: dups,
-  fav: Filter.books_with(non_dups, :fav),
-  regular: Filter.books_without(non_dups, %i[fav dnf]),
-  dnf: Filter.books_with(read, :dnf)
+  fav: Filter.with(non_dups, :fav),
+  regular: Filter.without(non_dups, %i[fav dnf]),
+  dnf: Filter.with(read, :dnf)
 }
 
 output = Format.result YEAR, sections, current
