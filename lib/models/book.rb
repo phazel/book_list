@@ -5,13 +5,12 @@ class Book
   attr_accessor :series, :series_number, :audiobook, :ebook, :nat, :sleep, :list_id,
                 :dnf, :fav
 
-  def initialize(title:, author:, series: nil, series_number: nil)
+  def initialize(title:, author:)
     @title = title
     @author = author
-    @series = series
-    @series_number = series_number
-    @duplicates = []
+    @series = @series_number = @list_id = nil
     @audiobook = @ebook = @nat = @sleep = @dnf = @fav = false
+    @duplicates = []
   end
 
   def matches(book)
