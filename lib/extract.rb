@@ -34,21 +34,22 @@ class Extract
   end
 
   def self.custom_field(hash, field_name)
-    hash[:customFields].find { |field| field[:name] == field_name }
+    found = hash[:customFields].find { |field| field[:name] == field_name }
+    found ? found.merge(type: found[:type].to_sym) : nil
   end
 
   def  self.book_list(json_book_list_id, lists)
     lists.find{ |list| list[:id] == json_book_list_id }[:name]
   end
 
-  def self.book_custom_field(json_book, field, key, default: nil)
+  def self.book_custom_field(json_book, field, default: nil)
     if json_book[:customFieldItems]
       found_field = json_book[:customFieldItems].find do |book_field|
         book_field[:idCustomField] == field[:id]
       end
     end
 
-    found_field ? found_field[:value][key] : default
+    found_field ? found_field[:value][field[:type]] : default
   end
 
   def self.json_label?(json_book, label)
@@ -68,10 +69,10 @@ class Extract
 
     Book.new(
       title: json_book[:name],
-      author: book_custom_field(json_book, author_field, :text, default: json_book[:desc])
+      author: book_custom_field(json_book, author_field, default: json_book[:desc])
     )
-        .with(series: book_custom_field(json_book, series_field, :text))
-        .with(series_number: book_custom_field(json_book, series_number_field, :number))
+        .with(series: book_custom_field(json_book, series_field))
+        .with(series_number: book_custom_field(json_book, series_number_field))
         .with(list: book_list(json_book[:idList], lists))
         .is(:audiobook, cond: json_label?(json_book, audiobook_label))
         .is(:ebook, cond: json_label?(json_book, ebook_label))

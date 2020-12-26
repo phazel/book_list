@@ -18,9 +18,9 @@ describe Extract do
   let(:dnf_label) { { id: 'd_id', name: 'dnf' } }
   let(:fav_label) { { id: 'f_id', name: 'fav' } }
 
-  let(:author_field) { { id: 'af_id', name: 'Author' } }
-  let(:series_field) { { id: 'sf_id', name: 'Series' } }
-  let(:series_number_field) { { id: 'snf_id', name: 'Series Number' } }
+  let(:author_field) { { id: 'af_id', name: 'Author', type: 'text' } }
+  let(:series_field) { { id: 'sf_id', name: 'Series', type: 'text' } }
+  let(:series_number_field) { { id: 'snf_id', name: 'Series Number', type: 'number' } }
 
   let(:book) do
     Book.new(title: 'A Very Good Book', author: 'Pretty Good Writer')
@@ -79,13 +79,21 @@ describe Extract do
   end
 
   describe '.custom_field' do
+    let(:author_field) { { id: 'af_id', name: 'Author', type: 'text' } }
+    let(:series_field) { { id: 'sf_id', name: 'Series', type: 'text' } }
+    let(:series_number_field) { { id: 'snf_id', name: 'Series Number', type: 'number' } }
     let(:hash) { { customFields: [ author_field, series_field, series_number_field ] } }
-    it { expect(Extract.custom_field(hash, author_field[:name])).to eq author_field }
-    it { expect(Extract.custom_field(hash, series_field[:name])).to eq series_field }
+
+    it { expect(Extract.custom_field(hash, author_field[:name])[:type]).to eq :text }
+    it { expect(Extract.custom_field(hash, series_field[:name])[:type]).to eq :text }
+    it { expect(Extract.custom_field(hash, series_number_field[:name])[:type]).to eq :number }
     it { expect(Extract.custom_field(hash, 'does_not_exist')).to eq nil }
   end
 
   describe '.book_custom_field' do
+    let(:author_field) { { id: 'af_id', name: 'Author', type: :text } }
+    let(:series_field) { { id: 'sf_id', name: 'Series', type: :text } }
+    let(:series_number_field) { { id: 'snf_id', name: 'Series Number', type: :number } }
     let(:json_book) do
       {
         customFieldItems: [{
@@ -95,32 +103,22 @@ describe Extract do
       }
     end
 
-    def run(json_book, field, key, default: nil)
-      if default.nil?
-        Extract.book_custom_field(json_book, field, key)
-      else
-        Extract.book_custom_field(json_book, field, key, default: default)
-      end
-    end
-
-    let(:key) { :text }
-
-    it { expect(run(json_book, author_field, :text)).to eq 'Pretty Good Writer' }
-    it { expect(run(json_book, series_field, :number)).to eq nil }
-    it { expect(run(json_book, series_number_field, :number)).to eq nil }
+    it { expect(Extract.book_custom_field(json_book, author_field)).to eq 'Pretty Good Writer' }
+    it { expect(Extract.book_custom_field(json_book, series_field)).to eq nil }
+    it { expect(Extract.book_custom_field(json_book, series_number_field)).to eq nil }
 
     context 'when the book is a sequel' do
       let(:items) { [{ idCustomField: 'snf_id', value: { number: 2 } }] }
       let(:json_book) { { customFieldItems: items } }
-      it { expect(run(json_book, series_number_field, :number)).to eq 2 }
+      it { expect(Extract.book_custom_field(json_book, series_number_field)).to eq 2 }
     end
 
     context 'the book has no author field' do
       let(:json_book) { { customFieldItems: [] } }
 
-      it { expect(run(json_book, author_field, :text)).to eq nil }
+      it { expect(Extract.book_custom_field(json_book, author_field)).to eq nil }
       it 'uses a default value' do
-        expect(run(json_book, author_field, :text, default: 'description text'))
+        expect(Extract.book_custom_field(json_book, author_field, default: 'description text'))
           .to eq 'description text'
       end
     end
