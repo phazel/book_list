@@ -22,12 +22,12 @@ class Extract
 
   def self.lists(hash, year, list_names = nil)
     if list_names.nil?
-      {
-        read: list(hash, READ_LIST(year)),
-        current: list(hash, CURRENTLY_READING_LIST)
-      }
+      [
+        list(hash, READ_LIST(year)).merge({ name: "read" }),
+        list(hash, CURRENTLY_READING_LIST).merge({ name: "current" })
+      ]
     else
-      list_names.map { |name| [ name.to_sym, list(hash, name) ] }.to_h
+      list_names.map { |name| list(hash, name) }
     end
   end
 
@@ -40,7 +40,7 @@ class Extract
   end
 
   def  self.book_list(json_book_list_id, lists)
-    key, found = lists.find{ |key, list| list[:id] == json_book_list_id }
+    found = lists.find{ |list| list[:id] == json_book_list_id }
     found ? found[:name] : nil
   end
 
@@ -84,10 +84,12 @@ class Extract
         .is(:fav, cond: json_label?(json_book, fav_label))
   end
 
-  def self.all_books(hash, lists)
+  def self.all_books(hash, year, list_names = nil)
+    lists = Extract.lists(hash, year, list_names)
     hash[:cards]
       .reject { |json_book| json_book[:closed] }
       .map { |json_book| book(hash, json_book, lists) }
       .reject { |book| book.list.nil? }
+      .group_by { |book| book.list.to_sym }
   end
 end

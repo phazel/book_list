@@ -3,10 +3,12 @@
 require 'extract'
 
 describe Extract do
+  let(:year) { "4082" }
   let(:some_list) { { id: 'list_id', name: 'some_list' } }
   let(:unused_list) { { id: 'ul_id', name: 'unused_list' } }
   let(:another_list) { { id: 'al_id', name: 'another_list' } }
-  let(:relevant_lists) { { some_list: some_list, another_list: another_list } }
+  let(:relevant_lists) { [ some_list, another_list ] }
+  let(:relevant_list_names) { relevant_lists.map{|list| list[:name] } }
 
   let(:audio_label) { { id: 'a_id', name: 'audiobook' } }
   let(:ebook_label) { { id: 'e_id', name: 'ebook' } }
@@ -35,9 +37,11 @@ describe Extract do
       }]
     }
   end
+  let(:another_json_book) { json_book.merge({ idList: another_list[:id] }) }
+  let(:another_book) { book.with({ list: another_list[:name] }) }
   let(:hash) do
     {
-      cards: [ json_book ],
+      cards: [ json_book, another_json_book ],
       lists: [ some_list, unused_list, another_list ],
       labels: [ audio_label, ebook_label, nat_label, sleep_label, dnf_label, fav_label ],
       customFields: [ author_field, series_field, series_number_field ]
@@ -50,11 +54,8 @@ describe Extract do
   end
 
   describe '.lists' do
-    let(:lists) { [some_list[:name], another_list[:name]] }
-    let(:expected) { { some_list: some_list, another_list: another_list } }
-
-    it { expect(Extract.lists(hash, 3040, lists)).to eq expected }
-    it { expect(Extract.lists(hash, 250, [])).to be_empty }
+    it { expect(Extract.lists(hash, year, relevant_list_names)).to eq relevant_lists }
+    it { expect(Extract.lists(hash, year, [])).to be_empty }
   end
 
   describe '.label' do
@@ -170,20 +171,28 @@ describe Extract do
   end
 
   describe '.all_books' do
-    it { expect(Extract.all_books(hash, relevant_lists)).to all be_a Book }
-    it { expect(Extract.all_books(hash, relevant_lists).size).to eq 1 }
+    let(:result) { Extract.all_books(hash, year, relevant_list_names) }
+
+    it { expect(result).to be_a Hash }
+    it { expect(result.size).to eq 2 }
+    it { expect(result.keys).to eq [ :some_list, :another_list ] }
+    it { expect(result[:some_list]).to all be_a Book }
+    it { expect(result[:some_list].size).to eq 1 }
+    it { expect(result[:another_list]).to all be_a Book }
+    it { expect(result[:another_list].size).to eq 1 }
 
     describe 'books to ignore' do
-      let(:hash_with_archived_card) do
-        hash.merge({ cards: hash[:cards] + [{ closed: 'true' }] })
-      end
-      let(:hash_with_irrelevant_card) do
-        irrelevant_book = json_book.merge({ idList: unused_list[:id] })
-        hash.merge({ cards: hash[:cards] + [ irrelevant_book ] })
+      let(:hash_ignore) { hash.merge({ cards: hash[:cards] + [ ignore ] }) }
+
+      context 'archived card' do
+        let(:ignore) { { closed: 'true' } }
+        it { expect(Extract.all_books(hash_ignore, year, relevant_list_names).size).to eq 2 }
       end
 
-      it { expect(Extract.all_books(hash_with_archived_card, relevant_lists).size).to eq 1 }
-      it { expect(Extract.all_books(hash_with_irrelevant_card, relevant_lists).size).to eq 1 }
+      context 'card in an irrelevant list' do
+        let(:ignore) { json_book.merge({ idList: unused_list[:id] }) }
+        it { expect(Extract.all_books(hash_ignore, year, relevant_list_names).size).to eq 2 }
+      end
     end
   end
 end

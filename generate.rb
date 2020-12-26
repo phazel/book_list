@@ -13,11 +13,7 @@ File.open("#{YEAR}/exported_pretty.json", 'w') do |file|
   file.write JSON.pretty_generate hash
 end
 
-lists = Extract.lists(hash, YEAR)
-books = Extract.all_books(hash, lists)
-
-read = Filter.in_list(books, lists[:read])
-current = Filter.in_list(books, lists[:current])
+read, current = Extract.all_books(hash, YEAR).values_at(:read, :current)
 dups, non_dups = Filter.duplicates(read).values_at(:dups, :non_dups)
 
 sections = {
