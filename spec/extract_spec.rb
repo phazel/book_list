@@ -91,36 +91,19 @@ describe Extract do
   end
 
   describe '.book_custom_field' do
-    let(:author_field) { { id: 'af_id', name: 'Author', type: :text } }
-    let(:series_field) { { id: 'sf_id', name: 'Series', type: :text } }
-    let(:series_number_field) { { id: 'snf_id', name: 'Series Number', type: :number } }
-    let(:json_book) do
-      {
-        customFieldItems: [{
-          idCustomField: author_field[:id],
-          value: { text: book.author }
-        }]
-      }
+    it_behaves_like "a non-empty custom field" do
+      let(:field_type) { :text }
+      let(:field_value) { 'A Series of Fine Adventures' }
     end
-
-    it { expect(Extract.book_custom_field(json_book, author_field)).to eq 'Pretty Good Writer' }
-    it { expect(Extract.book_custom_field(json_book, series_field)).to eq nil }
-    it { expect(Extract.book_custom_field(json_book, series_number_field)).to eq nil }
-
-    context 'when the book is a sequel' do
-      let(:items) { [{ idCustomField: 'snf_id', value: { number: 2 } }] }
-      let(:json_book) { { customFieldItems: items } }
-      it { expect(Extract.book_custom_field(json_book, series_number_field)).to eq 2 }
+    it_behaves_like "a non-empty custom field" do
+      let(:field_type) { :number }
+      let(:field_value) { 5 }
     end
-
-    context 'the book has no author field' do
+    it_behaves_like "an empty custom field" do
       let(:json_book) { { customFieldItems: [] } }
-
-      it { expect(Extract.book_custom_field(json_book, author_field)).to eq nil }
-      it 'uses a default value' do
-        expect(Extract.book_custom_field(json_book, author_field, default: 'description text'))
-          .to eq 'description text'
-      end
+    end
+    it_behaves_like "an empty custom field" do
+      let(:json_book) { {} }
     end
   end
 
@@ -207,11 +190,11 @@ describe Extract do
     let(:hash_archived) { hash.merge({ cards: hash[:cards] + [{ closed: 'true' }] }) }
     let(:num_expected_books) { 3 }
 
-    subject(:result) { Extract.all_books(hash_archived, year) }
-    it { expect(result).to all be_a Book }
+    subject(:value) { Extract.all_books(hash_archived, year) }
+    it { expect(value).to all be_a Book }
 
     it 'does not include archived cards' do
-      expect(result.size).to eq num_expected_books
+      expect(value.size).to eq num_expected_books
     end
   end
 end
