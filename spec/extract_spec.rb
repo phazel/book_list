@@ -39,7 +39,6 @@ describe Extract do
     }
   end
   let(:another_json_book) { json_book.merge({ idList: current_list[:id] }) }
-  let(:another_book) { book.with({ list: 'current' }) }
   let(:irrelevant_json_book) { json_book.merge({ idList: unused_list[:id] }) }
   let(:hash) do
     {
@@ -108,19 +107,19 @@ describe Extract do
   end
 
   describe '.book' do
-    let(:extracted_book) { Extract.book(hash, json_book, all_lists) }
-    it { expect(extracted_book).to be_a Book }
-    it { expect(extracted_book.title).to eq book.title }
-    it { expect(extracted_book.author).to eq book.author }
-    it { expect(extracted_book.series).to eq nil }
-    it { expect(extracted_book.series_number).to eq nil }
-    it { expect(extracted_book.list).to eq book.list }
-    it { expect(extracted_book.audiobook).to eq false }
-    it { expect(extracted_book.ebook).to eq false }
-    it { expect(extracted_book.nat).to eq false }
-    it { expect(extracted_book.sleep).to eq false }
-    it { expect(extracted_book.dnf).to eq false }
-    it { expect(extracted_book.fav).to eq false }
+    subject { Extract.book(hash, json_book, all_lists) }
+    it { expect(subject).to be_a Book }
+    it { expect(subject.title).to eq book.title }
+    it { expect(subject.author).to eq book.author }
+    it { expect(subject.series).to eq nil }
+    it { expect(subject.series_number).to eq nil }
+    it { expect(subject.list).to eq book.list }
+    it { expect(subject.audiobook).to eq false }
+    it { expect(subject.ebook).to eq false }
+    it { expect(subject.nat).to eq false }
+    it { expect(subject.sleep).to eq false }
+    it { expect(subject.dnf).to eq false }
+    it { expect(subject.fav).to eq false }
 
     it 'takes author from description if not in custom field' do
       json_book_no_custom_fields = json_book.merge({ customFieldItems: [] })
@@ -177,15 +176,14 @@ describe Extract do
   end
 
   describe '.all_books' do
-    let(:result) { Extract.all_books(hash, year) }
+    let(:hash_archived) { hash.merge({ cards: hash[:cards] + [{ closed: 'true' }] }) }
     let(:num_expected_books) { 3 }
 
+    subject(:result) { Extract.all_books(hash_archived, year) }
     it { expect(result).to all be_a Book }
-    it { expect(result.size).to eq num_expected_books }
 
-    it 'ignores archived cards' do
-      hash_archived = hash.merge({ cards: hash[:cards] + [{ closed: 'true' }] })
-      expect(Extract.all_books(hash_archived, year).size).to eq num_expected_books
+    it 'does not include archived cards' do
+      expect(result.size).to eq num_expected_books
     end
   end
 end
