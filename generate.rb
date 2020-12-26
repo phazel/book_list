@@ -25,5 +25,18 @@ sections = {
 }
 
 output = Format.result YEAR, sections, current
-
 File.write "#{YEAR}/books_read_#{YEAR}.md", output.join
+
+puts <<~SUMMARY
+  **********************************************
+  You read #{sections[:count]} books in #{YEAR}
+
+  - #{sections[:fav].size} were favourites
+  - You read #{dups.size} more than once
+  - #{Filter.with(read, :nat).size} were with Natalie
+  - #{Filter.with(read, :sleep).size} helped you get to sleep
+  - #{Filter.with(read, :audiobook).size} audiobooks, #{Filter.with(read, :ebook).size} ebooks, #{Filter.without(read, [:audiobook, :ebook]).size} physical books
+  - You declined to finish #{sections[:dnf].size}
+  - You're currently reading #{current.size} books
+  **********************************************
+SUMMARY
