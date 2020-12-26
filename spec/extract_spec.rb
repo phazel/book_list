@@ -26,6 +26,12 @@ describe Extract do
     Book.new(title: 'A Very Good Book', author: 'Pretty Good Writer')
       .with(list: 'read')
   end
+  let(:minimal_json_book) do
+    {
+      idLabels: [],
+      idList: read_list[:id],
+    }
+  end
   let(:json_book) do
     {
       name: book.title,
@@ -58,40 +64,63 @@ describe Extract do
   end
 
   describe '.lists' do
+    let(:year) { "4082" }
+    let(:hash) { { lists: [ json_read_list, json_current_list, unused_list ] } }
     it 'replaces names for read and current lists' do
       expect(Extract.lists(hash, year)).to eq all_lists
     end
   end
 
   describe '.label' do
+    let(:hash) { { labels: [ audio_label, ebook_label, nat_label, sleep_label, dnf_label, fav_label ], } }
     it { expect(Extract.label(hash, ebook_label[:name])).to eq ebook_label }
     it { expect(Extract.label(hash, sleep_label[:name])).to eq sleep_label }
     it { expect(Extract.label(hash, 'does_not_exist')).to eq nil }
   end
 
   describe '.custom_field' do
+    let(:hash) { { customFields: [ author_field, series_field, series_number_field ] } }
     it { expect(Extract.custom_field(hash, author_field[:name])).to eq author_field }
     it { expect(Extract.custom_field(hash, series_field[:name])).to eq series_field }
     it { expect(Extract.custom_field(hash, 'does_not_exist')).to eq nil }
   end
 
   describe '.book_custom_field' do
-    it { expect(Extract.book_custom_field(json_book, author_field, :text)).to eq 'Pretty Good Writer' }
-    it { expect(Extract.book_custom_field(json_book, series_field, :number)).to eq nil }
-    it { expect(Extract.book_custom_field(json_book, series_number_field, :number)).to eq nil }
+    let(:json_book) do
+      {
+        customFieldItems: [{
+          idCustomField: author_field[:id],
+          value: { text: book.author }
+        }]
+      }
+    end
 
-    it 'finds the custom field' do
-      items = [{ idCustomField: 'snf_id', value: { number: 2 } }]
-      json_sequel = json_book.merge({ customFieldItems: items })
-      expect(Extract.book_custom_field(json_sequel, series_number_field, :number)).to eq 2
+    def run(json_book, field, key, default: nil)
+      if default.nil?
+        Extract.book_custom_field(json_book, field, key)
+      else
+        Extract.book_custom_field(json_book, field, key, default: default)
+      end
+    end
+
+    let(:key) { :text }
+
+    it { expect(run(json_book, author_field, :text)).to eq 'Pretty Good Writer' }
+    it { expect(run(json_book, series_field, :number)).to eq nil }
+    it { expect(run(json_book, series_number_field, :number)).to eq nil }
+
+    context 'when the book is a sequel' do
+      let(:items) { [{ idCustomField: 'snf_id', value: { number: 2 } }] }
+      let(:json_book) { { customFieldItems: items } }
+      it { expect(run(json_book, series_number_field, :number)).to eq 2 }
     end
 
     context 'the book has no author field' do
-      let(:json_book_old) { json_book.merge({ customFieldItems: [] }) }
+      let(:json_book) { { customFieldItems: [] } }
 
-      it { expect(Extract.book_custom_field(json_book_old, author_field, :text)).to eq nil }
+      it { expect(run(json_book, author_field, :text)).to eq nil }
       it 'uses a default value' do
-        expect(Extract.book_custom_field(json_book_old, author_field, :text, default: 'description text'))
+        expect(run(json_book, author_field, :text, default: 'description text'))
           .to eq 'description text'
       end
     end
@@ -121,10 +150,11 @@ describe Extract do
     it { expect(subject.dnf).to eq false }
     it { expect(subject.fav).to eq false }
 
-    it 'takes author from description if not in custom field' do
-      json_book_no_custom_fields = json_book.merge({ customFieldItems: [] })
-      expect(Extract.book(hash, json_book_no_custom_fields, all_lists))
-        .to have_attributes(author: 'Ghost Writer')
+    context 'the author is not in a custom field' do
+      let(:json_book) do
+        minimal_json_book.merge({ desc: 'Ghost Writer', customFieldItems: [] })
+      end
+      it { expect(subject).to have_attributes(author: 'Ghost Writer') }
     end
 
     context 'when the book is in a series' do
