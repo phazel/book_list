@@ -7,6 +7,13 @@ class Filter
     end
   end
 
+  def self.by_list(books, list_names = nil)
+    list_names ||= [ "read", "current" ]
+    books
+      .select { |book| list_names.include? book.list }
+      .group_by { |book| book.list.to_sym }
+  end
+
   def self.with(books, attribute)
     books.select(& attribute)
   end

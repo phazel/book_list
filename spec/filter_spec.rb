@@ -11,17 +11,28 @@ describe Filter do
 
   let(:books) { [ book, book_fav, book_dnf, book_fav_dnf ] }
 
-  describe '.in_list' do
-    let(:list) { { id: 'list_id', name: 'some_list' } }
-    let(:another_list) { { id: 'another_list_id', name: 'some_other_list' } }
+  let(:list) { { id: 'list_id', name: 'some_list' } }
+  let(:another_list) { { id: 'another_list_id', name: 'some_other_list' } }
+  let(:book_in_list) { book.with(list: list[:name]) }
+  let(:book_in_another_list) { book.with(list: another_list[:name]) }
 
-    let(:book_in_list) { book.with(list: list[:name]) }
-    let(:book_in_another_list) { book.with(list: another_list[:name]) }
+  describe '.in_list' do
 
     let(:books) { [ book_in_list, book_in_another_list ] }
 
     it { expect(described_class.in_list(books, list)).to eq [book_in_list] }
     it { expect(described_class.in_list(books, another_list)).to eq [ book_in_another_list ] }
+  end
+
+  describe '.by_list' do
+    let(:book_in_list) { book.with(list: 'one') }
+    let(:book_in_another_list) { book.with(list: 'two') }
+    let(:book_in_irrelevant_list) { book.with(list: 'nah') }
+
+    let(:books) { [ book_in_list, book_in_another_list, book_in_irrelevant_list ] }
+    let(:list_names) { [ 'one', 'two', 'three' ] }
+    let(:expected) { { one: [ book_in_list ], two: [ book_in_another_list ] } }
+    it { expect(described_class.by_list(books, list_names)).to eq expected }
   end
 
   describe '.with' do

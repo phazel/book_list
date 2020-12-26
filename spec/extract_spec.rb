@@ -172,26 +172,22 @@ describe Extract do
 
   describe '.all_books' do
     let(:result) { Extract.all_books(hash, year, relevant_list_names) }
+    let(:num_relevant_books) { 2 }
 
-    it { expect(result).to be_a Hash }
-    it { expect(result.size).to eq 2 }
-    it { expect(result.keys).to eq [ :some_list, :another_list ] }
-    it { expect(result[:some_list]).to all be_a Book }
-    it { expect(result[:some_list].size).to eq 1 }
-    it { expect(result[:another_list]).to all be_a Book }
-    it { expect(result[:another_list].size).to eq 1 }
+    it { expect(result).to all be_a Book }
+    it { expect(result.size).to eq num_relevant_books }
 
     describe 'books to ignore' do
       let(:hash_ignore) { hash.merge({ cards: hash[:cards] + [ ignore ] }) }
 
       context 'archived card' do
         let(:ignore) { { closed: 'true' } }
-        it { expect(Extract.all_books(hash_ignore, year, relevant_list_names).size).to eq 2 }
+        it { expect(Extract.all_books(hash_ignore, year, relevant_list_names).size).to eq num_relevant_books }
       end
 
       context 'card in an irrelevant list' do
         let(:ignore) { json_book.merge({ idList: unused_list[:id] }) }
-        it { expect(Extract.all_books(hash_ignore, year, relevant_list_names).size).to eq 2 }
+        it { expect(Extract.all_books(hash_ignore, year, relevant_list_names).size).to eq num_relevant_books }
       end
     end
   end

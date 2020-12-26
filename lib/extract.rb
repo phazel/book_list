@@ -90,6 +90,5 @@ class Extract
       .reject { |json_book| json_book[:closed] }
       .map { |json_book| book(hash, json_book, lists) }
       .reject { |book| book.list.nil? }
-      .group_by { |book| book.list.to_sym }
   end
 end
