@@ -4,11 +4,12 @@ require 'extract'
 
 describe Extract do
   let(:year) { "4082" }
-  let(:some_list) { { id: 'list_id', name: 'some_list' } }
+  let(:json_read_list) { { id: 'read_list_id', name: "Read #{year}" } }
+  let(:json_current_list) { { id: 'current_list_id', name: '📖 Reading 📖' } }
   let(:unused_list) { { id: 'ul_id', name: 'unused_list' } }
-  let(:another_list) { { id: 'al_id', name: 'another_list' } }
-  let(:relevant_lists) { [ some_list, another_list ] }
-  let(:relevant_list_names) { relevant_lists.map{|list| list[:name] } }
+  let(:read_list) { json_read_list.merge({ name: "read" }) }
+  let(:current_list) { json_current_list.merge({ name: "current" }) }
+  let(:all_lists) { [ read_list, current_list, unused_list ] }
 
   let(:audio_label) { { id: 'a_id', name: 'audiobook' } }
   let(:ebook_label) { { id: 'e_id', name: 'ebook' } }
@@ -23,39 +24,44 @@ describe Extract do
 
   let(:book) do
     Book.new(title: 'A Very Good Book', author: 'Pretty Good Writer')
-      .with(list: some_list[:name])
+      .with(list: 'read')
   end
   let(:json_book) do
     {
       name: book.title,
       desc: 'Ghost Writer',
       idLabels: [],
-      idList: some_list[:id],
+      idList: read_list[:id],
       customFieldItems: [{
         idCustomField: author_field[:id],
         value: { text: book.author }
       }]
     }
   end
-  let(:another_json_book) { json_book.merge({ idList: another_list[:id] }) }
-  let(:another_book) { book.with({ list: another_list[:name] }) }
+  let(:another_json_book) { json_book.merge({ idList: current_list[:id] }) }
+  let(:another_book) { book.with({ list: 'current' }) }
+  let(:irrelevant_json_book) { json_book.merge({ idList: unused_list[:id] }) }
   let(:hash) do
     {
-      cards: [ json_book, another_json_book ],
-      lists: [ some_list, unused_list, another_list ],
+      cards: [ json_book, another_json_book, irrelevant_json_book ],
+      lists: [ json_read_list, json_current_list, unused_list ],
       labels: [ audio_label, ebook_label, nat_label, sleep_label, dnf_label, fav_label ],
       customFields: [ author_field, series_field, series_number_field ]
     }
   end
 
   describe '.list' do
+    let(:some_list) { { id: 'list_id', name: 'some_list' } }
+    let(:another_list) { { id: 'al_id', name: 'another_list' } }
+    let(:hash) { { lists: [ some_list, another_list ] } }
     it { expect(Extract.list(hash, some_list[:name])).to eq some_list }
     it { expect(Extract.list(hash, 'does_not_exist')).to eq nil }
   end
 
   describe '.lists' do
-    it { expect(Extract.lists(hash, year, relevant_list_names)).to eq relevant_lists }
-    it { expect(Extract.lists(hash, year, [])).to be_empty }
+    it 'replaces names for read and current lists' do
+      expect(Extract.lists(hash, year)).to eq all_lists
+    end
   end
 
   describe '.label' do
@@ -102,7 +108,7 @@ describe Extract do
   end
 
   describe '.book' do
-    let(:extracted_book) { Extract.book(hash, json_book, relevant_lists) }
+    let(:extracted_book) { Extract.book(hash, json_book, all_lists) }
     it { expect(extracted_book).to be_a Book }
     it { expect(extracted_book.title).to eq book.title }
     it { expect(extracted_book.author).to eq book.author }
@@ -118,7 +124,7 @@ describe Extract do
 
     it 'takes author from description if not in custom field' do
       json_book_no_custom_fields = json_book.merge({ customFieldItems: [] })
-      expect(Extract.book(hash, json_book_no_custom_fields, relevant_lists))
+      expect(Extract.book(hash, json_book_no_custom_fields, all_lists))
         .to have_attributes(author: 'Ghost Writer')
     end
 
@@ -128,11 +134,11 @@ describe Extract do
         json_book.merge({ customFieldItems: items })
       end
       it 'sets the series' do
-        expect(Extract.book(hash, json_book_in_series, relevant_lists))
+        expect(Extract.book(hash, json_book_in_series, all_lists))
           .to have_attributes(series: 'The Adventures')
       end
       it {
-        expect(Extract.book(hash, json_book_in_series, relevant_lists))
+        expect(Extract.book(hash, json_book_in_series, all_lists))
           .to have_attributes(series_number: nil)
       }
 
@@ -140,55 +146,46 @@ describe Extract do
         items = [{ idCustomField: 'snf_id', value: { number: 2 } }]
         json_book_in_series_w_num = json_book.merge({ customFieldItems:
           json_book_in_series[:customFieldItems] + items })
-        expect(Extract.book(hash, json_book_in_series_w_num, relevant_lists))
+        expect(Extract.book(hash, json_book_in_series_w_num, all_lists))
           .to have_attributes(series: 'The Adventures', series_number: 2)
       end
     end
 
     it 'includes if I read the book with Nat' do
       json_book_with_nat = json_book.merge({ idLabels: [nat_label[:id]] })
-      expect(Extract.book(hash, json_book_with_nat, relevant_lists))
+      expect(Extract.book(hash, json_book_with_nat, all_lists))
         .to have_attributes(nat: true)
     end
 
     it 'includes if I read the book to sleep' do
       json_book_sleep = json_book.merge({ idLabels: [sleep_label[:id]] })
-      expect(Extract.book(hash, json_book_sleep, relevant_lists))
+      expect(Extract.book(hash, json_book_sleep, all_lists))
         .to have_attributes(sleep: true)
     end
 
     it 'includes if I did not finish the book' do
       json_book_dnf = json_book.merge({ idLabels: [dnf_label[:id]] })
-      expect(Extract.book(hash, json_book_dnf, relevant_lists))
+      expect(Extract.book(hash, json_book_dnf, all_lists))
         .to have_attributes(dnf: true)
     end
 
     it 'includes if the book is a favourite' do
       json_book_fav = json_book.merge({ idLabels: [fav_label[:id]] })
-      expect(Extract.book(hash, json_book_fav, relevant_lists))
+      expect(Extract.book(hash, json_book_fav, all_lists))
         .to have_attributes(fav: true)
     end
   end
 
   describe '.all_books' do
-    let(:result) { Extract.all_books(hash, year, relevant_list_names) }
-    let(:num_relevant_books) { 2 }
+    let(:result) { Extract.all_books(hash, year) }
+    let(:num_expected_books) { 3 }
 
     it { expect(result).to all be_a Book }
-    it { expect(result.size).to eq num_relevant_books }
+    it { expect(result.size).to eq num_expected_books }
 
-    describe 'books to ignore' do
-      let(:hash_ignore) { hash.merge({ cards: hash[:cards] + [ ignore ] }) }
-
-      context 'archived card' do
-        let(:ignore) { { closed: 'true' } }
-        it { expect(Extract.all_books(hash_ignore, year, relevant_list_names).size).to eq num_relevant_books }
-      end
-
-      context 'card in an irrelevant list' do
-        let(:ignore) { json_book.merge({ idList: unused_list[:id] }) }
-        it { expect(Extract.all_books(hash_ignore, year, relevant_list_names).size).to eq num_relevant_books }
-      end
+    it 'ignores archived cards' do
+      hash_archived = hash.merge({ cards: hash[:cards] + [{ closed: 'true' }] })
+      expect(Extract.all_books(hash_archived, year).size).to eq num_expected_books
     end
   end
 end
