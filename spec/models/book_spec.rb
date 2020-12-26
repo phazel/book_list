@@ -38,7 +38,7 @@ describe Book do
     it { expect(book.title).to eq 'A Very Good Book' }
     it { expect(book.author).to eq 'Pretty Good Writer' }
     it { expect(book.series).to eq nil }
-    it { expect(book.list_id).to eq nil }
+    it { expect(book.list).to eq nil }
     it { expect(book.audiobook).to eq false }
     it { expect(book.ebook).to eq false }
     it { expect(book.nat).to eq false }

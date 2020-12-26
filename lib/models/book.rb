@@ -2,13 +2,13 @@
 
 class Book
   attr_reader :title, :author, :duplicates
-  attr_accessor :series, :series_number, :audiobook, :ebook, :nat, :sleep, :list_id,
+  attr_accessor :series, :series_number, :list, :audiobook, :ebook, :nat, :sleep,
                 :dnf, :fav
 
   def initialize(title:, author:)
     @title = title
     @author = author
-    @series = @series_number = @list_id = nil
+    @series = @series_number = @list = nil
     @audiobook = @ebook = @nat = @sleep = @dnf = @fav = false
     @duplicates = []
   end
@@ -18,7 +18,7 @@ class Book
   end
 
   def with(**attrs)
-    valid = %i[title author series series_number list_id].freeze
+    valid = %i[title author series series_number list].freeze
     raise ArgumentError, 'invalid attribute' unless attrs.keys.all? {|key| valid.include? key }
 
     book = dup
@@ -27,7 +27,7 @@ class Book
   end
 
   def is(attr, cond: true)
-    valid = [:audiobook, :ebook, :nat, :sleep, :list_id, :dnf, :fav].freeze
+    valid = [:audiobook, :ebook, :nat, :sleep, :dnf, :fav].freeze
     raise ArgumentError, 'invalid attribute' unless valid.include? attr
 
     book = dup

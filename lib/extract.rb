@@ -39,6 +39,11 @@ class Extract
     hash[:customFields].find { |field| field[:name] == field_name }
   end
 
+  def  self.book_list(json_book_list_id, lists)
+    key, found = lists.find{ |key, list| list[:id] == json_book_list_id }
+    found ? found[:name] : nil
+  end
+
   def self.book_custom_field(json_book, field, key, default: nil)
     if json_book[:customFieldItems]
       found_field = json_book[:customFieldItems].find do |book_field|
@@ -53,7 +58,7 @@ class Extract
     json_book[:idLabels].include? label[:id]
   end
 
-  def self.book(hash, json_book)
+  def self.book(hash, json_book, lists)
     author_field = custom_field(hash, AUTHOR_FIELD)
     series_field = custom_field(hash, SERIES_FIELD)
     series_number_field = custom_field(hash, SERIES_NUMBER_FIELD)
@@ -70,7 +75,7 @@ class Extract
     )
         .with(series: book_custom_field(json_book, series_field, :text))
         .with(series_number: book_custom_field(json_book, series_number_field, :number))
-        .with(list_id: json_book[:idList])
+        .with(list: book_list(json_book[:idList], lists))
         .is(:audiobook, cond: json_label?(json_book, audiobook_label))
         .is(:ebook, cond: json_label?(json_book, ebook_label))
         .is(:nat, cond: json_label?(json_book, nat_label))
@@ -79,9 +84,10 @@ class Extract
         .is(:fav, cond: json_label?(json_book, fav_label))
   end
 
-  def self.all_books(hash)
+  def self.all_books(hash, lists)
     hash[:cards]
       .reject { |json_book| json_book[:closed] }
-      .map { |json_book| book(hash, json_book) }
+      .map { |json_book| book(hash, json_book, lists) }
+      .reject { |book| book.list.nil? }
   end
 end

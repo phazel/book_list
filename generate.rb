@@ -14,7 +14,7 @@ File.open("#{YEAR}/exported_pretty.json", 'w') do |file|
 end
 
 lists = Extract.lists(hash, YEAR)
-books = Extract.all_books(hash)
+books = Extract.all_books(hash, lists)
 
 read = Filter.in_list(books, lists[:read])
 current = Filter.in_list(books, lists[:current])
