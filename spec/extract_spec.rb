@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'extract'
+require 'support/shared_examples'
 
 describe Extract do
   let(:year) { "4082" }
@@ -11,7 +12,7 @@ describe Extract do
   let(:current_list) { json_current_list.merge({ name: "current" }) }
   let(:all_lists) { [ read_list, current_list, unused_list ] }
 
-  let(:audio_label) { { id: 'a_id', name: 'audiobook' } }
+  let(:audiobook_label) { { id: 'a_id', name: 'audiobook' } }
   let(:ebook_label) { { id: 'e_id', name: 'ebook' } }
   let(:nat_label) { { id: 'n_id', name: 'nat' } }
   let(:sleep_label) { { id: 's_id', name: 'sleep' } }
@@ -50,7 +51,7 @@ describe Extract do
     {
       cards: [ json_book, another_json_book, irrelevant_json_book ],
       lists: [ json_read_list, json_current_list, unused_list ],
-      labels: [ audio_label, ebook_label, nat_label, sleep_label, dnf_label, fav_label ],
+      labels: [ audiobook_label, ebook_label, nat_label, sleep_label, dnf_label, fav_label ],
       customFields: [ author_field, series_field, series_number_field ]
     }
   end
@@ -72,7 +73,7 @@ describe Extract do
   end
 
   describe '.label' do
-    let(:hash) { { labels: [ audio_label, ebook_label, nat_label, sleep_label, dnf_label, fav_label ], } }
+    let(:hash) { { labels: [ audiobook_label, ebook_label, nat_label, sleep_label, dnf_label, fav_label ], } }
     it { expect(Extract.label(hash, ebook_label[:name])).to eq ebook_label }
     it { expect(Extract.label(hash, sleep_label[:name])).to eq sleep_label }
     it { expect(Extract.label(hash, 'does_not_exist')).to eq nil }
@@ -161,29 +162,12 @@ describe Extract do
       end
     end
 
-    it 'includes if I read the book with Nat' do
-      json_book_with_nat = json_book.merge({ idLabels: [nat_label[:id]] })
-      expect(Extract.book(hash, json_book_with_nat, all_lists))
-        .to have_attributes(nat: true)
-    end
-
-    it 'includes if I read the book to sleep' do
-      json_book_sleep = json_book.merge({ idLabels: [sleep_label[:id]] })
-      expect(Extract.book(hash, json_book_sleep, all_lists))
-        .to have_attributes(sleep: true)
-    end
-
-    it 'includes if I did not finish the book' do
-      json_book_dnf = json_book.merge({ idLabels: [dnf_label[:id]] })
-      expect(Extract.book(hash, json_book_dnf, all_lists))
-        .to have_attributes(dnf: true)
-    end
-
-    it 'includes if the book is a favourite' do
-      json_book_fav = json_book.merge({ idLabels: [fav_label[:id]] })
-      expect(Extract.book(hash, json_book_fav, all_lists))
-        .to have_attributes(fav: true)
-    end
+    it_behaves_like "a boolean attribute" do let(:label) { audiobook_label } end
+    it_behaves_like "a boolean attribute" do let(:label) { ebook_label } end
+    it_behaves_like "a boolean attribute" do let(:label) { nat_label } end
+    it_behaves_like "a boolean attribute" do let(:label) { sleep_label } end
+    it_behaves_like "a boolean attribute" do let(:label) { dnf_label } end
+    it_behaves_like "a boolean attribute" do let(:label) { fav_label } end
   end
 
   describe '.all_books' do
