@@ -33,20 +33,19 @@ describe Extract do
       idList: read_list[:id],
     }
   end
+  let(:jb) { minimal_json_book.merge(jb_additions) }
   let(:json_book) do
-    {
+    minimal_json_book.merge({
       name: book.title,
       desc: 'Ghost Writer',
-      idLabels: [],
-      idList: read_list[:id],
       customFieldItems: [{
         idCustomField: author_field[:id],
         value: { text: book.author }
       }]
-    }
+    })
   end
-  let(:another_json_book) { json_book.merge({ idList: current_list[:id] }) }
-  let(:irrelevant_json_book) { json_book.merge({ idList: unused_list[:id] }) }
+  let(:another_json_book) { minimal_json_book.merge({ idList: current_list[:id] }) }
+  let(:irrelevant_json_book) { minimal_json_book.merge({ idList: unused_list[:id] }) }
   let(:hash) do
     {
       cards: [ json_book, another_json_book, irrelevant_json_book ],
@@ -101,65 +100,66 @@ describe Extract do
       let(:field_value) { 5 }
     end
     it_behaves_like "an empty custom field" do
-      let(:json_book) { { customFieldItems: [] } }
+      let(:jb_additions) { { customFieldItems: [] } }
     end
     it_behaves_like "an empty custom field" do
-      let(:json_book) { {} }
+      let(:jb_additions) { {} }
     end
   end
 
   describe '.json_label?' do
-    label = { id: 'label_id', name: 'some_label' }
-    another_label = { id: 'another_label_id', name: 'some_other_label' }
-    json_book_with_label = { idLabels: [ label[:id] ], labels: [ label ] }
+    let(:label) { { id: 'label_id', name: 'some_label' } }
+    let(:another_label) { { id: 'another_label_id', name: 'some_other_label' } }
+    let(:jb_additions) { { idLabels: [ label[:id] ], labels: [ label ] } }
 
-    it { expect(described_class.json_label?(json_book_with_label, label)).to be true }
-    it { expect(described_class.json_label?(json_book_with_label, another_label)).to be false }
+    it { expect(described_class.json_label?(jb, label)).to be true }
+    it { expect(described_class.json_label?(jb, another_label)).to be false }
   end
 
   describe '.book' do
-    subject { Extract.book(hash, json_book, all_lists) }
+    let(:jb_additions) do
+      {
+        name: 'Such a Good Book',
+        customFieldItems: [{
+          idCustomField: author_field[:id],
+          value: { text: 'A Most Excellent Storyteller' } }]
+      }
+    end
+    subject { Extract.book(hash, jb, all_lists) }
     it { expect(subject).to be_a Book }
-    it { expect(subject.title).to eq book.title }
-    it { expect(subject.author).to eq book.author }
     it { expect(subject.series).to eq nil }
     it { expect(subject.series_number).to eq nil }
     it { expect(subject.list).to eq book.list }
-    it { expect(subject.audiobook).to eq false }
-    it { expect(subject.ebook).to eq false }
-    it { expect(subject.nat).to eq false }
-    it { expect(subject.sleep).to eq false }
-    it { expect(subject.dnf).to eq false }
-    it { expect(subject.fav).to eq false }
 
-    context 'the author is not in a custom field' do
-      let(:json_book) do
-        minimal_json_book.merge({ desc: 'Ghost Writer', customFieldItems: [] })
-      end
-      it { expect(subject).to have_attributes(author: 'Ghost Writer') }
+    it_behaves_like "a book attribute" do
+      let(:attribute) { :title }
+      let(:result) { 'Such a Good Book' }
+      let(:additions) {{ name: result }}
     end
 
-    context 'when the book is in a series' do
-      let(:json_book_in_series) do
-        items = [{ idCustomField: 'sf_id', value: { text: 'The Adventures' } }]
-        json_book.merge({ customFieldItems: items })
+    describe 'author' do
+      it_behaves_like "a custom field attribute" do
+        let(:field) { author_field }
+        let(:attribute) { :author }
+        let(:result) { 'A Most Excellent Storyteller' }
       end
-      it 'sets the series' do
-        expect(Extract.book(hash, json_book_in_series, all_lists))
-          .to have_attributes(series: 'The Adventures')
-      end
-      it {
-        expect(Extract.book(hash, json_book_in_series, all_lists))
-          .to have_attributes(series_number: nil)
-      }
 
-      it 'sets the series number if present' do
-        items = [{ idCustomField: 'snf_id', value: { number: 2 } }]
-        json_book_in_series_w_num = json_book.merge({ customFieldItems:
-          json_book_in_series[:customFieldItems] + items })
-        expect(Extract.book(hash, json_book_in_series_w_num, all_lists))
-          .to have_attributes(series: 'The Adventures', series_number: 2)
+      context 'the author is not in a custom field' do
+        let(:jb_additions) { { desc: 'Ghost Writer', customFieldItems: [] } }
+        it { expect(subject).to have_attributes(author: 'Ghost Writer') }
       end
+    end
+
+    it_behaves_like "a custom field attribute" do
+      let(:field) { series_field }
+      let(:attribute) { :series }
+      let(:result) { 'The Adventures' }
+    end
+
+    it_behaves_like "a custom field attribute" do
+      let(:field) { series_number_field }
+      let(:attribute) { :series_number }
+      let(:result) { 3 }
     end
 
     it_behaves_like "a boolean attribute" do let(:label) { audiobook_label } end
