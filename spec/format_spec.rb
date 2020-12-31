@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'format'
+require 'models/book'
 
 describe Format do
   describe '.header' do
