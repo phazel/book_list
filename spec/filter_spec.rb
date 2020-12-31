@@ -64,6 +64,22 @@ describe Filter do
     end
   end
 
+  describe '.by_series' do
+    let(:book_no_series) { Book.new(title: '', author: '') }
+    let(:book_series_a) { book.with(series: 'Big Series') }
+    let(:book_series_b) { book.with(series: 'Another Series') }
+    let(:books) { [ book_no_series, book_series_a, book_series_b ] }
+
+    it 'groups books with and without a series' do
+      expected = {
+        'Big Series' => [ book_series_a ],
+        'Another Series' => [ book_series_b ],
+        no_series: [ book_no_series ]
+      }
+      expect(Filter.by_series(books)).to eq expected
+    end
+  end
+
   describe '.duplicates' do
     book1a = Book.new(title: '1', author: 'A')
     book1a_dup = book1a.is :ebook
