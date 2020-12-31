@@ -16,10 +16,6 @@ class Extract
   CURRENTLY_READING_LIST = '📖 Reading 📖'
   def self.READ_LIST(year) "Read #{year}" end
 
-  def self.list(hash, list_name)
-    hash[:lists].find { |list| list[:name] == list_name }
-  end
-
   def self.lists(hash, year)
     replace = { READ_LIST(year) => "read", CURRENTLY_READING_LIST => "current" }
 
@@ -27,6 +23,7 @@ class Extract
       replacement = replace[list[:name]]
       replacement ? list.merge({ name: replacement }) : list
     end
+  rescue NoMethodError; nil
   end
 
   def self.label(hash, label_name)
@@ -39,7 +36,8 @@ class Extract
   end
 
   def  self.book_list(json_book_list_id, lists)
-    lists.find{ |list| list[:id] == json_book_list_id }[:name]
+    found = lists.find{ |list| list[:id] == json_book_list_id }
+    found ? found[:name] : nil
   end
 
   def self.book_custom_field(json_book, field, default: nil)
@@ -53,7 +51,14 @@ class Extract
   end
 
   def self.json_label?(json_book, label)
-    json_book[:idLabels].include? label[:id]
+    json_book[:idLabels] && label ? json_book[:idLabels].include?(label[:id]) : false
+  end
+
+  def self.all_books(hash, year)
+    hash[:cards]
+    .reject { |json_book| json_book[:closed] }
+    .map { |json_book| book(hash, json_book, Extract.lists(hash, year)) }
+    .reject { |book| book.list.nil? }
   end
 
   def self.book(hash, json_book, lists)
@@ -80,12 +85,5 @@ class Extract
         .is(:sleep, cond: json_label?(json_book, sleep_label))
         .is(:dnf, cond: json_label?(json_book, dnf_label))
         .is(:fav, cond: json_label?(json_book, fav_label))
-  end
-
-  def self.all_books(hash, year)
-    hash[:cards]
-      .reject { |json_book| json_book[:closed] }
-      .map { |json_book| book(hash, json_book, Extract.lists(hash, year)) }
-      .reject { |book| book.list.nil? }
   end
 end

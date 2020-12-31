@@ -1,12 +1,13 @@
 shared_examples "a custom field" do
+  let(:json_book) { {}.merge(jb_additions) }
   let(:field) { { id: 'f_id', name: 'Field Name', type: field_type } }
   let(:default) { 'something default' }
 
-  subject { Extract.book_custom_field(jb, field) }
+  subject { Extract.book_custom_field(json_book, field) }
   it { expect(subject).to eq expected }
 
   context 'a default value is given' do
-    subject { Extract.book_custom_field(jb, field, default: default) }
+    subject { Extract.book_custom_field(json_book, field, default: default) }
     it { expect(subject).to eq expected_with_default }
   end
 end
@@ -42,6 +43,7 @@ end
 shared_examples "a custom field attribute" do
     let(:type) { { Integer => :number, String => :text }[result.class] }
     let(:item) { {idCustomField: field[:id], value: {type => result}} }
+    let(:attribute) { field[:name].downcase.tr(' ', '_').to_sym }
 
     it_behaves_like "a book attribute" do
       let(:additions) { { customFieldItems: [ item ] } }
