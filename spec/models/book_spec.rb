@@ -45,7 +45,7 @@ describe Book do
     it { expect(book.sleep).to eq false }
     it { expect(book.dnf).to eq false }
     it { expect(book.fav).to eq false }
-    it { expect { Book.new }.to raise_error(ArgumentError, 'missing keywords: title, author') }
+    it { expect { Book.new }.to raise_error(ArgumentError, 'missing keywords: :title, :author') }
   end
 
   describe '#matches' do
