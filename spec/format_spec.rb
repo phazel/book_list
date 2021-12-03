@@ -14,7 +14,7 @@ describe Format do
         "📖 - physical book\n",
         "📱 - ebook\n",
         "🎧 - audiobook\n",
-        "💞 - I read this with my partner\n",
+        "👩🏻‍🦱 - I read this with my partner\n",
         "🌒 - I listened to this book to go to sleep\n\n"
       ]
     end

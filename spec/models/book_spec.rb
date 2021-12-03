@@ -73,10 +73,10 @@ describe Book do
     it { expect(book.is(:audiobook).emojis).to eq '🎧' }
     it { expect(book.is(:ebook).emojis).to eq '📱' }
     it { expect(book.is(:audiobook).is(:ebook).emojis).to eq '📱🎧' }
-    it { expect(book.is(:nat).emojis).to eq '📖💞' }
-    it { expect(book.is(:audiobook).is(:ebook).is(:nat).emojis).to eq '📱🎧💞' }
+    it { expect(book.is(:nat).emojis).to eq '📖👩🏻‍🦱' }
+    it { expect(book.is(:audiobook).is(:ebook).is(:nat).emojis).to eq '📱🎧👩🏻‍🦱' }
     it { expect(book.is(:sleep).emojis).to eq '📖🌒' }
-    it { expect(book.is(:audiobook).is(:nat).is(:sleep).emojis).to eq '🎧💞🌒' }
+    it { expect(book.is(:audiobook).is(:nat).is(:sleep).emojis).to eq '🎧👩🏻‍🦱🌒' }
   end
 
   describe '#to_s' do

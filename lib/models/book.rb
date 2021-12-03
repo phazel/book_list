@@ -45,7 +45,7 @@ class Book
     device_emojis = "#{'📱' if @ebook}#{'🎧' if @audiobook}"
 
     type_emojis = device ? device_emojis : '📖'
-    nat_emojis = @nat ? '💞' : ''
+    nat_emojis = @nat ? '👩🏻‍🦱' : ''
     sleep_emojis = @sleep ? '🌒' : ''
 
     "#{type_emojis}#{nat_emojis}#{sleep_emojis}"
