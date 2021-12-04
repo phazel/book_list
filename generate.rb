@@ -8,7 +8,7 @@ require_relative './lib/format'
 
 YEAR = '2020'
 
-hash = Format.symbify JSON.parse File.read "#{YEAR}/exported.json"
+hash = Format.strip Format.symbify JSON.parse File.read "#{YEAR}/exported.json"
 File.open("#{YEAR}/exported_pretty.json", 'w') do |file|
   file.write JSON.pretty_generate hash
 end

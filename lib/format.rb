@@ -49,4 +49,14 @@ class Format
       item
     end
   end
+
+  def self.strip(item)
+    if item.is_a? Hash
+      item.transform_values { |v| strip(v) }
+    elsif item.respond_to? :map
+      item.map { |i| strip(i) }
+    else
+      item.strip if item.respond_to? :strip
+    end
+  end
 end

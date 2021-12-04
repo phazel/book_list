@@ -39,8 +39,15 @@ describe Format do
   end
 
   describe '.symbify' do
-    json = { 'a' => 1, 'b' => { 'c' => 'd', 'e' => [{ 'f' => 'g' }] } }
-    hash = { a: 1, b: { c: 'd', e: [{ f: 'g' }] } }
-    it { expect(described_class.symbify(json)).to eq hash }
+    string_keys = { 'a' => 1, 'b' => { 'c' => 'd', 'e' => [{ 'f' => 'g' }] } }
+    sym_keys = { a: 1, b: { c: 'd', e: [{ f: 'g' }] } }
+    it { expect(described_class.symbify(string_keys)).to eq sym_keys }
+  end
+
+  describe '.strip' do
+    with_spaces = { a: '1 ', b: { c: ' d ', e: [{ f: ' g 2 ', h: nil, i: ' ', j: '' }] } }
+    stripped    = { a: '1',  b: { c: 'd',  e: [{ f: 'g 2' , h: nil, i: '',  j: '' }] } }
+    it { expect(described_class.strip('2 ')).to eq '2' }
+    it { expect(described_class.strip(with_spaces)).to eq stripped }
   end
 end
