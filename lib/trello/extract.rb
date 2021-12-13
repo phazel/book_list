@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './models/book'
+require_relative '../models/book'
 
 class Extract
   AUTHOR_FIELD = 'Author'

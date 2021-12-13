@@ -2,9 +2,9 @@
 
 require 'csv'
 require 'json'
-require_relative './extract'
-require_relative './filter'
-require_relative './format'
+require_relative './trello/extract'
+require_relative './trello/filter'
+require_relative './trello/format'
 
 class App
   def self.convert(year, data_file)

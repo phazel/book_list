@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'filter'
+require 'trello/filter'
 require 'models/book'
 
 describe Filter do

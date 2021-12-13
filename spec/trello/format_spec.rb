@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'format'
+require 'trello/format'
 require 'models/book'
 
 describe Format do

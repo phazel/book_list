@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'extract'
+require 'trello/extract'
 require 'support/shared_examples'
 
 describe Extract do
