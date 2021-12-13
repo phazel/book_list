@@ -7,8 +7,8 @@ csv = <<~BOOKS
   Other Parties,C M Machado,"physical, read aloud"
 BOOKS
 hashes = [
-  { name: 'Dune', author: 'Frank Herbert', format: ['audiobook'] },
-  { name: 'Other Parties', author: 'C M Machado', format: ['physical', 'read aloud'] },
+  { title: 'Dune', author: 'Frank Herbert', format: ['audiobook'] },
+  { title: 'Other Parties', author: 'C M Machado', format: ['physical', 'read aloud'] },
 ]
 
 describe 'Convert' do
@@ -24,7 +24,7 @@ describe 'Convert' do
     it { expect(csv_to_hash(csv)).to be_an(Array) }
     it { expect(csv_to_hash(csv)).to all(be_a(Hash)) }
     it 'contains hashes all with the required keys' do
-      required_keys = [:name, :author, :format]
+      required_keys = [:title, :author, :format]
       expect(csv_to_hash(csv).map(&:keys)).to all(include *required_keys)
     end
     it 'converts a csv string to an array of hashes' do
@@ -33,8 +33,16 @@ describe 'Convert' do
   end
 
   describe '.hash_to_book' do
-    it 'converts a hash to an array of books' do
-      expect(hash_to_book(hashes[0])).to be_a(Book)
+    let(:dune) { hashes[0] }
+    let(:other_parties) { hashes[1] }
+
+    context 'dune hash to book' do
+      it { expect(hash_to_book(dune)).to be_a(Book) }
+      it { expect(hash_to_book(dune)).to have_attributes(dune) }
+    end
+    context 'other_parties hash to book' do
+      it { expect(hash_to_book(other_parties)).to be_a(Book) }
+      it { expect(hash_to_book(other_parties)).to have_attributes(other_parties) }
     end
   end
 end

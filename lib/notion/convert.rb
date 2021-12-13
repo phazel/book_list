@@ -9,13 +9,15 @@ module Convert
   end
 
   def csv_to_hash(csv)
+    CSV::HeaderConverters[:title] = lambda { |header| header == 'Name' ? 'Title' : header }
+    CSV::HeaderConverters[:all] = [ :title, :symbol ]
     CSV::Converters[:blank_to_nil] = lambda {|value| value && value.empty? ? nil : value}
-    CSV.new(csv, headers: true, header_converters: :symbol, converters: [:all, :blank_to_nil])
+    CSV.new(csv, headers: true, header_converters: :all, converters: [:all, :blank_to_nil])
       .map { |row| row.to_h }
       .map { |hash| split_strings(hash, [:format]) }
   end
 
   def hash_to_book(hash)
-    Book.new(title: hash[:name], author: hash[:author], format: hash[:format])
+    Book.new(title: hash[:title], author: hash[:author], format: hash[:format])
   end
 end
