@@ -25,8 +25,8 @@ describe Format do
   describe '.section' do
     let(:books) do
       [
-        Book.new(title: 'book_1', author: 'Author 1'),
-        Book.new(title: 'book_2', author: 'Author 2').is(:audiobook)
+        TrelloBook.new(title: 'book_1', author: 'Author 1'),
+        TrelloBook.new(title: 'book_2', author: 'Author 2').is(:audiobook)
       ]
     end
     let(:expected_section) { [ "---\n\n", "## Favourites:\n\n", books ] }

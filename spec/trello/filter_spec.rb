@@ -4,7 +4,7 @@ require 'trello/filter'
 require 'trello/models/book'
 
 describe Filter do
-  let(:book) { Book.new(title: '', author: '') }
+  let(:book) { TrelloBook.new(title: '', author: '') }
   let(:book_fav) { book.is(:fav) }
   let(:book_dnf) { book.is(:dnf) }
   let(:book_fav_dnf) { book.is(:fav).is(:dnf) }
@@ -65,7 +65,7 @@ describe Filter do
   end
 
   describe '.by_series' do
-    let(:book_no_series) { Book.new(title: '', author: '') }
+    let(:book_no_series) { TrelloBook.new(title: '', author: '') }
     let(:book_series_a) { book.with(series: 'Big Series') }
     let(:book_series_b) { book.with(series: 'Another Series') }
     let(:books) { [ book_no_series, book_series_a, book_series_b ] }
@@ -81,11 +81,11 @@ describe Filter do
   end
 
   describe '.duplicates' do
-    book1a = Book.new(title: '1', author: 'A')
+    book1a = TrelloBook.new(title: '1', author: 'A')
     book1a_dup = book1a.is :ebook
-    book1b = Book.new(title: '1', author: 'B')
+    book1b = TrelloBook.new(title: '1', author: 'B')
     book1a_dup_dup = book1a.is :nat
-    book2b = Book.new(title: '2', author: 'B')
+    book2b = TrelloBook.new(title: '2', author: 'B')
     book2b_dup = book2b.is :ebook
 
     books = [ book1a, book1a_dup, book1b, book1a_dup_dup, book2b, book2b_dup ]

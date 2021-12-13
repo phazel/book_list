@@ -110,7 +110,7 @@ describe Extract do
       let(:num_expected_books) { 3 }
 
       subject(:value) { Extract.all_books(hash_archived, year) }
-      it { expect(value).to all be_a Book }
+      it { expect(value).to all be_a TrelloBook }
 
       it 'does not include archived cards' do
         expect(value.size).to eq num_expected_books

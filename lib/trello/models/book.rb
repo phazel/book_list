@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Book
+class TrelloBook
   attr_reader :title, :author, :duplicates
   attr_accessor :series, :series_number, :list, :audiobook, :ebook, :nat, :sleep,
                 :dnf, :fav

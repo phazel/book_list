@@ -72,7 +72,7 @@ class Extract
     dnf_label = label(hash, DNF_LABEL)
     fav_label = label(hash, FAVOURITE_LABEL)
 
-    Book.new(
+    TrelloBook.new(
       title: json_book[:name],
       author: book_custom_field(json_book, author_field, default: json_book[:desc])
     )

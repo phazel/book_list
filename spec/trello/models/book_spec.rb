@@ -2,7 +2,7 @@
 
 require 'trello/models/book'
 
-describe Book do
+describe TrelloBook do
   let(:list) { { id: 'list_id', name: 'some_list' } }
   let(:audio_label) { { id: 'a_id', name: 'audiobook' } }
   let(:ebook_label) { { id: 'e_id', name: 'ebook' } }
@@ -31,10 +31,10 @@ describe Book do
       customFields: [ author_field, series_field, series_number_field ]
     }
   end
-  let(:book) { Book.new(title: 'A Very Good Book', author: 'Pretty Good Writer') }
+  let(:book) { TrelloBook.new(title: 'A Very Good Book', author: 'Pretty Good Writer') }
 
   describe '#initialize' do
-    it { expect(book).to be_a Book }
+    it { expect(book).to be_a TrelloBook }
     it { expect(book.title).to eq 'A Very Good Book' }
     it { expect(book.author).to eq 'Pretty Good Writer' }
     it { expect(book.series).to eq nil }
@@ -45,7 +45,7 @@ describe Book do
     it { expect(book.sleep).to eq false }
     it { expect(book.dnf).to eq false }
     it { expect(book.fav).to eq false }
-    it { expect { Book.new }.to raise_error(ArgumentError, 'missing keywords: :title, :author') }
+    it { expect { TrelloBook.new }.to raise_error(ArgumentError, 'missing keywords: :title, :author') }
   end
 
   describe '#matches' do
