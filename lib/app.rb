@@ -1,12 +1,27 @@
 # frozen_string_literal: true
 
+require 'csv'
 require 'json'
 require_relative './extract'
 require_relative './filter'
 require_relative './format'
 
 class App
-  def self.generate(year)
+  def self.convert(year, data_file)
+    CSV::Converters[:blank_to_nil] = lambda {|value| value && value.empty? ? nil : value}
+    CSV.read(data_file, headers: true, header_converters: :symbol, converters: [:all, :blank_to_nil])
+      .map { |row| row.to_h }
+      .map { |hash| split_strings(hash, [:format]) }
+  end
+
+  def self.split_strings(hash, keys)
+    keys.reduce(hash) do |memo, key|
+      split_values = memo[key].split(',').map(&:strip)
+      memo.merge({ **memo, key => split_values })
+    end
+  end
+
+  def self.generate_from_trello(year)
     hash = Format.strip Format.symbify JSON.parse File.read "#{year}/exported.json"
     File.open("#{year}/exported_pretty.json", 'w') do |file|
       file.write JSON.pretty_generate hash

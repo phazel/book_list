@@ -4,7 +4,7 @@
 require_relative './lib/app'
 
 YEAR = '2021'
-summary = App.generate YEAR, "#{YEAR}/notion.csv"
+summary = App.generate_from_trello YEAR
 
 puts <<~SUMMARY
 **********************************************
