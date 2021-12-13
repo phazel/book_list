@@ -5,20 +5,12 @@ require 'json'
 require_relative './trello/extract'
 require_relative './trello/filter'
 require_relative './trello/format'
+require_relative './notion/convert'
+include Convert
 
 class App
-  def self.convert(year, data_file)
-    CSV::Converters[:blank_to_nil] = lambda {|value| value && value.empty? ? nil : value}
-    CSV.read(data_file, headers: true, header_converters: :symbol, converters: [:all, :blank_to_nil])
-      .map { |row| row.to_h }
-      .map { |hash| split_strings(hash, [:format]) }
-  end
-
-  def self.split_strings(hash, keys)
-    keys.reduce(hash) do |memo, key|
-      split_values = memo[key].split(',').map(&:strip)
-      memo.merge({ **memo, key => split_values })
-    end
+  def self.generate(year, data_file)
+    csv_to_hash File.read(data_file)
   end
 
   def self.generate_from_trello(year)
