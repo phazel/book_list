@@ -1,3 +1,5 @@
+require_relative '../notion/models/book'
+
 module Convert
   def split_strings(hash, keys)
     keys.reduce(hash) do |memo, key|
@@ -11,5 +13,9 @@ module Convert
     CSV.new(csv, headers: true, header_converters: :symbol, converters: [:all, :blank_to_nil])
       .map { |row| row.to_h }
       .map { |hash| split_strings(hash, [:format]) }
+  end
+
+  def hash_to_book(hash)
+    Book.new(title: hash[:name], author: hash[:author], format: hash[:format])
   end
 end
