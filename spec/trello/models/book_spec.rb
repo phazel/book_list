@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'models/book'
+require 'trello/models/book'
 
 describe Book do
   let(:list) { { id: 'list_id', name: 'some_list' } }

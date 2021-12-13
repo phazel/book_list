@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'trello/filter'
-require 'models/book'
+require 'trello/models/book'
 
 describe Filter do
   let(:book) { Book.new(title: '', author: '') }
