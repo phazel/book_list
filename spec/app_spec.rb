@@ -9,7 +9,7 @@ describe App do
     it 'returns a Hash' do
       expect(summary).to be_a(Hash)
     end
-    it { expect(summary[:total]).to     eq(8) }
+    it { expect(summary[:total]).to     eq(9) }
 
     # it { expect(summary[:read]).to     eq(4) }
     # it { expect(summary[:current]).to   eq(3) }

@@ -1,3 +1,4 @@
+require 'csv'
 require_relative '../notion/models/book'
 
 module Convert
@@ -18,7 +19,12 @@ module Convert
   end
 
   def hash_to_book(hash)
-    Book.new(title: hash[:title], author: hash[:author], format: hash[:format])
+    Book.new(
+      title: hash[:title],
+      author: hash[:author],
+      status: hash[:status],
+      format: hash[:format]
+    )
   end
 
   def hashes_to_books(hashes)
