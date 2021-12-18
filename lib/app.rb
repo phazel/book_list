@@ -10,7 +10,10 @@ include Convert
 
 class App
   def self.generate(year, data_file)
-    csv_to_books File.read(data_file)
+    books = csv_to_books File.read(data_file)
+    {
+      total: books.size
+    }
   end
 
   def self.generate_from_trello(year)
