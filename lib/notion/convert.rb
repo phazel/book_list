@@ -8,7 +8,7 @@ module Convert
     end
   end
 
-  def csv_to_array(csv)
+  def csv_to_hashes(csv)
     CSV::HeaderConverters[:title] = lambda { |header| header == 'Name' ? 'Title' : header }
     CSV::HeaderConverters[:all] = [ :title, :symbol ]
     CSV::Converters[:blank_to_nil] = lambda {|value| value && value.empty? ? nil : value}
@@ -21,7 +21,7 @@ module Convert
     Book.new(title: hash[:title], author: hash[:author], format: hash[:format])
   end
 
-  def array_to_books(hashes)
+  def hashes_to_books(hashes)
     hashes.map { |hash| hash_to_book(hash) }
   end
 end

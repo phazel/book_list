@@ -19,20 +19,20 @@ describe 'Convert' do
     end
   end
 
-  describe '.csv_to_array' do
-    it { expect(csv_to_array(csv)).to be_an(Array) }
-    it { expect(csv_to_array(csv)).to all(be_a(Hash)) }
+  describe '.csv_to_hashes' do
+    it { expect(csv_to_hashes(csv)).to be_an(Array) }
+    it { expect(csv_to_hashes(csv)).to all(be_a(Hash)) }
     it 'contains hashes all with the required keys' do
       required_keys = [:title, :author, :format]
-      expect(csv_to_array(csv).map(&:keys)).to all(include *required_keys)
+      expect(csv_to_hashes(csv).map(&:keys)).to all(include *required_keys)
     end
     it 'converts a csv string to an array of hashes' do
-      expect(csv_to_array(csv)).to eq(hashes)
+      expect(csv_to_hashes(csv)).to eq(hashes)
     end
   end
 
-  describe '.array_to_books' do
-    subject { array_to_books(hashes) }
+  describe '.hashes_to_books' do
+    subject { hashes_to_books(hashes) }
     it { expect(subject).to be_an(Array) }
     it { expect(subject).to all(be_a(Book)) }
     it { expect(subject.length).to eq(hashes.length) }
