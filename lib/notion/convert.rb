@@ -20,4 +20,8 @@ module Convert
   def hash_to_book(hash)
     Book.new(title: hash[:title], author: hash[:author], format: hash[:format])
   end
+
+  def array_to_books(hashes)
+    hashes.map { |hash| hash_to_book(hash) }
+  end
 end

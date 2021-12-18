@@ -6,10 +6,9 @@ csv = <<~BOOKS
   Dune,Frank Herbert,audiobook
   Other Parties,C M Machado,"physical, read aloud"
 BOOKS
-hashes = [
-  { title: 'Dune', author: 'Frank Herbert', format: ['audiobook'] },
-  { title: 'Other Parties', author: 'C M Machado', format: ['physical', 'read aloud'] },
-]
+dune = { title: 'Dune', author: 'Frank Herbert', format: ['audiobook'] }
+other_parties = { title: 'Other Parties', author: 'C M Machado', format: ['physical', 'read aloud'] }
+hashes = [dune, other_parties]
 
 describe 'Convert' do
   describe '.split_strings' do
@@ -32,10 +31,14 @@ describe 'Convert' do
     end
   end
 
-  describe '.hash_to_book' do
-    let(:dune) { hashes[0] }
-    let(:other_parties) { hashes[1] }
+  describe '.array_to_books' do
+    subject { array_to_books(hashes) }
+    it { expect(subject).to be_an(Array) }
+    it { expect(subject).to all(be_a(Book)) }
+    it { expect(subject.length).to eq(hashes.length) }
+  end
 
+  describe '.hash_to_book' do
     context 'dune hash to book' do
       it { expect(hash_to_book(dune)).to be_a(Book) }
       it { expect(hash_to_book(dune)).to have_attributes(dune) }
