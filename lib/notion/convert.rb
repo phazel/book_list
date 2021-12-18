@@ -8,7 +8,7 @@ module Convert
     end
   end
 
-  def csv_to_hash(csv)
+  def csv_to_array(csv)
     CSV::HeaderConverters[:title] = lambda { |header| header == 'Name' ? 'Title' : header }
     CSV::HeaderConverters[:all] = [ :title, :symbol ]
     CSV::Converters[:blank_to_nil] = lambda {|value| value && value.empty? ? nil : value}
