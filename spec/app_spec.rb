@@ -10,11 +10,7 @@ describe App do
       expect(result).to be_an(Array)
     end
     it 'is a collection of hashes' do
-      expect(result).to all(be_a(Hash))
-    end
-    it 'contains hashes all with the required keys' do
-      required_keys = [:name, :author, :format]
-      expect(result.map(&:keys)).to all(include *required_keys)
+      expect(result).to all(be_a(Book))
     end
   end
 end

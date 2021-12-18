@@ -38,6 +38,12 @@ describe 'Convert' do
     it { expect(subject.length).to eq(hashes.length) }
   end
 
+  describe '.csv_to_books' do
+    subject { csv_to_books(csv) }
+    it { expect(subject).to be_an(Array) }
+    it { expect(subject).to all(be_a(Book)) }
+  end
+
   describe '.hash_to_book' do
     context 'dune hash to book' do
       it { expect(hash_to_book(dune)).to be_a(Book) }

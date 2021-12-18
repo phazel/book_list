@@ -10,7 +10,7 @@ include Convert
 
 class App
   def self.generate(year, data_file)
-    csv_to_hashes File.read(data_file)
+    csv_to_books File.read(data_file)
   end
 
   def self.generate_from_trello(year)

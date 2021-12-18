@@ -24,4 +24,8 @@ module Convert
   def hashes_to_books(hashes)
     hashes.map { |hash| hash_to_book(hash) }
   end
+
+  def csv_to_books(csv)
+    hashes_to_books csv_to_hashes(csv)
+  end
 end
