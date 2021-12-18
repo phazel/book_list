@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 require_relative '../notion/models/book'
 

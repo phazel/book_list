@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples "a custom field" do
   let(:json_book) { {}.merge(jb_additions) }
   let(:field) { { id: 'f_id', name: 'Field Name', type: field_type } }

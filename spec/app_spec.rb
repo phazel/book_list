@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'app'
 
 # Note: This test requires a real csv file with dummy data
