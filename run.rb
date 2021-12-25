@@ -8,14 +8,9 @@ summary = App.generate YEAR, "#{YEAR}/notion.csv"
 
 puts <<~SUMMARY
 **********************************************
-You read #{summary[:count]} books in #{YEAR}
+Data contained #{summary[:total]} books
 
-- #{summary[:fav]} were favourites
-- You read #{summary[:dups]} more than once
-- #{summary[:nat]} were with Natalie
-- #{summary[:sleep]} helped you get to sleep
-- #{summary[:audiobook]} audiobooks, #{summary[:ebook]} ebooks, #{summary[:physical]} physical books
-- You declined to finish #{summary[:dnf]}
 - You're currently reading #{summary[:current]} books
+- You read #{summary[:done]}, with status 'Read 2021'
 **********************************************
 SUMMARY

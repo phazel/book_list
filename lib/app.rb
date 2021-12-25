@@ -13,6 +13,16 @@ include Filter
 class App
   def self.generate(year, data_file)
     books = csv_to_books File.read(data_file)
+
+    output = [
+      "Currently reading:\n",
+      filter_by_status(books)[:current].map{|b| "#{b}\n"},
+      "\n\n",
+      "Read this year:\n",
+      filter_by_status(books)[:done].map{|b| "#{b}\n"},
+    ]
+    File.write "#{year}/books_read_#{year}.md", output.join
+
     {
       total: books.size,
       done: filter_by_status(books)[:done].size,
