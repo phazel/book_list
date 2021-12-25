@@ -2,6 +2,10 @@
 
 require 'csv'
 require_relative '../notion/models/book'
+require_relative './helpers'
+include Helpers
+
+ALT_STATUSES = { '📖 Reading 📖' => 'current', 'Read 2021' => 'done' }
 
 module Convert
   def split_strings(hash, keys)
@@ -11,17 +15,8 @@ module Convert
     end
   end
 
-  ALT_STATUSES = {
-    '📖 Reading 📖' => 'current',
-    'Read 2021' => 'done',
-  }
-
   def csv_to_hashes(csv)
-    CSV::HeaderConverters[:title] = lambda { |header| header == 'Name' ? 'Title' : header }
-    CSV::HeaderConverters[:all] = [ :title, :symbol ]
-    CSV::Converters[:blank_to_nil] = lambda {|value| value && value.empty? ? nil : value}
-    CSV::Converters[:status] = lambda {|status| ALT_STATUSES.include?(status) ? ALT_STATUSES[status] : status}
-    CSV::Converters[:mine] = [ :all, :blank_to_nil, :status ]
+    csv_converters
     CSV.new(csv, headers: true, header_converters: :all, converters: :mine)
       .map { |row| row.to_h }
       .map { |hash| split_strings(hash, [:format]) }
