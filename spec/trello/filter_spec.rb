@@ -3,7 +3,7 @@
 require 'trello/filter'
 require 'trello/models/book'
 
-describe Filter do
+describe TrelloFilter do
   let(:book) { TrelloBook.new(title: '', author: '') }
   let(:book_fav) { book.is(:fav) }
   let(:book_dnf) { book.is(:dnf) }
@@ -76,7 +76,7 @@ describe Filter do
         'Another Series' => [ book_series_b ],
         no_series: [ book_no_series ]
       }
-      expect(Filter.by_series(books)).to eq expected
+      expect(TrelloFilter.by_series(books)).to eq expected
     end
   end
 

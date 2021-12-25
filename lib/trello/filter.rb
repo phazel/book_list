@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Filter
+class TrelloFilter
   def self.in_list(books, list)
     books.select do |book|
       book.list == list[:name]

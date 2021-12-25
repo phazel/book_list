@@ -23,15 +23,15 @@ class App
     end
 
     all_books = Extract.all_books(hash, year)
-    read, current = Filter.by_list(all_books).values_at(:read, :current)
-    dups, non_dups = Filter.duplicates(read).values_at(:dups, :non_dups)
+    read, current = TrelloFilter.by_list(all_books).values_at(:read, :current)
+    dups, non_dups = TrelloFilter.duplicates(read).values_at(:dups, :non_dups)
 
     sections = {
-      count: Filter.without(read, [:dnf]).size,
+      count: TrelloFilter.without(read, [:dnf]).size,
       dups: dups,
-      fav: Filter.with(non_dups, :fav),
-      regular: Filter.without(non_dups, %i[fav dnf]),
-      dnf: Filter.with(read, :dnf)
+      fav: TrelloFilter.with(non_dups, :fav),
+      regular: TrelloFilter.without(non_dups, %i[fav dnf]),
+      dnf: TrelloFilter.with(read, :dnf)
     }
 
     output = Format.result year, sections, current
@@ -41,11 +41,11 @@ class App
       count: sections[:count],
       fav: sections[:fav].size,
       dups: dups.size,
-      nat: Filter.with(read, :nat).size,
-      sleep: Filter.with(read, :sleep).size,
-      audiobook: Filter.with(read, :audiobook).size,
-      ebook: Filter.with(read, :ebook).size,
-      physical: Filter.without(read, [:audiobook, :ebook]).size,
+      nat: TrelloFilter.with(read, :nat).size,
+      sleep: TrelloFilter.with(read, :sleep).size,
+      audiobook: TrelloFilter.with(read, :audiobook).size,
+      ebook: TrelloFilter.with(read, :ebook).size,
+      physical: TrelloFilter.without(read, [:audiobook, :ebook]).size,
       dnf: sections[:dnf].size,
       current: current.size,
     }
