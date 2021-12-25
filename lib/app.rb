@@ -16,10 +16,10 @@ class App
 
     output = [
       "Currently reading:\n",
-      filter_by_status(books)[:current].map{|b| "#{b}\n"},
+      filter_by_status(books)[:current],
       "\n\n",
       "Read this year:\n",
-      filter_by_status(books)[:done].map{|b| "#{b}\n"},
+      filter_by_status(books)[:done],
     ]
     File.write "#{year}/books_read_#{year}.md", output.join
 

@@ -6,7 +6,15 @@ class Book
   def initialize(title:, author:, status:, format:)
     @title  = title
     @author = author
-    @status   = status
+    @status = status
     @format = format
+  end
+
+  def to_s
+    <<~BOOK
+      **#{@title}**
+      *by #{@author}*
+
+    BOOK
   end
 end

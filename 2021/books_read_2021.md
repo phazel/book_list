@@ -1,79 +1,229 @@
 Currently reading:
-#<Book:0x00007f983f80c490>
-#<Book:0x00007f983f80c2b0>
-#<Book:0x00007f983a823fa0>
+**Dune**
+*by Frank Herbert*
+
+**Her Body and Other Parties**
+*by Carmen Maria Machado*
+
+**A Room of One’s Own & Three Guineas**
+*by Virginia Woolf*
+
 
 
 Read this year:
-#<Book:0x00007f983f80c198>
-#<Book:0x00007f983a823cf8>
-#<Book:0x00007f983a823848>
-#<Book:0x00007f983a823320>
-#<Book:0x00007f983a8232a8>
-#<Book:0x00007f983a823258>
-#<Book:0x00007f983a8230f0>
-#<Book:0x00007f983a822e20>
-#<Book:0x00007f983a822d80>
-#<Book:0x00007f983a822c18>
-#<Book:0x00007f983a8226a0>
-#<Book:0x00007f983a821688>
-#<Book:0x00007f983a821638>
-#<Book:0x00007f983a821278>
-#<Book:0x00007f983a8211d8>
-#<Book:0x00007f983a8210e8>
-#<Book:0x00007f983a821048>
-#<Book:0x00007f983a820f80>
-#<Book:0x00007f983a820dc8>
-#<Book:0x00007f983a820ad0>
-#<Book:0x00007f983a820940>
-#<Book:0x00007f983a8207d8>
-#<Book:0x00007f983a8206c0>
-#<Book:0x00007f983b863780>
-#<Book:0x00007f983b862e48>
-#<Book:0x00007f983b862920>
-#<Book:0x00007f983b862768>
-#<Book:0x00007f983b8623a8>
-#<Book:0x00007f983b862150>
-#<Book:0x00007f983b8617c8>
-#<Book:0x00007f983b8614a8>
-#<Book:0x00007f983b861278>
-#<Book:0x00007f983b861200>
-#<Book:0x00007f983b8611b0>
-#<Book:0x00007f983b860fa8>
-#<Book:0x00007f983b860e40>
-#<Book:0x00007f983b860940>
-#<Book:0x00007f983b860828>
-#<Book:0x00007f983b860738>
-#<Book:0x00007f983b860508>
-#<Book:0x00007f983b860328>
-#<Book:0x00007f983b860260>
-#<Book:0x00007f983b85bc10>
-#<Book:0x00007f983b85b440>
-#<Book:0x00007f983b85b260>
-#<Book:0x00007f983b85ace8>
-#<Book:0x00007f983b85ab80>
-#<Book:0x00007f983b85a9f0>
-#<Book:0x00007f983b85a900>
-#<Book:0x00007f983b85a5e0>
-#<Book:0x00007f983b85a0b8>
-#<Book:0x00007f983b859d20>
-#<Book:0x00007f983b859a78>
-#<Book:0x00007f983b8594d8>
-#<Book:0x00007f983b858ce0>
-#<Book:0x00007f983b858b28>
-#<Book:0x00007f983b8587b8>
-#<Book:0x00007f983b858600>
-#<Book:0x00007f983b8581f0>
-#<Book:0x00007f983b8531c8>
-#<Book:0x00007f983b852570>
-#<Book:0x00007f983b851d00>
-#<Book:0x00007f983b850b08>
-#<Book:0x00007f983b850a18>
-#<Book:0x00007f983b850630>
-#<Book:0x00007f983b84bbf8>
-#<Book:0x00007f983b84bab8>
-#<Book:0x00007f983b84b928>
-#<Book:0x00007f983b84b338>
-#<Book:0x00007f983b84b040>
-#<Book:0x00007f983b84acd0>
-#<Book:0x00007f983b84ac58>
+**Letters From a Stoic**
+*by Seneca*
+
+**Wolf Hall**
+*by Hilary Mantel*
+
+**To Be Taught, If Fortunate**
+*by Becky Chambers*
+
+**Northanger Abbey**
+*by Jane Austen*
+
+**The Lord of the Rings: The Return of the King**
+*by J. R. R. Tolkien*
+
+**Punished By Rewards**
+*by Alfie Kohn*
+
+**The House in the Cerulean Sea**
+*by T.J. Klune*
+
+**The Invisible Life of Addie LaRue**
+*by V.E. Schwab*
+
+**Rogue Protocol**
+*by Martha Wells*
+
+**All Systems Red**
+*by Martha Wells*
+
+**Howards End**
+*by E. M. Forster*
+
+**In The Dream House**
+*by Carmen Maria Machado*
+
+**Artificial Condition**
+*by Martha Wells*
+
+**The Southern Book Club’s Guide to Slaying Vampires**
+*by Grady Hendrix*
+
+**The Lady's Guide to Celestial Mechanics**
+*by Olivia Waite*
+
+**First Comes Love**
+*by Tom Rasmussen*
+
+**Insomnia**
+*by Marina Benjamin*
+
+**Six Months, Three Days**
+*by Charlie Jane Anders*
+
+**Earthlings**
+*by Sayaka Murata*
+
+**Normal People**
+*by Sally Rooney*
+
+**Nocturnes**
+*by Kazuo Ishiguro*
+
+**Dune Messiah**
+*by Frank Herbert*
+
+**The Magician’s Nephew**
+*by C. S. Lewis*
+
+**The Snow Queen**
+*by Joan D. Vinge*
+
+**And Now We Have Everything**
+*by Meaghan O'Connell*
+
+**Middlegame**
+*by Seanan McGuire*
+
+**A Thousand Pieces of You**
+*by Claudia Gray*
+
+**Hitchhiker’s Guide to the Galaxy: Primary Phase**
+*by Douglas Adams*
+
+**The Amber Spyglass**
+*by Philip Pullman*
+
+**The Emotional Load**
+*by Emma*
+
+**The Mental Load**
+*by Emma*
+
+**The Hunger Games**
+*by Suzanne Collins*
+
+**Motherhood**
+*by Sheila Heti*
+
+**The Subtle Knife**
+*by Philip Pullman*
+
+**Now My Heart Is Full**
+*by Laura June*
+
+**The Argonauts**
+*by Maggie Nelson*
+
+**The Facts of Life**
+*by Paula Knight*
+
+**A Wrinkle In Time**
+*by Madeline L’Engle*
+
+**How To Talk So Little Kids Will Listen**
+*by Joanna Faber and Julie King*
+
+**Northern Lights**
+*by Philip Pullman*
+
+**The Turn of the Screw**
+*by Henry James*
+
+**And Then There Were None**
+*by Agatha Christie*
+
+**Growing Up Disabled in Australia**
+*by Carly Findlay*
+
+**Because We Are Bad**
+*by Lily Bailey*
+
+**All the Birds in the Sky**
+*by Charlie Jane Anders*
+
+**The Waves**
+*by Virginia Woolf*
+
+**Percy Jackson and the Lightning Thief**
+*by Rick Riordan*
+
+**Milkman**
+*by Anna Burns*
+
+**Mrs. Dalloway**
+*by Virginia Woolf*
+
+**Herland**
+*by Charlotte Perkins Gilman*
+
+**The Plague**
+*by Albert Camus*
+
+**The Paying Guests**
+*by Sarah Waters*
+
+**The Encounter**
+*by K. A. Applegate*
+
+**The Visitor**
+*by K. A. Applegate*
+
+**The Invasion**
+*by K. A. Applegate*
+
+**The Queen's Gambit**
+*by Walter Tevis*
+
+**The Three-Body Problem**
+*by Cixin Liu*
+
+**Milkman**
+*by Anna Burns*
+
+**Magic for Liars**
+*by Sarah Gailey*
+
+**Crown of Midnight**
+*by Sarah J. Maas*
+
+**Interview With The Vampire**
+*by Anne Rice*
+
+**The Song of Achilles**
+*by Madeline Miller*
+
+**Fingersmith**
+*by Sarah Waters*
+
+**Noumenon**
+*by Marina J. Lostetter*
+
+**Terra Nullius**
+*by Claire G. Coleman*
+
+**Mr. Penumbra's 24-Hour Bookstore**
+*by Robin Sloan*
+
+**Dune**
+*by Frank Herbert*
+
+**The Seven Husbands of Evelyn Hugo**
+*by Taylor Jenkins Reid*
+
+**Throne of Glass**
+*by Sarah J. Maas*
+
+**The Sinister Mystery of the Mesmerizing Girl**
+*by Theodora Goss*
+
+**The Ballad of Songbirds and Snakes**
+*by Suzanne Collins*
+
+**Tipping the Velvet**
+*by Sarah Waters*
+
