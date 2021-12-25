@@ -6,13 +6,17 @@ require_relative './trello/extract'
 require_relative './trello/filter'
 require_relative './trello/format'
 require_relative './notion/convert'
+require_relative './notion/filter'
 include Convert
+include Filter
 
 class App
   def self.generate(year, data_file)
     books = csv_to_books File.read(data_file)
     {
-      total: books.size
+      total: books.size,
+      done: filter_by_status(books)[:done].size,
+      current: filter_by_status(books)[:current].size,
     }
   end
 

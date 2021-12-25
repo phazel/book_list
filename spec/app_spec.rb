@@ -13,8 +13,8 @@ describe App do
     end
     it { expect(summary[:total]).to     eq(9) }
 
-    # it { expect(summary[:read]).to     eq(4) }
-    # it { expect(summary[:current]).to   eq(3) }
+    it { expect(summary[:done]).to     eq(4) }
+    it { expect(summary[:current]).to   eq(3) }
 
     # it { expect(summary[:audiobook]).to eq(1) }
     # it { expect(summary[:physical]).to  eq(1) }
