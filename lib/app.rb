@@ -39,7 +39,7 @@ class App
     }
 
     output = Format.result year, sections, current
-    File.write "#{year}/books_read_#{year}.md", output.join
+    File.write "#{year}/trello_books_read_#{year}.md", output.join
 
     {
       count: sections[:count],
