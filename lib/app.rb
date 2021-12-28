@@ -11,9 +11,17 @@ include Convert
 include Filter
 
 class App
-  def self.generate(year, data_file)
-    books = csv_to_books File.read(data_file)
+  def self.generate(data_file, output_file)
+    books = get_books(data_file)
+    output(books, output_file)
+    summary(books)
+  end
 
+  def self.get_books(data_file)
+    csv_to_books File.read(data_file)
+  end
+
+  def self.output(books, output_file)
     output = [
       "Currently reading:\n",
       filter_by_status(books)[:current],
@@ -21,8 +29,10 @@ class App
       "Read this year:\n",
       filter_by_status(books)[:done],
     ]
-    File.write "#{year}/books_read_#{year}.md", output.join
+    File.write output_file, output.join
+  end
 
+  def self.summary(books)
     {
       total: books.size,
       done: filter_by_status(books)[:done].size,

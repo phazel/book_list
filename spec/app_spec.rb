@@ -3,8 +3,8 @@
 require 'app'
 
 # Note: This test requires a real csv file with dummy data
-YEAR = '2021'
-summary = App.generate YEAR, "#{YEAR}/dummy.csv"
+books = App.get_books "2021/dummy.csv"
+summary = App.summary(books)
 
 describe App do
   describe '.convert' do
