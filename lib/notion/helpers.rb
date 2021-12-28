@@ -1,18 +1,28 @@
 # frozen_string_literal: true
 
 module Helpers
-  def csv_converters
-    CSV::HeaderConverters[:title] = lambda do |header|
-      header == 'Name' || header == "\u{feff}Name" ? 'Title' : header
-    end
-    CSV::Converters[:status] = lambda do |status|
-      ALT_STATUSES.include?(status) ? ALT_STATUSES[status] : status
-    end
-    CSV::Converters[:blank_to_nil] = lambda do |value|
-      value && value.empty? ? nil : value
+  module Convert
+    ALT_STATUSES = { '📖 Reading 📖' => 'current', 'Read 2021' => 'done' }
+
+    def csv_converters
+      CSV::HeaderConverters[:title] = method(:title)
+      CSV::Converters[:status] = method(:alt_status)
+      CSV::Converters[:blank_to_nil] = method(:blank_to_nil)
+
+      CSV::HeaderConverters[:all] = [ :title, :symbol ]
+      CSV::Converters[:mine] = [ :all, :blank_to_nil, :status ]
     end
 
-    CSV::HeaderConverters[:all] = [ :title, :symbol ]
-    CSV::Converters[:mine] = [ :all, :blank_to_nil, :status ]
+    def title(header)
+      header == 'Name' || header == "\u{feff}Name" ? 'Title' : header
+    end
+
+    def alt_status(status)
+      ALT_STATUSES.include?(status) ? ALT_STATUSES[status] : status
+    end
+
+    def blank_to_nil(value)
+      value && value.empty? ? nil : value
+    end
   end
 end

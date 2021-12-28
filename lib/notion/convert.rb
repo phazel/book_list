@@ -3,9 +3,7 @@
 require 'csv'
 require_relative '../notion/models/book'
 require_relative './helpers'
-include Helpers
-
-ALT_STATUSES = { '📖 Reading 📖' => 'current', 'Read 2021' => 'done' }
+include Helpers::Convert
 
 module Convert
   def split_strings(hash, keys)
