@@ -37,6 +37,9 @@ class App
       total: books.size,
       done: filter_by_status(books)[:done].size,
       current: filter_by_status(books)[:current].size,
+      audiobook: filter_by_format(books)[:audiobook].size,
+      ebook: filter_by_format(books)[:ebook].size,
+      physical: filter_by_format(books)[:physical].size,
     }
   end
 
