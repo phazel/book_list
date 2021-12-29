@@ -6,15 +6,20 @@ module Helpers
 
     def csv_converters
       CSV::HeaderConverters[:title] = method(:title)
+      CSV::HeaderConverters[:formats] = method(:formats)
       CSV::Converters[:status] = method(:alt_status)
       CSV::Converters[:blank_to_nil] = method(:blank_to_nil)
 
-      CSV::HeaderConverters[:all] = [ :title, :symbol ]
+      CSV::HeaderConverters[:all] = [ :title, :formats, :symbol ]
       CSV::Converters[:mine] = [ :all, :blank_to_nil, :status ]
     end
 
     def title(header)
       header == 'Name' || header == "\u{feff}Name" ? 'Title' : header
+    end
+
+    def formats(header)
+      header == 'Format' || header == "\u{feff}Format" ? 'Formats' : header
     end
 
     def alt_status(status)

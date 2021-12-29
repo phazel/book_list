@@ -6,7 +6,7 @@ module Filter
   end
   def filter_by_format(books)
     books.inject([]) do |pairs, book|
-      book.format.each { |format| pairs.push [format, book] }
+      book.formats.each { |format| pairs.push [format, book] }
       pairs
     end.group_by { |pair| pair[0] }
     .transform_values { |value| value.map{|item| item[1] } }

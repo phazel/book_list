@@ -17,7 +17,7 @@ module Convert
     csv_converters
     CSV.new(csv, headers: true, header_converters: :all, converters: :mine)
       .map { |row| row.to_h }
-      .map { |hash| split_strings(hash, [:format]) }
+      .map { |hash| split_strings(hash, [:formats]) }
   end
 
   def hash_to_book(hash)
@@ -25,7 +25,7 @@ module Convert
       title: hash[:title],
       author: hash[:author],
       status: hash[:status],
-      format: hash[:format]
+      formats: hash[:formats],
     )
   end
 

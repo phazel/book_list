@@ -15,13 +15,13 @@ module TestData
     Shaping the Fractured Self: Poetry of Chronic Illness and Pain,Heather Taylor Johnson (Editor),physical,Paused
   BOOKS
 
-  DUNE_HASH = { title: 'Dune', author: 'Frank Herbert', status: 'current', format: ['audiobook'] }
-  WOLF_HALL_HASH = { title: 'Wolf Hall', author: 'Hilary Mantel', status: 'done', format: ['audiobook'] }
-  STOIC_HASH = { title: 'Letters From a Stoic', author: 'Seneca', status: 'done', format: ['audiobook'] }
-  OTHER_PARTIES_HASH = { title: 'Her Body and Other Parties', author: 'Carmen Maria Machado', status: 'current', format: ['physical', 'read aloud'] }
-  IF_FORTUNATE_HASH = { title: 'To Be Taught, If Fortunate', author: 'Becky Chambers', status: 'done', format: ['physical', 'read aloud'] }
-  WE_HASH = { title: 'We', author: 'Yevgeny Zamyatin', status: 'To Read', format: ['audiobook', 'ebook', 'physical'] }
-  FRACTURED_SELF_HASH = { title: 'Shaping the Fractured Self: Poetry of Chronic Illness and Pain', author: 'Heather Taylor Johnson (Editor)', status: 'Paused', format: ['physical'] }
+  DUNE_HASH = { title: 'Dune', author: 'Frank Herbert', status: 'current', formats: ['audiobook'] }
+  WOLF_HALL_HASH = { title: 'Wolf Hall', author: 'Hilary Mantel', status: 'done', formats: ['audiobook'] }
+  STOIC_HASH = { title: 'Letters From a Stoic', author: 'Seneca', status: 'done', formats: ['audiobook'] }
+  OTHER_PARTIES_HASH = { title: 'Her Body and Other Parties', author: 'Carmen Maria Machado', status: 'current', formats: ['physical', 'read aloud'] }
+  IF_FORTUNATE_HASH = { title: 'To Be Taught, If Fortunate', author: 'Becky Chambers', status: 'done', formats: ['physical', 'read aloud'] }
+  WE_HASH = { title: 'We', author: 'Yevgeny Zamyatin', status: 'To Read', formats: ['audiobook', 'ebook', 'physical'] }
+  FRACTURED_SELF_HASH = { title: 'Shaping the Fractured Self: Poetry of Chronic Illness and Pain', author: 'Heather Taylor Johnson (Editor)', status: 'Paused', formats: ['physical'] }
   HASHES = [DUNE_HASH, WOLF_HALL_HASH, STOIC_HASH, OTHER_PARTIES_HASH, IF_FORTUNATE_HASH, WE_HASH, FRACTURED_SELF_HASH]
 
   DUNE = hash_to_book(DUNE_HASH)

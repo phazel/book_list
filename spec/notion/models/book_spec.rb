@@ -6,13 +6,13 @@ describe Book do
   let(:title) { 'Good Book' }
   let(:author) { 'Good Writer' }
   let(:status) { 'To Read' }
-  let(:format) { ['audiobook'] }
+  let(:formats) { ['audiobook'] }
   subject do
     Book.new(
       title: title,
       author: author,
       status: status,
-      format: format
+      formats: formats
     )
   end
 
@@ -23,11 +23,11 @@ describe Book do
         title: title,
         author: author,
         status: status,
-        format: format
+        formats: formats
       )
     end
     it 'errors on missing paramters' do
-      missing = ':title, :author, :status, :format'
+      missing = ':title, :author, :status, :formats'
       expect { Book.new }.to raise_error(ArgumentError, "missing keywords: #{missing}")
     end
   end

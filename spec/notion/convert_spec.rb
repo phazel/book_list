@@ -18,7 +18,7 @@ describe 'Convert' do
     it { expect(csv_to_hashes(CSV_DATA)).to be_an(Array) }
     it { expect(csv_to_hashes(CSV_DATA)).to all(be_a(Hash)) }
     it 'contains hashes all with the required keys' do
-      required_keys = [:title, :author, :status, :format]
+      required_keys = [:title, :author, :status, :formats]
       expect(csv_to_hashes(CSV_DATA).map(&:keys)).to all(include *required_keys)
     end
     it 'converts a csv string to an array of hashes' do

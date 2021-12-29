@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'notion/helpers'
-include Helpers
+include Helpers::Convert
 
 describe 'Helpers' do
   describe 'Convert' do
@@ -17,6 +17,21 @@ describe 'Helpers' do
       end
       it 'does not convert a different header with Byte Order Mark character' do
         expect(title("\u{feff}Format")).to eq("\u{feff}Format")
+      end
+    end
+
+    describe '.formats' do
+      it "converts header 'Format' to 'Formats'" do
+        expect(formats('Format')).to eq('Formats')
+      end
+      it "converts when 'Format' starts with Byte Order Mark character" do
+        expect(formats("\u{feff}Format")).to eq('Formats')
+      end
+      it 'does not convert a different header' do
+        expect(formats('Elsewhise')).to eq('Elsewhise')
+      end
+      it 'does not convert a different header with Byte Order Mark character' do
+        expect(formats("\u{feff}Elsewhise")).to eq("\u{feff}Elsewhise")
       end
     end
 
