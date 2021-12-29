@@ -6,13 +6,13 @@ describe Book do
   let(:title) { 'Good Book' }
   let(:author) { 'Good Writer' }
   let(:status) { 'To Read' }
-  let(:formats) { ['audiobook'] }
+  let(:formats) { ['audiobook', 'physical'] }
   subject do
     Book.new(
       title: title,
       author: author,
       status: status,
-      formats: formats
+      formats: formats,
     )
   end
 
@@ -23,12 +23,28 @@ describe Book do
         title: title,
         author: author,
         status: status,
-        formats: formats
+        formats: formats,
       )
     end
     it 'errors on missing paramters' do
       missing = ':title, :author, :status, :formats'
       expect { Book.new }.to raise_error(ArgumentError, "missing keywords: #{missing}")
     end
+  end
+
+  describe '#format_emojis' do
+    it 'has audiobook emoji' do
+      expect(subject.format_emojis).to eq('🎧📖')
+    end
+  end
+
+  describe '#to_s' do
+    output = <<~BOOK
+      **Good Book**
+      *by Good Writer*
+      Format: 🎧📖
+
+    BOOK
+    it { expect(subject.to_s).to eq(output) }
   end
 end

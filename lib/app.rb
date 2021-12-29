@@ -25,7 +25,7 @@ class App
     output = [
       "Currently reading:\n",
       filter_by_status(books)[:current],
-      "\n\n",
+      "---\n\n",
       "Read this year:\n",
       filter_by_status(books)[:done],
     ]

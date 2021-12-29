@@ -10,10 +10,18 @@ class Book
     @formats = formats
   end
 
+  def format_emojis
+    audiobook = @formats.include? 'audiobook'
+    ebook = @formats.include? 'ebook'
+    physical = @formats.include? 'physical'
+    "#{'💾' if ebook}#{'🎧' if audiobook}#{'📖' if physical}"
+  end
+
   def to_s
     <<~BOOK
       **#{@title}**
       *by #{@author}*
+      Format: #{format_emojis}
 
     BOOK
   end
