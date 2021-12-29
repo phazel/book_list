@@ -16,9 +16,9 @@ describe App do
     it { expect(summary[:done]).to     eq(4) }
     it { expect(summary[:current]).to   eq(3) }
 
-    it { expect(summary[:audiobook]).to eq(5) }
-    it { expect(summary[:ebook]).to     eq(3) }
-    it { expect(summary[:physical]).to  eq(4) }
+    it { expect(summary[:audiobook]).to eq(3) }
+    it { expect(summary[:ebook]).to     eq(2) }
+    it { expect(summary[:physical]).to  eq(1) }
 
     # it { expect(summary[:fav]).to       eq(22) }
     # it { expect(summary[:dups]).to      eq("hello") }

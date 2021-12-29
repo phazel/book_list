@@ -33,13 +33,14 @@ class App
   end
 
   def self.summary(books)
+    done_books = filter_by_status(books)[:done]
     {
       total: books.size,
-      done: filter_by_status(books)[:done].size,
+      done: done_books.size,
       current: filter_by_status(books)[:current].size,
-      audiobook: filter_by_format(books)[:audiobook].size,
-      ebook: filter_by_format(books)[:ebook].size,
-      physical: filter_by_format(books)[:physical].size,
+      audiobook: filter_by_format(done_books)[:audiobook].size,
+      ebook: filter_by_format(done_books)[:ebook].size,
+      physical: filter_by_format(done_books)[:physical].size,
     }
   end
 
