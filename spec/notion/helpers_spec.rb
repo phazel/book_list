@@ -5,18 +5,18 @@ include Helpers::Convert
 
 describe 'Helpers' do
   describe 'Convert' do
-    describe '.title' do
+    describe '.title_converter' do
       it "converts header 'Name' to 'Title'" do
-        expect(title('Name')).to eq('Title')
+        expect(title_converter('Name')).to eq('Title')
       end
       it "converts when 'Name' starts with Byte Order Mark character" do
-        expect(title("\u{feff}Name")).to eq('Title')
+        expect(title_converter("\u{feff}Name")).to eq('Title')
       end
       it 'does not convert a different header' do
-        expect(title('Format')).to eq('Format')
+        expect(title_converter('Format')).to eq('Format')
       end
       it 'does not convert a different header with Byte Order Mark character' do
-        expect(title("\u{feff}Format")).to eq("\u{feff}Format")
+        expect(title_converter("\u{feff}Format")).to eq("\u{feff}Format")
       end
     end
 

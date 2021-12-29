@@ -5,7 +5,7 @@ module Helpers
     ALT_STATUSES = { '📖 Reading 📖' => 'current', 'Read 2021' => 'done' }
 
     def csv_converters
-      CSV::HeaderConverters[:title] = method(:title)
+      CSV::HeaderConverters[:title] = method(:title_converter)
       CSV::HeaderConverters[:formats] = method(:formats)
       CSV::Converters[:status] = method(:alt_status)
       CSV::Converters[:blank_to_nil] = method(:blank_to_nil)
@@ -14,7 +14,7 @@ module Helpers
       CSV::Converters[:mine] = [ :all, :blank_to_nil, :status ]
     end
 
-    def title(header)
+    def title_converter(header)
       header == 'Name' || header == "\u{feff}Name" ? 'Title' : header
     end
 
