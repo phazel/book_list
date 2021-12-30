@@ -23,32 +23,33 @@ class App
 
   def self.output(books, output_file)
     done_books = filter_by_status(books)[:done]
-    deduped = dedup(done_books)
+    dups, non_dups = dedup(done_books).values_at(:dups, :non_dups)
     output = [
       "Books I Read More Than Once:\n",
-      deduped[:dups],
+      dups,
       "---\n\n",
       "Currently reading:\n",
       filter_by_status(books)[:current],
       "---\n\n",
       "Read this year:\n",
-      deduped[:non_dups],
+      non_dups,
     ]
     File.write output_file, output.join
   end
 
   def self.summary(books)
-    done_books = filter_by_status(books)[:done]
-    deduped = dedup(done_books)
+    done, current = filter_by_status(books).fetch_values(:done, :current)
+    dups, non_dups, all = dedup(done).fetch_values(:dups, :non_dups, :all)
+    audiobook, ebook, physical = filter_by_format(all).fetch_values(:audiobook, :ebook, :physical)
     {
       total: books.size,
       total_deduped: dedup(books)[:all].size,
-      done: deduped[:all].size,
-      current: filter_by_status(books)[:current].size,
-      audiobook: filter_by_format(deduped[:all])[:audiobook].size,
-      ebook: filter_by_format(deduped[:all])[:ebook].size,
-      physical: filter_by_format(deduped[:all])[:physical].size,
-      dups: deduped[:dups].size,
+      done: all.size,
+      current: current.size,
+      audiobook: audiobook.size,
+      ebook: ebook.size,
+      physical: physical.size,
+      dups: dups.size,
     }
   end
 
