@@ -78,6 +78,23 @@ describe Book do
     end
   end
 
+  describe '#sleep_emoji' do
+    it 'has moon with space if tags contains :sleep' do
+      sleep = Book.new(
+        title: title,
+        author: author,
+        status: status,
+        formats: formats,
+        fav: true,
+        tags: [:sleep],
+      )
+      expect(sleep.sleep_emoji).to eq(' 💤')
+    end
+    it 'has empty string if tags does not contain :sleep' do
+      expect(subject.sleep_emoji).to eq('')
+    end
+  end
+
   describe '#to_s' do
     output = <<~BOOK
       **Good Book**

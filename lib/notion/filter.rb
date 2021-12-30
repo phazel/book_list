@@ -22,6 +22,11 @@ module Filter
     books.group_by { |book| book.tags.include?(:nat) ? :nat : :non_nat }
   end
 
+  def filter_by_sleep(books)
+    grouped = books.group_by { |book| book.tags.include?(:sleep) ? :sleep : :non_sleep }
+    grouped.ensure([:sleep, :non_sleep])
+  end
+
   def dup?(book1, book2)
     book1.title == book2.title &&
     book1.author == book2.author &&

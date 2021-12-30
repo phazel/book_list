@@ -16,6 +16,11 @@ class Hash
     results = items.map{|item| item.nil? ? [] : item }
     results.size == 1 ? results.first : results
   end
+  def ensure(keys)
+    keys.reduce(self) do |memo, key|
+      memo[key].nil? ? memo.merge({ key => [] }) : memo
+    end
+  end
 end
 
 class App
@@ -54,6 +59,7 @@ class App
     dups, all = dedup(done).splat(:dups, :all)
     fav = filter_by_fav(all)[:fav]
     nat = filter_by_nat(all)[:nat]
+    sleep = filter_by_sleep(all)[:sleep]
     audiobook, ebook, physical = filter_by_format(all).splat(:audiobook, :ebook, :physical)
     {
       total: books.size,
@@ -66,6 +72,7 @@ class App
       dups: dups.size,
       fav: fav.size,
       nat: nat.size,
+      sleep: sleep.size,
     }
   end
 

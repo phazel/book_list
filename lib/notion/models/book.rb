@@ -27,12 +27,16 @@ class Book
     "#{ ' 💞' if @tags.include? :nat }"
   end
 
+  def sleep_emoji
+    "#{ ' 💤' if @tags.include? :sleep }"
+  end
+
   def to_s
     <<~BOOK
       **#{@title}**#{fav_emoji}
       *by #{@author}*
       Format:#{format_emojis}
-      Tags:#{nat_emoji}
+      Tags:#{nat_emoji}#{sleep_emoji}
 
     BOOK
   end
