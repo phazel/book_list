@@ -1,3 +1,10 @@
+Books I Read More Than Once:
+**Milkman**
+*by Anna Burns*
+Format: 🎧
+
+---
+
 Currently reading:
 **Dune**
 *by Frank Herbert*
@@ -202,10 +209,6 @@ Format: 🎧
 *by Rick Riordan*
 Format: 🎧
 
-**Milkman**
-*by Anna Burns*
-Format: 🎧
-
 **Mrs. Dalloway**
 *by Virginia Woolf*
 Format: 🎧
@@ -240,10 +243,6 @@ Format: 🎧
 
 **The Three-Body Problem**
 *by Cixin Liu*
-Format: 🎧
-
-**Milkman**
-*by Anna Burns*
 Format: 🎧
 
 **Magic for Liars**

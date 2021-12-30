@@ -22,12 +22,17 @@ class App
   end
 
   def self.output(books, output_file)
+    done_books = filter_by_status(books)[:done]
+    deduped = dedup(done_books)
     output = [
+      "Books I Read More Than Once:\n",
+      deduped[:dups],
+      "---\n\n",
       "Currently reading:\n",
       filter_by_status(books)[:current],
       "---\n\n",
       "Read this year:\n",
-      filter_by_status(books)[:done],
+      deduped[:non_dups],
     ]
     File.write output_file, output.join
   end
