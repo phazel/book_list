@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class Book
-  attr_reader :title, :author, :status, :formats
+  attr_reader :title, :author, :status, :formats, :fav
 
-  def initialize(title:, author:, status:, formats:)
+  def initialize(title:, author:, status:, formats:, fav:)
     @title  = title
     @author = author
     @status = status
     @formats = formats
+    @fav = fav
   end
 
   def format_emojis
@@ -17,9 +18,13 @@ class Book
     "#{'💾' if ebook}#{'🎧' if audiobook}#{'📖' if physical}"
   end
 
+  def fav_emoji
+    "#{' 🌟' if @fav}"
+  end
+
   def to_s
     <<~BOOK
-      **#{@title}**
+      **#{@title}**#{fav_emoji}
       *by #{@author}*
       Format: #{format_emojis}
 

@@ -35,6 +35,21 @@ describe 'Helpers' do
       end
     end
 
+    describe '.fav' do
+      it "converts header '⭐️' to 'Fav'" do
+        expect(fav('⭐️')).to eq('Fav')
+      end
+      it "converts when '⭐️' starts with Byte Order Mark character" do
+        expect(fav("\u{feff}⭐️")).to eq('Fav')
+      end
+      it 'does not convert a different header' do
+        expect(fav('Elsewhise')).to eq('Elsewhise')
+      end
+      it 'does not convert a different header with Byte Order Mark character' do
+        expect(fav("\u{feff}Elsewhise")).to eq("\u{feff}Elsewhise")
+      end
+    end
+
     describe '.alt_status' do
       it "converts status '📖 Reading 📖' to 'current'" do
         expect(alt_status('📖 Reading 📖')).to eq('current')

@@ -7,12 +7,14 @@ describe Book do
   let(:author) { 'Good Writer' }
   let(:status) { 'To Read' }
   let(:formats) { ['audiobook', 'physical'] }
+  let(:fav) { false }
   subject do
     Book.new(
       title: title,
       author: author,
       status: status,
       formats: formats,
+      fav: fav,
     )
   end
 
@@ -24,10 +26,11 @@ describe Book do
         author: author,
         status: status,
         formats: formats,
+        fav: fav,
       )
     end
     it 'errors on missing paramters' do
-      missing = ':title, :author, :status, :formats'
+      missing = ':title, :author, :status, :formats, :fav'
       expect { Book.new }.to raise_error(ArgumentError, "missing keywords: #{missing}")
     end
   end
@@ -35,6 +38,22 @@ describe Book do
   describe '#format_emojis' do
     it 'has audiobook emoji' do
       expect(subject.format_emojis).to eq('🎧📖')
+    end
+  end
+
+  describe '#fav_emoji' do
+    it 'has empty string if not a favourite' do
+      expect(subject.fav_emoji).to eq('')
+    end
+    it 'has star emoji and space if favourite' do
+      fav = Book.new(
+        title: title,
+        author: author,
+        status: status,
+        formats: formats,
+        fav: true,
+      )
+      expect(fav.fav_emoji).to eq(' 🌟')
     end
   end
 

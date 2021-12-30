@@ -13,11 +13,16 @@ module Convert
     end
   end
 
+  def fav_bool(hash)
+    hash.merge({ fav: hash[:fav].to_s.downcase == 'yes' })
+  end
+
   def csv_to_hashes(csv)
     csv_converters
     CSV.new(csv, headers: true, header_converters: :all, converters: :mine)
       .map { |row| row.to_h }
       .map { |hash| split_strings(hash, [:formats]) }
+      .map { |hash| fav_bool(hash) }
   end
 
   def hash_to_book(hash)
@@ -26,6 +31,7 @@ module Convert
       author: hash[:author],
       status: hash[:status],
       formats: hash[:formats],
+      fav: hash[:fav],
     )
   end
 

@@ -14,6 +14,10 @@ module Filter
     .transform_keys { |key| key.downcase.tr(" ", "_").to_sym }
   end
 
+  def filter_by_fav(books)
+    books.group_by { |book| book.fav ? :fav : :non_fav }
+  end
+
   def dup?(book1, book2)
     book1.title == book2.title &&
     book1.author == book2.author &&
@@ -61,6 +65,10 @@ module Filter
     (formats1 + formats2).uniq
   end
 
+  def dedupe_fav(fav1, fav2)
+    fav1 || fav2
+  end
+
   def dedupe_book(book1, book2)
     throw StandardError.new('Books must be duplicates') unless dup?(book1, book2)
     Book.new(
@@ -68,6 +76,7 @@ module Filter
       author: book1.author,
       status: dedupe_status(book1.status, book2.status),
       formats: dedupe_formats(book1.formats, book2.formats),
+      fav: dedupe_fav(book1.fav, book2.fav),
     )
   end
 

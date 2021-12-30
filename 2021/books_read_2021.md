@@ -1,16 +1,115 @@
 Books I Read More Than Once:
-**Milkman**
+**Milkman** 🌟
 *by Anna Burns*
 Format: 🎧
 
 ---
 
-Currently reading:
-**Dune**
+Favourites:
+**Wolf Hall** 🌟
+*by Hilary Mantel*
+Format: 🎧
+
+**To Be Taught, If Fortunate** 🌟
+*by Becky Chambers*
+Format: 📖
+
+**Northanger Abbey** 🌟
+*by Jane Austen*
+Format: 💾
+
+**Punished By Rewards** 🌟
+*by Alfie Kohn*
+Format: 🎧
+
+**The Invisible Life of Addie LaRue** 🌟
+*by V.E. Schwab*
+Format: 🎧
+
+**In The Dream House** 🌟
+*by Carmen Maria Machado*
+Format: 🎧
+
+**Insomnia** 🌟
+*by Marina Benjamin*
+Format: 🎧
+
+**Normal People** 🌟
+*by Sally Rooney*
+Format: 🎧
+
+**Nocturnes** 🌟
+*by Kazuo Ishiguro*
+Format: 🎧
+
+**Dune Messiah** 🌟
 *by Frank Herbert*
 Format: 🎧
 
-**Her Body and Other Parties**
+**The Magician’s Nephew** 🌟
+*by C. S. Lewis*
+Format: 📖
+
+**The Amber Spyglass** 🌟
+*by Philip Pullman*
+Format: 🎧
+
+**Motherhood** 🌟
+*by Sheila Heti*
+Format: 🎧
+
+**The Subtle Knife** 🌟
+*by Philip Pullman*
+Format: 🎧
+
+**The Argonauts** 🌟
+*by Maggie Nelson*
+Format: 🎧
+
+**Northern Lights** 🌟
+*by Philip Pullman*
+Format: 🎧
+
+**The Plague** 🌟
+*by Albert Camus*
+Format: 🎧
+
+**The Three-Body Problem** 🌟
+*by Cixin Liu*
+Format: 🎧
+
+**Interview With The Vampire** 🌟
+*by Anne Rice*
+Format: 🎧
+
+**The Song of Achilles** 🌟
+*by Madeline Miller*
+Format: 💾
+
+**Fingersmith** 🌟
+*by Sarah Waters*
+Format: 🎧
+
+**Terra Nullius** 🌟
+*by Claire G. Coleman*
+Format: 🎧
+
+**Dune** 🌟
+*by Frank Herbert*
+Format: 🎧
+
+**The Seven Husbands of Evelyn Hugo** 🌟
+*by Taylor Jenkins Reid*
+Format: 🎧
+
+---
+
+Currently reading:
+**Dune** 🌟
+*by Frank Herbert*
+Format: 🎧
+
+**Her Body and Other Parties** 🌟
 *by Carmen Maria Machado*
 Format: 📖
 
@@ -25,32 +124,12 @@ Read this year:
 *by Seneca*
 Format: 🎧
 
-**Wolf Hall**
-*by Hilary Mantel*
-Format: 🎧
-
-**To Be Taught, If Fortunate**
-*by Becky Chambers*
-Format: 📖
-
-**Northanger Abbey**
-*by Jane Austen*
-Format: 💾
-
 **The Lord of the Rings: The Return of the King**
 *by J. R. R. Tolkien*
 Format: 🎧
 
-**Punished By Rewards**
-*by Alfie Kohn*
-Format: 🎧
-
 **The House in the Cerulean Sea**
 *by T.J. Klune*
-Format: 🎧
-
-**The Invisible Life of Addie LaRue**
-*by V.E. Schwab*
 Format: 🎧
 
 **Rogue Protocol**
@@ -63,10 +142,6 @@ Format: 🎧
 
 **Howards End**
 *by E. M. Forster*
-Format: 🎧
-
-**In The Dream House**
-*by Carmen Maria Machado*
 Format: 🎧
 
 **Artificial Condition**
@@ -85,10 +160,6 @@ Format: 🎧
 *by Tom Rasmussen*
 Format: 🎧
 
-**Insomnia**
-*by Marina Benjamin*
-Format: 🎧
-
 **Six Months, Three Days**
 *by Charlie Jane Anders*
 Format: 🎧
@@ -96,22 +167,6 @@ Format: 🎧
 **Earthlings**
 *by Sayaka Murata*
 Format: 🎧
-
-**Normal People**
-*by Sally Rooney*
-Format: 🎧
-
-**Nocturnes**
-*by Kazuo Ishiguro*
-Format: 🎧
-
-**Dune Messiah**
-*by Frank Herbert*
-Format: 🎧
-
-**The Magician’s Nephew**
-*by C. S. Lewis*
-Format: 📖
 
 **The Snow Queen**
 *by Joan D. Vinge*
@@ -133,10 +188,6 @@ Format: 🎧
 *by Douglas Adams*
 Format: 🎧
 
-**The Amber Spyglass**
-*by Philip Pullman*
-Format: 🎧
-
 **The Emotional Load**
 *by Emma*
 Format: 📖
@@ -149,20 +200,8 @@ Format: 📖
 *by Suzanne Collins*
 Format: 🎧
 
-**Motherhood**
-*by Sheila Heti*
-Format: 🎧
-
-**The Subtle Knife**
-*by Philip Pullman*
-Format: 🎧
-
 **Now My Heart Is Full**
 *by Laura June*
-Format: 🎧
-
-**The Argonauts**
-*by Maggie Nelson*
 Format: 🎧
 
 **The Facts of Life**
@@ -175,10 +214,6 @@ Format: 🎧
 
 **How To Talk So Little Kids Will Listen**
 *by Joanna Faber and Julie King*
-Format: 🎧
-
-**Northern Lights**
-*by Philip Pullman*
 Format: 🎧
 
 **The Turn of the Screw**
@@ -217,10 +252,6 @@ Format: 🎧
 *by Charlotte Perkins Gilman*
 Format: 🎧
 
-**The Plague**
-*by Albert Camus*
-Format: 🎧
-
 **The Paying Guests**
 *by Sarah Waters*
 Format: 🎧
@@ -241,10 +272,6 @@ Format: 💾
 *by Walter Tevis*
 Format: 🎧
 
-**The Three-Body Problem**
-*by Cixin Liu*
-Format: 🎧
-
 **Magic for Liars**
 *by Sarah Gailey*
 Format: 🎧
@@ -253,36 +280,12 @@ Format: 🎧
 *by Sarah J. Maas*
 Format: 🎧
 
-**Interview With The Vampire**
-*by Anne Rice*
-Format: 🎧
-
-**The Song of Achilles**
-*by Madeline Miller*
-Format: 💾
-
-**Fingersmith**
-*by Sarah Waters*
-Format: 🎧
-
 **Noumenon**
 *by Marina J. Lostetter*
 Format: 🎧
 
-**Terra Nullius**
-*by Claire G. Coleman*
-Format: 🎧
-
 **Mr. Penumbra's 24-Hour Bookstore**
 *by Robin Sloan*
-Format: 🎧
-
-**Dune**
-*by Frank Herbert*
-Format: 🎧
-
-**The Seven Husbands of Evelyn Hugo**
-*by Taylor Jenkins Reid*
 Format: 🎧
 
 **Throne of Glass**

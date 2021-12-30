@@ -14,6 +14,17 @@ describe 'Convert' do
     end
   end
 
+  describe '.fav_bool' do
+    it { expect(fav_bool({fav: 'Yes'})).to eq({fav: true}) }
+    it { expect(fav_bool({fav: 'yes'})).to eq({fav: true}) }
+    it { expect(fav_bool({fav: 'YES'})).to eq({fav: true}) }
+    it { expect(fav_bool({fav: 'No'})).to eq({fav: false}) }
+    it { expect(fav_bool({fav: 'no'})).to eq({fav: false}) }
+    it { expect(fav_bool({fav: 'NO'})).to eq({fav: false}) }
+    it { expect(fav_bool({fav: 'something'})).to eq({fav: false}) }
+    it { expect(fav_bool({})).to eq({fav: false}) }
+  end
+
   describe '.csv_to_hashes' do
     it { expect(csv_to_hashes(CSV_DATA)).to be_an(Array) }
     it { expect(csv_to_hashes(CSV_DATA)).to all(be_a(Hash)) }

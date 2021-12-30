@@ -10,6 +10,14 @@ require_relative './notion/filter'
 include Convert
 include Filter
 
+class Hash
+  def splat(*args)
+    items = args.reduce([]) {|memo, key| memo.push self[key] }
+    results = items.map{|item| item.nil? ? [] : item }
+    results.size == 1 ? results.first : results
+  end
+end
+
 class App
   def self.generate(data_file, output_file)
     books = get_books(data_file)
@@ -22,25 +30,30 @@ class App
   end
 
   def self.output(books, output_file)
-    done_books = filter_by_status(books)[:done]
-    dups, non_dups = dedup(done_books).values_at(:dups, :non_dups)
+    done, current = filter_by_status(books).splat(:done, :current)
+    dups, non_dups = dedup(done).splat(:dups, :non_dups)
+    fav, remaining = filter_by_fav(non_dups).splat(:fav, :non_fav)
     output = [
       "Books I Read More Than Once:\n",
       dups,
       "---\n\n",
+      "Favourites:\n",
+      fav,
+      "---\n\n",
       "Currently reading:\n",
-      filter_by_status(books)[:current],
+      current,
       "---\n\n",
       "Read this year:\n",
-      non_dups,
+      remaining,
     ]
     File.write output_file, output.join
   end
 
   def self.summary(books)
-    done, current = filter_by_status(books).fetch_values(:done, :current)
-    dups, non_dups, all = dedup(done).fetch_values(:dups, :non_dups, :all)
-    audiobook, ebook, physical = filter_by_format(all).fetch_values(:audiobook, :ebook, :physical)
+    done, current = filter_by_status(books).splat(:done, :current)
+    dups, all = dedup(done).splat(:dups, :all)
+    fav = filter_by_fav(all)[:fav]
+    audiobook, ebook, physical = filter_by_format(all).splat(:audiobook, :ebook, :physical)
     {
       total: books.size,
       total_deduped: dedup(books)[:all].size,
@@ -50,6 +63,7 @@ class App
       ebook: ebook.size,
       physical: physical.size,
       dups: dups.size,
+      fav: fav.size,
     }
   end
 

@@ -25,6 +25,11 @@ describe 'Filter' do
     it { expect(filter_by_format(books)).to eq(by_format) }
   end
 
+  describe '.filter_by_fav' do
+    by_fav = { fav: [DUNE, WOLF_HALL], non_fav: [IF_FORTUNATE] }
+    it { expect(filter_by_fav(books)).to eq(by_fav) }
+  end
+
   describe '.dup?' do
     it { expect(dup?(WE, WE_DUP)).to eq(true) }
     it { expect(dup?(WE, WE)).to eq(false) }
@@ -54,6 +59,13 @@ describe 'Filter' do
 
   describe '.dedupe_formats' do
     it { expect(dedupe_formats(['1','2','3'], ['2','4'])).to eq(['1','2','3','4']) }
+  end
+
+  describe '.dedupe_fav' do
+    it { expect(dedupe_fav(false, false)).to eq(false) }
+    it { expect(dedupe_fav(true, true)).to eq(true) }
+    it { expect(dedupe_fav(true, false)).to eq(true) }
+    it { expect(dedupe_fav(false, true)).to eq(true) }
   end
 
   describe '.dedupe_book' do

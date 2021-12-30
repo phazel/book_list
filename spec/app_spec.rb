@@ -22,7 +22,7 @@ describe App do
     it { expect(summary[:physical]).to      eq(1) }
 
     it { expect(summary[:dups]).to      eq(1) }
-    # it { expect(summary[:fav]).to       eq(22) }
+    it { expect(summary[:fav]).to       eq(3) }
     # it { expect(summary[:nat]).to       eq(25) }
     # it { expect(summary[:sleep]).to     eq(1) }
     # it { expect(summary[:dnf]).to       eq(7) }
