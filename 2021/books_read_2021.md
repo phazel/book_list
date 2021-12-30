@@ -6,6 +6,14 @@ Tags: 💞
 
 ---
 
+Books used as background noise for going to sleep:
+**The Lord of the Rings: The Return of the King**
+*by J. R. R. Tolkien*
+Format: 🎧
+Tags: 💤
+
+---
+
 Favourites:
 **Wolf Hall** 🌟
 *by Hilary Mantel*
@@ -129,34 +137,11 @@ Tags: 💞
 
 ---
 
-Currently reading:
-**Dune** 🌟
-*by Frank Herbert*
-Format: 🎧
-Tags: 💞
-
-**Her Body and Other Parties** 🌟
-*by Carmen Maria Machado*
-Format: 📖
-Tags: 💞
-
-**A Room of One’s Own & Three Guineas**
-*by Virginia Woolf*
-Format: 💾🎧
-Tags:
-
----
-
 Read this year:
 **Letters From a Stoic**
 *by Seneca*
 Format: 🎧
 Tags:
-
-**The Lord of the Rings: The Return of the King**
-*by J. R. R. Tolkien*
-Format: 🎧
-Tags: 💤
 
 **The House in the Cerulean Sea**
 *by T.J. Klune*
@@ -376,5 +361,23 @@ Tags:
 **Tipping the Velvet**
 *by Sarah Waters*
 Format: 🎧
+Tags:
+
+---
+
+Currently reading:
+**Dune** 🌟
+*by Frank Herbert*
+Format: 🎧
+Tags: 💞
+
+**Her Body and Other Parties** 🌟
+*by Carmen Maria Machado*
+Format: 📖
+Tags: 💞
+
+**A Room of One’s Own & Three Guineas**
+*by Virginia Woolf*
+Format: 💾🎧
 Tags:
 

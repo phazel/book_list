@@ -37,19 +37,23 @@ class App
   def self.output(books, output_file)
     done, current = filter_by_status(books).splat(:done, :current)
     dups, non_dups = dedup(done).splat(:dups, :non_dups)
-    fav, remaining = filter_by_fav(non_dups).splat(:fav, :non_fav)
+    fav, non_fav = filter_by_fav(non_dups).splat(:fav, :non_fav)
+    sleep, remaining = filter_by_sleep(non_fav).splat(:sleep, :non_sleep)
     output = [
       "Books I Read More Than Once:\n",
       dups,
       "---\n\n",
+      "Books used as background noise for going to sleep:\n",
+      sleep,
+      "---\n\n",
       "Favourites:\n",
       fav,
       "---\n\n",
-      "Currently reading:\n",
-      current,
-      "---\n\n",
       "Read this year:\n",
       remaining,
+      "---\n\n",
+      "Currently reading:\n",
+      current,
     ]
     File.write output_file, output.join
   end
