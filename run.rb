@@ -13,6 +13,7 @@ Data contained #{summary[:total]} books
 - You're currently reading #{summary[:current]} books
 - You read #{summary[:done]}, with status 'Read 2021'
 - You favourited #{summary[:fav]} of the total books
+- You read #{summary[:nat]} of the total books with Nat
 - #{summary[:audiobook]} of the total books are audiobooks
 - #{summary[:ebook]} of the total books are ebooks
 - #{summary[:physical]} of the total books are physical books

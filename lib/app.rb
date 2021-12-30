@@ -53,6 +53,7 @@ class App
     done, current = filter_by_status(books).splat(:done, :current)
     dups, all = dedup(done).splat(:dups, :all)
     fav = filter_by_fav(all)[:fav]
+    nat = filter_by_nat(all)[:nat]
     audiobook, ebook, physical = filter_by_format(all).splat(:audiobook, :ebook, :physical)
     {
       total: books.size,
@@ -64,6 +65,7 @@ class App
       physical: physical.size,
       dups: dups.size,
       fav: fav.size,
+      nat: nat.size,
     }
   end
 

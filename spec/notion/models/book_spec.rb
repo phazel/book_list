@@ -8,6 +8,7 @@ describe Book do
   let(:status) { 'To Read' }
   let(:formats) { ['audiobook', 'physical'] }
   let(:fav) { false }
+  let(:tags) { [:nat] }
   subject do
     Book.new(
       title: title,
@@ -15,6 +16,7 @@ describe Book do
       status: status,
       formats: formats,
       fav: fav,
+      tags: tags,
     )
   end
 
@@ -27,17 +29,18 @@ describe Book do
         status: status,
         formats: formats,
         fav: fav,
+        tags: tags,
       )
     end
     it 'errors on missing paramters' do
-      missing = ':title, :author, :status, :formats, :fav'
+      missing = ':title, :author, :status, :formats, :fav, :tags'
       expect { Book.new }.to raise_error(ArgumentError, "missing keywords: #{missing}")
     end
   end
 
   describe '#format_emojis' do
     it 'has audiobook emoji' do
-      expect(subject.format_emojis).to eq('🎧📖')
+      expect(subject.format_emojis).to eq(' 🎧📖')
     end
   end
 
@@ -52,8 +55,26 @@ describe Book do
         status: status,
         formats: formats,
         fav: true,
+        tags: tags,
       )
       expect(fav.fav_emoji).to eq(' 🌟')
+    end
+  end
+
+  describe '#nat_emoji' do
+    it 'has hearts emoji with space if tags contains :nat' do
+      expect(subject.nat_emoji).to eq(' 💞')
+    end
+    it 'has empty string if tags does not contain :nat' do
+      non_nat = Book.new(
+        title: title,
+        author: author,
+        status: status,
+        formats: formats,
+        fav: true,
+        tags: [],
+      )
+      expect(non_nat.nat_emoji).to eq('')
     end
   end
 
@@ -62,6 +83,7 @@ describe Book do
       **Good Book**
       *by Good Writer*
       Format: 🎧📖
+      Tags: 💞
 
     BOOK
     it { expect(subject.to_s).to eq(output) }

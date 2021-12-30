@@ -7,10 +7,28 @@ include TestData
 
 describe 'Convert' do
   describe '.split_strings' do
-    it 'splits values for given keys into arrays with comma delimiter' do
+    it 'splits values for given keys into arrays of strings' do
       unsplit = { a: '1, 2', b: '3, 4', c: '5, 6, 7' }
       split = { a: '1, 2', b: ['3', '4'], c: ['5', '6', '7'] }
       expect(split_strings(unsplit, [:b, :c])).to eq(split)
+    end
+    it 'handles nil' do
+      unsplit = { a: '1, 2', b: '3, 4'}
+      split = { a: '1, 2', b: ['3', '4'] }
+      expect(split_strings(unsplit, [:b, :absent])).to eq(split)
+    end
+  end
+
+  describe '.split_strings_sym' do
+    it 'splits values for given keys into arrays of symbols' do
+      unsplit = { X: 'a, b', Y: 'c, d', Z: 'e, f, g' }
+      split = { X: 'a, b', Y: [:c, :d], Z: [:e, :f, :g] }
+      expect(split_strings_sym(unsplit, [:Y, :Z])).to eq(split)
+    end
+    it 'handles nil' do
+      unsplit = { X: 'a, b', Y: 'c, d' }
+      split = { X: 'a, b', Y: [:c, :d] }
+      expect(split_strings_sym(unsplit, [:Y, :absent])).to eq(split)
     end
   end
 

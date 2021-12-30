@@ -5,23 +5,23 @@ include Convert
 
 module TestData
   CSV_DATA = <<~BOOKS
-    Name,Author,Format,Status,⭐️
-    Dune,Frank Herbert,audiobook,📖 Reading 📖,Yes
-    Wolf Hall,Hilary Mantel,audiobook,Read 2021,Yes
-    Letters From a Stoic,Seneca,audiobook,Read 2021,No
-    Her Body and Other Parties,Carmen Maria Machado,"physical, read aloud",📖 Reading 📖,Yes
-    "To Be Taught, If Fortunate",Becky Chambers,"physical, read aloud",Read 2021,No
-    We,Yevgeny Zamyatin,"audiobook, ebook, physical",To Read,No
-    Shaping the Fractured Self: Poetry of Chronic Illness and Pain,Heather Taylor Johnson (Editor),physical,Paused,No
+    Name,Author,Format,Labels,Status,⭐️
+    Dune,Frank Herbert,audiobook,nat,📖 Reading 📖,Yes
+    Wolf Hall,Hilary Mantel,audiobook,shelf,Read 2021,Yes
+    Letters From a Stoic,Seneca,audiobook,shelf,Read 2021,No
+    Her Body and Other Parties,Carmen Maria Machado,"physical, read aloud",nat,📖 Reading 📖,Yes
+    "To Be Taught, If Fortunate",Becky Chambers,"physical, read aloud","nat, shelf",Read 2021,No
+    We,Yevgeny Zamyatin,"audiobook, ebook, physical",shelf,To Read,No
+    Shaping the Fractured Self: Poetry of Chronic Illness and Pain,Heather Taylor Johnson (Editor),physical,shelf,Paused,No
   BOOKS
 
-  DUNE_HASH = { title: 'Dune', author: 'Frank Herbert', status: 'current', formats: ['audiobook'], fav: true }.freeze
-  WOLF_HALL_HASH = { title: 'Wolf Hall', author: 'Hilary Mantel', status: 'done', formats: ['audiobook'], fav: true }.freeze
-  STOIC_HASH = { title: 'Letters From a Stoic', author: 'Seneca', status: 'done', formats: ['audiobook'], fav: false }.freeze
-  OTHER_PARTIES_HASH = { title: 'Her Body and Other Parties', author: 'Carmen Maria Machado', status: 'current', formats: ['physical', 'read aloud'], fav: true }.freeze
-  IF_FORTUNATE_HASH = { title: 'To Be Taught, If Fortunate', author: 'Becky Chambers', status: 'done', formats: ['physical', 'read aloud'], fav: false }.freeze
-  WE_HASH = { title: 'We', author: 'Yevgeny Zamyatin', status: 'To Read', formats: ['audiobook', 'ebook', 'physical'], fav: false }.freeze
-  FRACTURED_SELF_HASH = { title: 'Shaping the Fractured Self: Poetry of Chronic Illness and Pain', author: 'Heather Taylor Johnson (Editor)', status: 'Paused', formats: ['physical'], fav: false }.freeze
+  DUNE_HASH = { title: 'Dune', author: 'Frank Herbert', status: 'current', formats: ['audiobook'], tags: [:nat], fav: true }.freeze
+  WOLF_HALL_HASH = { title: 'Wolf Hall', author: 'Hilary Mantel', status: 'done', formats: ['audiobook'], tags: [:shelf], fav: true }.freeze
+  STOIC_HASH = { title: 'Letters From a Stoic', author: 'Seneca', status: 'done', formats: ['audiobook'], tags: [:shelf], fav: false }.freeze
+  OTHER_PARTIES_HASH = { title: 'Her Body and Other Parties', author: 'Carmen Maria Machado', status: 'current', formats: ['physical', 'read aloud'], tags: [:nat], fav: true }.freeze
+  IF_FORTUNATE_HASH = { title: 'To Be Taught, If Fortunate', author: 'Becky Chambers', status: 'done', formats: ['physical', 'read aloud'], tags: [:nat, :shelf], fav: false }.freeze
+  WE_HASH = { title: 'We', author: 'Yevgeny Zamyatin', status: 'To Read', formats: ['audiobook', 'ebook', 'physical'], tags: [:shelf], fav: false }.freeze
+  FRACTURED_SELF_HASH = { title: 'Shaping the Fractured Self: Poetry of Chronic Illness and Pain', author: 'Heather Taylor Johnson (Editor)', status: 'Paused', formats: ['physical'], tags: [:shelf], fav: false }.freeze
   HASHES = [DUNE_HASH, WOLF_HALL_HASH, STOIC_HASH, OTHER_PARTIES_HASH, IF_FORTUNATE_HASH, WE_HASH, FRACTURED_SELF_HASH].freeze
 
   DUNE = hash_to_book(DUNE_HASH)

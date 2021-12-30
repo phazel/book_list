@@ -30,6 +30,11 @@ describe 'Filter' do
     it { expect(filter_by_fav(books)).to eq(by_fav) }
   end
 
+  describe '.filter_by_nat' do
+    by_nat = { nat: [DUNE, IF_FORTUNATE], non_nat: [WOLF_HALL] }
+    it { expect(filter_by_nat(books)).to eq(by_nat) }
+  end
+
   describe '.dup?' do
     it { expect(dup?(WE, WE_DUP)).to eq(true) }
     it { expect(dup?(WE, WE)).to eq(false) }
@@ -66,6 +71,10 @@ describe 'Filter' do
     it { expect(dedupe_fav(true, true)).to eq(true) }
     it { expect(dedupe_fav(true, false)).to eq(true) }
     it { expect(dedupe_fav(false, true)).to eq(true) }
+  end
+
+  describe '.dedupe_tags' do
+    it { expect(dedupe_tags([:a,:b,:c], [:c,:d])).to eq([:a,:b,:c,:d]) }
   end
 
   describe '.dedupe_book' do

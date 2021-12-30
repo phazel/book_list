@@ -8,7 +8,16 @@ include Helpers::Convert
 module Convert
   def split_strings(hash, keys)
     keys.reduce(hash) do |memo, key|
+      return memo unless memo[key]
       split_values = memo[key].split(',').map(&:strip)
+      memo.merge({ **memo, key => split_values })
+    end
+  end
+
+  def split_strings_sym(hash, keys)
+    keys.reduce(hash) do |memo, key|
+      return memo unless memo[key]
+      split_values = memo[key].split(',').map(&:strip).map(&:to_sym)
       memo.merge({ **memo, key => split_values })
     end
   end
@@ -22,6 +31,7 @@ module Convert
     CSV.new(csv, headers: true, header_converters: :all, converters: :mine)
       .map { |row| row.to_h }
       .map { |hash| split_strings(hash, [:formats]) }
+      .map { |hash| split_strings_sym(hash, [:tags]) }
       .map { |hash| fav_bool(hash) }
   end
 
@@ -32,6 +42,7 @@ module Convert
       status: hash[:status],
       formats: hash[:formats],
       fav: hash[:fav],
+      tags: hash[:tags],
     )
   end
 
