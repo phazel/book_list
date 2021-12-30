@@ -32,6 +32,14 @@ describe 'Convert' do
     end
   end
 
+  describe '.nil_to_empty' do
+    it 'converts the given key from nil to empty arrays' do
+      with_nil = { X: 'a, b', Y: [:c, :d] }
+      with_empty = { X: 'a, b', Y: [:c, :d], absent: [] }
+      expect(nil_to_empty(with_nil, :absent)).to eq(with_empty)
+    end
+  end
+
   describe '.fav_bool' do
     it { expect(fav_bool({fav: 'Yes'})).to eq({fav: true}) }
     it { expect(fav_bool({fav: 'yes'})).to eq({fav: true}) }

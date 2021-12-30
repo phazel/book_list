@@ -22,6 +22,10 @@ module Convert
     end
   end
 
+  def nil_to_empty(hash, key)
+    hash[key].nil? ? hash.merge({ key => [] }) : hash
+  end
+
   def fav_bool(hash)
     hash.merge({ fav: hash[:fav].to_s.downcase == 'yes' })
   end
@@ -32,6 +36,7 @@ module Convert
       .map { |row| row.to_h }
       .map { |hash| split_strings(hash, [:formats]) }
       .map { |hash| split_strings_sym(hash, [:tags]) }
+      .map { |hash| nil_to_empty(hash, :tags) }
       .map { |hash| fav_bool(hash) }
   end
 
