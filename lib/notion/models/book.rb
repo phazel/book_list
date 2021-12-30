@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class Book
-  attr_reader :title, :author, :status, :formats, :fav, :tags
+  attr_reader :title, :author, :status, :formats, :fav, :labels
 
-  def initialize(title:, author:, status:, formats:, fav:, tags:)
+  def initialize(title:, author:, status:, formats:, fav:, labels:)
     @title  = title
     @author = author
     @status = status
     @formats = formats
     @fav = fav
-    @tags = tags || []
+    @labels = labels || []
   end
 
   def format_emojis
@@ -24,11 +24,11 @@ class Book
   end
 
   def nat_emoji
-    "#{ ' 💞' if @tags.include? :nat }"
+    "#{ ' 💞' if @labels.include? :nat }"
   end
 
   def sleep_emoji
-    "#{ ' 💤' if @tags.include? :sleep }"
+    "#{ ' 💤' if @labels.include? :sleep }"
   end
 
   def to_s

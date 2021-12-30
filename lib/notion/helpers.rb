@@ -8,11 +8,10 @@ module Helpers
       CSV::HeaderConverters[:title] = method(:title_converter)
       CSV::HeaderConverters[:formats] = method(:formats)
       CSV::HeaderConverters[:fav] = method(:fav)
-      CSV::HeaderConverters[:tags] = method(:tags)
       CSV::Converters[:status] = method(:alt_status)
       CSV::Converters[:blank_to_nil] = method(:blank_to_nil)
 
-      CSV::HeaderConverters[:all] = [ :title, :formats, :fav, :tags, :symbol ]
+      CSV::HeaderConverters[:all] = [ :title, :formats, :fav, :symbol ]
       CSV::Converters[:mine] = [ :all, :blank_to_nil, :status ]
     end
 
@@ -26,10 +25,6 @@ module Helpers
 
     def fav(header)
       header == '⭐️' || header == "\u{feff}⭐️" ? 'Fav' : header
-    end
-
-    def tags(header)
-      header == 'Labels' || header == "\u{feff}Labels" ? 'Tags' : header
     end
 
     def alt_status(status)

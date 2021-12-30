@@ -8,7 +8,7 @@ describe Book do
   let(:status) { 'To Read' }
   let(:formats) { ['audiobook', 'physical'] }
   let(:fav) { false }
-  let(:tags) { [:nat] }
+  let(:labels) { [:nat] }
   subject do
     Book.new(
       title: title,
@@ -16,7 +16,7 @@ describe Book do
       status: status,
       formats: formats,
       fav: fav,
-      tags: tags,
+      labels: labels,
     )
   end
 
@@ -29,11 +29,11 @@ describe Book do
         status: status,
         formats: formats,
         fav: fav,
-        tags: tags,
+        labels: labels,
       )
     end
     it 'errors on missing paramters' do
-      missing = ':title, :author, :status, :formats, :fav, :tags'
+      missing = ':title, :author, :status, :formats, :fav, :labels'
       expect { Book.new }.to raise_error(ArgumentError, "missing keywords: #{missing}")
     end
   end
@@ -55,42 +55,42 @@ describe Book do
         status: status,
         formats: formats,
         fav: true,
-        tags: tags,
+        labels: labels,
       )
       expect(fav.fav_emoji).to eq(' 🌟')
     end
   end
 
   describe '#nat_emoji' do
-    it 'has hearts emoji with space if tags contains :nat' do
+    it 'has hearts emoji with space if labels contains :nat' do
       expect(subject.nat_emoji).to eq(' 💞')
     end
-    it 'has empty string if tags does not contain :nat' do
+    it 'has empty string if labels does not contain :nat' do
       non_nat = Book.new(
         title: title,
         author: author,
         status: status,
         formats: formats,
         fav: true,
-        tags: [],
+        labels: [],
       )
       expect(non_nat.nat_emoji).to eq('')
     end
   end
 
   describe '#sleep_emoji' do
-    it 'has moon with space if tags contains :sleep' do
+    it 'has moon with space if labels contains :sleep' do
       sleep = Book.new(
         title: title,
         author: author,
         status: status,
         formats: formats,
         fav: true,
-        tags: [:sleep],
+        labels: [:sleep],
       )
       expect(sleep.sleep_emoji).to eq(' 💤')
     end
-    it 'has empty string if tags does not contain :sleep' do
+    it 'has empty string if labels does not contain :sleep' do
       expect(subject.sleep_emoji).to eq('')
     end
   end

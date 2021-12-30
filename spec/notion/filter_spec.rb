@@ -73,8 +73,8 @@ describe 'Filter' do
     it { expect(dedupe_fav(false, true)).to eq(true) }
   end
 
-  describe '.dedupe_tags' do
-    it { expect(dedupe_tags([:a,:b,:c], [:c,:d])).to eq([:a,:b,:c,:d]) }
+  describe '.dedupe_labels' do
+    it { expect(dedupe_labels([:a,:b,:c], [:c,:d])).to eq([:a,:b,:c,:d]) }
   end
 
   describe '.dedupe_book' do

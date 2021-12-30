@@ -19,11 +19,11 @@ module Filter
   end
 
   def filter_by_nat(books)
-    books.group_by { |book| book.tags.include?(:nat) ? :nat : :non_nat }
+    books.group_by { |book| book.labels.include?(:nat) ? :nat : :non_nat }
   end
 
   def filter_by_sleep(books)
-    grouped = books.group_by { |book| book.tags.include?(:sleep) ? :sleep : :non_sleep }
+    grouped = books.group_by { |book| book.labels.include?(:sleep) ? :sleep : :non_sleep }
     grouped.ensure([:sleep, :non_sleep])
   end
 
@@ -78,8 +78,8 @@ module Filter
     fav1 || fav2
   end
 
-  def dedupe_tags(tags1, tags2)
-    (tags1 + tags2).uniq
+  def dedupe_labels(labels1, labels2)
+    (labels1 + labels2).uniq
   end
 
   def dedupe_book(book1, book2)
@@ -90,7 +90,7 @@ module Filter
       status: dedupe_status(book1.status, book2.status),
       formats: dedupe_formats(book1.formats, book2.formats),
       fav: dedupe_fav(book1.fav, book2.fav),
-      tags: dedupe_tags(book1.tags, book2.tags),
+      labels: dedupe_labels(book1.labels, book2.labels),
     )
   end
 

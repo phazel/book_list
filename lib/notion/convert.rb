@@ -35,8 +35,8 @@ module Convert
     CSV.new(csv, headers: true, header_converters: :all, converters: :mine)
       .map { |row| row.to_h }
       .map { |hash| split_strings(hash, [:formats]) }
-      .map { |hash| split_strings_sym(hash, [:tags]) }
-      .map { |hash| nil_to_empty(hash, :tags) }
+      .map { |hash| split_strings_sym(hash, [:labels]) }
+      .map { |hash| nil_to_empty(hash, :labels) }
       .map { |hash| fav_bool(hash) }
   end
 
@@ -47,7 +47,7 @@ module Convert
       status: hash[:status],
       formats: hash[:formats],
       fav: hash[:fav],
-      tags: hash[:tags],
+      labels: hash[:labels],
     )
   end
 
