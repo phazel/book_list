@@ -34,13 +34,16 @@ class App
 
   def self.summary(books)
     done_books = filter_by_status(books)[:done]
+    deduped = dedup(done_books)
     {
       total: books.size,
-      done: done_books.size,
+      total_deduped: dedup(books)[:all].size,
+      done: deduped[:all].size,
       current: filter_by_status(books)[:current].size,
-      audiobook: filter_by_format(done_books)[:audiobook].size,
-      ebook: filter_by_format(done_books)[:ebook].size,
-      physical: filter_by_format(done_books)[:physical].size,
+      audiobook: filter_by_format(deduped[:all])[:audiobook].size,
+      ebook: filter_by_format(deduped[:all])[:ebook].size,
+      physical: filter_by_format(deduped[:all])[:physical].size,
+      dups: deduped[:dups].size,
     }
   end
 

@@ -33,7 +33,7 @@ module TestData
   FRACTURED_SELF = hash_to_book(FRACTURED_SELF_HASH)
   BOOKS = [DUNE, WOLF_HALL, STOIC, OTHER_PARTIES, IF_FORTUNATE, WE, FRACTURED_SELF]
 
-  WE_HASH_DUP = WE_HASH.merge({ status: 'done', formats: ['audiobook', 'ebook'] })
+  WE_HASH_DUP = WE_HASH.merge({ status: 'done', formats: ['audiobook', 'ebook', 'read aloud'] })
   WE_DUP = hash_to_book(WE_HASH_DUP)
   DUNE_HASH_DUP_1 = DUNE_HASH.merge({ status: 'done', formats: ['audiobook', 'ebook'] })
   DUNE_HASH_DUP_2 = DUNE_HASH.merge({ status: 'done', formats: ['physical'] })

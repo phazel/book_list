@@ -11,17 +11,18 @@ describe App do
     it 'returns a Hash' do
       expect(summary).to be_a(Hash)
     end
-    it { expect(summary[:total]).to     eq(9) }
+    it { expect(summary[:total]).to         eq(10) }
+    it { expect(summary[:total_deduped]).to eq(9) }
 
-    it { expect(summary[:done]).to     eq(4) }
-    it { expect(summary[:current]).to   eq(3) }
+    it { expect(summary[:done]).to          eq(4) }
+    it { expect(summary[:current]).to       eq(3) }
 
-    it { expect(summary[:audiobook]).to eq(3) }
-    it { expect(summary[:ebook]).to     eq(2) }
-    it { expect(summary[:physical]).to  eq(1) }
+    it { expect(summary[:audiobook]).to     eq(3) }
+    it { expect(summary[:ebook]).to         eq(2) }
+    it { expect(summary[:physical]).to      eq(1) }
 
+    it { expect(summary[:dups]).to      eq(1) }
     # it { expect(summary[:fav]).to       eq(22) }
-    # it { expect(summary[:dups]).to      eq("hello") }
     # it { expect(summary[:nat]).to       eq(25) }
     # it { expect(summary[:sleep]).to     eq(1) }
     # it { expect(summary[:dnf]).to       eq(7) }

@@ -36,4 +36,42 @@ module Filter
       end
     end
   end
+
+  def dedup(books)
+    sorted = filter_by_dups(books)
+    dups = sorted[:dups].map{|group| dedupe_group(group)}
+    non_dups = sorted[:non_dups]
+    {
+      dups: dups,
+      non_dups: non_dups,
+      all: dups + non_dups,
+    }
+  end
+
+  def dedupe_status(status1, status2)
+    order = [ 'done', 'current' ]
+    order.each do |compare|
+      return status1 if status1 == compare
+      return status2 if status2 == compare
+    end
+    return status1
+  end
+
+  def dedupe_formats(formats1, formats2)
+    (formats1 + formats2).uniq
+  end
+
+  def dedupe_book(book1, book2)
+    throw StandardError.new('Books must be duplicates') unless dup?(book1, book2)
+    Book.new(
+      title: book1.title,
+      author: book1.author,
+      status: dedupe_status(book1.status, book2.status),
+      formats: dedupe_formats(book1.formats, book2.formats),
+    )
+  end
+
+  def dedupe_group(group)
+    group.reduce { |result, book| dedupe_book(result, book) }
+  end
 end
