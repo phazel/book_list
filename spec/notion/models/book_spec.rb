@@ -46,7 +46,7 @@ describe Book do
 
   describe '#format_emojis' do
     it 'has audiobook emoji' do
-      expect(subject.format_emojis).to eq(' 🎧📖')
+      expect(subject.format_emojis).to eq(' 🎧 📖')
     end
     it 'shows talking emoji when read aloud' do
       aloud = Book.new(
@@ -192,7 +192,7 @@ describe Book do
     output = <<~BOOK
       **Good Book**
       *by Great Writer*
-      Format: 🎧📖
+      Format: 🎧 📖
       Tags:
 
     BOOK

@@ -19,11 +19,13 @@ describe 'Format' do
     # Books Read In 2021
     `Total books read: 64`
 
+    **Formats**
     📖 - physical book
     💾 - ebook
     🎧 - audiobook
     🗣 - read aloud
 
+    **Tags**
     🌟 - favourite
     💞 - I read this with my partner
     💤 - I listened to this book to go to sleep

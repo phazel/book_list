@@ -21,7 +21,7 @@ class Book
     ebook = @formats.include? 'ebook'
     physical = @formats.include? 'physical'
     read_aloud = @formats.include? 'read aloud'
-    " #{'💾' if ebook}#{'🎧' if audiobook}#{'📖' if physical}#{'🗣' if read_aloud}"
+    "#{' 💾' if ebook}#{' 🎧' if audiobook}#{' 📖' if physical}#{' 🗣' if read_aloud}"
   end
 
   def fav_emoji

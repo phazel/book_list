@@ -1,11 +1,13 @@
 # Books Read In 2021
 `Total books read: 75`
 
+**Formats**
 📖 - physical book
 💾 - ebook
 🎧 - audiobook
 🗣 - read aloud
 
+**Tags**
 🌟 - favourite
 💞 - I read this with my partner
 💤 - I listened to this book to go to sleep
@@ -35,7 +37,7 @@ Tags: 💤
 
 🌟 **Her Body and Other Parties**
 *by Carmen Maria Machado*
-Format: 📖🗣
+Format: 📖 🗣
 Tags: 💞 🔁
 
 🌟 **Wolf Hall** -- *#1 of Thomas Cromwell*
@@ -45,12 +47,12 @@ Tags:
 
 🌟 **To Be Taught, If Fortunate**
 *by Becky Chambers*
-Format: 📖🗣
+Format: 📖 🗣
 Tags: 💞
 
 🌟 **Northanger Abbey**
 *by Jane Austen*
-Format: 💾🗣
+Format: 💾 🗣
 Tags: 💞 🔁
 
 🌟 **Punished By Rewards**
@@ -90,7 +92,7 @@ Tags:
 
 🌟 **The Magician’s Nephew** -- *#1 of The Chronicles of Narnia*
 *by C. S. Lewis*
-Format: 📖🗣
+Format: 📖 🗣
 Tags: 💞 🔁
 
 🌟 **The Amber Spyglass** -- *#3 of His Dark Materials*
@@ -162,12 +164,12 @@ Tags: 💞 🔁
 
 **The Lion, the Witch, and the Wardrobe** -- *#2 of The Chronicles of Narnia*
 *by C. S. Lewis*
-Format: 📖🗣
+Format: 📖 🗣
 Tags: 💞 🔁
 
 **A Room of One’s Own & Three Guineas**
 *by Virginia Woolf*
-Format: 💾🎧
+Format: 💾 🎧
 Tags:
 
 **Foundation** -- *#1 of Foundation*
@@ -415,7 +417,7 @@ Tags: 💞 🔁
 
 🌟 **Bring Up the Bodies** -- *#2 of Thomas Cromwell*
 *by Hilary Mantel*
-Format: 🎧📖
+Format: 🎧 📖
 Tags:
 
 **The Unmapped Country**

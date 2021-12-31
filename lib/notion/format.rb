@@ -2,11 +2,13 @@
 
 module Format
   LEGEND = <<~LEGEND
+    **Formats**
     📖 - physical book
     💾 - ebook
     🎧 - audiobook
     🗣 - read aloud
 
+    **Tags**
     🌟 - favourite
     💞 - I read this with my partner
     💤 - I listened to this book to go to sleep
