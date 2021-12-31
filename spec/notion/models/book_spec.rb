@@ -193,7 +193,6 @@ describe Book do
       **Good Book**
       *by Great Writer*
       Format: 🎧 📖
-      Tags:
 
     BOOK
     it { expect(subject.to_s).to eq(output) }

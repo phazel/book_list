@@ -45,13 +45,22 @@ class Book
     "#{" -- *#{number_text}of #{@series}*" if @series}"
   end
 
-  def to_s
-    <<~BOOK
-      #{fav_emoji}**#{@title}**#{series_text}
-      *by #{@author}*
-      Format:#{format_emojis}
-      Tags:#{nat_emoji}#{sleep_emoji}#{reread_emoji}
+  def tags_text
+    "Tags:#{nat_emoji}#{sleep_emoji}#{reread_emoji}" + "\n"
+  end
 
-    BOOK
+  def show_tags?
+    [:nat, :sleep, :reread].any? do |tag|
+      @labels.include?(tag) || @tags.include?(tag)
+    end
+  end
+
+  def to_s
+    [
+      "#{fav_emoji}**#{@title}**#{series_text}",
+      "*by #{@author}*",
+      "Format:#{format_emojis}",
+      "#{tags_text if show_tags?}" + "\n",
+    ].join("\n")
   end
 end
