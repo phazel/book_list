@@ -22,12 +22,12 @@ Tags:
 
 **To Be Taught, If Fortunate** 🌟
 *by Becky Chambers*
-Format: 📖
+Format: 📖🗣
 Tags: 💞
 
 **Northanger Abbey** 🌟
 *by Jane Austen*
-Format: 💾
+Format: 💾🗣
 Tags: 💞 🔁
 
 **Punished By Rewards** 🌟
@@ -67,7 +67,7 @@ Tags:
 
 **The Magician’s Nephew** 🌟
 *by C. S. Lewis*
-Format: 📖
+Format: 📖🗣
 Tags: 💞 🔁
 
 **The Amber Spyglass** 🌟
@@ -373,7 +373,7 @@ Tags: 💞 🔁
 
 **Her Body and Other Parties** 🌟
 *by Carmen Maria Machado*
-Format: 📖
+Format: 📖🗣
 Tags: 💞 🔁
 
 **A Room of One’s Own & Three Guineas**

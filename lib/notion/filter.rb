@@ -5,6 +5,7 @@ require_relative './models/hash'
 module Filter
   def filter_by_status(books)
     books.group_by { |book| book.status.to_sym }
+    .ensure([:done, :current])
   end
 
   def filter_by_format(books)
@@ -12,26 +13,29 @@ module Filter
       book.formats.each { |format| pairs.push [format, book] }
       pairs
     end.group_by { |pair| pair[0] }
-    .transform_values { |value| value.map{|item| item[1] } }
-    .transform_keys { |key| key.downcase.tr(" ", "_").to_sym }
+      .transform_values { |value| value.map{|pair| pair[1] } }
+      .transform_keys { |key| key.downcase.tr(" ", "_").to_sym }
+      .ensure([:audiobook, :ebook, :physical, :read_aloud])
   end
 
   def filter_by_fav(books)
     books.group_by { |book| book.fav ? :fav : :non_fav }
+      .ensure([:fav, :non_fav])
   end
 
   def filter_by_nat(books)
     books.group_by { |book| book.labels.include?(:nat) ? :nat : :non_nat }
+      .ensure([:nat, :non_nat])
   end
 
   def filter_by_sleep(books)
-    grouped = books.group_by { |book| book.labels.include?(:sleep) ? :sleep : :non_sleep }
-    grouped.ensure([:sleep, :non_sleep])
+    books.group_by { |book| book.labels.include?(:sleep) ? :sleep : :non_sleep }
+      .ensure([:sleep, :non_sleep])
   end
 
   def filter_by_reread(books)
-    grouped = books.group_by { |book| book.tags.include?(:reread) ? :reread : :non_reread }
-    grouped.ensure([:reread, :non_reread])
+    books.group_by { |book| book.tags.include?(:reread) ? :reread : :non_reread }
+      .ensure([:reread, :non_reread])
   end
 
   def dup?(book1, book2)
@@ -54,7 +58,7 @@ module Filter
       else
         result[:non_dups].push book
       end
-    end
+    end.ensure([:dups, :non_dups])
   end
 
   def dedup(books)

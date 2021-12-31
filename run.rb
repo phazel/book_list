@@ -19,5 +19,6 @@ Data contained #{summary[:total]} books
 - #{summary[:audiobook]} of the total books are audiobooks
 - #{summary[:ebook]} of the total books are ebooks
 - #{summary[:physical]} of the total books are physical books
+- You read aloud #{summary[:physical]} of the total books
 **********************************************
 SUMMARY

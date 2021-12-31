@@ -45,6 +45,18 @@ describe Book do
     it 'has audiobook emoji' do
       expect(subject.format_emojis).to eq(' 🎧📖')
     end
+    it 'shows talking emoji when read aloud' do
+      aloud = Book.new(
+        title: title,
+        author: author,
+        status: status,
+        formats: ['read aloud'],
+        fav: fav,
+        labels: labels,
+        tags: tags,
+      )
+      expect(aloud.format_emojis).to eq(' 🗣')
+    end
   end
 
   describe '#fav_emoji' do

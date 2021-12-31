@@ -53,7 +53,7 @@ class App
     nat = filter_by_nat(all)[:nat]
     sleep = filter_by_sleep(all)[:sleep]
     reread = filter_by_reread(all)[:reread]
-    audiobook, ebook, physical = filter_by_format(all).splat(:audiobook, :ebook, :physical)
+    audiobook, ebook, physical, read_aloud = filter_by_format(all).splat(:audiobook, :ebook, :physical, :read_aloud)
     {
       total: books.size,
       total_deduped: dedup(books)[:all].size,
@@ -62,6 +62,7 @@ class App
       audiobook: audiobook.size,
       ebook: ebook.size,
       physical: physical.size,
+      read_aloud: read_aloud.size,
       dups: dups.size,
       fav: fav.size,
       nat: nat.size,

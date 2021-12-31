@@ -20,6 +20,7 @@ describe App do
     it { expect(summary[:audiobook]).to     eq(4) }
     it { expect(summary[:ebook]).to         eq(2) }
     it { expect(summary[:physical]).to      eq(1) }
+    it { expect(summary[:read_aloud]).to    eq(2) }
 
     it { expect(summary[:dups]).to          eq(1) }
     it { expect(summary[:fav]).to           eq(3) }
@@ -28,6 +29,5 @@ describe App do
     it { expect(summary[:reread]).to         eq(2) }
     # it { expect(summary[:dnf]).to           eq("?") }
     # it { expect(summary[:series]).to           eq("?") }
-    # it { expect(summary[:read_aloud]).to           eq("?") }
   end
 end

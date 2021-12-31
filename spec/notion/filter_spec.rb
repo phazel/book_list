@@ -19,6 +19,7 @@ describe 'Filter' do
   describe '.filter_by_format' do
     by_format = {
       audiobook: [DUNE, WOLF_HALL],
+      ebook: [],
       physical: [IF_FORTUNATE],
       read_aloud: [IF_FORTUNATE],
     }
