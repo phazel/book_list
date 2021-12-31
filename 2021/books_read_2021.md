@@ -375,7 +375,7 @@ Tags: 💞 🔁
 
 🌟 **Bring Up the Bodies** -- *#2 of Thomas Cromwell*
 *by Hilary Mantel*
-Format: 🎧 📖
+Format: 🎧
 
 **The Unmapped Country**
 *by Ann Quin*
