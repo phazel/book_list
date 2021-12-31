@@ -20,10 +20,14 @@ describe 'Format' do
     `Total books read: 64`
 
     📖 - physical book
-    📱 - ebook
+    💾 - ebook
     🎧 - audiobook
-    👩🏻‍🦱 - I read this with my partner
-    🌒 - I listened to this book to go to sleep
+    🗣 - read aloud
+
+    🌟 - favourite
+    💞 - I read this with my partner
+    💤 - I listened to this book to go to sleep
+    🔁 - I've read this book before
 
     ---
 

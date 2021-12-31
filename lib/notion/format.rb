@@ -3,10 +3,14 @@
 module Format
   LEGEND = <<~LEGEND
     📖 - physical book
-    📱 - ebook
+    💾 - ebook
     🎧 - audiobook
-    👩🏻‍🦱 - I read this with my partner
-    🌒 - I listened to this book to go to sleep
+    🗣 - read aloud
+
+    🌟 - favourite
+    💞 - I read this with my partner
+    💤 - I listened to this book to go to sleep
+    🔁 - I've read this book before
   LEGEND
 
   def section(header, contents)
