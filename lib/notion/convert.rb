@@ -47,6 +47,7 @@ module Convert
       title: hash[:title],
       author: hash[:author],
       status: hash[:status],
+      genre: hash[:genre],
       formats: hash[:formats],
       fav: hash[:fav],
       labels: hash[:labels],

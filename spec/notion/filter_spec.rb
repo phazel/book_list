@@ -52,8 +52,15 @@ describe 'Filter' do
   end
 
   describe '.dup?' do
-    it { expect(dup?(WE, WE_DUP)).to eq(true) }
-    it { expect(dup?(WE, WE)).to eq(false) }
+    it 'is duplicate if books have same title, author, and genre' do
+      expect(dup?(WE, WE_DUP)).to eq(true)
+    end
+    it 'is not duplicate if books are the same object' do
+      expect(dup?(WE, WE)).to eq(false)
+    end
+    it 'is not duplicate if books have different genre' do
+      expect(dup?(WE, WE_NF)).to eq(false)
+    end
   end
 
   describe '.filter_by_dups' do

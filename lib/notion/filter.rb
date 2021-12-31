@@ -46,6 +46,7 @@ module Filter
   def dup?(book1, book2)
     book1.title == book2.title &&
     book1.author == book2.author &&
+    book1.genre == book2.genre &&
     book1 != book2
   end
 
@@ -107,6 +108,7 @@ module Filter
     Book.new(
       title: book1.title,
       author: book1.author,
+      genre: book1.genre,
       status: dedupe_status(book1.status, book2.status),
       formats: dedupe_formats(book1.formats, book2.formats),
       fav: dedupe_fav(book1.fav, book2.fav),

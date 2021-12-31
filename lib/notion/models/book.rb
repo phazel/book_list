@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class Book
-  attr_reader :title, :author, :status, :formats, :fav, :labels, :tags, :series, :series_number
+  attr_reader :title, :author, :status, :genre, :formats, :fav, :labels, :tags, :series, :series_number
 
-  def initialize(title:, author:, status:, formats:, fav:, labels:, tags:, series: nil, series_number: nil)
+  def initialize(title:, author:, status:, genre:, formats:, fav:, labels:, tags:, series: nil, series_number: nil)
     @title  = title
     @author = author
     @status = status
+    @genre = genre
     @formats = formats
     @fav = fav
     @labels = labels || []

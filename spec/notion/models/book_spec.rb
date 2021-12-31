@@ -6,6 +6,7 @@ describe Book do
   let(:title) { 'Good Book' }
   let(:author) { 'Great Writer' }
   let(:status) { 'To Read' }
+  let(:genre) { 'non-fiction' }
   let(:formats) { ['audiobook', 'physical'] }
   let(:fav) { false }
   let(:labels) { [] }
@@ -15,6 +16,7 @@ describe Book do
       title: title,
       author: author,
       status: status,
+      genre: genre,
       formats: formats,
       fav: fav,
       labels: labels,
@@ -29,6 +31,7 @@ describe Book do
         title: title,
         author: author,
         status: status,
+        genre: genre,
         formats: formats,
         fav: fav,
         labels: labels,
@@ -36,7 +39,7 @@ describe Book do
       )
     end
     it 'errors on missing paramters' do
-      missing = ':title, :author, :status, :formats, :fav, :labels, :tags'
+      missing = ':title, :author, :status, :genre, :formats, :fav, :labels, :tags'
       expect { Book.new }.to raise_error(ArgumentError, "missing keywords: #{missing}")
     end
   end
@@ -50,6 +53,7 @@ describe Book do
         title: title,
         author: author,
         status: status,
+        genre: genre,
         formats: ['read aloud'],
         fav: fav,
         labels: labels,
@@ -65,6 +69,7 @@ describe Book do
         title: title,
         author: author,
         status: status,
+        genre: genre,
         formats: formats,
         fav: true,
         labels: labels,
@@ -83,6 +88,7 @@ describe Book do
         title: title,
         author: author,
         status: status,
+        genre: genre,
         formats: formats,
         fav: true,
         labels: [:nat],
@@ -101,6 +107,7 @@ describe Book do
         title: title,
         author: author,
         status: status,
+        genre: genre,
         formats: formats,
         fav: true,
         labels: [:sleep],
@@ -119,6 +126,7 @@ describe Book do
         title: title,
         author: author,
         status: status,
+        genre: genre,
         formats: formats,
         fav: fav,
         labels: labels,
@@ -137,6 +145,7 @@ describe Book do
         title: title,
         author: author,
         status: status,
+        genre: genre,
         formats: formats,
         fav: fav,
         labels: labels,
@@ -150,6 +159,7 @@ describe Book do
         title: title,
         author: author,
         status: status,
+        genre: genre,
         formats: formats,
         fav: fav,
         labels: labels,
@@ -164,6 +174,7 @@ describe Book do
         title: title,
         author: author,
         status: status,
+        genre: genre,
         formats: formats,
         fav: fav,
         labels: labels,
