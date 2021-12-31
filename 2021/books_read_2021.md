@@ -1,3 +1,14 @@
+# Books Read In 2021
+`Total books read: 71`
+
+📖 - physical book
+📱 - ebook
+🎧 - audiobook
+👩🏻‍🦱 - I read this with my partner
+🌒 - I listened to this book to go to sleep
+
+---
+
 Books I Read More Than Once:
  🌟**Milkman**
 *by Anna Burns*

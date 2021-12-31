@@ -6,6 +6,7 @@ include Format
 describe 'Format' do
   subject do
     post(
+      total: 64,
       dups: ["These are the duplicate books\n\n"],
       sleep: ["These are the sleep books\n\n"],
       fav: ["These are the favourite books\n\n"],
@@ -15,6 +16,17 @@ describe 'Format' do
     )
   end
   expected = <<-POST
+# Books Read In 2021
+`Total books read: 64`
+
+📖 - physical book
+📱 - ebook
+🎧 - audiobook
+👩🏻‍🦱 - I read this with my partner
+🌒 - I listened to this book to go to sleep
+
+---
+
 Books I Read More Than Once:
 These are the duplicate books
 

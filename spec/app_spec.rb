@@ -8,9 +8,8 @@ summary = App.summary(books)
 
 describe App do
   describe '.convert' do
-    it 'returns a Hash' do
-      expect(summary).to be_a(Hash)
-    end
+    it { expect(summary).to be_a(Hash) }
+
     it { expect(summary[:total]).to         eq(11) }
     it { expect(summary[:total_deduped]).to eq(10) }
 
