@@ -4,11 +4,12 @@ require 'notion/models/book'
 
 describe Book do
   let(:title) { 'Good Book' }
-  let(:author) { 'Good Writer' }
+  let(:author) { 'Great Writer' }
   let(:status) { 'To Read' }
   let(:formats) { ['audiobook', 'physical'] }
   let(:fav) { false }
-  let(:labels) { [:nat] }
+  let(:labels) { [] }
+  let(:tags) { [] }
   subject do
     Book.new(
       title: title,
@@ -17,6 +18,7 @@ describe Book do
       formats: formats,
       fav: fav,
       labels: labels,
+      tags: tags,
     )
   end
 
@@ -30,10 +32,11 @@ describe Book do
         formats: formats,
         fav: fav,
         labels: labels,
+        tags: tags,
       )
     end
     it 'errors on missing paramters' do
-      missing = ':title, :author, :status, :formats, :fav, :labels'
+      missing = ':title, :author, :status, :formats, :fav, :labels, :tags'
       expect { Book.new }.to raise_error(ArgumentError, "missing keywords: #{missing}")
     end
   end
@@ -45,9 +48,6 @@ describe Book do
   end
 
   describe '#fav_emoji' do
-    it 'has empty string if not a favourite' do
-      expect(subject.fav_emoji).to eq('')
-    end
     it 'has star emoji and space if favourite' do
       fav = Book.new(
         title: title,
@@ -56,25 +56,30 @@ describe Book do
         formats: formats,
         fav: true,
         labels: labels,
+        tags: tags,
       )
       expect(fav.fav_emoji).to eq(' 🌟')
+    end
+    it 'has empty string if not a favourite' do
+      expect(subject.fav_emoji).to eq('')
     end
   end
 
   describe '#nat_emoji' do
     it 'has hearts emoji with space if labels contains :nat' do
-      expect(subject.nat_emoji).to eq(' 💞')
-    end
-    it 'has empty string if labels does not contain :nat' do
-      non_nat = Book.new(
+      nat = Book.new(
         title: title,
         author: author,
         status: status,
         formats: formats,
         fav: true,
-        labels: [],
+        labels: [:nat],
+        tags: tags,
       )
-      expect(non_nat.nat_emoji).to eq('')
+      expect(nat.nat_emoji).to eq(' 💞')
+    end
+    it 'has empty string if labels does not contain :nat' do
+      expect(subject.nat_emoji).to eq('')
     end
   end
 
@@ -87,6 +92,7 @@ describe Book do
         formats: formats,
         fav: true,
         labels: [:sleep],
+        tags: tags,
       )
       expect(sleep.sleep_emoji).to eq(' 💤')
     end
@@ -95,12 +101,30 @@ describe Book do
     end
   end
 
+  describe '#reread_emoji' do
+    it 'has replay with space if labels contains :reread' do
+      reread = Book.new(
+        title: title,
+        author: author,
+        status: status,
+        formats: formats,
+        fav: fav,
+        labels: labels,
+        tags: [:reread],
+      )
+      expect(reread.reread_emoji).to eq(' 🔁')
+    end
+    it 'has empty string if labels does not contain :reread' do
+      expect(subject.reread_emoji).to eq('')
+    end
+  end
+
   describe '#to_s' do
     output = <<~BOOK
       **Good Book**
-      *by Good Writer*
+      *by Great Writer*
       Format: 🎧📖
-      Tags: 💞
+      Tags:
 
     BOOK
     it { expect(subject.to_s).to eq(output) }

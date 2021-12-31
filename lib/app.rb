@@ -7,21 +7,9 @@ require_relative './trello/filter'
 require_relative './trello/format'
 require_relative './notion/convert'
 require_relative './notion/filter'
+require_relative './notion/models/hash'
 include Convert
 include Filter
-
-class Hash
-  def splat(*args)
-    items = args.reduce([]) {|memo, key| memo.push self[key] }
-    results = items.map{|item| item.nil? ? [] : item }
-    results.size == 1 ? results.first : results
-  end
-  def ensure(keys)
-    keys.reduce(self) do |memo, key|
-      memo[key].nil? ? memo.merge({ key => [] }) : memo
-    end
-  end
-end
 
 class App
   def self.generate(data_file, output_file)
@@ -64,6 +52,7 @@ class App
     fav = filter_by_fav(all)[:fav]
     nat = filter_by_nat(all)[:nat]
     sleep = filter_by_sleep(all)[:sleep]
+    reread = filter_by_reread(all)[:reread]
     audiobook, ebook, physical = filter_by_format(all).splat(:audiobook, :ebook, :physical)
     {
       total: books.size,
@@ -77,6 +66,7 @@ class App
       fav: fav.size,
       nat: nat.size,
       sleep: sleep.size,
+      reread: reread.size,
     }
   end
 

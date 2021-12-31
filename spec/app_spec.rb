@@ -25,6 +25,9 @@ describe App do
     it { expect(summary[:fav]).to           eq(3) }
     it { expect(summary[:nat]).to           eq(2) }
     it { expect(summary[:sleep]).to         eq(1) }
-    it { expect(summary[:dnf]).to           eq("?") }
+    it { expect(summary[:reread]).to         eq(2) }
+    # it { expect(summary[:dnf]).to           eq("?") }
+    # it { expect(summary[:series]).to           eq("?") }
+    # it { expect(summary[:read_aloud]).to           eq("?") }
   end
 end

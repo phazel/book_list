@@ -35,6 +35,16 @@ describe 'Filter' do
     it { expect(filter_by_nat(books)).to eq(by_nat) }
   end
 
+  describe '.filter_by_sleep' do
+    by_sleep = { sleep: [], non_sleep: books }
+    it { expect(filter_by_sleep(books)).to eq(by_sleep) }
+  end
+
+  describe '.filter_by_reread' do
+    by_reread = { reread: [DUNE, WOLF_HALL], non_reread: [IF_FORTUNATE] }
+    it { expect(filter_by_reread(books)).to eq(by_reread) }
+  end
+
   describe '.dup?' do
     it { expect(dup?(WE, WE_DUP)).to eq(true) }
     it { expect(dup?(WE, WE)).to eq(false) }
@@ -75,6 +85,10 @@ describe 'Filter' do
 
   describe '.dedupe_labels' do
     it { expect(dedupe_labels([:a,:b,:c], [:c,:d])).to eq([:a,:b,:c,:d]) }
+  end
+
+  describe '.dedupe_tags' do
+    it { expect(dedupe_tags([:a,:b,:c], [:c,:d])).to eq([:a,:b,:c,:d]) }
   end
 
   describe '.dedupe_book' do

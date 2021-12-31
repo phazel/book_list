@@ -36,7 +36,9 @@ module Convert
       .map { |row| row.to_h }
       .map { |hash| split_strings(hash, [:formats]) }
       .map { |hash| split_strings_sym(hash, [:labels]) }
+      .map { |hash| split_strings_sym(hash, [:tags]) }
       .map { |hash| nil_to_empty(hash, :labels) }
+      .map { |hash| nil_to_empty(hash, :tags) }
       .map { |hash| fav_bool(hash) }
   end
 
@@ -48,6 +50,7 @@ module Convert
       formats: hash[:formats],
       fav: hash[:fav],
       labels: hash[:labels],
+      tags: hash[:tags],
     )
   end
 

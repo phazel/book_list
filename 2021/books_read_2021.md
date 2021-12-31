@@ -2,7 +2,7 @@ Books I Read More Than Once:
 **Milkman** 🌟
 *by Anna Burns*
 Format: 🎧
-Tags: 💞
+Tags: 💞 🔁
 
 ---
 
@@ -28,7 +28,7 @@ Tags: 💞
 **Northanger Abbey** 🌟
 *by Jane Austen*
 Format: 💾
-Tags: 💞
+Tags: 💞 🔁
 
 **Punished By Rewards** 🌟
 *by Alfie Kohn*
@@ -53,7 +53,7 @@ Tags:
 **Normal People** 🌟
 *by Sally Rooney*
 Format: 🎧
-Tags: 💞
+Tags: 💞 🔁
 
 **Nocturnes** 🌟
 *by Kazuo Ishiguro*
@@ -68,12 +68,12 @@ Tags:
 **The Magician’s Nephew** 🌟
 *by C. S. Lewis*
 Format: 📖
-Tags: 💞
+Tags: 💞 🔁
 
 **The Amber Spyglass** 🌟
 *by Philip Pullman*
 Format: 🎧
-Tags: 💞
+Tags: 💞 🔁
 
 **Motherhood** 🌟
 *by Sheila Heti*
@@ -83,7 +83,7 @@ Tags:
 **The Subtle Knife** 🌟
 *by Philip Pullman*
 Format: 🎧
-Tags: 💞
+Tags: 💞 🔁
 
 **The Argonauts** 🌟
 *by Maggie Nelson*
@@ -93,7 +93,7 @@ Tags:
 **Northern Lights** 🌟
 *by Philip Pullman*
 Format: 🎧
-Tags: 💞
+Tags: 💞 🔁
 
 **The Plague** 🌟
 *by Albert Camus*
@@ -118,7 +118,7 @@ Tags:
 **Fingersmith** 🌟
 *by Sarah Waters*
 Format: 🎧
-Tags: 💞
+Tags: 💞 🔁
 
 **Terra Nullius** 🌟
 *by Claire G. Coleman*
@@ -128,12 +128,12 @@ Tags:
 **Dune** 🌟
 *by Frank Herbert*
 Format: 🎧
-Tags:
+Tags: 🔁
 
 **The Seven Husbands of Evelyn Hugo** 🌟
 *by Taylor Jenkins Reid*
 Format: 🎧
-Tags: 💞
+Tags: 💞 🔁
 
 ---
 
@@ -156,7 +156,7 @@ Tags: 💞
 **All Systems Red**
 *by Martha Wells*
 Format: 🎧
-Tags:
+Tags: 🔁
 
 **Howards End**
 *by E. M. Forster*
@@ -231,7 +231,7 @@ Tags:
 **The Hunger Games**
 *by Suzanne Collins*
 Format: 🎧
-Tags:
+Tags: 🔁
 
 **Now My Heart Is Full**
 *by Laura June*
@@ -306,17 +306,17 @@ Tags: 💞
 **The Encounter**
 *by K. A. Applegate*
 Format: 💾
-Tags:
+Tags: 🔁
 
 **The Visitor**
 *by K. A. Applegate*
 Format: 💾
-Tags:
+Tags: 🔁
 
 **The Invasion**
 *by K. A. Applegate*
 Format: 💾
-Tags:
+Tags: 🔁
 
 **The Queen's Gambit**
 *by Walter Tevis*
@@ -369,12 +369,12 @@ Currently reading:
 **Dune** 🌟
 *by Frank Herbert*
 Format: 🎧
-Tags: 💞
+Tags: 💞 🔁
 
 **Her Body and Other Parties** 🌟
 *by Carmen Maria Machado*
 Format: 📖
-Tags: 💞
+Tags: 💞 🔁
 
 **A Room of One’s Own & Three Guineas**
 *by Virginia Woolf*

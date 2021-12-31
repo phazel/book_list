@@ -5,25 +5,25 @@ include Convert
 
 module TestData
   CSV_DATA = <<~BOOKS
-    Name,Author,Format,Labels,Status,⭐️
-    Dune,Frank Herbert,audiobook,nat,📖 Reading 📖,Yes
-    Wolf Hall,Hilary Mantel,audiobook,shelf,Read 2021,Yes
-    Letters From a Stoic,Seneca,audiobook,shelf,Read 2021,No
-    Her Body and Other Parties,Carmen Maria Machado,"physical, read aloud",nat,📖 Reading 📖,Yes
-    "To Be Taught, If Fortunate",Becky Chambers,"physical, read aloud","nat, shelf",Read 2021,No
-    We,Yevgeny Zamyatin,"audiobook, ebook, physical",shelf,To Read,No
-    Shaping the Fractured Self: Poetry of Chronic Illness and Pain,Heather Taylor Johnson (Editor),physical,shelf,Paused,No
-    Punished By Rewards,Alfie Kohn,audiobook,,Read 2021,Yes
+    Name,Author,Format,Labels,Status,Tags,⭐️
+    Dune,Frank Herbert,audiobook,nat,📖 Reading 📖,reread,Yes
+    Wolf Hall,Hilary Mantel,audiobook,shelf,Read 2021,reread,Yes
+    Letters From a Stoic,Seneca,audiobook,shelf,Read 2021,,No
+    Her Body and Other Parties,Carmen Maria Machado,"physical, read aloud",nat,📖 Reading 📖,reread,Yes
+    "To Be Taught, If Fortunate",Becky Chambers,"physical, read aloud","nat, shelf",Read 2021,,No
+    We,Yevgeny Zamyatin,"audiobook, ebook, physical",shelf,To Read,,No
+    Shaping the Fractured Self: Poetry of Chronic Illness and Pain,Heather Taylor Johnson (Editor),physical,shelf,Paused,topics,No
+    Punished By Rewards,Alfie Kohn,audiobook,,Read 2021,"reread, topics",Yes
   BOOKS
 
-  DUNE_HASH = { title: 'Dune', author: 'Frank Herbert', status: 'current', formats: ['audiobook'], labels: [:nat], fav: true }.freeze
-  WOLF_HALL_HASH = { title: 'Wolf Hall', author: 'Hilary Mantel', status: 'done', formats: ['audiobook'], labels: [:shelf], fav: true }.freeze
-  STOIC_HASH = { title: 'Letters From a Stoic', author: 'Seneca', status: 'done', formats: ['audiobook'], labels: [:shelf], fav: false }.freeze
-  OTHER_PARTIES_HASH = { title: 'Her Body and Other Parties', author: 'Carmen Maria Machado', status: 'current', formats: ['physical', 'read aloud'], labels: [:nat], fav: true }.freeze
-  IF_FORTUNATE_HASH = { title: 'To Be Taught, If Fortunate', author: 'Becky Chambers', status: 'done', formats: ['physical', 'read aloud'], labels: [:nat, :shelf], fav: false }.freeze
-  WE_HASH = { title: 'We', author: 'Yevgeny Zamyatin', status: 'To Read', formats: ['audiobook', 'ebook', 'physical'], labels: [:shelf], fav: false }.freeze
-  FRACTURED_SELF_HASH = { title: 'Shaping the Fractured Self: Poetry of Chronic Illness and Pain', author: 'Heather Taylor Johnson (Editor)', status: 'Paused', formats: ['physical'], labels: [:shelf], fav: false }.freeze
-  PUNISHED_HASH = { title: 'Punished By Rewards', author: 'Alfie Kohn', status: 'done', formats: ['audiobook'], labels: [], fav: true }.freeze
+  DUNE_HASH = { title: 'Dune', author: 'Frank Herbert', status: 'current', formats: ['audiobook'], labels: [:nat], tags: [:reread], fav: true }.freeze
+  WOLF_HALL_HASH = { title: 'Wolf Hall', author: 'Hilary Mantel', status: 'done', formats: ['audiobook'], labels: [:shelf], tags: [:reread], fav: true }.freeze
+  STOIC_HASH = { title: 'Letters From a Stoic', author: 'Seneca', status: 'done', formats: ['audiobook'], labels: [:shelf], tags: [], fav: false }.freeze
+  OTHER_PARTIES_HASH = { title: 'Her Body and Other Parties', author: 'Carmen Maria Machado', status: 'current', formats: ['physical', 'read aloud'], labels: [:nat], tags: [:reread], fav: true }.freeze
+  IF_FORTUNATE_HASH = { title: 'To Be Taught, If Fortunate', author: 'Becky Chambers', status: 'done', formats: ['physical', 'read aloud'], labels: [:nat, :shelf], tags: [], fav: false }.freeze
+  WE_HASH = { title: 'We', author: 'Yevgeny Zamyatin', status: 'To Read', formats: ['audiobook', 'ebook', 'physical'], labels: [:shelf], tags: [], fav: false }.freeze
+  FRACTURED_SELF_HASH = { title: 'Shaping the Fractured Self: Poetry of Chronic Illness and Pain', author: 'Heather Taylor Johnson (Editor)', status: 'Paused', formats: ['physical'], labels: [:shelf], tags: [:topics], fav: false }.freeze
+  PUNISHED_HASH = { title: 'Punished By Rewards', author: 'Alfie Kohn', status: 'done', formats: ['audiobook'], labels: [], tags: [:reread, :topics], fav: true }.freeze
   HASHES = [DUNE_HASH, WOLF_HALL_HASH, STOIC_HASH, OTHER_PARTIES_HASH, IF_FORTUNATE_HASH, WE_HASH, FRACTURED_SELF_HASH, PUNISHED_HASH].freeze
 
   DUNE = hash_to_book(DUNE_HASH)

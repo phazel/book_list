@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative './models/hash'
+
 module Filter
   def filter_by_status(books)
     books.group_by { |book| book.status.to_sym }
@@ -25,6 +27,11 @@ module Filter
   def filter_by_sleep(books)
     grouped = books.group_by { |book| book.labels.include?(:sleep) ? :sleep : :non_sleep }
     grouped.ensure([:sleep, :non_sleep])
+  end
+
+  def filter_by_reread(books)
+    grouped = books.group_by { |book| book.tags.include?(:reread) ? :reread : :non_reread }
+    grouped.ensure([:reread, :non_reread])
   end
 
   def dup?(book1, book2)
@@ -82,6 +89,10 @@ module Filter
     (labels1 + labels2).uniq
   end
 
+  def dedupe_tags(tags1, tags2)
+    (tags1 + tags2).uniq
+  end
+
   def dedupe_book(book1, book2)
     throw StandardError.new('Books must be duplicates') unless dup?(book1, book2)
     Book.new(
@@ -91,6 +102,7 @@ module Filter
       formats: dedupe_formats(book1.formats, book2.formats),
       fav: dedupe_fav(book1.fav, book2.fav),
       labels: dedupe_labels(book1.labels, book2.labels),
+      tags: dedupe_tags(book1.tags, book2.tags),
     )
   end
 
