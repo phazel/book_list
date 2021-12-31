@@ -9,7 +9,8 @@
 
 ---
 
-Books I Read More Than Once:
+## Books I Read More Than Once:
+
  🌟**Milkman**
 *by Anna Burns*
 Format: 🎧
@@ -17,7 +18,8 @@ Tags: 💞 🔁
 
 ---
 
-Books used as background noise for going to sleep:
+## Books I used as background noise for going to sleep:
+
 **The Lord of the Rings: The Return of the King** -- *#3 of The Lord of the Rings*
 *by J. R. R. Tolkien*
 Format: 🎧
@@ -25,7 +27,8 @@ Tags: 💤
 
 ---
 
-Favourites:
+## Favourites:
+
  🌟**Wolf Hall** -- *#1 of Thomas Cromwell*
 *by Hilary Mantel*
 Format: 🎧
@@ -148,7 +151,6 @@ Tags: 💞 🔁
 
 ---
 
-Read this year:
 **Letters From a Stoic**
 *by Seneca*
 Format: 🎧
@@ -341,7 +343,8 @@ Tags:
 
 ---
 
-Books I Decided Not To Finish:
+## Books I Decided Not To Finish:
+
 **The House in the Cerulean Sea**
 *by T.J. Klune*
 Format: 🎧
@@ -379,7 +382,8 @@ Tags: 💞
 
 ---
 
-Currently reading:
+## Currently reading:
+
  🌟**Dune** -- *#1 of The Dune Sequence*
 *by Frank Herbert*
 Format: 🎧

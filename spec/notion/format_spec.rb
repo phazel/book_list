@@ -27,32 +27,36 @@ describe 'Format' do
 
 ---
 
-Books I Read More Than Once:
+## Books I Read More Than Once:
+
 These are the duplicate books
 
 ---
 
-Books used as background noise for going to sleep:
+## Books I used as background noise for going to sleep:
+
 These are the sleep books
 
 ---
 
-Favourites:
+## Favourites:
+
 These are the favourite books
 
 ---
 
-Read this year:
 These are all the rest of the books
 
 ---
 
-Books I Decided Not To Finish:
+## Books I Decided Not To Finish:
+
 These are the DNF books
 
 ---
 
-Currently reading:
+## Currently reading:
+
 These are the current books
 
 POST

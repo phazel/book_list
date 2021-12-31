@@ -10,18 +10,18 @@ module Format
   LEGEND
 
   def section(header, contents)
-    [ header, "\n", contents ].join
+    [ ("#{header}\n\n" if header), contents ].join
   end
 
   def lists(dups:, sleep:, fav:, remaining:, dnf:, current:)
     [
       "\n#{LEGEND}\n",
-      section("Books I Read More Than Once:", dups),
-      section("Books used as background noise for going to sleep:", sleep),
-      section("Favourites:", fav),
-      section("Read this year:", remaining),
-      section("Books I Decided Not To Finish:", dnf),
-      section("Currently reading:", current),
+      section("## Books I Read More Than Once:", dups),
+      section("## Books I used as background noise for going to sleep:", sleep),
+      section("## Favourites:", fav),
+      section(nil, remaining),
+      section("## Books I Decided Not To Finish:", dnf),
+      section("## Currently reading:", current),
     ].join("---\n\n")
   end
 
