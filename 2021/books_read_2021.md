@@ -1,5 +1,5 @@
 # Books Read In 2021
-`Total books read: 71`
+`Total books read: 75`
 
 📖 - physical book
 💾 - ebook
@@ -32,6 +32,11 @@ Tags: 💤
 ---
 
 ## Favourites:
+
+🌟 **Her Body and Other Parties**
+*by Carmen Maria Machado*
+Format: 📖🗣
+Tags: 💞 🔁
 
 🌟 **Wolf Hall** -- *#1 of Thomas Cromwell*
 *by Hilary Mantel*
@@ -154,6 +159,21 @@ Format: 🎧
 Tags: 💞 🔁
 
 ---
+
+**The Lion, the Witch, and the Wardrobe** -- *#2 of The Chronicles of Narnia*
+*by C. S. Lewis*
+Format: 📖🗣
+Tags: 💞 🔁
+
+**A Room of One’s Own & Three Guineas**
+*by Virginia Woolf*
+Format: 💾🎧
+Tags:
+
+**Foundation** -- *#1 of Foundation*
+*by Isaac Asimov*
+Format: 🎧
+Tags:
 
 **Letters From a Stoic**
 *by Seneca*
@@ -388,18 +408,18 @@ Tags: 💞
 
 ## Currently reading:
 
-🌟 **Dune** -- *#1 of The Dune Sequence*
+**Dune** -- *#1 of The Dune Sequence*
 *by Frank Herbert*
 Format: 🎧
 Tags: 💞 🔁
 
-🌟 **Her Body and Other Parties**
-*by Carmen Maria Machado*
-Format: 📖🗣
-Tags: 💞 🔁
+🌟 **Bring Up the Bodies** -- *#2 of Thomas Cromwell*
+*by Hilary Mantel*
+Format: 🎧📖
+Tags:
 
-**A Room of One’s Own & Three Guineas**
-*by Virginia Woolf*
-Format: 💾🎧
+**The Unmapped Country**
+*by Ann Quin*
+Format: 💾
 Tags:
 
