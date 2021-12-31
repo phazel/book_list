@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Book
-  attr_reader :title, :author, :status, :formats, :fav, :labels, :tags
+  attr_reader :title, :author, :status, :formats, :fav, :labels, :tags, :series, :series_number
 
-  def initialize(title:, author:, status:, formats:, fav:, labels:, tags:)
+  def initialize(title:, author:, status:, formats:, fav:, labels:, tags:, series: nil, series_number: nil)
     @title  = title
     @author = author
     @status = status
@@ -11,6 +11,8 @@ class Book
     @fav = fav
     @labels = labels || []
     @tags = tags || []
+    @series = series
+    @series_number = series_number
   end
 
   def format_emojis
@@ -37,9 +39,14 @@ class Book
     "#{ ' 🔁' if @tags.include? :reread }"
   end
 
+  def series_text
+    number_text = "##{@series_number} " if @series_number
+    "#{" -- *#{number_text}of #{@series}*" if @series}"
+  end
+
   def to_s
     <<~BOOK
-      **#{@title}**#{fav_emoji}
+      #{fav_emoji}**#{@title}**#{series_text}
       *by #{@author}*
       Format:#{format_emojis}
       Tags:#{nat_emoji}#{sleep_emoji}#{reread_emoji}

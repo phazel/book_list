@@ -131,6 +131,52 @@ describe Book do
     end
   end
 
+  describe '#series_text' do
+    it 'has series name if in a series' do
+      series = Book.new(
+        title: title,
+        author: author,
+        status: status,
+        formats: formats,
+        fav: fav,
+        labels: labels,
+        tags: tags,
+        series: 'Some Series',
+      )
+      expect(series.series_text).to eq(' -- *of Some Series*')
+    end
+    it 'has series name and number if in a series with number' do
+      series = Book.new(
+        title: title,
+        author: author,
+        status: status,
+        formats: formats,
+        fav: fav,
+        labels: labels,
+        tags: tags,
+        series: 'Some Series',
+        series_number: 2,
+      )
+      expect(series.series_text).to eq(' -- *#2 of Some Series*')
+    end
+    it 'does not show series text if it has series number but no series' do
+      series = Book.new(
+        title: title,
+        author: author,
+        status: status,
+        formats: formats,
+        fav: fav,
+        labels: labels,
+        tags: tags,
+        series_number: 2,
+      )
+      expect(series.series_text).to eq('')
+    end
+    it 'has empty string if not in a series' do
+      expect(subject.series_text).to eq('')
+    end
+  end
+
   describe '#to_s' do
     output = <<~BOOK
       **Good Book**

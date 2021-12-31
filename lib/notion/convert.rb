@@ -51,6 +51,8 @@ module Convert
       fav: hash[:fav],
       labels: hash[:labels],
       tags: hash[:tags],
+      series: hash[:series],
+      series_number: hash[:series_number],
     )
   end
 
