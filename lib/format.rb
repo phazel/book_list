@@ -15,6 +15,8 @@ module Format
     🔁 - I've read this book before
   LEGEND
 
+  NICE = " <sub><sub>(nice)</sub></sub>"
+
   def section(header, contents)
     [ ("#{header}\n\n" if header), contents ].join
   end
@@ -34,7 +36,7 @@ module Format
   def post(year:, total:, dups:, sleep:, fav:, remaining:, dnf:, current:)
     [
       "# Books Read In #{year}",
-      "`Total books read: #{total}`",
+      "`Total books read: #{total}`#{NICE if total == 69}",
       lists(
         dups: dups,
         sleep: sleep,
