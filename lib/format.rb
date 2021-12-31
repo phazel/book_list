@@ -31,9 +31,9 @@ module Format
     ].join("---\n\n")
   end
 
-  def post(total:, dups:, sleep:, fav:, remaining:, dnf:, current:)
+  def post(year:, total:, dups:, sleep:, fav:, remaining:, dnf:, current:)
     [
-      '# Books Read In 2021',
+      "# Books Read In #{year}",
       "`Total books read: #{total}`",
       lists(
         dups: dups,

@@ -4,7 +4,7 @@
 require_relative './lib/app'
 
 YEAR = '2021'
-summary = App.generate "#{YEAR}/notion.csv", "#{YEAR}/books_read_#{YEAR}.md"
+summary = App.generate "#{YEAR}/notion.csv", "#{YEAR}/books_read_#{YEAR}.md", YEAR
 
 puts <<~SUMMARY
 **********************************************

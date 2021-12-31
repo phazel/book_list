@@ -30,7 +30,13 @@ module Convert
     hash.merge({ fav: hash[:fav].to_s.downcase == 'yes' })
   end
 
-  def csv_to_hashes(csv)
+  def alt_status(hash, year)
+    alt = { '📖 Reading 📖' => 'current', "Read #{year}" => 'done' }
+    status = hash[:status]
+    alt.keys.include?(status) ? hash.merge({ status: alt[status] }) : hash
+  end
+
+  def csv_to_hashes(csv, year)
     csv_converters
     CSV.new(csv, headers: true, header_converters: :all, converters: :mine)
       .map { |row| row.to_h }
@@ -39,6 +45,7 @@ module Convert
       .map { |hash| split_strings_sym(hash, [:tags]) }
       .map { |hash| nil_to_empty(hash, :labels) }
       .map { |hash| nil_to_empty(hash, :tags) }
+      .map { |hash| alt_status(hash, year) }
       .map { |hash| fav_bool(hash) }
   end
 
@@ -61,7 +68,7 @@ module Convert
     hashes.map { |hash| hash_to_book(hash) }
   end
 
-  def csv_to_books(csv)
-    hashes_to_books csv_to_hashes(csv)
+  def csv_to_books(csv, year)
+    hashes_to_books csv_to_hashes(csv, year)
   end
 end

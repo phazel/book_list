@@ -6,6 +6,7 @@ include Format
 describe 'Format' do
   subject do
     post(
+      year: 1534,
       total: 64,
       dups: ["These are the duplicate books\n\n"],
       sleep: ["These are the sleep books\n\n"],
@@ -16,7 +17,7 @@ describe 'Format' do
     )
   end
   expected = <<~POST
-    # Books Read In 2021
+    # Books Read In 1534
     `Total books read: 64`
 
     **Formats**

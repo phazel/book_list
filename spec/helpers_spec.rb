@@ -50,18 +50,6 @@ describe 'Helpers' do
       end
     end
 
-    describe '.alt_status' do
-      it "converts status '📖 Reading 📖' to 'current'" do
-        expect(alt_status('📖 Reading 📖')).to eq('current')
-      end
-      it "converts status 'Read 2021' to 'done'" do
-        expect(alt_status('Read 2021')).to eq('done')
-      end
-      it 'does not convert another status' do
-        expect(alt_status('Paused')).to eq('Paused')
-      end
-    end
-
     describe '.blank_to_nil' do
       it "converts empty string value to nil" do
         expect(blank_to_nil('')).to eq(nil)

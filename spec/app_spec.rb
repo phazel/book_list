@@ -2,8 +2,9 @@
 
 require 'app'
 
+YEAR = '2021'
 # Note: This test requires a real csv file with dummy data
-books = App.get_books "2021/dummy.csv"
+books = App.get_books "#{YEAR}/dummy.csv", YEAR
 summary = App.summary(books)
 
 describe App do

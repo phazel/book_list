@@ -11,17 +11,17 @@ include Filter
 include Format
 
 class App
-  def self.generate(data_file, output_file)
-    books = get_books(data_file)
-    output(books, output_file)
+  def self.generate(data_file, output_file, year)
+    books = get_books(data_file, year)
+    output(books, output_file, year)
     summary(books)
   end
 
-  def self.get_books(data_file)
-    csv_to_books File.read(data_file)
+  def self.get_books(data_file, year)
+    csv_to_books File.read(data_file), year
   end
 
-  def self.output(books, output_file)
+  def self.output(books, output_file, year)
     done, current = filter_by_status(books).splat(:done, :current)
     dups, non_dups, all = dedup(done).splat(:dups, :non_dups, :all)
     fav, non_fav = filter_by_fav(non_dups).splat(:fav, :non_fav)
@@ -29,6 +29,7 @@ class App
     dnf, remaining = filter_by_dnf(non_sleep).splat(:dnf, :non_dnf)
 
     output = post(
+      year: year,
       total: all.size,
       dups: dups,
       sleep: sleep,

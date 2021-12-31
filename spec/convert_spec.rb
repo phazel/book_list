@@ -52,14 +52,15 @@ describe 'Convert' do
   end
 
   describe '.csv_to_hashes' do
-    it { expect(csv_to_hashes(CSV_DATA)).to be_an(Array) }
-    it { expect(csv_to_hashes(CSV_DATA)).to all(be_a(Hash)) }
+    subject { csv_to_hashes(CSV_DATA, YEAR) }
+    it { expect(subject).to be_an(Array) }
+    it { expect(subject).to all(be_a(Hash)) }
     it 'contains hashes all with the required keys' do
       required_keys = [:title, :author, :status, :formats]
-      expect(csv_to_hashes(CSV_DATA).map(&:keys)).to all(include *required_keys)
+      expect(subject.map(&:keys)).to all(include *required_keys)
     end
     it 'converts a csv string to an array of hashes' do
-      expect(csv_to_hashes(CSV_DATA)).to eq(HASHES)
+      expect(subject).to eq(HASHES)
     end
   end
 
@@ -71,7 +72,7 @@ describe 'Convert' do
   end
 
   describe '.csv_to_books' do
-    subject { csv_to_books(CSV_DATA) }
+    subject { csv_to_books(CSV_DATA, YEAR) }
     it { expect(subject).to be_an(Array) }
     it { expect(subject).to all(be_a(Book)) }
   end
