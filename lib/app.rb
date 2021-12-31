@@ -2,10 +2,10 @@
 
 require 'csv'
 require 'json'
-require_relative './notion/convert'
-require_relative './notion/filter'
-require_relative './notion/format'
-require_relative './notion/models/hash'
+require_relative './convert'
+require_relative './filter'
+require_relative './format'
+require_relative './models/hash'
 include Convert
 include Filter
 include Format

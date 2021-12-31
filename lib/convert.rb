@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'csv'
-require_relative '../notion/models/book'
+require_relative './models/book'
 require_relative './helpers'
 include Helpers::Convert
 

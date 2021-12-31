@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'notion/helpers'
+require 'helpers'
 include Helpers::Convert
 
 describe 'Helpers' do

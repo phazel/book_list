@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'notion/filter'
-require_relative '../support/test_data'
+require 'filter'
+require_relative './support/test_data'
 include Filter
 include TestData
 

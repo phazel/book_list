@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'notion/convert'
+require 'convert'
 include Convert
 
 module TestData

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'notion/models/book'
+require 'models/book'
 
 describe Book do
   let(:title) { 'Good Book' }

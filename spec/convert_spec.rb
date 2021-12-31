@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'notion/convert'
-require_relative '../support/test_data'
+require 'convert'
+require_relative './support/test_data'
 include Convert
 include TestData
 
