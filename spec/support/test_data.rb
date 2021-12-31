@@ -8,7 +8,7 @@ module TestData
     Name,Author,Format,Labels,Status,Tags,⭐️
     Dune,Frank Herbert,audiobook,nat,📖 Reading 📖,reread,Yes
     Wolf Hall,Hilary Mantel,audiobook,shelf,Read 2021,reread,Yes
-    Letters From a Stoic,Seneca,audiobook,shelf,Read 2021,,No
+    Letters From a Stoic,Seneca,audiobook,shelf,Read 2021,dnf,No
     Her Body and Other Parties,Carmen Maria Machado,"physical, read aloud",nat,📖 Reading 📖,reread,Yes
     "To Be Taught, If Fortunate",Becky Chambers,"physical, read aloud","nat, shelf",Read 2021,,No
     We,Yevgeny Zamyatin,"audiobook, ebook, physical",shelf,To Read,,No
@@ -18,7 +18,7 @@ module TestData
 
   DUNE_HASH = { title: 'Dune', author: 'Frank Herbert', status: 'current', formats: ['audiobook'], labels: [:nat], tags: [:reread], fav: true }.freeze
   WOLF_HALL_HASH = { title: 'Wolf Hall', author: 'Hilary Mantel', status: 'done', formats: ['audiobook'], labels: [:shelf], tags: [:reread], fav: true }.freeze
-  STOIC_HASH = { title: 'Letters From a Stoic', author: 'Seneca', status: 'done', formats: ['audiobook'], labels: [:shelf], tags: [], fav: false }.freeze
+  STOIC_HASH = { title: 'Letters From a Stoic', author: 'Seneca', status: 'done', formats: ['audiobook'], labels: [:shelf], tags: [:dnf], fav: false }.freeze
   OTHER_PARTIES_HASH = { title: 'Her Body and Other Parties', author: 'Carmen Maria Machado', status: 'current', formats: ['physical', 'read aloud'], labels: [:nat], tags: [:reread], fav: true }.freeze
   IF_FORTUNATE_HASH = { title: 'To Be Taught, If Fortunate', author: 'Becky Chambers', status: 'done', formats: ['physical', 'read aloud'], labels: [:nat, :shelf], tags: [], fav: false }.freeze
   WE_HASH = { title: 'We', author: 'Yevgeny Zamyatin', status: 'To Read', formats: ['audiobook', 'ebook', 'physical'], labels: [:shelf], tags: [], fav: false }.freeze

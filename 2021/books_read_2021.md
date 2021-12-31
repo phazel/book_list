@@ -143,11 +143,6 @@ Read this year:
 Format: 🎧
 Tags:
 
-**The House in the Cerulean Sea**
-*by T.J. Klune*
-Format: 🎧
-Tags: 💞
-
 **Rogue Protocol**
 *by Martha Wells*
 Format: 🎧
@@ -168,11 +163,6 @@ Tags:
 Format: 🎧
 Tags: 💞
 
-**The Southern Book Club’s Guide to Slaying Vampires**
-*by Grady Hendrix*
-Format: 🎧
-Tags: 💞
-
 **The Lady's Guide to Celestial Mechanics**
 *by Olivia Waite*
 Format: 🎧
@@ -188,11 +178,6 @@ Tags:
 Format: 🎧
 Tags:
 
-**Earthlings**
-*by Sayaka Murata*
-Format: 🎧
-Tags:
-
 **The Snow Queen**
 *by Joan D. Vinge*
 Format: 🎧
@@ -202,16 +187,6 @@ Tags:
 *by Meaghan O'Connell*
 Format: 🎧
 Tags:
-
-**Middlegame**
-*by Seanan McGuire*
-Format: 🎧
-Tags: 💞
-
-**A Thousand Pieces of You**
-*by Claudia Gray*
-Format: 🎧
-Tags: 💞
 
 **Hitchhiker’s Guide to the Galaxy: Primary Phase**
 *by Douglas Adams*
@@ -248,11 +223,6 @@ Tags:
 Format: 🎧
 Tags:
 
-**How To Talk So Little Kids Will Listen**
-*by Joanna Faber and Julie King*
-Format: 🎧
-Tags: 💞
-
 **The Turn of the Screw**
 *by Henry James*
 Format: 🎧
@@ -282,11 +252,6 @@ Tags:
 *by Virginia Woolf*
 Format: 🎧
 Tags:
-
-**Percy Jackson and the Lightning Thief**
-*by Rick Riordan*
-Format: 🎧
-Tags: 💞
 
 **Mrs. Dalloway**
 *by Virginia Woolf*
@@ -362,6 +327,44 @@ Tags:
 *by Sarah Waters*
 Format: 🎧
 Tags:
+
+---
+
+Books I Decided Not To Finish:
+**The House in the Cerulean Sea**
+*by T.J. Klune*
+Format: 🎧
+Tags: 💞
+
+**The Southern Book Club’s Guide to Slaying Vampires**
+*by Grady Hendrix*
+Format: 🎧
+Tags: 💞
+
+**Earthlings**
+*by Sayaka Murata*
+Format: 🎧
+Tags:
+
+**Middlegame**
+*by Seanan McGuire*
+Format: 🎧
+Tags: 💞
+
+**A Thousand Pieces of You**
+*by Claudia Gray*
+Format: 🎧
+Tags: 💞
+
+**How To Talk So Little Kids Will Listen**
+*by Joanna Faber and Julie King*
+Format: 🎧
+Tags: 💞
+
+**Percy Jackson and the Lightning Thief**
+*by Rick Riordan*
+Format: 🎧
+Tags: 💞
 
 ---
 

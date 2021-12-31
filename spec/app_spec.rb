@@ -17,7 +17,7 @@ describe App do
     it { expect(summary[:done]).to          eq(5) }
     it { expect(summary[:current]).to       eq(3) }
 
-    it { expect(summary[:audiobook]).to     eq(4) }
+    it { expect(summary[:audiobook]).to     eq(3) }
     it { expect(summary[:ebook]).to         eq(2) }
     it { expect(summary[:physical]).to      eq(1) }
     it { expect(summary[:read_aloud]).to    eq(2) }
@@ -27,7 +27,7 @@ describe App do
     it { expect(summary[:nat]).to           eq(2) }
     it { expect(summary[:sleep]).to         eq(1) }
     it { expect(summary[:reread]).to         eq(2) }
-    # it { expect(summary[:dnf]).to           eq("?") }
+    it { expect(summary[:dnf]).to           eq(1) }
     # it { expect(summary[:series]).to           eq("?") }
   end
 end

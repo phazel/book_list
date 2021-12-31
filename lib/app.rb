@@ -26,7 +26,8 @@ class App
     done, current = filter_by_status(books).splat(:done, :current)
     dups, non_dups = dedup(done).splat(:dups, :non_dups)
     fav, non_fav = filter_by_fav(non_dups).splat(:fav, :non_fav)
-    sleep, remaining = filter_by_sleep(non_fav).splat(:sleep, :non_sleep)
+    sleep, non_sleep = filter_by_sleep(non_fav).splat(:sleep, :non_sleep)
+    dnf, remaining = filter_by_dnf(non_sleep).splat(:dnf, :non_dnf)
     output = [
       "Books I Read More Than Once:\n",
       dups,
@@ -40,6 +41,9 @@ class App
       "Read this year:\n",
       remaining,
       "---\n\n",
+      "Books I Decided Not To Finish:\n",
+      dnf,
+      "---\n\n",
       "Currently reading:\n",
       current,
     ]
@@ -49,11 +53,12 @@ class App
   def self.summary(books)
     done, current = filter_by_status(books).splat(:done, :current)
     dups, all = dedup(done).splat(:dups, :all)
-    fav = filter_by_fav(all)[:fav]
-    nat = filter_by_nat(all)[:nat]
-    sleep = filter_by_sleep(all)[:sleep]
-    reread = filter_by_reread(all)[:reread]
-    audiobook, ebook, physical, read_aloud = filter_by_format(all).splat(:audiobook, :ebook, :physical, :read_aloud)
+    dnf, finished = filter_by_dnf(all).splat(:dnf, :non_dnf)
+    fav = filter_by_fav(finished)[:fav]
+    nat = filter_by_nat(finished)[:nat]
+    sleep = filter_by_sleep(finished)[:sleep]
+    reread = filter_by_reread(finished)[:reread]
+    audiobook, ebook, physical, read_aloud = filter_by_format(finished).splat(:audiobook, :ebook, :physical, :read_aloud)
     {
       total: books.size,
       total_deduped: dedup(books)[:all].size,
@@ -68,6 +73,7 @@ class App
       nat: nat.size,
       sleep: sleep.size,
       reread: reread.size,
+      dnf: dnf.size,
     }
   end
 

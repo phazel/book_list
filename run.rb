@@ -16,6 +16,7 @@ Data contained #{summary[:total]} books
 - You read #{summary[:nat]} of the total books with Nat
 - You read #{summary[:sleep]} of the total books to go to sleep
 - You'd already read #{summary[:reread]} of the total books
+- You DNFed #{summary[:dnf]} of the total books
 - #{summary[:audiobook]} of the total books are audiobooks
 - #{summary[:ebook]} of the total books are ebooks
 - #{summary[:physical]} of the total books are physical books

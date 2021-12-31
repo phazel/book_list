@@ -5,20 +5,20 @@ require_relative '../support/test_data'
 include Filter
 include TestData
 
-books = [ DUNE, WOLF_HALL, IF_FORTUNATE ]
+books = [ DUNE, WOLF_HALL, STOIC, IF_FORTUNATE ]
 
 describe 'Filter' do
   describe '.filter_by_status' do
     by_status = {
       current: [DUNE],
-      done: [WOLF_HALL, IF_FORTUNATE],
+      done: [WOLF_HALL, STOIC, IF_FORTUNATE],
     }
     it { expect(filter_by_status(books)).to eq(by_status) }
   end
 
   describe '.filter_by_format' do
     by_format = {
-      audiobook: [DUNE, WOLF_HALL],
+      audiobook: [DUNE, WOLF_HALL, STOIC],
       ebook: [],
       physical: [IF_FORTUNATE],
       read_aloud: [IF_FORTUNATE],
@@ -27,12 +27,12 @@ describe 'Filter' do
   end
 
   describe '.filter_by_fav' do
-    by_fav = { fav: [DUNE, WOLF_HALL], non_fav: [IF_FORTUNATE] }
+    by_fav = { fav: [DUNE, WOLF_HALL], non_fav: [STOIC, IF_FORTUNATE] }
     it { expect(filter_by_fav(books)).to eq(by_fav) }
   end
 
   describe '.filter_by_nat' do
-    by_nat = { nat: [DUNE, IF_FORTUNATE], non_nat: [WOLF_HALL] }
+    by_nat = { nat: [DUNE, IF_FORTUNATE], non_nat: [WOLF_HALL, STOIC] }
     it { expect(filter_by_nat(books)).to eq(by_nat) }
   end
 
@@ -42,8 +42,13 @@ describe 'Filter' do
   end
 
   describe '.filter_by_reread' do
-    by_reread = { reread: [DUNE, WOLF_HALL], non_reread: [IF_FORTUNATE] }
+    by_reread = { reread: [DUNE, WOLF_HALL], non_reread: [STOIC, IF_FORTUNATE] }
     it { expect(filter_by_reread(books)).to eq(by_reread) }
+  end
+
+  describe '.filter_by_dnf' do
+    by_dnf = { dnf: [STOIC], non_dnf: [DUNE, WOLF_HALL, IF_FORTUNATE] }
+    it { expect(filter_by_dnf(books)).to eq(by_dnf) }
   end
 
   describe '.dup?' do
@@ -56,7 +61,7 @@ describe 'Filter' do
       books_dups = books + [ WE_DUP, DUNE_DUP_1, DUNE_DUP_2, WE ]
       by_dups = {
         dups: [[DUNE, DUNE_DUP_1, DUNE_DUP_2], [WE_DUP, WE]],
-        non_dups: [WOLF_HALL, IF_FORTUNATE],
+        non_dups: [WOLF_HALL, STOIC, IF_FORTUNATE],
       }
       expect(filter_by_dups(books_dups)).to eq(by_dups)
     end
@@ -124,12 +129,12 @@ describe 'Filter' do
     books_dups = books + [ WE_DUP, DUNE_DUP_1, DUNE_DUP_2, WE ]
     deduped = {
       dups: [[DUNE, DUNE_DUP_1, DUNE_DUP_2], [WE_DUP, WE]],
-      non_dups: [WOLF_HALL, IF_FORTUNATE],
+      non_dups: [WOLF_HALL, IF_FORTUNATE, STOIC],
     }
     subject { dedup(books_dups) }
     it { expect(subject[:dups]).to all be_a Book }
     it { expect(subject[:dups].size).to eq(2)}
-    it { expect(subject[:non_dups]).to eq([WOLF_HALL, IF_FORTUNATE]) }
+    it { expect(subject[:non_dups]).to eq([WOLF_HALL, STOIC, IF_FORTUNATE]) }
     it 'creates composite Dune book' do
       expect(subject[:dups][0]).to have_attributes(
         title: DUNE.title,

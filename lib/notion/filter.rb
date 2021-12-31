@@ -38,6 +38,11 @@ module Filter
       .ensure([:reread, :non_reread])
   end
 
+  def filter_by_dnf(books)
+    books.group_by { |book| book.tags.include?(:dnf) ? :dnf : :non_dnf }
+      .ensure([:dnf, :non_dnf])
+  end
+
   def dup?(book1, book2)
     book1.title == book2.title &&
     book1.author == book2.author &&
