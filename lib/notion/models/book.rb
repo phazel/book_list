@@ -42,7 +42,7 @@ class Book
 
   def series_text
     number_text = "##{@series_number} " if @series_number
-    "#{" -- *#{number_text}of #{@series}*" if @series}"
+    "#{" — *#{number_text}of #{@series}*" if @series}"
   end
 
   def tags_text

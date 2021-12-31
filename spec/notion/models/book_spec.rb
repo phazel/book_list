@@ -152,7 +152,7 @@ describe Book do
         tags: tags,
         series: 'Some Series',
       )
-      expect(series.series_text).to eq(' -- *of Some Series*')
+      expect(series.series_text).to eq(' — *of Some Series*')
     end
     it 'has series name and number if in a series with number' do
       series = Book.new(
@@ -167,7 +167,7 @@ describe Book do
         series: 'Some Series',
         series_number: 2,
       )
-      expect(series.series_text).to eq(' -- *#2 of Some Series*')
+      expect(series.series_text).to eq(' — *#2 of Some Series*')
     end
     it 'does not show series text if it has series number but no series' do
       series = Book.new(

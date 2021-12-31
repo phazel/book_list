@@ -26,7 +26,7 @@ Tags: 💞 🔁
 
 ## Books I used as background noise for going to sleep:
 
-**The Lord of the Rings: The Return of the King** -- *#3 of The Lord of the Rings*
+**The Lord of the Rings: The Return of the King** — *#3 of The Lord of the Rings*
 *by J. R. R. Tolkien*
 Format: 🎧
 Tags: 💤
@@ -40,7 +40,7 @@ Tags: 💤
 Format: 📖 🗣
 Tags: 💞 🔁
 
-🌟 **Wolf Hall** -- *#1 of Thomas Cromwell*
+🌟 **Wolf Hall** — *#1 of Thomas Cromwell*
 *by Hilary Mantel*
 Format: 🎧
 
@@ -80,16 +80,16 @@ Tags: 💞 🔁
 *by Kazuo Ishiguro*
 Format: 🎧
 
-🌟 **Dune Messiah** -- *#2 of The Dune Sequence*
+🌟 **Dune Messiah** — *#2 of The Dune Sequence*
 *by Frank Herbert*
 Format: 🎧
 
-🌟 **The Magician’s Nephew** -- *#1 of The Chronicles of Narnia*
+🌟 **The Magician’s Nephew** — *#1 of The Chronicles of Narnia*
 *by C. S. Lewis*
 Format: 📖 🗣
 Tags: 💞 🔁
 
-🌟 **The Amber Spyglass** -- *#3 of His Dark Materials*
+🌟 **The Amber Spyglass** — *#3 of His Dark Materials*
 *by Philip Pullman*
 Format: 🎧
 Tags: 💞 🔁
@@ -98,7 +98,7 @@ Tags: 💞 🔁
 *by Sheila Heti*
 Format: 🎧
 
-🌟 **The Subtle Knife** -- *#2 of His Dark Materials*
+🌟 **The Subtle Knife** — *#2 of His Dark Materials*
 *by Philip Pullman*
 Format: 🎧
 Tags: 💞 🔁
@@ -107,7 +107,7 @@ Tags: 💞 🔁
 *by Maggie Nelson*
 Format: 🎧
 
-🌟 **Northern Lights** -- *#1 of His Dark Materials*
+🌟 **Northern Lights** — *#1 of His Dark Materials*
 *by Philip Pullman*
 Format: 🎧
 Tags: 💞 🔁
@@ -116,11 +116,11 @@ Tags: 💞 🔁
 *by Albert Camus*
 Format: 🎧
 
-🌟 **The Three-Body Problem** -- *#1 of Remembrance of Earth's Past*
+🌟 **The Three-Body Problem** — *#1 of Remembrance of Earth's Past*
 *by Cixin Liu*
 Format: 🎧
 
-🌟 **Interview With The Vampire** -- *#1 of The Vampire Chronicles*
+🌟 **Interview With The Vampire** — *#1 of The Vampire Chronicles*
 *by Anne Rice*
 Format: 🎧
 
@@ -137,7 +137,7 @@ Tags: 💞 🔁
 *by Claire G. Coleman*
 Format: 🎧
 
-🌟 **Dune** -- *#1 of The Dune Sequence*
+🌟 **Dune** — *#1 of The Dune Sequence*
 *by Frank Herbert*
 Format: 🎧
 Tags: 🔁
@@ -149,7 +149,7 @@ Tags: 💞 🔁
 
 ---
 
-**The Lion, the Witch, and the Wardrobe** -- *#2 of The Chronicles of Narnia*
+**The Lion, the Witch, and the Wardrobe** — *#2 of The Chronicles of Narnia*
 *by C. S. Lewis*
 Format: 📖 🗣
 Tags: 💞 🔁
@@ -158,7 +158,7 @@ Tags: 💞 🔁
 *by Virginia Woolf*
 Format: 💾 🎧
 
-**Foundation** -- *#1 of Foundation*
+**Foundation** — *#1 of Foundation*
 *by Isaac Asimov*
 Format: 🎧
 
@@ -166,12 +166,12 @@ Format: 🎧
 *by Seneca*
 Format: 🎧
 
-**Rogue Protocol** -- *#3 of The Murderbot Diaries*
+**Rogue Protocol** — *#3 of The Murderbot Diaries*
 *by Martha Wells*
 Format: 🎧
 Tags: 💞
 
-**All Systems Red** -- *#1 of The Murderbot Diaries*
+**All Systems Red** — *#1 of The Murderbot Diaries*
 *by Martha Wells*
 Format: 🎧
 Tags: 🔁
@@ -180,7 +180,7 @@ Tags: 🔁
 *by E. M. Forster*
 Format: 🎧
 
-**Artificial Condition** -- *#2 of The Murderbot Diaries*
+**Artificial Condition** — *#2 of The Murderbot Diaries*
 *by Martha Wells*
 Format: 🎧
 Tags: 💞
@@ -198,7 +198,7 @@ Format: 🎧
 *by Charlie Jane Anders*
 Format: 🎧
 
-**The Snow Queen** -- *#1 of Tiamat*
+**The Snow Queen** — *#1 of Tiamat*
 *by Joan D. Vinge*
 Format: 🎧
 
@@ -206,20 +206,20 @@ Format: 🎧
 *by Meaghan O'Connell*
 Format: 🎧
 
-**Hitchhiker’s Guide to the Galaxy: Primary Phase** -- *#1 of Hitchhiker’s Guide to the Galaxy: Radio Series*
+**Hitchhiker’s Guide to the Galaxy: Primary Phase** — *#1 of Hitchhiker’s Guide to the Galaxy: Radio Series*
 *by Douglas Adams*
 Format: 🎧
 Tags: 💞
 
-**The Emotional Load** -- *#2 of Un autre regard*
+**The Emotional Load** — *#2 of Un autre regard*
 *by Emma*
 Format: 📖
 
-**The Mental Load** -- *#1 of Un autre regard*
+**The Mental Load** — *#1 of Un autre regard*
 *by Emma*
 Format: 📖
 
-**The Hunger Games** -- *#1 of The Hunger Games*
+**The Hunger Games** — *#1 of The Hunger Games*
 *by Suzanne Collins*
 Format: 🎧
 Tags: 🔁
@@ -232,7 +232,7 @@ Format: 🎧
 *by Paula Knight*
 Format: 💾
 
-**A Wrinkle In Time** -- *#1 of Time Quintet*
+**A Wrinkle In Time** — *#1 of Time Quintet*
 *by Madeline L’Engle*
 Format: 🎧
 
@@ -252,7 +252,7 @@ Format: 🎧
 *by Lily Bailey*
 Format: 🎧
 
-**All the Birds in the Sky** -- *#1 of All the Birds in the Sky*
+**All the Birds in the Sky** — *#1 of All the Birds in the Sky*
 *by Charlie Jane Anders*
 Format: 💾
 
@@ -273,17 +273,17 @@ Format: 🎧
 Format: 🎧
 Tags: 💞
 
-**The Encounter** -- *#3 of Animorphs*
+**The Encounter** — *#3 of Animorphs*
 *by K. A. Applegate*
 Format: 💾
 Tags: 🔁
 
-**The Visitor** -- *#2 of Animorphs*
+**The Visitor** — *#2 of Animorphs*
 *by K. A. Applegate*
 Format: 💾
 Tags: 🔁
 
-**The Invasion** -- *#1 of Animorphs*
+**The Invasion** — *#1 of Animorphs*
 *by K. A. Applegate*
 Format: 💾
 Tags: 🔁
@@ -297,11 +297,11 @@ Format: 🎧
 Format: 🎧
 Tags: 💞
 
-**Crown of Midnight** -- *#2 of Throne of Glass*
+**Crown of Midnight** — *#2 of Throne of Glass*
 *by Sarah J. Maas*
 Format: 🎧
 
-**Noumenon** -- *#1 of Noumenon*
+**Noumenon** — *#1 of Noumenon*
 *by Marina J. Lostetter*
 Format: 🎧
 
@@ -309,16 +309,16 @@ Format: 🎧
 *by Robin Sloan*
 Format: 🎧
 
-**Throne of Glass** -- *#1 of Throne of Glass*
+**Throne of Glass** — *#1 of Throne of Glass*
 *by Sarah J. Maas*
 Format: 🎧
 
-**The Sinister Mystery of the Mesmerizing Girl** -- *#3 of The Extraordinary Adventures of the Athena Club*
+**The Sinister Mystery of the Mesmerizing Girl** — *#3 of The Extraordinary Adventures of the Athena Club*
 *by Theodora Goss*
 Format: 🎧
 Tags: 💞
 
-**The Ballad of Songbirds and Snakes** -- *#4 of The Hunger Games*
+**The Ballad of Songbirds and Snakes** — *#4 of The Hunger Games*
 *by Suzanne Collins*
 Format: 🎧
 
@@ -344,22 +344,22 @@ Tags: 💞
 *by Sayaka Murata*
 Format: 🎧
 
-**Middlegame** -- *#1 of Middlegame*
+**Middlegame** — *#1 of Middlegame*
 *by Seanan McGuire*
 Format: 🎧
 Tags: 💞
 
-**A Thousand Pieces of You** -- *#1 of Firebird*
+**A Thousand Pieces of You** — *#1 of Firebird*
 *by Claudia Gray*
 Format: 🎧
 Tags: 💞
 
-**How To Talk So Little Kids Will Listen** -- *of How To Talk Collection*
+**How To Talk So Little Kids Will Listen** — *of How To Talk Collection*
 *by Joanna Faber and Julie King*
 Format: 🎧
 Tags: 💞
 
-**Percy Jackson and the Lightning Thief** -- *#1 of Percy Jackson & the Olympians*
+**Percy Jackson and the Lightning Thief** — *#1 of Percy Jackson & the Olympians*
 *by Rick Riordan*
 Format: 🎧
 Tags: 💞
@@ -368,12 +368,12 @@ Tags: 💞
 
 ## Currently reading:
 
-**Dune** -- *#1 of The Dune Sequence*
+**Dune** — *#1 of The Dune Sequence*
 *by Frank Herbert*
 Format: 🎧
 Tags: 💞 🔁
 
-🌟 **Bring Up the Bodies** -- *#2 of Thomas Cromwell*
+🌟 **Bring Up the Bodies** — *#2 of Thomas Cromwell*
 *by Hilary Mantel*
 Format: 🎧
 
