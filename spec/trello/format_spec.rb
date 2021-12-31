@@ -3,7 +3,7 @@
 require 'trello/format'
 require 'trello/models/book'
 
-describe Format do
+describe TrelloFormat do
   describe '.header' do
     let(:year) { 3904 }
     let(:number) { 45 }

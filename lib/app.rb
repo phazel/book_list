@@ -7,9 +7,11 @@ require_relative './trello/filter'
 require_relative './trello/format'
 require_relative './notion/convert'
 require_relative './notion/filter'
+require_relative './notion/format'
 require_relative './notion/models/hash'
 include Convert
 include Filter
+include Format
 
 class App
   def self.generate(data_file, output_file)
@@ -28,26 +30,16 @@ class App
     fav, non_fav = filter_by_fav(non_dups).splat(:fav, :non_fav)
     sleep, non_sleep = filter_by_sleep(non_fav).splat(:sleep, :non_sleep)
     dnf, remaining = filter_by_dnf(non_sleep).splat(:dnf, :non_dnf)
-    output = [
-      "Books I Read More Than Once:\n",
-      dups,
-      "---\n\n",
-      "Books used as background noise for going to sleep:\n",
-      sleep,
-      "---\n\n",
-      "Favourites:\n",
-      fav,
-      "---\n\n",
-      "Read this year:\n",
-      remaining,
-      "---\n\n",
-      "Books I Decided Not To Finish:\n",
-      dnf,
-      "---\n\n",
-      "Currently reading:\n",
-      current,
-    ]
-    File.write output_file, output.join
+
+    output = post(
+      dups: dups,
+      sleep: sleep,
+      fav: fav,
+      remaining: remaining,
+      dnf: dnf,
+      current: current,
+    )
+    File.write output_file, output
   end
 
   def self.summary(books)
@@ -78,7 +70,7 @@ class App
   end
 
   def self.generate_from_trello(year)
-    hash = Format.strip Format.symbify JSON.parse File.read "#{year}/exported.json"
+    hash = TrelloFormat.strip TrelloFormat.symbify JSON.parse File.read "#{year}/exported.json"
     File.open("#{year}/exported_pretty.json", 'w') do |file|
       file.write JSON.pretty_generate hash
     end
@@ -95,7 +87,7 @@ class App
       dnf: TrelloFilter.with(read, :dnf)
     }
 
-    output = Format.result year, sections, current
+    output = TrelloFormat.result year, sections, current
     File.write "#{year}/trello_books_read_#{year}.md", output.join
 
     {

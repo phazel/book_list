@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Format
+class TrelloFormat
   SECTION_HEADERS = {
     dups: "## Books I Read More Than Once!\n\n",
     fav: "## Favourites:\n\n",
