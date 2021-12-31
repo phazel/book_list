@@ -15,7 +15,7 @@
 
 ## Books I Read More Than Once:
 
- 🌟**Milkman**
+🌟 **Milkman**
 *by Anna Burns*
 Format: 🎧
 Tags: 💞 🔁
@@ -33,122 +33,122 @@ Tags: 💤
 
 ## Favourites:
 
- 🌟**Wolf Hall** -- *#1 of Thomas Cromwell*
+🌟 **Wolf Hall** -- *#1 of Thomas Cromwell*
 *by Hilary Mantel*
 Format: 🎧
 Tags:
 
- 🌟**To Be Taught, If Fortunate**
+🌟 **To Be Taught, If Fortunate**
 *by Becky Chambers*
 Format: 📖🗣
 Tags: 💞
 
- 🌟**Northanger Abbey**
+🌟 **Northanger Abbey**
 *by Jane Austen*
 Format: 💾🗣
 Tags: 💞 🔁
 
- 🌟**Punished By Rewards**
+🌟 **Punished By Rewards**
 *by Alfie Kohn*
 Format: 🎧
 Tags:
 
- 🌟**The Invisible Life of Addie LaRue**
+🌟 **The Invisible Life of Addie LaRue**
 *by V.E. Schwab*
 Format: 🎧
 Tags: 💞
 
- 🌟**In The Dream House**
+🌟 **In The Dream House**
 *by Carmen Maria Machado*
 Format: 🎧
 Tags:
 
- 🌟**Insomnia**
+🌟 **Insomnia**
 *by Marina Benjamin*
 Format: 🎧
 Tags:
 
- 🌟**Normal People**
+🌟 **Normal People**
 *by Sally Rooney*
 Format: 🎧
 Tags: 💞 🔁
 
- 🌟**Nocturnes**
+🌟 **Nocturnes**
 *by Kazuo Ishiguro*
 Format: 🎧
 Tags:
 
- 🌟**Dune Messiah** -- *#2 of The Dune Sequence*
+🌟 **Dune Messiah** -- *#2 of The Dune Sequence*
 *by Frank Herbert*
 Format: 🎧
 Tags:
 
- 🌟**The Magician’s Nephew** -- *#1 of The Chronicles of Narnia*
+🌟 **The Magician’s Nephew** -- *#1 of The Chronicles of Narnia*
 *by C. S. Lewis*
 Format: 📖🗣
 Tags: 💞 🔁
 
- 🌟**The Amber Spyglass** -- *#3 of His Dark Materials*
+🌟 **The Amber Spyglass** -- *#3 of His Dark Materials*
 *by Philip Pullman*
 Format: 🎧
 Tags: 💞 🔁
 
- 🌟**Motherhood**
+🌟 **Motherhood**
 *by Sheila Heti*
 Format: 🎧
 Tags:
 
- 🌟**The Subtle Knife** -- *#2 of His Dark Materials*
+🌟 **The Subtle Knife** -- *#2 of His Dark Materials*
 *by Philip Pullman*
 Format: 🎧
 Tags: 💞 🔁
 
- 🌟**The Argonauts**
+🌟 **The Argonauts**
 *by Maggie Nelson*
 Format: 🎧
 Tags:
 
- 🌟**Northern Lights** -- *#1 of His Dark Materials*
+🌟 **Northern Lights** -- *#1 of His Dark Materials*
 *by Philip Pullman*
 Format: 🎧
 Tags: 💞 🔁
 
- 🌟**The Plague**
+🌟 **The Plague**
 *by Albert Camus*
 Format: 🎧
 Tags:
 
- 🌟**The Three-Body Problem** -- *#1 of Remembrance of Earth's Past*
+🌟 **The Three-Body Problem** -- *#1 of Remembrance of Earth's Past*
 *by Cixin Liu*
 Format: 🎧
 Tags:
 
- 🌟**Interview With The Vampire** -- *#1 of The Vampire Chronicles*
+🌟 **Interview With The Vampire** -- *#1 of The Vampire Chronicles*
 *by Anne Rice*
 Format: 🎧
 Tags:
 
- 🌟**The Song of Achilles**
+🌟 **The Song of Achilles**
 *by Madeline Miller*
 Format: 💾
 Tags:
 
- 🌟**Fingersmith**
+🌟 **Fingersmith**
 *by Sarah Waters*
 Format: 🎧
 Tags: 💞 🔁
 
- 🌟**Terra Nullius**
+🌟 **Terra Nullius**
 *by Claire G. Coleman*
 Format: 🎧
 Tags:
 
- 🌟**Dune** -- *#1 of The Dune Sequence*
+🌟 **Dune** -- *#1 of The Dune Sequence*
 *by Frank Herbert*
 Format: 🎧
 Tags: 🔁
 
- 🌟**The Seven Husbands of Evelyn Hugo**
+🌟 **The Seven Husbands of Evelyn Hugo**
 *by Taylor Jenkins Reid*
 Format: 🎧
 Tags: 💞 🔁
@@ -388,12 +388,12 @@ Tags: 💞
 
 ## Currently reading:
 
- 🌟**Dune** -- *#1 of The Dune Sequence*
+🌟 **Dune** -- *#1 of The Dune Sequence*
 *by Frank Herbert*
 Format: 🎧
 Tags: 💞 🔁
 
- 🌟**Her Body and Other Parties**
+🌟 **Her Body and Other Parties**
 *by Carmen Maria Machado*
 Format: 📖🗣
 Tags: 💞 🔁

@@ -25,7 +25,7 @@ class Book
   end
 
   def fav_emoji
-    "#{' 🌟' if @fav}"
+    "#{'🌟 ' if @fav}"
   end
 
   def nat_emoji

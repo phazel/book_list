@@ -75,7 +75,7 @@ describe Book do
         labels: labels,
         tags: tags,
       )
-      expect(fav.fav_emoji).to eq(' 🌟')
+      expect(fav.fav_emoji).to eq('🌟 ')
     end
     it 'has empty string if not a favourite' do
       expect(subject.fav_emoji).to eq('')
