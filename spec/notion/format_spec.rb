@@ -15,51 +15,51 @@ describe 'Format' do
       current: ["These are the current books\n\n"],
     )
   end
-  expected = <<-POST
-# Books Read In 2021
-`Total books read: 64`
+  expected = <<~POST
+    # Books Read In 2021
+    `Total books read: 64`
 
-📖 - physical book
-📱 - ebook
-🎧 - audiobook
-👩🏻‍🦱 - I read this with my partner
-🌒 - I listened to this book to go to sleep
+    📖 - physical book
+    📱 - ebook
+    🎧 - audiobook
+    👩🏻‍🦱 - I read this with my partner
+    🌒 - I listened to this book to go to sleep
 
----
+    ---
 
-## Books I Read More Than Once:
+    ## Books I Read More Than Once:
 
-These are the duplicate books
+    These are the duplicate books
 
----
+    ---
 
-## Books I used as background noise for going to sleep:
+    ## Books I used as background noise for going to sleep:
 
-These are the sleep books
+    These are the sleep books
 
----
+    ---
 
-## Favourites:
+    ## Favourites:
 
-These are the favourite books
+    These are the favourite books
 
----
+    ---
 
-These are all the rest of the books
+    These are all the rest of the books
 
----
+    ---
 
-## Books I Decided Not To Finish:
+    ## Books I Decided Not To Finish:
 
-These are the DNF books
+    These are the DNF books
 
----
+    ---
 
-## Currently reading:
+    ## Currently reading:
 
-These are the current books
+    These are the current books
 
-POST
+  POST
 
   describe '.post' do
     it { expect(subject).to eq(expected) }
