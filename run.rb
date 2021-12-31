@@ -11,7 +11,7 @@ puts <<~SUMMARY
 Data contained #{summary[:total]} books
 
 - You're currently reading #{summary[:current]} books
-- You read #{summary[:done]}, with status 'Read 2021'
+- You read #{summary[:done]}, with status 'Read #{YEAR}'
 - You favourited #{summary[:fav]} of the total books
 - You read #{summary[:nat]} of the total books with Nat
 - You read #{summary[:sleep]} of the total books to go to sleep

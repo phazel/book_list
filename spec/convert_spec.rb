@@ -6,6 +6,20 @@ include Convert
 include TestData
 
 describe 'Convert' do
+  describe '.alt_status' do
+    year = 2934
+    it { expect(alt_status({ status: '📖 Reading 📖' }, year)).to eq({ status: 'current' }) }
+    it { expect(alt_status({ status: "Read #{year}" }, year)).to eq({ status: 'done' }) }
+    it { expect(alt_status({ status: 'Anything' }, year)).to eq({ status: 'Anything' }) }
+  end
+
+  describe '.relevant?' do
+    it { expect(relevant?({ status: 'done' })).to eq(true) }
+    it { expect(relevant?({ status: 'current' })).to eq(true) }
+    it { expect(relevant?({ status: 'Read 2021' })).to eq(false) }
+    it { expect(relevant?({ status: 'Anything Else' })).to eq(false) }
+  end
+
   describe '.split_strings' do
     it 'splits values for given keys into arrays of strings' do
       unsplit = { a: '1, 2', b: '3, 4', c: '5, 6, 7' }

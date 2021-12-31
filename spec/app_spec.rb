@@ -11,8 +11,8 @@ describe App do
   describe '.convert' do
     it { expect(summary).to be_a(Hash) }
 
-    it { expect(summary[:total]).to         eq(11) }
-    it { expect(summary[:total_deduped]).to eq(10) }
+    it { expect(summary[:total]).to         eq(9) }
+    it { expect(summary[:total_deduped]).to eq(8) }
 
     it { expect(summary[:done]).to          eq(5) }
     it { expect(summary[:current]).to       eq(3) }

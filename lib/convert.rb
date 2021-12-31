@@ -36,16 +36,21 @@ module Convert
     alt.keys.include?(status) ? hash.merge({ status: alt[status] }) : hash
   end
 
+  def relevant?(hash)
+    ['done', 'current'].include? hash[:status]
+  end
+
   def csv_to_hashes(csv, year)
     csv_converters
     CSV.new(csv, headers: true, header_converters: :all, converters: :mine)
       .map { |row| row.to_h }
+      .map { |hash| alt_status(hash, year) }
+      .select { |hash| relevant?(hash) }
       .map { |hash| split_strings(hash, [:formats]) }
       .map { |hash| split_strings_sym(hash, [:labels]) }
       .map { |hash| split_strings_sym(hash, [:tags]) }
       .map { |hash| nil_to_empty(hash, :labels) }
       .map { |hash| nil_to_empty(hash, :tags) }
-      .map { |hash| alt_status(hash, year) }
       .map { |hash| fav_bool(hash) }
   end
 

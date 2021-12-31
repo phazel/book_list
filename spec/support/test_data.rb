@@ -15,6 +15,7 @@ module TestData
     Shaping the Fractured Self: Poetry of Chronic Illness and Pain,Heather Taylor Johnson (Editor),physical,fiction-ish,shelf,,,Paused,topics,No
     Punished By Rewards,Alfie Kohn,audiobook,non-fiction,,,,Read 2021,"reread, topics",Yes
     The Lord of the Rings: The Return of the King,J. R. R. Tolkien,audiobook,fiction-ish,sleep,The Lord of the Rings,3,Read 2021,reread,No
+    Some Book I Read Last Year,Author Name,physical,non-fiction,shelf,,,Read 2020,,No
   BOOKS
 
   DUNE_HASH = { title: 'Dune', author: 'Frank Herbert', status: 'current', genre: 'fiction-ish', formats: ['audiobook'], labels: [:nat], series: 'The Dune Sequence', series_number: 1, tags: [:reread], fav: true }.freeze
@@ -22,11 +23,12 @@ module TestData
   STOIC_HASH = { title: 'Letters From a Stoic', author: 'Seneca', status: 'done', genre: 'non-fiction', formats: ['audiobook'], labels: [:shelf], series: nil, series_number: nil, tags: [:dnf], fav: false }.freeze
   OTHER_PARTIES_HASH = { title: 'Her Body and Other Parties', author: 'Carmen Maria Machado', status: 'current', genre: 'fiction-ish', formats: ['physical', 'read aloud'], labels: [:nat], series: nil, series_number: nil, tags: [:reread], fav: true }.freeze
   IF_FORTUNATE_HASH = { title: 'To Be Taught, If Fortunate', author: 'Becky Chambers', status: 'done', genre: 'fiction-ish', formats: ['physical', 'read aloud'], labels: [:nat, :shelf], series: nil, series_number: nil, tags: [], fav: false }.freeze
-  WE_HASH = { title: 'We', author: 'Yevgeny Zamyatin', status: 'To Read', genre: 'fiction-ish', formats: ['audiobook', 'ebook', 'physical'], labels: [:shelf], series: nil, series_number: nil, tags: [], fav: false }.freeze
-  FRACTURED_SELF_HASH = { title: 'Shaping the Fractured Self: Poetry of Chronic Illness and Pain', author: 'Heather Taylor Johnson (Editor)', status: 'Paused', genre: 'fiction-ish', formats: ['physical'], labels: [:shelf], series: nil, series_number: nil, tags: [:topics], fav: false }.freeze
   PUNISHED_HASH = { title: 'Punished By Rewards', author: 'Alfie Kohn', status: 'done', genre: 'non-fiction', formats: ['audiobook'], labels: [], series: nil, series_number: nil, tags: [:reread, :topics], fav: true }.freeze
   LOTR_3_HASH = { title: 'The Lord of the Rings: The Return of the King', author: 'J. R. R. Tolkien', status: 'done', genre: 'fiction-ish', formats: ['audiobook'], labels: [:sleep], series: 'The Lord of the Rings', series_number: 3, tags: [:reread], fav: false }.freeze
-  HASHES = [DUNE_HASH, WOLF_HALL_HASH, STOIC_HASH, OTHER_PARTIES_HASH, IF_FORTUNATE_HASH, WE_HASH, FRACTURED_SELF_HASH, PUNISHED_HASH, LOTR_3_HASH].freeze
+  HASHES = [DUNE_HASH, WOLF_HALL_HASH, STOIC_HASH, OTHER_PARTIES_HASH, IF_FORTUNATE_HASH, PUNISHED_HASH, LOTR_3_HASH].freeze
+
+  WE_HASH = { title: 'We', author: 'Yevgeny Zamyatin', status: 'To Read', genre: 'fiction-ish', formats: ['audiobook', 'ebook', 'physical'], labels: [:shelf], series: nil, series_number: nil, tags: [], fav: false }.freeze
+  FRACTURED_SELF_HASH = { title: 'Shaping the Fractured Self: Poetry of Chronic Illness and Pain', author: 'Heather Taylor Johnson (Editor)', status: 'Paused', genre: 'fiction-ish', formats: ['physical'], labels: [:shelf], series: nil, series_number: nil, tags: [:topics], fav: false }.freeze
 
   DUNE = hash_to_book(DUNE_HASH)
   WOLF_HALL = hash_to_book(WOLF_HALL_HASH)
