@@ -1,5 +1,5 @@
 # Books Read In 2021
-`Total books read: 75`
+`Total books read: 69`
 
 **Formats**
 📖 - physical book

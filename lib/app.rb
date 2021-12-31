@@ -23,14 +23,16 @@ class App
 
   def self.output(books, output_file, year)
     done, current = filter_by_status(books).splat(:done, :current)
-    dups, non_dups, all = dedup(done).splat(:dups, :non_dups, :all)
+    dnf, finished = filter_by_dnf(done).splat(:dnf, :non_dnf)
+    dups, non_dups, all = dedup(finished).splat(:dups, :non_dups, :all)
+
     fav, non_fav = filter_by_fav(non_dups).splat(:fav, :non_fav)
     sleep, non_sleep = filter_by_sleep(non_fav).splat(:sleep, :non_sleep)
-    dnf, remaining = filter_by_dnf(non_sleep).splat(:dnf, :non_dnf)
+    remaining = non_sleep
 
     output = post(
       year: year,
-      total: all.size,
+      total: finished.size,
       dups: dups,
       sleep: sleep,
       fav: fav,
